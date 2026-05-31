@@ -1,0 +1,28 @@
+name: tie-in-screening-agent
+description: Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks.
+required_skills:
+  - fluid-quality-check
+  - hydrate-screening
+  - separator-modelling
+supported_domains:
+  - field-development
+  - tie-in-screening
+  - flow-assurance
+  - process-engineering
+inputs:
+  - tie_in_description
+  - fluid_data
+  - flow_rate_range
+  - pressure_temperature_conditions
+  - water_and_contaminant_assumptions
+  - host_constraints
+  - screening_objective
+outputs:
+  - tie_in_screening_summary
+  - data_quality_assessment
+  - flow_assurance_risk_list
+  - process_screening_findings
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

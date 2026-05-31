@@ -1,0 +1,11 @@
+name: agent-name
+description: Short description of the engineering task this agent assists with.
+required_skills:
+  - skill-name
+supported_domains:
+  - domain-name
+inputs:
+  - input-name
+outputs:
+  - output-name
+human_review_required: true

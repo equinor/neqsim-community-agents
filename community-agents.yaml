@@ -1,0 +1,58 @@
+# NeqSim Community Agent Catalog Preview
+#
+# These entries are intended to support a future public catalog that can be
+# consumed by the main NeqSim ecosystem.
+
+catalog_version: "0.1"
+last_updated: "2026-05-31"
+
+agents:
+  - name: pvt-agent
+    version: "0.1.0"
+    description: "Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/pvt-agent/AGENT.md"
+    required_skills:
+      - fluid-quality-check
+    supported_domains:
+      - pvt
+      - thermodynamics
+      - fluid-characterization
+
+  - name: hydrate-screening-agent
+    version: "0.1.0"
+    description: "Performs preliminary hydrate risk assessment and recommends further analysis."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/hydrate-screening-agent/AGENT.md"
+    required_skills:
+      - hydrate-screening
+    supported_domains:
+      - flow-assurance
+      - hydrates
+      - screening
+
+  - name: tie-in-screening-agent
+    version: "0.1.0"
+    description: "Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/tie-in-screening-agent/AGENT.md"
+    required_skills:
+      - fluid-quality-check
+      - hydrate-screening
+      - separator-modelling
+    supported_domains:
+      - field-development
+      - tie-in-screening
+      - flow-assurance
+
+  - name: process-screening-agent
+    version: "0.1.0"
+    description: "Performs high-level process engineering screening studies and engineering checklist generation."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/process-screening-agent/AGENT.md"
+    required_skills:
+      - separator-modelling
+    supported_domains:
+      - process-engineering
+      - process-screening
+      - separator-screening

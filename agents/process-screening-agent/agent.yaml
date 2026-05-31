@@ -1,0 +1,23 @@
+name: process-screening-agent
+description: Performs high-level process engineering screening studies and engineering checklist generation.
+required_skills:
+  - separator-modelling
+supported_domains:
+  - process-engineering
+  - process-screening
+  - separator-screening
+inputs:
+  - process_description
+  - inlet_stream_information
+  - operating_conditions
+  - equipment_assumptions
+  - screening_objective
+  - known_constraints
+outputs:
+  - process_screening_summary
+  - major_risk_list
+  - recommended_process_simulations
+  - engineering_checklist
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

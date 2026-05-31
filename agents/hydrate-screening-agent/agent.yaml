@@ -1,0 +1,21 @@
+name: hydrate-screening-agent
+description: Performs preliminary hydrate risk assessment and recommends further analysis.
+required_skills:
+  - hydrate-screening
+supported_domains:
+  - flow-assurance
+  - hydrates
+  - screening
+inputs:
+  - pressure_temperature_conditions
+  - fluid_information
+  - water_assumptions
+  - operating_scenario
+  - inhibitor_information
+outputs:
+  - hydrate_risk_screening_summary
+  - missing_information
+  - recommended_follow_up_analysis
+  - assumptions_and_limitations
+  - validation_checklist
+human_review_required: true

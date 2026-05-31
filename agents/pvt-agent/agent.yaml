@@ -1,0 +1,21 @@
+name: pvt-agent
+description: Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis.
+required_skills:
+  - fluid-quality-check
+supported_domains:
+  - pvt
+  - thermodynamics
+  - fluid-characterization
+inputs:
+  - fluid_composition
+  - pressure_temperature_range
+  - fluid_context
+  - available_lab_data
+  - analysis_objective
+outputs:
+  - composition_quality_summary
+  - recommended_thermodynamic_workflow
+  - neqsim_example
+  - assumptions_and_limitations
+  - validation_checklist
+human_review_required: true
