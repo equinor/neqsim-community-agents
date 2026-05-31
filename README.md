@@ -24,7 +24,7 @@ Agents support engineering work. They never replace engineering judgement, quali
 
 ## Relationship to NeqSim
 
-[NeqSim](https://github.com/equinor/neqsim) is an open-source library for calculation of fluid behavior, phase equilibrium, thermodynamic properties, and process simulation.
+[equinor/neqsim: NeqSim is a library for calculation of fluid behavior, phase equilibrium and process simulation](https://github.com/equinor/neqsim).
 
 Community agents are designed to make NeqSim-based workflows easier to discover, document, reproduce, and review. An agent may recommend NeqSim calculations, generate example scripts, organize engineering checks, or help explain assumptions. Any generated NeqSim workflow must still be verified by a qualified user before engineering or operational use.
 
