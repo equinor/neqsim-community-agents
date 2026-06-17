@@ -1,0 +1,25 @@
+name: process-safety-agent
+description: Provides early-stage process safety screening for fire-case relief loads and emergency depressurization with public, educational methods.
+required_skills:
+  - relief-load-screening
+  - depressurization-screening
+supported_domains:
+  - process-safety
+  - relief-screening
+  - depressurization-screening
+inputs:
+  - equipment_description
+  - fire_area_and_environment_assumptions
+  - latent_heat_and_relief_pressure
+  - inventory_and_pressures
+  - blowdown_rate_and_relieving_temperature
+  - minimum_design_metal_temperature
+  - screening_objective
+outputs:
+  - relief_load_indicator
+  - blowdown_time_indicator
+  - low_temperature_flag
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

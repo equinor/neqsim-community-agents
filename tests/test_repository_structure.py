@@ -48,6 +48,18 @@ EXPECTED_AGENTS = {
         "separator-modelling",
     ],
     "process-screening-agent": ["separator-modelling"],
+    "process-safety-agent": [
+        "relief-load-screening",
+        "depressurization-screening",
+    ],
+    "process-engineer-agent": [
+        "line-velocity-check",
+        "compressor-operating-window-check",
+    ],
+    "flow-assurance-engineer-agent": [
+        "hydrate-margin-check",
+        "wax-margin-check",
+    ],
 }
 
 

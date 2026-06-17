@@ -56,3 +56,42 @@ agents:
       - process-engineering
       - process-screening
       - separator-screening
+
+  - name: process-safety-agent
+    version: "0.1.0"
+    description: "Provides early-stage process safety screening for fire-case relief loads and emergency depressurization with public, educational methods."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/process-safety-agent/AGENT.md"
+    required_skills:
+      - relief-load-screening
+      - depressurization-screening
+    supported_domains:
+      - process-safety
+      - relief-screening
+      - depressurization-screening
+
+  - name: process-engineer-agent
+    version: "0.1.0"
+    description: "Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/process-engineer-agent/AGENT.md"
+    required_skills:
+      - line-velocity-check
+      - compressor-operating-window-check
+    supported_domains:
+      - process-engineering
+      - operating-limits
+      - standards-compliance
+
+  - name: flow-assurance-engineer-agent
+    version: "0.1.0"
+    description: "Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/flow-assurance-engineer-agent/AGENT.md"
+    required_skills:
+      - hydrate-margin-check
+      - wax-margin-check
+    supported_domains:
+      - flow-assurance
+      - operating-limits
+      - standards-compliance

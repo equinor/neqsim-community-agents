@@ -1,0 +1,24 @@
+name: process-engineer-agent
+description: Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines.
+required_skills:
+  - line-velocity-check
+  - compressor-operating-window-check
+supported_domains:
+  - process-engineering
+  - operating-limits
+  - standards-compliance
+inputs:
+  - equipment_or_line_description
+  - line_velocity_and_density
+  - erosional_c_factor_and_velocity_guideline
+  - compressor_operating_surge_and_stonewall_flows
+  - minimum_surge_and_stonewall_margins
+  - screening_objective
+outputs:
+  - line_velocity_indicator
+  - compressor_operating_window_indicator
+  - operating_limit_warnings
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

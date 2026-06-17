@@ -43,6 +43,12 @@ Current skill mappings used by the example agents:
 | `fluid-quality-check` | `neqsim-fluid-quality-check` |
 | `hydrate-screening` | `neqsim-hydrate-screening` |
 | `separator-modelling` | `neqsim-separator-modelling` |
+| `relief-load-screening` | `neqsim-relief-load-screening` |
+| `depressurization-screening` | `neqsim-depressurization-screening` |
+| `line-velocity-check` | `neqsim-line-velocity-check` |
+| `compressor-operating-window-check` | `neqsim-compressor-operating-window-check` |
+| `hydrate-margin-check` | `neqsim-hydrate-margin-check` |
+| `wax-margin-check` | `neqsim-wax-margin-check` |
 
 ## What Is An Engineering Agent?
 
@@ -80,6 +86,9 @@ agent-name/
 | [Hydrate Screening Agent](agents/hydrate-screening-agent/README.md) | Preliminary hydrate risk assessment | `hydrate-screening` |
 | [Tie-In Screening Agent](agents/tie-in-screening-agent/README.md) | Early-stage screening of tie-in opportunities | `fluid-quality-check`, `hydrate-screening`, `separator-modelling` |
 | [Process Screening Agent](agents/process-screening-agent/README.md) | High-level process engineering screening studies | `separator-modelling` |
+| [Process Safety Agent](agents/process-safety-agent/README.md) | Early-stage fire-case relief load and depressurization screening | `relief-load-screening`, `depressurization-screening` |
+| [Process Engineer Agent](agents/process-engineer-agent/README.md) | Early-stage screening of unit operations against line-velocity and compressor operating-window guidelines | `line-velocity-check`, `compressor-operating-window-check` |
+| [Flow Assurance Engineer Agent](agents/flow-assurance-engineer-agent/README.md) | Early-stage screening of operating points against hydrate-margin and wax-margin guidelines | `hydrate-margin-check`, `wax-margin-check` |
 
 ## How To Create A New Agent
 

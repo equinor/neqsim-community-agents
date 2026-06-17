@@ -1,0 +1,24 @@
+name: flow-assurance-engineer-agent
+description: Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines.
+required_skills:
+  - hydrate-margin-check
+  - wax-margin-check
+supported_domains:
+  - flow-assurance
+  - operating-limits
+  - standards-compliance
+inputs:
+  - pipeline_or_unit_description
+  - operating_temperature
+  - hydrate_equilibrium_temperature
+  - wax_appearance_temperature
+  - minimum_hydrate_and_wax_margins
+  - screening_objective
+outputs:
+  - hydrate_margin_indicator
+  - wax_margin_indicator
+  - operating_limit_warnings
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true
