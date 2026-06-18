@@ -1,0 +1,24 @@
+name: gas-treatment-agent
+description: Provides early-stage gas treatment screening that checks gas water content and dehydration against a sales-gas spec and estimates single-stage compression power.
+required_skills:
+  - water-dewpoint-dehydration-screening
+  - compressor-power-screening
+supported_domains:
+  - process-engineering
+  - gas-treatment
+  - dehydration
+  - standards-compliance
+inputs:
+  - gas_stream_description
+  - gas_temperature_pressure_and_sales_gas_water_spec
+  - compression_suction_discharge_conditions
+  - compression_efficiency_molecular_weight_and_flow
+  - screening_objective
+outputs:
+  - water_content_indicator
+  - dehydration_warning
+  - compression_power_indicator
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

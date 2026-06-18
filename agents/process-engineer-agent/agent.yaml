@@ -3,6 +3,8 @@ description: Provides early-stage process engineering screening that checks unit
 required_skills:
   - line-velocity-check
   - compressor-operating-window-check
+  - pressure-drop-screening
+  - fired-heater-duty-screening
 supported_domains:
   - process-engineering
   - operating-limits
@@ -13,10 +15,14 @@ inputs:
   - erosional_c_factor_and_velocity_guideline
   - compressor_operating_surge_and_stonewall_flows
   - minimum_surge_and_stonewall_margins
+  - pressure_drop_length_diameter_friction_and_gradient_guideline
+  - fired_heater_flow_heat_capacity_temperature_rise_efficiency_and_radiant_area
   - screening_objective
 outputs:
   - line_velocity_indicator
   - compressor_operating_window_indicator
+  - pressure_drop_indicator
+  - fired_heater_duty_indicator
   - operating_limit_warnings
   - recommended_neqsim_workflows
   - required_follow_up_studies

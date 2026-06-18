@@ -48,6 +48,10 @@ Document what the agent cannot do. State that it does not replace engineering ju
 
 List checks required before outputs can be used or shared.
 
+# Related NeqSim Functionality
+
+Link this agent to NeqSim functionality where possible. Name the NeqSim Java classes/methods and/or NeqSim MCP tools that the required skills ultimately drive (for example `neqsim.process.processmodel.ProcessSystem`). If the agent only orchestrates data-supply or reporting skills, name the downstream NeqSim Java/MCP workflow rather than claiming it runs calculations. Only cite functionality that actually exists.
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim

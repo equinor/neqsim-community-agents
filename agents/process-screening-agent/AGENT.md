@@ -86,6 +86,15 @@ Review this public process description for a simple inlet separation concept. Id
 - Assumptions and limitations are included.
 - Qualified human review is completed before engineering decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.process.equipment.separator.Separator` and `neqsim.process.equipment.separator.ThreePhaseSeparator` — rigorous phase separation in a `neqsim.process.processmodel.ProcessSystem` flowsheet.
+- `neqsim.process.mechanicaldesign.separator.SeparatorMechanicalDesign` — Souders-Brown gas-load and retention-time sizing.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim

@@ -28,6 +28,7 @@ Every `AGENT.md` file must then include these sections in clear markdown:
 - `# Assumptions`
 - `# Limitations`
 - `# Validation Checklist`
+- `# Related NeqSim Functionality`
 - `# References`
 
 ## Required Metadata
@@ -60,6 +61,8 @@ Agent documentation must be:
 - Clear about which skills are required
 - Clear about where NeqSim calculations may be used
 - Clear that the agent assists engineers and does not replace engineering judgement
+
+Where possible, every agent should include a `# Related NeqSim Functionality` section that links the agent to NeqSim functionality. Name the concrete NeqSim Java classes or methods, and/or the NeqSim MCP tools, that the agent's required skills ultimately drive, so the agent stays traceable to the validated engine. If an agent only orchestrates data-supply or reporting skills, name the downstream NeqSim Java/MCP workflow rather than claiming it runs calculations itself. Only cite NeqSim functionality that actually exists.
 
 Documentation should avoid claims of certified accuracy, operational readiness, or guaranteed safety unless supported by an approved validation process outside this repository.
 

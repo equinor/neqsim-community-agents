@@ -5,6 +5,8 @@ version: 0.1.0
 required_skills:
   - line-velocity-check
   - compressor-operating-window-check
+  - pressure-drop-screening
+  - fired-heater-duty-screening
 ---
 
 # Purpose
@@ -19,6 +21,8 @@ Use this agent when an engineer needs to:
 
 - Screen a public or synthetic pipe flow velocity against erosional-velocity and guideline limits
 - Screen a compressor operating point against surge and stonewall margins
+- Screen a single-phase line pressure drop against a pressure-gradient guideline
+- Screen a fired-heater duty, fuel rate, and average radiant flux
 - Check whether a unit operation appears to operate within standard guidelines
 - Identify required follow-up line sizing, hydraulic, and compressor studies
 - Generate a transparent process engineering screening report outline
@@ -33,6 +37,8 @@ Typical inputs include:
 - Erosional velocity C-factor and a maximum velocity guideline
 - Compressor operating, surge, and stonewall flows at a common speed
 - Minimum acceptable surge and stonewall margins
+- Pressure-drop line length, diameter, friction factor, and a pressure-gradient guideline
+- Fired-heater process flow, heat capacity, temperature rise, thermal efficiency, and radiant area
 - Screening objective and decision criteria
 
 # Outputs
@@ -41,6 +47,8 @@ Typical outputs include:
 
 - Line-velocity indicators (erosional velocity, velocity ratio, guideline ratio) and warning level
 - Compressor operating-window indicators (surge margin, stonewall margin, limiting margin) and warning level
+- Pressure-drop indicators (pressure gradient, guideline ratio) and warning level
+- Fired-heater indicators (process duty, fired duty, fuel rate, average radiant flux) and warning level
 - Recommended validated NeqSim and standards workflows
 - Required follow-up studies
 - Assumptions, limitations, and human review checklist
@@ -50,7 +58,9 @@ Typical outputs include:
 1. Confirm the screening objective and available public input data.
 2. Use `line-velocity-check` to estimate erosional velocity and a velocity ratio against the guideline.
 3. Use `compressor-operating-window-check` to estimate surge and stonewall margins for the operating point.
-4. Summarize major uncertainties and required studies.
+4. Use `pressure-drop-screening` to estimate the pressure gradient and a ratio against the gradient guideline.
+5. Use `fired-heater-duty-screening` to estimate process duty, fired duty, fuel rate, and average radiant flux.
+6. Summarize major uncertainties and required studies.
 5. Generate a reproducible process engineering screening report outline.
 6. Document assumptions, limitations, and human review requirements.
 
@@ -58,6 +68,8 @@ Typical outputs include:
 
 - `line-velocity-check` mapped to community catalog ID `neqsim-line-velocity-check`
 - `compressor-operating-window-check` mapped to community catalog ID `neqsim-compressor-operating-window-check`
+- `pressure-drop-screening` mapped to community catalog ID `neqsim-pressure-drop-screening`
+- `fired-heater-duty-screening` mapped to community catalog ID `neqsim-fired-heater-duty-screening`
 
 # Example Usage
 
@@ -90,9 +102,19 @@ Use public synthetic data to screen a process line and a compressor operating po
 - Screening report clearly separates facts, assumptions, and recommendations.
 - Qualified human review is completed before design or operating decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.process.equipment.pipeline.PipeBeggsAndBrills` — rigorous line velocity and pressure drop.
+- `neqsim.process.equipment.compressor.Compressor` with `neqsim.process.equipment.compressor.CompressorChart` — surge/stonewall operating window.
+- `neqsim.process.equipment.heatexchanger.Heater` — fired-heater process duty.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim
 - NeqSim Community Skills: https://github.com/equinor/neqsim-community-skills
-- Community skills: `line-velocity-check`, `compressor-operating-window-check`
-- Public standards such as API RP 14E, NORSOK P-001, and API Standard 617 for line-velocity and operating-window concepts.
+- Community skills: `line-velocity-check`, `compressor-operating-window-check`, `pressure-drop-screening`, `fired-heater-duty-screening`
+- Public standards such as API RP 14E, NORSOK P-001, NORSOK P-002, API Standard 617, and API Standard 560 for line-velocity, pressure-drop, operating-window, and fired-heater concepts.

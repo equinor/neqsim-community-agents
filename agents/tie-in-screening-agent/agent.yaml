@@ -4,11 +4,13 @@ required_skills:
   - fluid-quality-check
   - hydrate-screening
   - separator-modelling
+  - resource-classification-screening
 supported_domains:
   - field-development
   - tie-in-screening
   - flow-assurance
   - process-engineering
+  - resource-classification
 inputs:
   - tie_in_description
   - fluid_data
@@ -16,12 +18,14 @@ inputs:
   - pressure_temperature_conditions
   - water_and_contaminant_assumptions
   - host_constraints
+  - project_maturity_stage
   - screening_objective
 outputs:
   - tie_in_screening_summary
   - data_quality_assessment
   - flow_assurance_risk_list
   - process_screening_findings
+  - resource_classification_indicator
   - recommended_neqsim_workflows
   - required_follow_up_studies
   - validation_checklist

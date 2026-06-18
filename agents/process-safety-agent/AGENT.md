@@ -5,6 +5,9 @@ version: 0.1.0
 required_skills:
   - relief-load-screening
   - depressurization-screening
+  - flare-radiation-screening
+  - psv-orifice-screening
+  - safety-function-coverage-screening
 ---
 
 # Purpose
@@ -20,6 +23,9 @@ Use this agent when an engineer needs to:
 - Screen a public or synthetic fire-case relief scenario
 - Get a preliminary blowdown time triage to a target pressure
 - Flag potential auto-refrigeration low-temperature concerns against an MDMT
+- Screen flare thermal radiation at a distance against allowable radiation limits
+- Screen a required PSV orifice area and map it to an API orifice letter
+- Screen whether a process component has the typically required protective functions
 - Identify required follow-up relief, flare, and depressurization studies
 - Generate a transparent process safety screening report outline
 - Suggest validated NeqSim and API 520/521 workflows for detailed work
@@ -34,6 +40,9 @@ Typical inputs include:
 - Vessel inventory, initial and target pressures
 - Representative blowdown rate and relieving temperature
 - Minimum design metal temperature (MDMT)
+- Flare heat release, fraction radiated, and distance to a receptor
+- PSV relieving rate, set pressure, temperature, and gas properties
+- Process component type and its installed protective functions
 - Screening objective and decision criteria
 
 # Outputs
@@ -43,6 +52,9 @@ Typical outputs include:
 - Fire-case relief load indicator and warning level
 - Blowdown time indicator and estimated time to target pressure
 - Simplified cold-end temperature estimate and low-temperature flag
+- Flare radiant heat flux indicator and allowable-limit warning level
+- Required PSV orifice area indicator and mapped API orifice letter
+- Safety-function coverage indicator and missing-function warning level
 - Recommended validated NeqSim and standards workflows
 - Required follow-up studies
 - Assumptions, limitations, and human review checklist
@@ -52,7 +64,10 @@ Typical outputs include:
 1. Confirm the screening objective and available public input data.
 2. Use `relief-load-screening` to estimate fire-case heat input and a relief load indicator.
 3. Use `depressurization-screening` to estimate a blowdown time indicator and low-temperature flag.
-4. Summarize major uncertainties and required studies.
+4. Use `flare-radiation-screening` to estimate radiant heat flux at a distance against allowable limits.
+5. Use `psv-orifice-screening` to estimate a required PSV orifice area and map an API orifice letter.
+6. Use `safety-function-coverage-screening` to check whether the component has the typically required protective functions.
+7. Summarize major uncertainties and required studies.
 5. Generate a reproducible process safety screening report outline.
 6. Document assumptions, limitations, and human review requirements.
 
@@ -60,6 +75,9 @@ Typical outputs include:
 
 - `relief-load-screening` mapped to community catalog ID `neqsim-relief-load-screening`
 - `depressurization-screening` mapped to community catalog ID `neqsim-depressurization-screening`
+- `flare-radiation-screening` mapped to community catalog ID `neqsim-flare-radiation-screening`
+- `psv-orifice-screening` mapped to community catalog ID `neqsim-psv-orifice-screening`
+- `safety-function-coverage-screening` mapped to community catalog ID `neqsim-safety-function-coverage-screening`
 
 # Example Usage
 
@@ -92,9 +110,20 @@ Use public synthetic data to screen a fire-case relief and blowdown scenario for
 - Screening report clearly separates facts, assumptions, and recommendations.
 - Qualified human review is completed before safety decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.process.util.fire.ReliefValveSizing` and `neqsim.process.equipment.valve.SafetyValve` — API 520/521 relief-load and PSV orifice sizing.
+- `neqsim.process.safety.depressurization.DepressurizationSimulator` — transient blowdown and low-temperature evaluation.
+- `neqsim.process.equipment.flare.Flare` and `neqsim.process.equipment.flare.FlareStack` — flare thermal-radiation analysis.
+- `neqsim.process.safety.SafetyAnalysisFunctionEvaluation` — protective-function coverage evaluation.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim
 - NeqSim Community Skills: https://github.com/equinor/neqsim-community-skills
-- Community skills: `relief-load-screening`, `depressurization-screening`
-- Public standards such as API Standard 520 and API Standard 521 for relief and depressurization concepts.
+- Community skills: `relief-load-screening`, `depressurization-screening`, `flare-radiation-screening`, `psv-orifice-screening`, `safety-function-coverage-screening`
+- Public standards such as API Standard 520, API Standard 521, API Standard 537, API RP 14C, and ISO 10418 for relief, flare radiation, PSV orifice, and safety-function concepts.

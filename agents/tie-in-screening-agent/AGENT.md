@@ -6,6 +6,7 @@ required_skills:
   - fluid-quality-check
   - hydrate-screening
   - separator-modelling
+  - resource-classification-screening
 ---
 
 # Purpose
@@ -21,6 +22,7 @@ Use this agent when an engineer needs to:
 - Screen a public or synthetic tie-in concept
 - Review whether fluid data is adequate for preliminary analysis
 - Identify potential hydrate, separator, and process capacity concerns
+- Map a project maturity stage to a public resource classification category
 - List required follow-up studies
 - Generate a transparent screening report outline
 - Suggest NeqSim workflows for early analysis
@@ -35,6 +37,7 @@ Typical inputs include:
 - Pressure and temperature conditions
 - Water and CO2 or H2S assumptions
 - Existing host facility constraints, if public and non-confidential
+- Project maturity stage for a public resource classification
 - Screening objective and decision criteria
 
 # Outputs
@@ -45,6 +48,7 @@ Typical outputs include:
 - Data quality assessment
 - Potential flow assurance risks
 - Potential process and separator constraints
+- Public resource classification category indicator
 - Recommended NeqSim workflows
 - Required follow-up studies
 - Assumptions, limitations, and review checklist
@@ -55,15 +59,17 @@ Typical outputs include:
 2. Use `fluid-quality-check` to review composition quality and missing data.
 3. Use `hydrate-screening` to flag preliminary hydrate risk considerations.
 4. Use `separator-modelling` to identify high-level separator screening considerations.
-5. Summarize major uncertainties and required studies.
-6. Generate a reproducible screening report outline.
-7. Document assumptions, limitations, and human review requirements.
+5. Use `resource-classification-screening` to map the project maturity stage to a public resource classification category.
+6. Summarize major uncertainties and required studies.
+7. Generate a reproducible screening report outline.
+8. Document assumptions, limitations, and human review requirements.
 
 # Required Skills
 
 - `fluid-quality-check` mapped to community catalog ID `neqsim-fluid-quality-check`
 - `hydrate-screening` mapped to community catalog ID `neqsim-hydrate-screening`
 - `separator-modelling` mapped to community catalog ID `neqsim-separator-modelling`
+- `resource-classification-screening` mapped to community catalog ID `neqsim-resource-classification-screening`
 
 # Example Usage
 
@@ -95,8 +101,20 @@ Use public synthetic data to screen a potential subsea tie-in to an existing hos
 - Screening report clearly separates facts, assumptions, and recommendations.
 - Qualified human review is completed before concept decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.thermo.system.SystemInterface` with `neqsim.thermodynamicoperations.ThermodynamicOperations#TPflash()` — fluid composition quality and phase equilibrium.
+- `neqsim.thermo.system.SystemSrkCPAstatoil` with `ThermodynamicOperations#hydrateFormationTemperature()` — hydrate equilibrium temperature.
+- `neqsim.process.equipment.separator.Separator` — high-level separator screening.
+- `neqsim.process.fielddevelopment.evaluation.ReservesClassification` — resource/reserves classification mapping.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim
 - NeqSim Community Skills: https://github.com/equinor/neqsim-community-skills
-- Community skills: `fluid-quality-check`, `hydrate-screening`, `separator-modelling`
+- Community skills: `fluid-quality-check`, `hydrate-screening`, `separator-modelling`, `resource-classification-screening`
+- Public frameworks such as SPE-PRMS and the open Norwegian Petroleum Directorate resource-class scheme for resource classification concepts.

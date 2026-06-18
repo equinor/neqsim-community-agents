@@ -40,10 +40,12 @@ agents:
       - fluid-quality-check
       - hydrate-screening
       - separator-modelling
+      - resource-classification-screening
     supported_domains:
       - field-development
       - tie-in-screening
       - flow-assurance
+      - resource-classification
 
   - name: process-screening-agent
     version: "0.1.0"
@@ -65,10 +67,15 @@ agents:
     required_skills:
       - relief-load-screening
       - depressurization-screening
+      - flare-radiation-screening
+      - psv-orifice-screening
+      - safety-function-coverage-screening
     supported_domains:
       - process-safety
       - relief-screening
       - depressurization-screening
+      - flare-radiation-screening
+      - safety-function-screening
 
   - name: process-engineer-agent
     version: "0.1.0"
@@ -78,6 +85,8 @@ agents:
     required_skills:
       - line-velocity-check
       - compressor-operating-window-check
+      - pressure-drop-screening
+      - fired-heater-duty-screening
     supported_domains:
       - process-engineering
       - operating-limits
@@ -94,4 +103,34 @@ agents:
     supported_domains:
       - flow-assurance
       - operating-limits
+      - standards-compliance
+
+  - name: piping-integrity-agent
+    version: "0.1.0"
+    description: "Provides early-stage piping-integrity screening that checks main lines against public line-velocity, pressure-drop, wall-thickness, and flow-induced-vibration guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/piping-integrity-agent/AGENT.md"
+    required_skills:
+      - line-velocity-check
+      - pressure-drop-screening
+      - pipe-wall-thickness-screening
+      - flow-induced-vibration-screening
+    supported_domains:
+      - process-engineering
+      - piping-integrity
+      - operating-limits
+      - standards-compliance
+
+  - name: gas-treatment-agent
+    version: "0.1.0"
+    description: "Provides early-stage gas-treatment screening that checks water dewpoint/dehydration and compressor power against public, educational guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/gas-treatment-agent/AGENT.md"
+    required_skills:
+      - water-dewpoint-dehydration-screening
+      - compressor-power-screening
+    supported_domains:
+      - process-engineering
+      - gas-treatment
+      - dehydration
       - standards-compliance

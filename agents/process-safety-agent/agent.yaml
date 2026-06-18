@@ -3,10 +3,15 @@ description: Provides early-stage process safety screening for fire-case relief 
 required_skills:
   - relief-load-screening
   - depressurization-screening
+  - flare-radiation-screening
+  - psv-orifice-screening
+  - safety-function-coverage-screening
 supported_domains:
   - process-safety
   - relief-screening
   - depressurization-screening
+  - flare-radiation-screening
+  - safety-function-screening
 inputs:
   - equipment_description
   - fire_area_and_environment_assumptions
@@ -14,11 +19,17 @@ inputs:
   - inventory_and_pressures
   - blowdown_rate_and_relieving_temperature
   - minimum_design_metal_temperature
+  - flare_heat_release_fraction_radiated_and_distance
+  - psv_relieving_rate_set_pressure_temperature_and_gas_properties
+  - component_type_and_installed_protective_functions
   - screening_objective
 outputs:
   - relief_load_indicator
   - blowdown_time_indicator
   - low_temperature_flag
+  - flare_radiation_indicator
+  - psv_orifice_indicator
+  - safety_function_coverage_indicator
   - recommended_neqsim_workflows
   - required_follow_up_studies
   - validation_checklist

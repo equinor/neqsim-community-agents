@@ -86,6 +86,15 @@ Review this synthetic gas condensate composition for NeqSim use. Check the mole 
 - Assumptions and limitations are included in the output.
 - Qualified human review is completed before design or operational decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.thermo.system.SystemInterface` with `neqsim.thermodynamicoperations.ThermodynamicOperations#TPflash()` — rigorous phase equilibrium and property evaluation.
+- `neqsim.standards.gasquality.Standard_ISO6976` — ISO 6976 calorific value, density, and Wobbe index.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim

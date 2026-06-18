@@ -92,6 +92,15 @@ Use public synthetic data to screen a subsea operating point. Estimate the hydra
 - Screening report clearly separates facts, assumptions, and recommendations.
 - Qualified human review is completed before design or operating decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.thermo.system.SystemSrkCPAstatoil` with `neqsim.thermodynamicoperations.ThermodynamicOperations#hydrateFormationTemperature()` — rigorous hydrate equilibrium temperature and subcooling margin.
+- `neqsim.thermodynamicoperations.ThermodynamicOperations#calcWAT()` — rigorous wax appearance temperature.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim

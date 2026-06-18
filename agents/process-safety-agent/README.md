@@ -9,14 +9,20 @@ It helps engineers produce preliminary relief load indicators, blowdown time ind
 - Estimate fire-case relief load indicators
 - Estimate blowdown time to a target pressure
 - Flag potential low-temperature (auto-refrigeration) concerns against an MDMT
+- Estimate flare radiant heat flux at a distance against allowable limits
+- Estimate a required PSV orifice area and map it to an API orifice letter
+- Screen whether a component has the typically required protective functions
 - Identify required follow-up studies
 - Generate screening reports
-- Suggest validated NeqSim and API 520/521 workflows
+- Suggest validated NeqSim and API 520/521/537, API RP 14C, and ISO 10418 workflows
 
 ## Required Skills
 
 - `relief-load-screening`
 - `depressurization-screening`
+- `flare-radiation-screening`
+- `psv-orifice-screening`
+- `safety-function-coverage-screening`
 
 ## Directory Contents
 

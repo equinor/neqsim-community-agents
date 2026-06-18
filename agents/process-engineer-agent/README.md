@@ -8,15 +8,19 @@ It helps engineers check whether unit operations appear to run within public des
 
 - Estimate line velocity against erosional velocity and a velocity guideline
 - Estimate compressor surge and stonewall operating-window margins
+- Estimate single-phase pressure drop against a pressure-gradient guideline
+- Estimate fired-heater process duty, fired duty, fuel rate, and average radiant flux
 - Flag unit operations that appear to run outside standard guidelines
 - Identify required follow-up line sizing, hydraulic, and compressor studies
 - Generate screening reports
-- Suggest validated NeqSim, API RP 14E, NORSOK P-001, and API 617 workflows
+- Suggest validated NeqSim, API RP 14E, NORSOK P-001, NORSOK P-002, API 617, and API 560 workflows
 
 ## Required Skills
 
 - `line-velocity-check`
 - `compressor-operating-window-check`
+- `pressure-drop-screening`
+- `fired-heater-duty-screening`
 
 ## Directory Contents
 

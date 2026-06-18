@@ -8,6 +8,7 @@ It helps engineers review available fluid data, identify potential flow assuranc
 
 - Review available fluid data
 - Identify potential flow assurance risks
+- Map a project maturity stage to a public resource classification category
 - Identify required studies
 - Generate screening reports
 - Suggest NeqSim workflows
@@ -17,6 +18,7 @@ It helps engineers review available fluid data, identify potential flow assuranc
 - `fluid-quality-check`
 - `hydrate-screening`
 - `separator-modelling`
+- `resource-classification-screening`
 
 ## Directory Contents
 

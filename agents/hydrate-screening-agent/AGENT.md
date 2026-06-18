@@ -85,6 +85,15 @@ Review these public example pressure and temperature conditions for preliminary 
 - Follow-up analysis recommendations are included.
 - Qualified human review is completed before operational or design decisions.
 
+# Related NeqSim Functionality
+
+The screening produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
+
+- `neqsim.thermo.system.SystemSrkCPAstatoil` — CPA equation of state for water-bearing natural gas.
+- `neqsim.thermodynamicoperations.ThermodynamicOperations#hydrateFormationTemperature()` — rigorous hydrate equilibrium temperature.
+
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim
