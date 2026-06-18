@@ -78,6 +78,56 @@ agent-name/
 
 `AGENT.md` is the human-readable agent specification. `agent.yaml` is the machine-readable metadata. The `examples/`, `prompts/`, and `tests/` directories keep usage examples, reusable prompt examples, and validation material close to the agent.
 
+## Using an Agent in a Harness
+
+A *harness* is any driver — a test, a script, a CLI, or the main NeqSim repo's task workflow — that loads an agent definition and runs its skills in order. An agent is mostly declarative: `agent.yaml` lists the `required_skills`, and each skill is an installable Python package. A harness reads that list, installs the matching skill packages, then calls them and assembles a reviewable summary.
+
+1. Install the skill packages the agent declares. For the Flow Assurance Engineer Agent (`hydrate-margin-check`, `wax-margin-check`):
+
+   ```bash
+   python -m pip install -e ../neqsim-community-skills/skills/flow-assurance/hydrate-margin-check
+   python -m pip install -e ../neqsim-community-skills/skills/flow-assurance/wax-margin-check
+   ```
+
+2. Drive the agent's skills from one harness:
+
+   ```python
+   # harness.py — runs a community agent's required skills, e.g. from the neqsim main repo
+   import yaml
+   from hydrate_margin_check import HydrateMarginModel
+
+   # 1. Read the machine-readable agent contract.
+   with open("agents/flow-assurance-engineer-agent/agent.yaml") as f:
+       agent = yaml.safe_load(f)
+   print("required skills:", agent["required_skills"])
+
+   # 2. Invoke each skill with validated NeqSim-derived inputs.
+   margin = HydrateMarginModel(min_margin=3.0).evaluate(
+       operating_temperature=15.0,
+       hydrate_equilibrium_temperature=8.0,
+   )
+
+   # 3. Assemble a review-ready summary that keeps assumptions visible.
+   print("hydrate margin (C):", margin.hydrate_margin_c, margin.margin_warning)
+   for note in margin.assumptions:
+       print("assumption:", note)
+   if agent.get("human_review_required"):
+       print("Human review required before any engineering or operational use.")
+   ```
+
+The harness is the boundary where the agent's declared inputs, skills, assumptions, and review requirement become a runnable workflow. The agent definition stays transparent and reproducible; the harness only orchestrates the skills it names and surfaces their combined output for qualified human review.
+
+### Automatic discovery via the Engineering Harness
+
+This repository publishes a machine-readable catalog, [`community-agents.yaml`](community-agents.yaml), so a runtime can discover every agent and its `required_skills` without opening each `agent.yaml`. The [Engineering Harness](https://github.com/equinor/engineering-harness) lists this repo as a default plugin source and imports it with:
+
+```powershell
+engineering-harness plugins sync      # imports community agents (public, no token)
+engineering-harness list agents       # shows the imported agents
+```
+
+Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills` from `required_skills`, `allowed_tools: [neqsim]`, `requires_human_approval: true`). Because the agents only declare skills that the harness also imports, a workflow launched from the main NeqSim repo can run them end to end.
+
 ## Initial Example Agents
 
 | Agent | Purpose | Required skills |
