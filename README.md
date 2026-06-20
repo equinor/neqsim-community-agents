@@ -152,6 +152,8 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 
 ## How To Contribute
 
+Not sure which repository a contribution belongs in? See the shared [Contribution Router](https://github.com/equinor/idea-sharing-AI-agents/blob/main/CONTRIBUTION-ROUTER.md).
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution requirements, required files, documentation expectations, testing expectations, review checklist, and open-source requirements.
 
 Contributions should use public information only. Do not include proprietary field data, confidential design methods, vendor-confidential information, private operational procedures, credentials, or personal data.
@@ -181,4 +183,4 @@ The initial tests use only the Python standard library. They validate that each 
 
 ## License
 
-This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) and [LICENSE.md](LICENSE.md).
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE).

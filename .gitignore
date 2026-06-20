@@ -1,0 +1,98 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Type checkers / linters
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# IDE / editor
+.idea/
+.vscode/
+tempCodeRunnerFile.py
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PyPI configuration file
+.pypirc
+
+# Credentials, secrets, and browser profiles (never commit)
+token_cache.bin
+**/token_cache.bin
+*.pem
+*.key
+.pims_browser_profile/
+.secrets/
+secrets.toml
+
+# AI agent local state and generated outputs
+cache/
+data/cache/
+*-results/
+task_solve/
+figures/
+documents/
+_assets/
+*.zip
