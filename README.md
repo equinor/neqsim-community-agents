@@ -183,4 +183,4 @@ The initial tests use only the Python standard library. They validate that each 
 
 ## License
 
-This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE.md).
