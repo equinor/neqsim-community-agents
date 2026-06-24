@@ -60,6 +60,9 @@ EXPECTED_AGENTS = {
         "hydrate-margin-check",
         "wax-margin-check",
     ],
+    "subsea-cooldown-agent": [
+        "surf-cooldown-screening",
+    ],
 }
 
 

@@ -247,3 +247,16 @@ agents:
       - process
       - flow-assurance
       - pipeline
+
+  - name: subsea-cooldown-agent
+    version: "0.1.0"
+    description: "Provides early-stage subsea flowline and riser cooldown screening that checks no-touch time against public hydrate-margin guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/subsea-cooldown-agent/AGENT.md"
+    required_skills:
+      - surf-cooldown-screening
+    supported_domains:
+      - flow-assurance
+      - subsea
+      - operating-limits
+      - standards-compliance

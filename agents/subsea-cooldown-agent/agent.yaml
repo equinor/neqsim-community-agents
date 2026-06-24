@@ -1,0 +1,25 @@
+name: subsea-cooldown-agent
+description: Provides early-stage subsea flowline and riser cooldown screening that checks no-touch time against public hydrate-margin guidelines.
+required_skills:
+  - surf-cooldown-screening
+supported_domains:
+  - flow-assurance
+  - subsea
+  - operating-limits
+  - standards-compliance
+inputs:
+  - flowline_or_riser_description
+  - initial_temperature
+  - seabed_temperature
+  - hydrate_equilibrium_temperature
+  - cooldown_time_constant_or_geometry
+  - required_no_touch_time
+  - screening_objective
+outputs:
+  - no_touch_time_indicator
+  - cooldown_verdict
+  - operating_limit_warnings
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true
