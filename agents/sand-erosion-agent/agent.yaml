@@ -1,0 +1,29 @@
+name: sand-erosion-agent
+description: Provides early-stage subsea and topside line sand-erosion screening that checks erosional velocity and remaining wall life against public integrity guidelines.
+required_skills:
+  - sand-erosion-screening
+supported_domains:
+  - flow-assurance
+  - integrity
+  - operating-limits
+  - standards-compliance
+inputs:
+  - line_description
+  - flow_velocity
+  - mixture_density
+  - pipe_diameter
+  - wall_thickness
+  - sand_rate
+  - corrosion_allowance
+  - design_life
+  - screening_objective
+outputs:
+  - erosional_velocity_indicator
+  - velocity_ratio
+  - erosion_rate_indicator
+  - remaining_wall_life_indicator
+  - sand_erosion_verdict
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

@@ -260,3 +260,16 @@ agents:
       - subsea
       - operating-limits
       - standards-compliance
+
+  - name: sand-erosion-agent
+    version: "0.1.0"
+    description: "Provides early-stage subsea and topside line sand-erosion screening that checks erosional velocity and remaining wall life against public integrity guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/sand-erosion-agent/AGENT.md"
+    required_skills:
+      - sand-erosion-screening
+    supported_domains:
+      - flow-assurance
+      - integrity
+      - operating-limits
+      - standards-compliance

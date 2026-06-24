@@ -63,6 +63,9 @@ EXPECTED_AGENTS = {
     "subsea-cooldown-agent": [
         "surf-cooldown-screening",
     ],
+    "sand-erosion-agent": [
+        "sand-erosion-screening",
+    ],
 }
 
 
