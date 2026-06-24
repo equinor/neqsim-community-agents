@@ -1,0 +1,48 @@
+name: field-development-economics-agent
+description: Coordinates an end-to-end reservoir-to-market field-development screening that chains reservoir fluid and depletion screening, subsea hydrate flow-assurance margins, topside separation duty, gas-export line screening, and an asset-economics roll-up (CAPEX/OPEX, energy and emissions, and a discounted NPV) into one concept-level value-chain view.
+required_skills:
+  - fluid-quality-check
+  - reservoir-depletion-screening
+  - hydrate-margin-check
+  - separator-modelling
+  - line-velocity-check
+  - capex-opex-screening
+  - energy-emissions-screening
+  - asset-value-npv-screening
+supported_domains:
+  - field-development
+  - reservoir-engineering
+  - flow-assurance
+  - process
+  - economics
+  - environment
+  - cost-estimation
+inputs:
+  - reservoir_fluid_composition_and_type
+  - initial_and_abandonment_pressure
+  - recoverable_volume_offtake_rate_and_field_life
+  - subsea_surf_layout_and_operating_conditions
+  - topside_separation_duty_point
+  - gas_export_length_and_required_arrival_pressure
+  - capex_drivers_and_installation_basis
+  - opex_assumptions_over_field_life
+  - annual_energy_use_and_emission_factor
+  - production_profile_boe
+  - co2_tax_usd_per_tonne
+  - net_cash_flow_or_price_and_cost_assumptions
+  - discount_rate
+  - screening_objective
+outputs:
+  - reservoir_fluid_and_depletion_screening
+  - subsea_hydrate_margin_warnings
+  - topside_separation_duty_and_capacity_screening
+  - gas_export_line_velocity_and_arrival_pressure_screening
+  - capex_opex_screening_summary
+  - annual_and_total_co2e_and_carbon_intensity
+  - co2_tax_cost_exposure
+  - screening_npv_and_payback
+  - combined_reservoir_to_market_concept_summary
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

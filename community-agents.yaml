@@ -183,3 +183,41 @@ agents:
       - process-engineering
       - pipeline-hydraulics
       - operating-limits
+
+  - name: asset-economics-agent
+    version: "0.1.0"
+    description: "Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/asset-economics-agent/AGENT.md"
+    required_skills:
+      - capex-opex-screening
+      - energy-emissions-screening
+      - asset-value-npv-screening
+    supported_domains:
+      - field-development
+      - economics
+      - environment
+      - cost-estimation
+
+  - name: field-development-economics-agent
+    version: "0.1.0"
+    description: "Coordinates an end-to-end reservoir-to-market field-development screening that chains reservoir fluid and depletion screening, subsea hydrate flow-assurance margins, topside separation duty, gas-export line screening, and an asset-economics roll-up (CAPEX/OPEX, energy and emissions, and a discounted NPV) into one concept-level value-chain view."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/field-development-economics-agent/AGENT.md"
+    required_skills:
+      - fluid-quality-check
+      - reservoir-depletion-screening
+      - hydrate-margin-check
+      - separator-modelling
+      - line-velocity-check
+      - capex-opex-screening
+      - energy-emissions-screening
+      - asset-value-npv-screening
+    supported_domains:
+      - field-development
+      - reservoir-engineering
+      - flow-assurance
+      - process
+      - economics
+      - environment
+      - cost-estimation

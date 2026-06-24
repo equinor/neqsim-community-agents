@@ -1,0 +1,30 @@
+name: asset-economics-agent
+description: Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure.
+required_skills:
+  - capex-opex-screening
+  - energy-emissions-screening
+  - asset-value-npv-screening
+supported_domains:
+  - field-development
+  - economics
+  - environment
+  - cost-estimation
+inputs:
+  - capex_drivers_and_installation_basis
+  - opex_assumptions_over_field_life
+  - annual_energy_use_and_emission_factor
+  - production_profile_boe
+  - co2_tax_usd_per_tonne
+  - net_cash_flow_or_price_and_cost_assumptions
+  - discount_rate
+  - screening_objective
+outputs:
+  - capex_opex_screening_summary
+  - annual_and_total_co2e_and_carbon_intensity
+  - co2_tax_cost_exposure
+  - screening_npv_and_payback
+  - combined_concept_economics_summary
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true
