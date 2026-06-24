@@ -1,0 +1,30 @@
+name: gas-export-pipeline-agent
+description: Performs preliminary gas-export pipeline screening by chaining line velocity, pressure drop, and export compression power checks.
+required_skills:
+  - line-velocity-check
+  - pressure-drop-screening
+  - compressor-power-screening
+supported_domains:
+  - process
+  - flow-assurance
+  - pipeline
+  - screening
+inputs:
+  - gas_flow_rate
+  - gas_density_or_molecular_weight
+  - pipeline_internal_diameter
+  - pipeline_length
+  - pipeline_roughness
+  - inlet_pressure
+  - export_pressure
+  - gas_temperature
+  - compression_efficiency
+outputs:
+  - line_velocity_screening
+  - pressure_drop_screening
+  - export_compression_power_estimate
+  - missing_information
+  - recommended_follow_up_analysis
+  - assumptions_and_limitations
+  - validation_checklist
+human_review_required: true
