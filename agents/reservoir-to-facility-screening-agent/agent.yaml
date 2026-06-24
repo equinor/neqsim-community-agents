@@ -1,0 +1,32 @@
+name: reservoir-to-facility-screening-agent
+description: Coordinates early-stage reservoir-to-facility production screening that chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development.
+required_skills:
+  - reservoir-depletion-screening
+  - production-network-routing
+  - subsea-layout-geometry
+  - step-out-screening
+supported_domains:
+  - field-development
+  - reservoir-engineering
+  - production-technology
+  - subsea-layout
+  - flow-assurance
+inputs:
+  - reservoir_fluid_type_and_recoverable_volume
+  - initial_and_abandonment_pressure
+  - offtake_rate_and_field_life_years
+  - water_cut_and_gor_trends
+  - well_list_with_productivity_index_and_tubing_head_pressure
+  - manifold_and_flowline_riser_layout
+  - host_name_and_required_arrival_pressure
+  - screening_objective
+outputs:
+  - reservoir_pressure_and_production_profile_vs_time
+  - well_inflow_rates_and_warnings
+  - manifold_aggregated_rates
+  - platform_arrival_pressure_rollup_and_margin
+  - time_development_summary
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

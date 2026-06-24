@@ -1,0 +1,27 @@
+name: pipe-route-screening-agent
+description: Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines.
+required_skills:
+  - pipe-route-profile
+  - pressure-drop-screening
+  - line-velocity-check
+  - hydrate-margin-check
+supported_domains:
+  - flow-assurance
+  - process-engineering
+  - pipeline-hydraulics
+  - operating-limits
+inputs:
+  - ordered_route_waypoints_and_coordinate_system
+  - fluid_density_viscosity_flow_and_pipe_geometry
+  - operating_temperature_and_hydrate_equilibrium_temperature
+  - recommended_gradient_velocity_and_hydrate_margin_guidelines
+  - screening_objective
+outputs:
+  - route_length_and_elevation_profile
+  - pressure_drop_indicator
+  - line_velocity_indicator
+  - hydrate_margin_indicator
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

@@ -134,3 +134,52 @@ agents:
       - gas-treatment
       - dehydration
       - standards-compliance
+
+  - name: subsea-layout-screening-agent
+    version: "0.1.0"
+    description: "Coordinates early-stage subsea layout screening that turns a supplied subsea map into a well and tie-back inventory with step-out distances, route profiles, and seabed slope flags."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/subsea-layout-screening-agent/AGENT.md"
+    required_skills:
+      - field-layout-import
+      - subsea-layout-geometry
+      - bathymetry-profile-screening
+      - pipe-route-profile
+    supported_domains:
+      - field-development
+      - subsea-layout
+      - tie-in-screening
+      - flow-assurance
+
+  - name: reservoir-to-facility-screening-agent
+    version: "0.1.0"
+    description: "Coordinates early-stage reservoir-to-facility production screening that chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-to-facility-screening-agent/AGENT.md"
+    required_skills:
+      - reservoir-depletion-screening
+      - production-network-routing
+      - subsea-layout-geometry
+      - step-out-screening
+    supported_domains:
+      - field-development
+      - reservoir-engineering
+      - production-technology
+      - subsea-layout
+      - flow-assurance
+
+  - name: pipe-route-screening-agent
+    version: "0.1.0"
+    description: "Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/pipe-route-screening-agent/AGENT.md"
+    required_skills:
+      - pipe-route-profile
+      - pressure-drop-screening
+      - line-velocity-check
+      - hydrate-margin-check
+    supported_domains:
+      - flow-assurance
+      - process-engineering
+      - pipeline-hydraulics
+      - operating-limits

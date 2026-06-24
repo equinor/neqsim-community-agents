@@ -1,0 +1,27 @@
+name: subsea-layout-screening-agent
+description: Coordinates early-stage subsea layout screening that turns a supplied subsea map into a well and tie-back inventory with step-out distances, route profiles, and seabed slope flags.
+required_skills:
+  - field-layout-import
+  - subsea-layout-geometry
+  - bathymetry-profile-screening
+  - pipe-route-profile
+supported_domains:
+  - field-development
+  - subsea-layout
+  - tie-in-screening
+  - flow-assurance
+inputs:
+  - parsed_subsea_map_geojson_or_rows
+  - host_name_and_coordinate_system
+  - ordered_route_waypoints_with_depths
+  - seabed_soundings
+  - screening_objective
+outputs:
+  - normalized_node_list_with_issues
+  - step_out_distances_and_distance_matrix
+  - route_length_and_elevation_profile
+  - bathymetry_slope_screening
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true
