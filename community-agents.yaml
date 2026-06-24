@@ -92,6 +92,18 @@ agents:
       - operating-limits
       - standards-compliance
 
+  - name: compressor-antisurge-agent
+    version: "0.1.0"
+    description: "Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including generating a compressor chart with surge and stonewall curves when no vendor chart is given."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/compressor-antisurge-agent/AGENT.md"
+    required_skills:
+      - compressor-antisurge-recycle
+    supported_domains:
+      - process-engineering
+      - rotating-equipment
+      - compressor-control
+
   - name: flow-assurance-engineer-agent
     version: "0.1.0"
     description: "Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines."

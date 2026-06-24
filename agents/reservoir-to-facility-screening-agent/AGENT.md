@@ -34,6 +34,7 @@ Use this agent when an engineer needs to:
 - Estimate a first-pass inflow rate per well from a productivity index and drawdown
 - Route wells through one or more manifolds and flowlines/risers to a host
 - Roll up a screening platform arrival pressure and compare it to a requirement
+- Screen pressure-regulated multiwell flow from a fixed facility inlet/separator pressure and the reservoir pressures
 - See the time development of the reservoir-to-facility chain at a screening level
 - Identify required follow-up reservoir, inflow, and flow-assurance studies
 - Suggest validated NeqSim reservoir and multiphase-hydraulics workflows
@@ -59,6 +60,7 @@ Typical outputs include:
 - Per-well inflow rates and no-flow warnings
 - Manifold-aggregated rates
 - A platform arrival-pressure roll-up with margin and warning level
+- Pressure-regulated per-well rates solved from a fixed facility inlet/separator pressure (generalizing the single-train NeqSim `Adjuster` to many wells and manifolds)
 - A time-development summary tying reservoir decline to arrival pressure
 - Recommended validated NeqSim and routing workflows
 - Assumptions, limitations, and a human review checklist
@@ -69,6 +71,7 @@ Typical outputs include:
 2. Use `reservoir-depletion-screening` to build the reservoir pressure and production profile versus time, including water-cut development.
 3. Optionally use `subsea-layout-geometry` and `step-out-screening` to confirm the well/manifold/host layout and tie-back distances.
 4. Use `production-network-routing` to estimate per-well inflow, aggregate rates by manifold, and roll up the platform arrival pressure.
+4a. Optionally use `production-network-routing.regulate_flow_from_inlet_pressure` to solve each well's rate from a fixed facility inlet/separator pressure and the reservoir pressures, mirroring NeqSim `WellFlowlineNetwork.setTargetEndpointPressure`.
 5. Combine the reservoir profile and the network roll-up into a time-development summary (how falling reservoir pressure erodes arrival-pressure margin).
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible reservoir-to-facility screening report outline.
@@ -123,6 +126,8 @@ functionality that a qualified engineer should use for design-grade work:
 
 - `neqsim.process.processTools.simplereservoir` (`SimpleReservoir`) with gas/oil/water producers and injectors and a `runTransient(deltat)` time loop for reservoir-versus-time behaviour.
 - `neqsim.process.equipment.pipeline.PipeBeggsAndBrills` — multiphase pressure and temperature along a flowline/riser with gas, oil, and water.
+- `neqsim.process.equipment.util.Adjuster` — tunes a single well/train rate to hold a target endpoint (pipeline outlet / separator inlet) pressure; the multiwell generalization is the network solver below.
+- `neqsim.process.equipment.reservoir.WellFlowlineNetwork` with `setTargetEndpointPressure(pressure, unit)` — iterates the manifold/endpoint pressure to hold a target facility inlet/separator pressure while solving every well's rate from its backpressure (the validated counterpart to the pressure-regulated screening).
 - The NeqSim MCP `runReservoir`, `runPipeline`, `runProcess`, and `runFlowAssurance` tools for orchestrated reservoir-to-facility simulation.
 
 In Python these classes are reachable through the `neqsim` package (for example

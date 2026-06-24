@@ -56,6 +56,9 @@ EXPECTED_AGENTS = {
         "line-velocity-check",
         "compressor-operating-window-check",
     ],
+    "compressor-antisurge-agent": [
+        "compressor-antisurge-recycle",
+    ],
     "flow-assurance-engineer-agent": [
         "hydrate-margin-check",
         "wax-margin-check",
