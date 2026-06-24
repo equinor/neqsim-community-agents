@@ -221,3 +221,29 @@ agents:
       - economics
       - environment
       - cost-estimation
+
+  - name: energy-emissions-agent
+    version: "0.1.0"
+    description: "Performs preliminary energy-use and CO2-equivalent emissions screening for a facility or process, estimates a screening carbon intensity per boe, applies an optional CO2 tax, and recommends further analysis."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/energy-emissions-agent/AGENT.md"
+    required_skills:
+      - energy-emissions-screening
+    supported_domains:
+      - environment
+      - emissions
+      - energy
+
+  - name: gas-export-pipeline-agent
+    version: "0.1.0"
+    description: "Performs preliminary gas-export pipeline screening by chaining an erosional and recommended line-velocity check, a single-phase pressure-drop screening, and an indicative export-compression power estimate."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/gas-export-pipeline-agent/AGENT.md"
+    required_skills:
+      - line-velocity-check
+      - pressure-drop-screening
+      - compressor-power-screening
+    supported_domains:
+      - process
+      - flow-assurance
+      - pipeline
