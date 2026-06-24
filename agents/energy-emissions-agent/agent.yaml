@@ -1,0 +1,24 @@
+name: energy-emissions-agent
+description: Performs preliminary energy-use and CO2-equivalent emissions screening for a facility or process and recommends further analysis.
+required_skills:
+  - energy-emissions-screening
+supported_domains:
+  - environment
+  - emissions
+  - energy
+  - screening
+inputs:
+  - annual_energy_use_mwh
+  - emission_factor_kg_co2e_per_mwh
+  - annual_production_boe
+  - co2_tax
+  - energy_source_context
+outputs:
+  - emissions_screening_summary
+  - carbon_intensity_estimate
+  - co2_tax_cost_exposure
+  - missing_information
+  - recommended_follow_up_analysis
+  - assumptions_and_limitations
+  - validation_checklist
+human_review_required: true
