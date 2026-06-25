@@ -47,6 +47,8 @@ Current skill mappings used by the example agents:
 | `depressurization-screening` | `neqsim-depressurization-screening` |
 | `line-velocity-check` | `neqsim-line-velocity-check` |
 | `compressor-operating-window-check` | `neqsim-compressor-operating-window-check` |
+| `dynamic-process-preparation` | `neqsim-dynamic-process-preparation` |
+| `dynamic-instrument-controller-setup` | `neqsim-dynamic-instrument-controller-setup` |
 | `hydrate-margin-check` | `neqsim-hydrate-margin-check` |
 | `wax-margin-check` | `neqsim-wax-margin-check` |
 
@@ -138,6 +140,8 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 | [Process Screening Agent](agents/process-screening-agent/README.md) | High-level process engineering screening studies | `separator-modelling` |
 | [Process Safety Agent](agents/process-safety-agent/README.md) | Early-stage fire-case relief load and depressurization screening | `relief-load-screening`, `depressurization-screening` |
 | [Process Engineer Agent](agents/process-engineer-agent/README.md) | Early-stage screening of unit operations against line-velocity and compressor operating-window guidelines | `line-velocity-check`, `compressor-operating-window-check` |
+| [Dynamic Process Preparation Agent](agents/dynamic-process-preparation-agent/README.md) | Prepares NeqSim process systems and process models for dynamic calculations | `dynamic-process-preparation` |
+| [Dynamic Instrument Controller Agent](agents/dynamic-instrument-controller-agent/README.md) | Adds NeqSim transmitters and PID-style controllers for dynamic simulations | `dynamic-instrument-controller-setup` |
 | [Flow Assurance Engineer Agent](agents/flow-assurance-engineer-agent/README.md) | Early-stage screening of operating points against hydrate-margin and wax-margin guidelines | `hydrate-margin-check`, `wax-margin-check` |
 
 ## How To Create A New Agent

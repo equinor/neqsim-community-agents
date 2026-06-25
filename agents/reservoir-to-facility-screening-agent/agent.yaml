@@ -19,12 +19,14 @@ inputs:
   - well_list_with_productivity_index_and_tubing_head_pressure
   - manifold_and_flowline_riser_layout
   - host_name_and_required_arrival_pressure
+  - target_facility_inlet_or_separator_pressure
   - screening_objective
 outputs:
   - reservoir_pressure_and_production_profile_vs_time
   - well_inflow_rates_and_warnings
   - manifold_aggregated_rates
   - platform_arrival_pressure_rollup_and_margin
+  - pressure_regulated_per_well_rates_from_inlet_pressure
   - time_development_summary
   - recommended_neqsim_workflows
   - required_follow_up_studies

@@ -1,0 +1,23 @@
+name: artificial-lift-agent
+description: Screens gas-lift versus ESP artificial-lift feasibility against a simple inflow performance relationship using public, educational methods.
+required_skills:
+  - artificial-lift-screening
+supported_domains:
+  - production-engineering
+  - well-screening
+  - artificial-lift
+inputs:
+  - reservoir_pressure_pi
+  - target_production_rate
+  - fluid_type_glr
+  - well_depth_wellhead_conditions
+  - available_lift_gas_power
+  - screening_objective
+outputs:
+  - ipr_deliverability_screening
+  - gas_lift_feasibility_indication
+  - esp_feasibility_indication
+  - selection_driver_list
+  - major_risk_list
+  - validation_checklist
+human_review_required: true

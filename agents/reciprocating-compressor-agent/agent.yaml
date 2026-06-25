@@ -1,0 +1,24 @@
+name: reciprocating-compressor-agent
+description: Screens reciprocating compressor staging, volumetric efficiency, discharge temperature, and rod load using public, educational methods.
+required_skills:
+  - reciprocating-compressor-screening
+supported_domains:
+  - process-engineering
+  - compressor-screening
+  - rotating-equipment
+inputs:
+  - suction_discharge_pressure
+  - suction_temperature
+  - gas_composition
+  - volumetric_flow_rate
+  - clearance_fraction
+  - discharge_temperature_limit
+  - screening_objective
+outputs:
+  - stage_count_and_ratio
+  - volumetric_efficiency_screening
+  - discharge_temperature_estimate
+  - rod_load_indication
+  - major_risk_list
+  - validation_checklist
+human_review_required: true

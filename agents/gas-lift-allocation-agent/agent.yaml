@@ -1,0 +1,24 @@
+name: gas-lift-allocation-agent
+description: Screens lift-gas allocation across a small set of gas-lifted wells, framing the allocation problem and ranking candidate splits using public artificial-lift, production-network-routing, and reservoir-depletion screening before a validated NeqSim study.
+required_skills:
+  - artificial-lift-screening
+  - production-network-routing
+  - reservoir-depletion-screening
+supported_domains:
+  - gas-lift-allocation
+  - artificial-lift
+  - production-optimization
+  - well-screening
+inputs:
+  - well-set-description
+  - lift-gas-budget
+  - network-routing-description
+  - fluid-composition
+  - optional-depletion-context
+outputs:
+  - framed-allocation-problem
+  - split-screening-assessment
+  - ranked-allocation-directions
+  - assumptions-and-limitations
+  - neqsim-optimization-recommendation
+human_review_required: true

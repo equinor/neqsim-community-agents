@@ -1,0 +1,26 @@
+name: concept-selection-agent
+description: Coordinates early-stage concept-selection screening for a field-development opportunity, chaining resource classification, CAPEX/OPEX, asset-value (NPV), energy/emissions, and step-out screening into a comparable concept summary before a validated study.
+required_skills:
+  - resource-classification-screening
+  - capex-opex-screening
+  - asset-value-npv-screening
+  - energy-emissions-screening
+  - step-out-screening
+supported_domains:
+  - concept-selection
+  - field-development
+  - asset-economics
+  - screening
+inputs:
+  - opportunity-description
+  - per-concept-cost-drivers
+  - economic-basis
+  - step-out-distance
+  - fluid-and-production-context
+outputs:
+  - concept-comparison-summary
+  - screening-ranking
+  - decision-drivers-and-sensitivities
+  - assumptions-and-limitations
+  - neqsim-study-recommendation
+human_review_required: true

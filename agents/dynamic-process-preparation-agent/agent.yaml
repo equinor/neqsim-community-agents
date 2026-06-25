@@ -1,0 +1,24 @@
+name: dynamic-process-preparation-agent
+description: Prepares NeqSim ProcessSystem and ProcessModel flowsheets for dynamic calculations with mechanical-design and volume-readiness checks.
+required_skills:
+  - dynamic-process-preparation
+supported_domains:
+  - process-engineering
+  - dynamic-simulation
+  - process-modeling
+  - mechanical-design-readiness
+inputs:
+  - process_name_and_kind
+  - steady_state_convergence_status
+  - equipment_geometry_and_initial_holdup
+  - process_model_area_boundaries
+  - transient_time_step_and_duration
+  - dynamic_acceptance_checks
+outputs:
+  - dynamic_readiness_plan
+  - equipment_dynamic_action_list
+  - vessel_volume_estimates
+  - neqsim_transient_initialization_sequence
+  - missing_data_warnings
+  - validation_checklist
+human_review_required: true
