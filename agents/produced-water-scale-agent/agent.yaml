@@ -1,0 +1,25 @@
+name: produced-water-scale-agent
+description: Provides early-stage produced-water brine building and screening-level scale evaluation, turning ion analyses, presets, or TDS values into NeqSim-ready electrolyte ion mappings and public scale-risk indicators.
+required_skills:
+  - produced-water-scale-screening
+supported_domains:
+  - flow-assurance
+  - water-chemistry
+  - standards-compliance
+inputs:
+  - produced_water_ion_analysis_or_preset_or_tds
+  - water_temperature_pressure_ph
+  - second_water_for_mixing
+  - mixing_fraction_range
+  - optional_co2_and_h2s_content
+  - screening_objective
+outputs:
+  - produced_water_description
+  - neqsim_ready_ion_mapping
+  - scale_saturation_indices
+  - mixing_incompatibility_indicators
+  - corrosion_flags
+  - recommended_neqsim_workflows
+  - required_follow_up_studies
+  - validation_checklist
+human_review_required: true

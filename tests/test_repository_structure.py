@@ -69,6 +69,9 @@ EXPECTED_AGENTS = {
     "sand-erosion-agent": [
         "sand-erosion-screening",
     ],
+    "produced-water-scale-agent": [
+        "produced-water-scale-screening",
+    ],
 }
 
 

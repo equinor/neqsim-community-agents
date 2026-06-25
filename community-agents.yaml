@@ -19,6 +19,18 @@ agents:
       - thermodynamics
       - fluid-characterization
 
+  - name: e300-fluid-agent
+    version: "0.1.0"
+    description: "Reads Eclipse E300 files into NeqSim fluids, writes NeqSim fluids to E300, and adds water with the public PVTsim water parameters."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/e300-fluid-agent/AGENT.md"
+    required_skills:
+      - e300-fluid-io
+    supported_domains:
+      - pvt
+      - thermodynamics
+      - fluid-io
+
   - name: hydrate-screening-agent
     version: "0.1.0"
     description: "Performs preliminary hydrate risk assessment and recommends further analysis."
@@ -284,4 +296,16 @@ agents:
       - flow-assurance
       - integrity
       - operating-limits
+      - standards-compliance
+
+  - name: produced-water-scale-agent
+    version: "0.1.0"
+    description: "Provides early-stage produced-water brine building and screening-level scale evaluation, turning ion analyses, presets, or TDS values into NeqSim-ready electrolyte ion mappings and public BaSO4/SrSO4/CaSO4/CaCO3 scale-risk and mixing-incompatibility indicators."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/produced-water-scale-agent/AGENT.md"
+    required_skills:
+      - produced-water-scale-screening
+    supported_domains:
+      - flow-assurance
+      - water-chemistry
       - standards-compliance
