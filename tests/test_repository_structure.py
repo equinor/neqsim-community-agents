@@ -59,6 +59,12 @@ EXPECTED_AGENTS = {
     "compressor-antisurge-agent": [
         "compressor-antisurge-recycle",
     ],
+    "dynamic-process-preparation-agent": [
+        "dynamic-process-preparation",
+    ],
+    "dynamic-instrument-controller-agent": [
+        "dynamic-instrument-controller-setup",
+    ],
     "flow-assurance-engineer-agent": [
         "hydrate-margin-check",
         "wax-margin-check",
@@ -71,6 +77,30 @@ EXPECTED_AGENTS = {
     ],
     "produced-water-scale-agent": [
         "produced-water-scale-screening",
+    ],
+    "production-optimization-agent": [
+        "separator-modelling",
+        "compressor-operating-window-check",
+        "compressor-power-screening",
+        "production-network-routing",
+    ],
+    "debottlenecking-agent": [
+        "separator-modelling",
+        "compressor-operating-window-check",
+        "line-velocity-check",
+        "pressure-drop-screening",
+    ],
+    "gas-lift-allocation-agent": [
+        "artificial-lift-screening",
+        "production-network-routing",
+        "reservoir-depletion-screening",
+    ],
+    "concept-selection-agent": [
+        "resource-classification-screening",
+        "capex-opex-screening",
+        "asset-value-npv-screening",
+        "energy-emissions-screening",
+        "step-out-screening",
     ],
 }
 

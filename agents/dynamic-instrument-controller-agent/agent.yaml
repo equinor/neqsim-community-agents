@@ -1,0 +1,25 @@
+name: dynamic-instrument-controller-agent
+description: Adds NeqSim measurement devices and PID-style controllers for dynamic process simulations.
+required_skills:
+  - dynamic-instrument-controller-setup
+supported_domains:
+  - process-engineering
+  - dynamic-simulation
+  - process-control
+  - instrumentation
+inputs:
+  - control_loop_name_and_variable
+  - transmitter_target
+  - manipulated_equipment
+  - setpoint_and_transmitter_range
+  - reverse_or_direct_action_basis
+  - pid_parameters
+  - transient_response_acceptance_checks
+outputs:
+  - control_loop_setup_plan
+  - recommended_transmitter_class
+  - controller_configuration_steps
+  - validation_warnings
+  - autotuning_workflow
+  - human_review_checklist
+human_review_required: true

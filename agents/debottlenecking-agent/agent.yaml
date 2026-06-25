@@ -1,0 +1,25 @@
+name: debottlenecking-agent
+description: Screens a simple process train to identify the most likely capacity bottleneck — separator capacity, compressor operating window, line velocity, or line pressure drop — and ranks units by public screening-level utilization before a validated NeqSim study.
+required_skills:
+  - separator-modelling
+  - compressor-operating-window-check
+  - line-velocity-check
+  - pressure-drop-screening
+supported_domains:
+  - debottlenecking
+  - capacity-screening
+  - bottleneck-identification
+  - process-screening
+inputs:
+  - process-train-description
+  - target-throughput-scenario
+  - line-geometry
+  - fluid-composition
+  - optional-design-limits
+outputs:
+  - ranked-unit-utilization
+  - identified-bottleneck
+  - debottlenecking-directions
+  - assumptions-and-limitations
+  - neqsim-capacity-study-recommendation
+human_review_required: true

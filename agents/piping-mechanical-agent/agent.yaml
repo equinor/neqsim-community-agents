@@ -1,0 +1,24 @@
+name: piping-mechanical-agent
+description: Screens piping hoop and thermal-flexibility margins and acoustic-induced vibration likelihood using public, educational methods.
+required_skills:
+  - piping-flexibility-screening
+  - acoustic-induced-vibration-screening
+supported_domains:
+  - process-engineering
+  - piping-mechanical
+  - vibration-screening
+inputs:
+  - pipe_geometry_and_schedule
+  - design_pressure_temperature
+  - operating_temperature_range
+  - material_allowable_stress
+  - aiv_source_data
+  - screening_objective
+outputs:
+  - hoop_stress_wall_thickness_screening
+  - thermal_flexibility_indication
+  - acoustic_induced_vibration_indication
+  - lines_for_detailed_analysis
+  - major_risk_list
+  - validation_checklist
+human_review_required: true

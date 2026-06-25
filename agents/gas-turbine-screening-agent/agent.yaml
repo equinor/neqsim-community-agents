@@ -1,0 +1,23 @@
+name: gas-turbine-screening-agent
+description: Screens gas-turbine driver site-rating, heat rate, and exhaust conditions using public, educational methods.
+required_skills:
+  - gas-turbine-performance-screening
+supported_domains:
+  - process-engineering
+  - power-generation
+  - driver-screening
+inputs:
+  - iso_base_power_rating
+  - ambient_temperature_elevation
+  - fuel_gas_composition
+  - required_power
+  - screening_objective
+  - known_constraints
+outputs:
+  - site_rated_power_estimate
+  - heat_rate_and_fuel_screening
+  - exhaust_flow_temperature_estimate
+  - driver_margin
+  - major_risk_list
+  - validation_checklist
+human_review_required: true

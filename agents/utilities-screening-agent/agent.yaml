@@ -1,0 +1,23 @@
+name: utilities-screening-agent
+description: Screens instrument air, fuel-gas Wobbe, and cooling-water balances using public, educational methods.
+required_skills:
+  - utility-balance-screening
+supported_domains:
+  - process-engineering
+  - utility-systems
+  - utility-screening
+inputs:
+  - instrument_air_demand_dewpoint
+  - fuel_gas_composition
+  - cooling_water_duty_temperatures
+  - utility_supply_capacities
+  - screening_objective
+  - known_constraints
+outputs:
+  - instrument_air_balance_screening
+  - fuel_gas_wobbe_screening
+  - cooling_water_balance_screening
+  - utility_bottleneck_list
+  - major_risk_list
+  - validation_checklist
+human_review_required: true
