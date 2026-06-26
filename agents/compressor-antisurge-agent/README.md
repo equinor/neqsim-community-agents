@@ -10,6 +10,7 @@ It helps engineers estimate the recycle flow required to keep a compressor off i
 - Decide whether a compressor chart must be generated (with surge and stonewall curves)
 - Explain how to auto-generate a NeqSim compressor chart from a design point
 - Describe the NeqSim anti-surge recycle topology (surge curve, recycle stream, discharge splitter, anti-surge `Calculator`, anti-surge valve, `Recycle`)
+- Point to the dynamic `AntiSurgeController` (reverse-acting PI on distance to surge) and the reproducible `AntiSurgeDynamicBenchmark` for transient studies, including the deep-surge gotchas
 - Flag operating points that fall at or below the surge line
 - Identify required follow-up compressor performance and anti-surge control studies
 - Generate anti-surge setup reports

@@ -59,6 +59,18 @@ agents:
       - flow-assurance
       - resource-classification
 
+  - name: teg-dehydration-agent
+    version: "0.1.0"
+    description: "Builds and runs a validated NeqSim TEG (triethylene glycol) dehydration plant and reports water dew point, lean-TEG purity, and regeneration still-vent emissions."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/teg-dehydration-agent/AGENT.md"
+    required_skills:
+      - teg-dehydration-modeling
+    supported_domains:
+      - process
+      - dehydration
+      - emissions
+
   - name: process-screening-agent
     version: "0.1.0"
     description: "Performs high-level process engineering screening studies and engineering checklist generation."

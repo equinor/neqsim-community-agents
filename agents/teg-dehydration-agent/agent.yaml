@@ -1,0 +1,24 @@
+name: teg-dehydration-agent
+description: Builds and runs a validated NeqSim TEG (triethylene glycol) dehydration plant and reports water dew point, lean-TEG purity, and regeneration still-vent emissions.
+required_skills:
+  - teg-dehydration-modeling
+supported_domains:
+  - process
+  - dehydration
+  - emissions
+inputs:
+  - feed_gas_composition_and_flow
+  - feed_temperature_pressure
+  - absorber_conditions
+  - lean_teg_rate_temperature_purity
+  - regeneration_conditions
+  - water_specification_mode
+  - stripping_gas_recirculation_option
+outputs:
+  - water_dew_point_and_lean_teg_purity
+  - still_vent_emission_classification
+  - once_through_vs_recirculated_comparison
+  - missing_information
+  - assumptions_and_limitations
+  - validation_checklist
+human_review_required: true

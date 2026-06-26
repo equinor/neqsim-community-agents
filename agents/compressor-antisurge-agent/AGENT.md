@@ -55,9 +55,10 @@ Typical outputs include:
 2. Determine whether a vendor compressor chart is available; if not, explain how to generate a NeqSim chart with surge and stonewall curves from the design point.
 3. Use `compressor-antisurge-recycle` to estimate the surge margin and recommended recycle flow for the operating point.
 4. Describe the NeqSim anti-surge recycle topology (surge curve, recycle stream, discharge splitter, anti-surge `Calculator`, anti-surge valve, `Recycle`) to apply.
-5. Summarize major uncertainties and required studies.
-6. Generate a reproducible anti-surge setup report outline.
-7. Document assumptions, limitations, and human review requirements.
+5. For dynamic (transient) studies, point to NeqSim's `AntiSurgeController` (reverse-acting PI on distance to surge driving a recycle valve) and the reproducible `AntiSurgeDynamicBenchmark`, and flag the deep-surge gotchas (a fixed-factor `Splitter` denies the valve recycle authority; `getDistanceToSurge()` clamps at -1.0 in deep surge and the steady solver cannot recover; aggressive gains can cause a flash `NaN`).
+6. Summarize major uncertainties and required studies.
+7. Generate a reproducible anti-surge setup report outline.
+8. Document assumptions, limitations, and human review requirements.
 
 # Required Skills
 
@@ -104,7 +105,8 @@ The setup produced by this agent maps to validated, rigorous NeqSim Java functio
 
 - `neqsim.process.equipment.compressor.Compressor` with `neqsim.process.equipment.compressor.CompressorChart` and `neqsim.process.equipment.compressor.CompressorChartGenerator` — chart generation with surge and stonewall curves, surge flow, and distance to surge.
 - `neqsim.process.equipment.splitter.Splitter` — discharge split into forward and recycle branches.
-- `neqsim.process.equipment.util.Calculator` — anti-surge engine triggered by the `"anti surge calculator"` name prefix.
+- `neqsim.process.equipment.util.Calculator` — steady-state anti-surge engine triggered by the `"anti surge calculator"` name prefix.
+- `neqsim.process.controllerdevice.AntiSurgeController` — dynamic reverse-acting PI anti-surge controller on distance to surge driving a recycle valve; `neqsim.process.util.scenario.AntiSurgeDynamicBenchmark` provides a reproducible surrogate benchmark for verifying or tuning the control law.
 - `neqsim.process.equipment.valve.ThrottlingValve` — anti-surge recycle valve.
 - `neqsim.process.equipment.util.Recycle` — closes the recycle loop.
 
