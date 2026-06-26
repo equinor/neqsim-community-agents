@@ -6,6 +6,14 @@ Contributions may include new agents, improved documentation, examples, prompt t
 
 All contributions must be suitable for a public open-source repository.
 
+## Where Does This Belong?
+
+Before adding an agent here, confirm this is the right repository. See the
+[Where Does This Go? placement guide](https://github.com/equinor/neqsim-community-skills/blob/main/docs/where-does-this-go.md):
+community agents **orchestrate** community screening skills. They contain no
+engineering method themselves, claim only screening-level results, and reference
+validated NeqSim classes rather than reimplementing them.
+
 ## Create An Agent
 
 1. Choose a clear engineering purpose and a bounded scope.
