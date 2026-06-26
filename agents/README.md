@@ -22,3 +22,4 @@ Initial agents:
 - [hydrate-screening-agent](hydrate-screening-agent/README.md)
 - [tie-in-screening-agent](tie-in-screening-agent/README.md)
 - [process-screening-agent](process-screening-agent/README.md)
+- [teg-dehydration-agent](teg-dehydration-agent/README.md)
