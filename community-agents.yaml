@@ -118,7 +118,7 @@ agents:
 
   - name: compressor-antisurge-agent
     version: "0.1.0"
-    description: "Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including generating a compressor chart with surge and stonewall curves when no vendor chart is given."
+    description: "Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including compressor chart generation, steady-state recycle initialization, dynamic AntiSurgeController use, and CompressorAntiSurgeApplication topology binding for hot/cold recycle valves and speed runback."
     repo: "equinor/neqsim-community-agents"
     path: "agents/compressor-antisurge-agent/AGENT.md"
     required_skills:

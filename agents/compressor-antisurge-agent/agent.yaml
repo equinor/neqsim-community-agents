@@ -1,5 +1,5 @@
 name: compressor-antisurge-agent
-description: Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including generating a compressor chart with surge and stonewall curves when no vendor chart is given.
+description: Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including compressor chart generation, steady-state recycle initialization, dynamic AntiSurgeController use, and CompressorAntiSurgeApplication topology binding for hot/cold recycle valves and speed runback.
 required_skills:
   - compressor-antisurge-recycle
 supported_domains:
@@ -20,6 +20,7 @@ outputs:
   - recommended_recycle_flow
   - recycle_warning_level
   - antisurge_recycle_wiring_pattern
+  - recommended_antisurge_control_layer
   - recommended_neqsim_workflows
   - required_follow_up_studies
   - validation_checklist

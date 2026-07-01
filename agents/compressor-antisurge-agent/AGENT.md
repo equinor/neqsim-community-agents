@@ -1,6 +1,6 @@
 ---
 name: compressor-antisurge-agent
-description: Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including generating a compressor chart with surge and stonewall curves when no vendor chart is given.
+description: Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including compressor chart generation, steady-state recycle initialization, dynamic AntiSurgeController use, and CompressorAntiSurgeApplication topology binding for hot/cold recycle valves and speed runback.
 version: 0.1.0
 required_skills:
   - compressor-antisurge-recycle
@@ -8,7 +8,7 @@ required_skills:
 
 # Purpose
 
-The Compressor Anti-Surge Agent assists engineers in configuring anti-surge recycle (spill-back) protection for a centrifugal compressor in a NeqSim `ProcessSystem`. It reviews the available compressor data, estimates the recycle flow needed to keep the operating point off the surge line, and explains how to build the validated NeqSim anti-surge topology (surge curve, recycle stream, discharge splitter, anti-surge `Calculator`, anti-surge valve, and `Recycle`). When no vendor compressor chart is available, it explains how to auto-generate a chart with surge and stonewall curves first.
+The Compressor Anti-Surge Agent assists engineers in configuring anti-surge recycle (spill-back) protection for a centrifugal compressor in a NeqSim `ProcessSystem`. It reviews the available compressor data, estimates the recycle flow needed to keep the operating point off the surge line, and explains how to build validated NeqSim anti-surge topologies: steady-state recycle initialization with `AntiSurgeRecycleCalculator`, legacy splitter/calculator loops where needed, dynamic `AntiSurgeController` loops, and `CompressorAntiSurgeApplication` topology binding for real hot/cold recycle valves, cooler, mixer, recycle blocks, process stepping, and compressor speed runback. When no vendor compressor chart is available, it explains how to auto-generate a chart with surge and stonewall curves first.
 
 The agent supports concept screening and model scaffolding. It does not replace anti-surge controller design and tuning, dynamic surge or transient analysis, vendor performance maps, or rotating-equipment design review. A qualified human review is always required, and this agent does not replace project assurance or design reviews.
 
@@ -20,6 +20,7 @@ Use this agent when an engineer needs to:
 - Decide whether a compressor chart must be generated because no vendor chart exists
 - Generate a NeqSim compressor chart with surge and stonewall curves from a design point
 - Build the NeqSim anti-surge recycle topology around a compressor
+- Bind `CompressorAntiSurgeApplication` to an executable dynamic topology with hot/cold recycle valves and optional speed runback
 - Identify required follow-up compressor performance and anti-surge control studies
 - Generate a transparent anti-surge setup report outline
 - Suggest validated NeqSim, API 617, and API 692 workflows
@@ -45,6 +46,7 @@ Typical outputs include:
 - Recommended screening recycle flow and total suction flow
 - Recycle warning level (`ok`, `recycle`, `surge`)
 - The NeqSim anti-surge recycle wiring pattern to apply
+- The recommended control layer: steady-state `AntiSurgeRecycleCalculator`, dynamic `AntiSurgeController`, or application-level `CompressorAntiSurgeApplication`
 - Recommended validated NeqSim and standards workflows
 - Required follow-up studies
 - Assumptions, limitations, and human review checklist
@@ -54,8 +56,8 @@ Typical outputs include:
 1. Confirm the screening objective and available compressor input data.
 2. Determine whether a vendor compressor chart is available; if not, explain how to generate a NeqSim chart with surge and stonewall curves from the design point.
 3. Use `compressor-antisurge-recycle` to estimate the surge margin and recommended recycle flow for the operating point.
-4. Describe the NeqSim anti-surge recycle topology (surge curve, recycle stream, discharge splitter, anti-surge `Calculator`, anti-surge valve, `Recycle`) to apply.
-5. For dynamic (transient) studies, point to NeqSim's `AntiSurgeController` (reverse-acting PI on distance to surge driving a recycle valve) and the reproducible `AntiSurgeDynamicBenchmark`, and flag the deep-surge gotchas (a fixed-factor `Splitter` denies the valve recycle authority; `getDistanceToSurge()` clamps at -1.0 in deep surge and the steady solver cannot recover; aggressive gains can cause a flash `NaN`).
+4. Select the NeqSim implementation path: `AntiSurgeRecycleCalculator` for steady-state initialization, the legacy splitter/calculator topology for existing splitter-based flowsheets, `AntiSurgeController` for a single dynamic PI recycle valve, or `CompressorAntiSurgeApplication` when the study needs hot/cold recycle split, startup/trip sequencing, diagnostics, speed runback, and direct writeback to real topology objects.
+5. For dynamic (transient) studies, point to NeqSim's `AntiSurgeController` (reverse-acting PI on distance to surge driving a recycle valve), `CompressorAntiSurgeApplication.bindTopology(...)` / `runDynamicStep(...)`, and the reproducible `AntiSurgeDynamicBenchmark`, and flag the deep-surge gotchas (a fixed-factor `Splitter` denies the valve recycle authority; `getDistanceToSurge()` clamps at -1.0 in deep surge and the steady solver cannot recover; aggressive gains can cause a flash `NaN`).
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible anti-surge setup report outline.
 8. Document assumptions, limitations, and human review requirements.
@@ -92,9 +94,11 @@ Use public synthetic data to set up anti-surge recycle control for a centrifugal
 - Screening objective is documented.
 - Compressor design point, suction flow, and surge flow assumptions are stated.
 - Whether a chart was generated (with surge and stonewall curves) is documented.
-- The anti-surge `Calculator` name starts with `"anti surge calculator"`.
+- The implementation path is documented (`AntiSurgeRecycleCalculator`, legacy splitter/calculator, `AntiSurgeController`, or `CompressorAntiSurgeApplication`).
+- If the legacy splitter/calculator path is used, the anti-surge `Calculator` name starts with `"anti surge calculator"` or the typed `AntiSurgeCalculator` is used.
 - The anti-surge valve is wired to the recycle branch and drops to suction pressure.
 - The `Recycle` loop closes into the placeholder suction stream.
+- For application-level dynamic topology binding, hot/cold recycle valves are real `ThrottlingValve` units and speed-control limits are bounded before `runDynamicStep(...)` is used.
 - Recycle and chart-generation limitations are documented.
 - Required follow-up studies are listed.
 - Qualified human review is completed before design or operating decisions.
@@ -104,6 +108,8 @@ Use public synthetic data to set up anti-surge recycle control for a centrifugal
 The setup produced by this agent maps to validated, rigorous NeqSim Java functionality that a qualified engineer should use for design-grade work:
 
 - `neqsim.process.equipment.compressor.Compressor` with `neqsim.process.equipment.compressor.CompressorChart` and `neqsim.process.equipment.compressor.CompressorChartGenerator` — chart generation with surge and stonewall curves, surge flow, and distance to surge.
+- `neqsim.process.equipment.compressor.AntiSurgeRecycleCalculator` — preferred steady-state recycle helper for charted compressors.
+- `neqsim.process.equipment.compressor.CompressorAntiSurgeApplication` — application-level supervisor with `StageApplication.bindTopology(...)`, `TopologyBinding.enableSpeedControl(...)`, `scan(...)`, and `runDynamicStep(...)` for direct writeback to real hot/cold recycle valves and compressor speed.
 - `neqsim.process.equipment.splitter.Splitter` — discharge split into forward and recycle branches.
 - `neqsim.process.equipment.util.Calculator` — steady-state anti-surge engine triggered by the `"anti surge calculator"` name prefix.
 - `neqsim.process.controllerdevice.AntiSurgeController` — dynamic reverse-acting PI anti-surge controller on distance to surge driving a recycle valve; `neqsim.process.util.scenario.AntiSurgeDynamicBenchmark` provides a reproducible surrogate benchmark for verifying or tuning the control law.
