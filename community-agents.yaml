@@ -1,9 +1,9 @@
-# NeqSim Community Agent Catalog Preview
+# NeqSim Community Agent Catalog
 #
 # These entries are intended to support a future public catalog that can be
 # consumed by the main NeqSim ecosystem.
 
-catalog_version: "0.1"
+catalog_version: "1.0"
 last_updated: "2026-06-25"
 trust: "community"
 
