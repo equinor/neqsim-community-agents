@@ -3,7 +3,7 @@ name: dynamic-process-preparation-agent
 description: Prepares NeqSim ProcessSystem and ProcessModel flowsheets for dynamic calculations with mechanical-design and volume-readiness checks.
 version: 0.1.0
 required_skills:
-  - dynamic-process-preparation
+- neqsim-dynamic-process-preparation
 ---
 
 # Purpose

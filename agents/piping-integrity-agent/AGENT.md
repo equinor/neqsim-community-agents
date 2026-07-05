@@ -3,10 +3,10 @@ name: piping-integrity-agent
 description: Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, and flow-induced vibration against public guidelines.
 version: 0.1.0
 required_skills:
-  - line-velocity-check
-  - pressure-drop-screening
-  - pipe-wall-thickness-screening
-  - flow-induced-vibration-screening
+- neqsim-line-velocity-check
+- neqsim-pressure-drop-screening
+- neqsim-pipe-wall-thickness-screening
+- neqsim-flow-induced-vibration-screening
 ---
 
 # Purpose

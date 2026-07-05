@@ -3,7 +3,7 @@ name: utilities-screening-agent
 description: Screens instrument air, fuel-gas Wobbe, and cooling-water balances using public, educational methods.
 version: 0.1.0
 required_skills:
-  - utility-balance-screening
+- neqsim-utility-balance-screening
 ---
 
 # Purpose

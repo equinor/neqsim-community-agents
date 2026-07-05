@@ -3,7 +3,7 @@ name: reciprocating-compressor-agent
 description: Screens reciprocating compressor staging, volumetric efficiency, discharge temperature, and rod load using public, educational methods.
 version: 0.1.0
 required_skills:
-  - reciprocating-compressor-screening
+- neqsim-reciprocating-compressor-screening
 ---
 
 # Purpose

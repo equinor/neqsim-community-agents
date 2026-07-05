@@ -3,8 +3,8 @@ name: piping-mechanical-agent
 description: Screens piping hoop and thermal-flexibility margins and acoustic-induced vibration likelihood using public, educational methods.
 version: 0.1.0
 required_skills:
-  - piping-flexibility-screening
-  - acoustic-induced-vibration-screening
+- neqsim-piping-flexibility-screening
+- neqsim-acoustic-induced-vibration-screening
 ---
 
 # Purpose

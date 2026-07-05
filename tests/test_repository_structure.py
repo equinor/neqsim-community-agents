@@ -2,11 +2,19 @@ from pathlib import Path
 import re
 import unittest
 
+import yaml
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 AGENTS_DIR = REPO_ROOT / "agents"
 
 REQUIRED_AGENT_FILES = [
+    "AGENT.md",
+    "agent.yaml",
+    "README.md",
+]
+
+REQUIRED_FULL_AGENT_FILES = [
     "AGENT.md",
     "agent.yaml",
     "README.md",
@@ -40,73 +48,77 @@ REQUIRED_YAML_KEYS = [
 ]
 
 EXPECTED_AGENTS = {
-    "pvt-agent": ["fluid-quality-check"],
-    "hydrate-screening-agent": ["hydrate-screening"],
+    "pvt-agent": ["neqsim-fluid-quality-check"],
+    "hydrate-screening-agent": ["neqsim-hydrate-screening"],
     "tie-in-screening-agent": [
-        "fluid-quality-check",
-        "hydrate-screening",
-        "separator-modelling",
+        "neqsim-fluid-quality-check",
+        "neqsim-hydrate-screening",
+        "neqsim-separator-modelling",
     ],
-    "process-screening-agent": ["separator-modelling"],
+    "process-screening-agent": ["neqsim-separator-modelling"],
     "process-safety-agent": [
-        "relief-load-screening",
-        "depressurization-screening",
+        "neqsim-relief-load-screening",
+        "neqsim-depressurization-screening",
     ],
     "process-engineer-agent": [
-        "line-velocity-check",
-        "compressor-operating-window-check",
+        "neqsim-line-velocity-check",
+        "neqsim-compressor-operating-window-check",
     ],
     "compressor-antisurge-agent": [
-        "compressor-antisurge-recycle",
+        "neqsim-compressor-antisurge-recycle",
     ],
     "dynamic-process-preparation-agent": [
-        "dynamic-process-preparation",
+        "neqsim-dynamic-process-preparation",
     ],
     "dynamic-instrument-controller-agent": [
-        "dynamic-instrument-controller-setup",
+        "neqsim-dynamic-instrument-controller-setup",
     ],
     "flow-assurance-engineer-agent": [
-        "hydrate-margin-check",
-        "wax-margin-check",
+        "neqsim-hydrate-margin-check",
+        "neqsim-wax-margin-check",
     ],
     "subsea-cooldown-agent": [
-        "surf-cooldown-screening",
+        "neqsim-surf-cooldown-screening",
     ],
     "sand-erosion-agent": [
-        "sand-erosion-screening",
+        "neqsim-sand-erosion-screening",
     ],
     "produced-water-scale-agent": [
-        "produced-water-scale-screening",
+        "neqsim-produced-water-scale-screening",
     ],
     "production-optimization-agent": [
-        "separator-modelling",
-        "compressor-operating-window-check",
-        "compressor-power-screening",
-        "production-network-routing",
+        "neqsim-separator-modelling",
+        "neqsim-compressor-operating-window-check",
+        "neqsim-compressor-power-screening",
+        "neqsim-production-network-routing",
     ],
     "debottlenecking-agent": [
-        "separator-modelling",
-        "compressor-operating-window-check",
-        "line-velocity-check",
-        "pressure-drop-screening",
+        "neqsim-separator-modelling",
+        "neqsim-compressor-operating-window-check",
+        "neqsim-line-velocity-check",
+        "neqsim-pressure-drop-screening",
     ],
     "gas-lift-allocation-agent": [
-        "artificial-lift-screening",
-        "production-network-routing",
-        "reservoir-depletion-screening",
+        "neqsim-artificial-lift-screening",
+        "neqsim-production-network-routing",
+        "neqsim-reservoir-depletion-screening",
     ],
     "concept-selection-agent": [
-        "resource-classification-screening",
-        "capex-opex-screening",
-        "asset-value-npv-screening",
-        "energy-emissions-screening",
-        "step-out-screening",
+        "neqsim-resource-classification-screening",
+        "neqsim-capex-opex-screening",
+        "neqsim-asset-value-npv-screening",
+        "neqsim-energy-emissions-screening",
+        "neqsim-step-out-screening",
     ],
 }
 
 
 def read_text(path):
     return path.read_text(encoding="utf-8")
+
+
+def read_yaml(path):
+    return yaml.safe_load(read_text(path))
 
 
 def top_level_yaml_keys(text):
@@ -120,6 +132,43 @@ def top_level_yaml_keys(text):
 def front_matter(text):
     match = re.match(r"---\s*\n(.*?)\n---\s*\n", text, re.DOTALL)
     return match.group(1) if match else ""
+
+
+def required_skills_from_yaml_text(text):
+    skills = []
+    in_required_skills = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped == "required_skills:":
+            in_required_skills = True
+            continue
+        if in_required_skills:
+            if stripped.startswith("- "):
+                skills.append(stripped[2:].strip().strip('"\''))
+                continue
+            if stripped:
+                break
+    return skills
+
+
+def scalar_from_yaml_text(text, key):
+    match = re.search(r"^\s*" + re.escape(key) + r":\s*(.+)$", text, re.MULTILINE)
+    return match.group(1).strip().strip('"\'') if match else None
+
+
+def catalog_agent_blocks(text):
+    blocks = []
+    current = []
+    for line in text.splitlines():
+        if line.startswith("- name: "):
+            if current:
+                blocks.append("\n".join(current))
+            current = [line]
+        elif current:
+            current.append(line)
+    if current:
+        blocks.append("\n".join(current))
+    return blocks
 
 
 class RepositoryStructureTests(unittest.TestCase):
@@ -146,9 +195,17 @@ class RepositoryStructureTests(unittest.TestCase):
         self.assertTrue(set(EXPECTED_AGENTS).issubset(actual_agents))
 
     def test_each_agent_has_required_structure(self):
-        for agent_name in EXPECTED_AGENTS:
+        agent_names = [path.name for path in AGENTS_DIR.iterdir() if path.is_dir()]
+        for agent_name in agent_names:
             agent_dir = AGENTS_DIR / agent_name
             for required_file in REQUIRED_AGENT_FILES:
+                with self.subTest(agent=agent_name, required_file=required_file):
+                    self.assertTrue((agent_dir / required_file).exists())
+
+    def test_expected_agents_have_full_structure(self):
+        for agent_name in EXPECTED_AGENTS:
+            agent_dir = AGENTS_DIR / agent_name
+            for required_file in REQUIRED_FULL_AGENT_FILES:
                 with self.subTest(agent=agent_name, required_file=required_file):
                     self.assertTrue((agent_dir / required_file).exists())
 
@@ -180,6 +237,50 @@ class RepositoryStructureTests(unittest.TestCase):
             for skill in expected_skills:
                 with self.subTest(agent=agent_name, skill=skill):
                     self.assertIn(f"- {skill}", yaml_text)
+
+    def test_agent_yaml_matches_front_matter_metadata(self):
+        for agent_dir in AGENTS_DIR.iterdir():
+            if not agent_dir.is_dir():
+                continue
+            markdown_metadata = front_matter(read_text(agent_dir / "AGENT.md"))
+            yaml_text = read_text(agent_dir / "agent.yaml")
+            for key in ["name", "version"]:
+                with self.subTest(agent=agent_dir.name, key=key):
+                    self.assertEqual(
+                        scalar_from_yaml_text(markdown_metadata, key),
+                        scalar_from_yaml_text(yaml_text, key),
+                    )
+            with self.subTest(agent=agent_dir.name, key="required_skills"):
+                self.assertEqual(
+                    required_skills_from_yaml_text(markdown_metadata),
+                    required_skills_from_yaml_text(yaml_text),
+                )
+
+    def test_catalog_uses_canonical_skill_ids_and_matches_packages(self):
+        catalog = read_yaml(REPO_ROOT / "community-agents.yaml")
+        self.assertEqual(catalog["trust"], "community")
+        for entry in catalog["agents"]:
+            agent_dir = AGENTS_DIR / entry["name"]
+            with self.subTest(agent=entry["name"], field="package"):
+                self.assertTrue(agent_dir.exists())
+            catalog_skills = entry["required_skills"]
+            package_skills = read_yaml(agent_dir / "agent.yaml")["required_skills"]
+            with self.subTest(agent=entry["name"], field="required_skills"):
+                self.assertEqual(catalog_skills, package_skills)
+            for skill in catalog_skills:
+                with self.subTest(agent=entry["name"], skill=skill):
+                    self.assertTrue(skill.startswith("neqsim-"))
+
+    def test_catalog_metadata_matches_agent_packages(self):
+        catalog = read_yaml(REPO_ROOT / "community-agents.yaml")
+        for entry in catalog["agents"]:
+            agent_dir = REPO_ROOT / Path(entry["path"]).parent
+            package = read_yaml(agent_dir / "agent.yaml")
+            for field in ["name", "version", "description"]:
+                with self.subTest(agent=entry["name"], field=field):
+                    self.assertEqual(str(entry[field]), str(package[field]))
+            with self.subTest(agent=entry["name"], field="required_skills"):
+                self.assertEqual(entry["required_skills"], package["required_skills"])
 
     def test_each_agent_has_examples_and_prompts(self):
         for agent_name in EXPECTED_AGENTS:

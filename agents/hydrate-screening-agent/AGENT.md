@@ -3,7 +3,7 @@ name: hydrate-screening-agent
 description: Performs preliminary hydrate risk assessment and recommends further analysis.
 version: 0.1.0
 required_skills:
-  - hydrate-screening
+- neqsim-hydrate-screening
 ---
 
 # Purpose

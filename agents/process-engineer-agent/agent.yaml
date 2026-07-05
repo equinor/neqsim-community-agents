@@ -1,30 +1,31 @@
 name: process-engineer-agent
 description: Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines.
 required_skills:
-  - line-velocity-check
-  - compressor-operating-window-check
-  - pressure-drop-screening
-  - fired-heater-duty-screening
+- neqsim-line-velocity-check
+- neqsim-compressor-operating-window-check
+- neqsim-pressure-drop-screening
+- neqsim-fired-heater-duty-screening
 supported_domains:
-  - process-engineering
-  - operating-limits
-  - standards-compliance
+- process-engineering
+- operating-limits
+- standards-compliance
 inputs:
-  - equipment_or_line_description
-  - line_velocity_and_density
-  - erosional_c_factor_and_velocity_guideline
-  - compressor_operating_surge_and_stonewall_flows
-  - minimum_surge_and_stonewall_margins
-  - pressure_drop_length_diameter_friction_and_gradient_guideline
-  - fired_heater_flow_heat_capacity_temperature_rise_efficiency_and_radiant_area
-  - screening_objective
+- equipment_or_line_description
+- line_velocity_and_density
+- erosional_c_factor_and_velocity_guideline
+- compressor_operating_surge_and_stonewall_flows
+- minimum_surge_and_stonewall_margins
+- pressure_drop_length_diameter_friction_and_gradient_guideline
+- fired_heater_flow_heat_capacity_temperature_rise_efficiency_and_radiant_area
+- screening_objective
 outputs:
-  - line_velocity_indicator
-  - compressor_operating_window_indicator
-  - pressure_drop_indicator
-  - fired_heater_duty_indicator
-  - operating_limit_warnings
-  - recommended_neqsim_workflows
-  - required_follow_up_studies
-  - validation_checklist
+- line_velocity_indicator
+- compressor_operating_window_indicator
+- pressure_drop_indicator
+- fired_heater_duty_indicator
+- operating_limit_warnings
+- recommended_neqsim_workflows
+- required_follow_up_studies
+- validation_checklist
 human_review_required: true
+version: 0.1.0

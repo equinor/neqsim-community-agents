@@ -3,9 +3,9 @@ name: asset-economics-agent
 description: Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure.
 version: 0.1.0
 required_skills:
-  - capex-opex-screening
-  - energy-emissions-screening
-  - asset-value-npv-screening
+- neqsim-capex-opex-screening
+- neqsim-energy-emissions-screening
+- neqsim-asset-value-npv-screening
 ---
 
 # Purpose

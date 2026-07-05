@@ -3,7 +3,7 @@ name: dynamic-instrument-controller-agent
 description: Adds NeqSim measurement devices and PID-style controllers for dynamic process simulations.
 version: 0.1.0
 required_skills:
-  - dynamic-instrument-controller-setup
+- neqsim-dynamic-instrument-controller-setup
 ---
 
 # Purpose

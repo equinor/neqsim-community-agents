@@ -3,7 +3,7 @@ name: pvt-agent
 description: Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis.
 version: 0.1.0
 required_skills:
-  - fluid-quality-check
+- neqsim-fluid-quality-check
 ---
 
 # Purpose

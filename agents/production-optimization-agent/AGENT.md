@@ -3,10 +3,10 @@ name: production-optimization-agent
 description: Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines.
 version: 0.1.0
 required_skills:
-  - separator-modelling
-  - compressor-operating-window-check
-  - compressor-power-screening
-  - production-network-routing
+- neqsim-separator-modelling
+- neqsim-compressor-operating-window-check
+- neqsim-compressor-power-screening
+- neqsim-production-network-routing
 ---
 
 # Purpose

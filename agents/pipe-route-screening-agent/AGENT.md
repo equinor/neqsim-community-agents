@@ -3,10 +3,10 @@ name: pipe-route-screening-agent
 description: Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines.
 version: 0.1.0
 required_skills:
-  - pipe-route-profile
-  - pressure-drop-screening
-  - line-velocity-check
-  - hydrate-margin-check
+- neqsim-pipe-route-profile
+- neqsim-pressure-drop-screening
+- neqsim-line-velocity-check
+- neqsim-hydrate-margin-check
 ---
 
 # Purpose

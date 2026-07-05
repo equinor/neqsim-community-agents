@@ -3,10 +3,10 @@ name: process-engineer-agent
 description: Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines.
 version: 0.1.0
 required_skills:
-  - line-velocity-check
-  - compressor-operating-window-check
-  - pressure-drop-screening
-  - fired-heater-duty-screening
+- neqsim-line-velocity-check
+- neqsim-compressor-operating-window-check
+- neqsim-pressure-drop-screening
+- neqsim-fired-heater-duty-screening
 ---
 
 # Purpose

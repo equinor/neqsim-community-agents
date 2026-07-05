@@ -3,10 +3,10 @@ name: tie-in-screening-agent
 description: Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks.
 version: 0.1.0
 required_skills:
-  - fluid-quality-check
-  - hydrate-screening
-  - separator-modelling
-  - resource-classification-screening
+- neqsim-fluid-quality-check
+- neqsim-hydrate-screening
+- neqsim-separator-modelling
+- neqsim-resource-classification-screening
 ---
 
 # Purpose

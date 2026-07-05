@@ -3,8 +3,8 @@ name: gas-treatment-agent
 description: Provides early-stage gas treatment screening that checks gas water content and dehydration against a sales-gas spec and estimates single-stage compression power.
 version: 0.1.0
 required_skills:
-  - water-dewpoint-dehydration-screening
-  - compressor-power-screening
+- neqsim-water-dewpoint-dehydration-screening
+- neqsim-compressor-power-screening
 ---
 
 # Purpose

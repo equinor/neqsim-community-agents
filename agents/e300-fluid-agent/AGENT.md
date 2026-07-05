@@ -3,7 +3,7 @@ name: e300-fluid-agent
 description: Reads Eclipse E300 files into NeqSim fluids, writes NeqSim fluids to E300, and adds water with the public PVTsim water parameters.
 version: 0.1.0
 required_skills:
-  - e300-fluid-io
+- neqsim-e300-fluid-io
 ---
 
 # Purpose

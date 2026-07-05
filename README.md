@@ -36,9 +36,15 @@ Future versions of this repository may publish agent catalog entries that can be
 
 Agents use those skills as building blocks. Skills describe focused capabilities; agents combine one or more skills into complete engineering workflows with inputs, outputs, examples, validation checklists, and review expectations.
 
+Machine-readable agent metadata uses canonical community skill IDs such as
+`neqsim-fluid-quality-check`. Older shorthand names such as
+`fluid-quality-check` may still appear in prose, but catalog entries and
+`agent.yaml` files should use the canonical ID so runtimes do not need implicit
+alias rules.
+
 Current skill mappings used by the example agents:
 
-| Agent skill name | Community skill catalog ID |
+| Legacy shorthand | Community skill catalog ID |
 | --- | --- |
 | `fluid-quality-check` | `neqsim-fluid-quality-check` |
 | `hydrate-screening` | `neqsim-hydrate-screening` |
@@ -128,21 +134,21 @@ engineering-harness plugins sync      # imports community agents (public, no tok
 engineering-harness list agents       # shows the imported agents
 ```
 
-Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills` from `required_skills`, `allowed_tools: [neqsim]`, `requires_human_approval: true`). Because the agents only declare skills that the harness also imports, a workflow launched from the main NeqSim repo can run them end to end.
+Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills` from `required_skills`, `allowed_tools: [neqsim]`, `requires_human_approval: true`, `trust: community`). Because the agents only declare skills that the harness also imports, a workflow launched from the main NeqSim repo can run them end to end. Runtimes should display the trust namespace, for example `community/pvt-agent`, when an enterprise or core agent has the same short name.
 
 ## Initial Example Agents
 
 | Agent | Purpose | Required skills |
 | --- | --- | --- |
-| [PVT Agent](agents/pvt-agent/README.md) | Fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis | `fluid-quality-check` |
-| [Hydrate Screening Agent](agents/hydrate-screening-agent/README.md) | Preliminary hydrate risk assessment | `hydrate-screening` |
-| [Tie-In Screening Agent](agents/tie-in-screening-agent/README.md) | Early-stage screening of tie-in opportunities | `fluid-quality-check`, `hydrate-screening`, `separator-modelling` |
-| [Process Screening Agent](agents/process-screening-agent/README.md) | High-level process engineering screening studies | `separator-modelling` |
-| [Process Safety Agent](agents/process-safety-agent/README.md) | Early-stage fire-case relief load and depressurization screening | `relief-load-screening`, `depressurization-screening` |
-| [Process Engineer Agent](agents/process-engineer-agent/README.md) | Early-stage screening of unit operations against line-velocity and compressor operating-window guidelines | `line-velocity-check`, `compressor-operating-window-check` |
-| [Dynamic Process Preparation Agent](agents/dynamic-process-preparation-agent/README.md) | Prepares NeqSim process systems and process models for dynamic calculations | `dynamic-process-preparation` |
-| [Dynamic Instrument Controller Agent](agents/dynamic-instrument-controller-agent/README.md) | Adds NeqSim transmitters and PID-style controllers for dynamic simulations | `dynamic-instrument-controller-setup` |
-| [Flow Assurance Engineer Agent](agents/flow-assurance-engineer-agent/README.md) | Early-stage screening of operating points against hydrate-margin and wax-margin guidelines | `hydrate-margin-check`, `wax-margin-check` |
+| [PVT Agent](agents/pvt-agent/README.md) | Fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis | `neqsim-fluid-quality-check` |
+| [Hydrate Screening Agent](agents/hydrate-screening-agent/README.md) | Preliminary hydrate risk assessment | `neqsim-hydrate-screening` |
+| [Tie-In Screening Agent](agents/tie-in-screening-agent/README.md) | Early-stage screening of tie-in opportunities | `neqsim-fluid-quality-check`, `neqsim-hydrate-screening`, `neqsim-separator-modelling` |
+| [Process Screening Agent](agents/process-screening-agent/README.md) | High-level process engineering screening studies | `neqsim-separator-modelling` |
+| [Process Safety Agent](agents/process-safety-agent/README.md) | Early-stage fire-case relief load and depressurization screening | `neqsim-relief-load-screening`, `neqsim-depressurization-screening` |
+| [Process Engineer Agent](agents/process-engineer-agent/README.md) | Early-stage screening of unit operations against line-velocity and compressor operating-window guidelines | `neqsim-line-velocity-check`, `neqsim-compressor-operating-window-check` |
+| [Dynamic Process Preparation Agent](agents/dynamic-process-preparation-agent/README.md) | Prepares NeqSim process systems and process models for dynamic calculations | `neqsim-dynamic-process-preparation` |
+| [Dynamic Instrument Controller Agent](agents/dynamic-instrument-controller-agent/README.md) | Adds NeqSim transmitters and PID-style controllers for dynamic simulations | `neqsim-dynamic-instrument-controller-setup` |
+| [Flow Assurance Engineer Agent](agents/flow-assurance-engineer-agent/README.md) | Early-stage screening of operating points against hydrate-margin and wax-margin guidelines | `neqsim-hydrate-margin-check`, `neqsim-wax-margin-check` |
 
 ## How To Create A New Agent
 
@@ -161,6 +167,8 @@ Not sure which repository a contribution belongs in? See the shared [Contributio
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution requirements, required files, documentation expectations, testing expectations, review checklist, and open-source requirements.
 
 Contributions should use public information only. Do not include proprietary field data, confidential design methods, vendor-confidential information, private operational procedures, credentials, or personal data.
+
+Company-specific agents belong in private enterprise repositories instead of this public community repository. See the main NeqSim [Enterprise Agent and Skill Repositories](https://github.com/equinor/neqsim/blob/master/docs/integration/enterprise_agent_skill_repos.md) guide for the setup and install/discovery workflow.
 
 ## Governance Principles
 

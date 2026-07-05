@@ -3,10 +3,10 @@ name: subsea-layout-screening-agent
 description: Coordinates early-stage subsea layout screening that turns a supplied subsea map into a well and tie-back inventory with step-out distances, route profiles, and seabed slope flags.
 version: 0.1.0
 required_skills:
-  - field-layout-import
-  - subsea-layout-geometry
-  - bathymetry-profile-screening
-  - pipe-route-profile
+- neqsim-field-layout-import
+- neqsim-subsea-layout-geometry
+- neqsim-bathymetry-profile-screening
+- neqsim-pipe-route-profile
 ---
 
 # Purpose

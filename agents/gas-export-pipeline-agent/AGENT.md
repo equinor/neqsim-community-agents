@@ -3,9 +3,9 @@ name: gas-export-pipeline-agent
 description: Performs preliminary gas-export pipeline screening by chaining line velocity, pressure drop, and export compression power checks.
 version: 0.1.0
 required_skills:
-  - line-velocity-check
-  - pressure-drop-screening
-  - compressor-power-screening
+- neqsim-line-velocity-check
+- neqsim-pressure-drop-screening
+- neqsim-compressor-power-screening
 ---
 
 # Purpose

@@ -3,7 +3,7 @@ name: process-screening-agent
 description: Performs high-level process engineering screening studies and engineering checklist generation.
 version: 0.1.0
 required_skills:
-  - separator-modelling
+- neqsim-separator-modelling
 ---
 
 # Purpose

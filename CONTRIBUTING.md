@@ -14,6 +14,8 @@ community agents **orchestrate** community screening skills. They contain no
 engineering method themselves, claim only screening-level results, and reference
 validated NeqSim classes rather than reimplementing them.
 
+Company-specific agents, internal workflow policy, private data integration, and confidential examples belong in private enterprise repositories instead. See the main NeqSim [Enterprise Agent and Skill Repositories](https://github.com/equinor/neqsim/blob/master/docs/integration/enterprise_agent_skill_repos.md) guide for the paired enterprise agents/skills setup and Engineering Harness installation workflow.
+
 ## Create An Agent
 
 1. Choose a clear engineering purpose and a bounded scope.
@@ -23,7 +25,8 @@ validated NeqSim classes rather than reimplementing them.
 5. Add at least one realistic public example in `examples/`.
 6. Add at least one reusable example prompt in `prompts/`.
 7. Add tests or validation notes in `tests/`.
-8. Run the repository tests before opening a pull request.
+8. Add or update the root `community-agents.yaml` catalog entry with canonical `neqsim-*` skill IDs.
+9. Run the repository tests before opening a pull request.
 
 Agent names should be lowercase, descriptive, and hyphen-separated, for example `hydrate-screening-agent`.
 
@@ -87,6 +90,7 @@ Before submitting a pull request, confirm that:
 - The agent has a clear engineering purpose
 - The scope is bounded and suitable for screening or assistance
 - Required skills are listed and already public or proposed publicly
+- Required skills use canonical `neqsim-*` IDs in `AGENT.md`, `agent.yaml`, and `community-agents.yaml`
 - Inputs and outputs are documented
 - Assumptions and limitations are explicit
 - Human review is required for engineering decisions

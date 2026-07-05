@@ -3,7 +3,7 @@ name: produced-water-scale-agent
 description: Provides early-stage produced-water brine building and screening-level scale evaluation, turning ion analyses, presets, or TDS values into NeqSim-ready electrolyte ion mappings and public scale-risk indicators.
 version: 0.1.0
 required_skills:
-  - produced-water-scale-screening
+- neqsim-produced-water-scale-screening
 ---
 
 # Purpose

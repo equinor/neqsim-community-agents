@@ -3,8 +3,8 @@ name: flow-assurance-engineer-agent
 description: Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines.
 version: 0.1.0
 required_skills:
-  - hydrate-margin-check
-  - wax-margin-check
+- neqsim-hydrate-margin-check
+- neqsim-wax-margin-check
 ---
 
 # Purpose

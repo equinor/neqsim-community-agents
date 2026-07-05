@@ -3,7 +3,7 @@ name: subsea-cooldown-agent
 description: Provides early-stage subsea flowline and riser cooldown screening that checks no-touch time against public hydrate-margin guidelines.
 version: 0.1.0
 required_skills:
-  - surf-cooldown-screening
+- neqsim-surf-cooldown-screening
 ---
 
 # Purpose

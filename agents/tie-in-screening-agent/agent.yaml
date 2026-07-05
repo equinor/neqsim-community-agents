@@ -1,32 +1,33 @@
 name: tie-in-screening-agent
 description: Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks.
 required_skills:
-  - fluid-quality-check
-  - hydrate-screening
-  - separator-modelling
-  - resource-classification-screening
+- neqsim-fluid-quality-check
+- neqsim-hydrate-screening
+- neqsim-separator-modelling
+- neqsim-resource-classification-screening
 supported_domains:
-  - field-development
-  - tie-in-screening
-  - flow-assurance
-  - process-engineering
-  - resource-classification
+- field-development
+- tie-in-screening
+- flow-assurance
+- process-engineering
+- resource-classification
 inputs:
-  - tie_in_description
-  - fluid_data
-  - flow_rate_range
-  - pressure_temperature_conditions
-  - water_and_contaminant_assumptions
-  - host_constraints
-  - project_maturity_stage
-  - screening_objective
+- tie_in_description
+- fluid_data
+- flow_rate_range
+- pressure_temperature_conditions
+- water_and_contaminant_assumptions
+- host_constraints
+- project_maturity_stage
+- screening_objective
 outputs:
-  - tie_in_screening_summary
-  - data_quality_assessment
-  - flow_assurance_risk_list
-  - process_screening_findings
-  - resource_classification_indicator
-  - recommended_neqsim_workflows
-  - required_follow_up_studies
-  - validation_checklist
+- tie_in_screening_summary
+- data_quality_assessment
+- flow_assurance_risk_list
+- process_screening_findings
+- resource_classification_indicator
+- recommended_neqsim_workflows
+- required_follow_up_studies
+- validation_checklist
 human_review_required: true
+version: 0.1.0

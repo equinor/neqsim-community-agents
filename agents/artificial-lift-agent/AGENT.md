@@ -3,7 +3,7 @@ name: artificial-lift-agent
 description: Screens gas-lift versus ESP artificial-lift feasibility against a simple inflow performance relationship using public, educational methods.
 version: 0.1.0
 required_skills:
-  - artificial-lift-screening
+- neqsim-artificial-lift-screening
 ---
 
 # Purpose

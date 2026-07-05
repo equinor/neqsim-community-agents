@@ -3,7 +3,7 @@ name: gas-turbine-screening-agent
 description: Screens gas-turbine driver site-rating, heat rate, and exhaust conditions using public, educational methods.
 version: 0.1.0
 required_skills:
-  - gas-turbine-performance-screening
+- neqsim-gas-turbine-performance-screening
 ---
 
 # Purpose

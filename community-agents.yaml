@@ -5,6 +5,7 @@
 
 catalog_version: "0.1"
 last_updated: "2026-06-25"
+trust: "community"
 
 agents:
   - name: pvt-agent
@@ -13,7 +14,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/pvt-agent/AGENT.md"
     required_skills:
-      - fluid-quality-check
+      - neqsim-fluid-quality-check
     supported_domains:
       - pvt
       - thermodynamics
@@ -25,7 +26,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/e300-fluid-agent/AGENT.md"
     required_skills:
-      - e300-fluid-io
+      - neqsim-e300-fluid-io
     supported_domains:
       - pvt
       - thermodynamics
@@ -37,7 +38,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/hydrate-screening-agent/AGENT.md"
     required_skills:
-      - hydrate-screening
+      - neqsim-hydrate-screening
     supported_domains:
       - flow-assurance
       - hydrates
@@ -49,10 +50,10 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/tie-in-screening-agent/AGENT.md"
     required_skills:
-      - fluid-quality-check
-      - hydrate-screening
-      - separator-modelling
-      - resource-classification-screening
+      - neqsim-fluid-quality-check
+      - neqsim-hydrate-screening
+      - neqsim-separator-modelling
+      - neqsim-resource-classification-screening
     supported_domains:
       - field-development
       - tie-in-screening
@@ -65,7 +66,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/teg-dehydration-agent/AGENT.md"
     required_skills:
-      - teg-dehydration-modeling
+      - neqsim-teg-dehydration-modeling
     supported_domains:
       - process
       - dehydration
@@ -77,7 +78,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/process-screening-agent/AGENT.md"
     required_skills:
-      - separator-modelling
+      - neqsim-separator-modelling
     supported_domains:
       - process-engineering
       - process-screening
@@ -89,11 +90,12 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/process-safety-agent/AGENT.md"
     required_skills:
-      - relief-load-screening
-      - depressurization-screening
-      - flare-radiation-screening
-      - psv-orifice-screening
-      - safety-function-coverage-screening
+      - neqsim-relief-load-screening
+      - neqsim-depressurization-screening
+      - neqsim-vacuum-collapse-screening
+      - neqsim-flare-radiation-screening
+      - neqsim-psv-orifice-screening
+      - neqsim-safety-function-coverage-screening
     supported_domains:
       - process-safety
       - relief-screening
@@ -107,10 +109,10 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/process-engineer-agent/AGENT.md"
     required_skills:
-      - line-velocity-check
-      - compressor-operating-window-check
-      - pressure-drop-screening
-      - fired-heater-duty-screening
+      - neqsim-line-velocity-check
+      - neqsim-compressor-operating-window-check
+      - neqsim-pressure-drop-screening
+      - neqsim-fired-heater-duty-screening
     supported_domains:
       - process-engineering
       - operating-limits
@@ -122,7 +124,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/compressor-antisurge-agent/AGENT.md"
     required_skills:
-      - compressor-antisurge-recycle
+      - neqsim-compressor-antisurge-recycle
     supported_domains:
       - process-engineering
       - rotating-equipment
@@ -134,7 +136,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/dynamic-process-preparation-agent/AGENT.md"
     required_skills:
-      - dynamic-process-preparation
+      - neqsim-dynamic-process-preparation
     supported_domains:
       - process-engineering
       - dynamic-simulation
@@ -147,7 +149,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/dynamic-instrument-controller-agent/AGENT.md"
     required_skills:
-      - dynamic-instrument-controller-setup
+      - neqsim-dynamic-instrument-controller-setup
     supported_domains:
       - process-engineering
       - dynamic-simulation
@@ -160,8 +162,8 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/flow-assurance-engineer-agent/AGENT.md"
     required_skills:
-      - hydrate-margin-check
-      - wax-margin-check
+      - neqsim-hydrate-margin-check
+      - neqsim-wax-margin-check
     supported_domains:
       - flow-assurance
       - operating-limits
@@ -169,14 +171,14 @@ agents:
 
   - name: piping-integrity-agent
     version: "0.1.0"
-    description: "Provides early-stage piping-integrity screening that checks main lines against public line-velocity, pressure-drop, wall-thickness, and flow-induced-vibration guidelines."
+    description: "Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, and flow-induced vibration against public guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/piping-integrity-agent/AGENT.md"
     required_skills:
-      - line-velocity-check
-      - pressure-drop-screening
-      - pipe-wall-thickness-screening
-      - flow-induced-vibration-screening
+      - neqsim-line-velocity-check
+      - neqsim-pressure-drop-screening
+      - neqsim-pipe-wall-thickness-screening
+      - neqsim-flow-induced-vibration-screening
     supported_domains:
       - process-engineering
       - piping-integrity
@@ -185,12 +187,12 @@ agents:
 
   - name: gas-treatment-agent
     version: "0.1.0"
-    description: "Provides early-stage gas-treatment screening that checks water dewpoint/dehydration and compressor power against public, educational guidelines."
+    description: "Provides early-stage gas treatment screening that checks gas water content and dehydration against a sales-gas spec and estimates single-stage compression power."
     repo: "equinor/neqsim-community-agents"
     path: "agents/gas-treatment-agent/AGENT.md"
     required_skills:
-      - water-dewpoint-dehydration-screening
-      - compressor-power-screening
+      - neqsim-water-dewpoint-dehydration-screening
+      - neqsim-compressor-power-screening
     supported_domains:
       - process-engineering
       - gas-treatment
@@ -203,10 +205,10 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/subsea-layout-screening-agent/AGENT.md"
     required_skills:
-      - field-layout-import
-      - subsea-layout-geometry
-      - bathymetry-profile-screening
-      - pipe-route-profile
+      - neqsim-field-layout-import
+      - neqsim-subsea-layout-geometry
+      - neqsim-bathymetry-profile-screening
+      - neqsim-pipe-route-profile
     supported_domains:
       - field-development
       - subsea-layout
@@ -219,10 +221,10 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-to-facility-screening-agent/AGENT.md"
     required_skills:
-      - reservoir-depletion-screening
-      - production-network-routing
-      - subsea-layout-geometry
-      - step-out-screening
+      - neqsim-reservoir-depletion-screening
+      - neqsim-production-network-routing
+      - neqsim-subsea-layout-geometry
+      - neqsim-step-out-screening
     supported_domains:
       - field-development
       - reservoir-engineering
@@ -236,10 +238,10 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/pipe-route-screening-agent/AGENT.md"
     required_skills:
-      - pipe-route-profile
-      - pressure-drop-screening
-      - line-velocity-check
-      - hydrate-margin-check
+      - neqsim-pipe-route-profile
+      - neqsim-pressure-drop-screening
+      - neqsim-line-velocity-check
+      - neqsim-hydrate-margin-check
     supported_domains:
       - flow-assurance
       - process-engineering
@@ -252,9 +254,9 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/asset-economics-agent/AGENT.md"
     required_skills:
-      - capex-opex-screening
-      - energy-emissions-screening
-      - asset-value-npv-screening
+      - neqsim-capex-opex-screening
+      - neqsim-energy-emissions-screening
+      - neqsim-asset-value-npv-screening
     supported_domains:
       - field-development
       - economics
@@ -267,14 +269,14 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/field-development-economics-agent/AGENT.md"
     required_skills:
-      - fluid-quality-check
-      - reservoir-depletion-screening
-      - hydrate-margin-check
-      - separator-modelling
-      - line-velocity-check
-      - capex-opex-screening
-      - energy-emissions-screening
-      - asset-value-npv-screening
+      - neqsim-fluid-quality-check
+      - neqsim-reservoir-depletion-screening
+      - neqsim-hydrate-margin-check
+      - neqsim-separator-modelling
+      - neqsim-line-velocity-check
+      - neqsim-capex-opex-screening
+      - neqsim-energy-emissions-screening
+      - neqsim-asset-value-npv-screening
     supported_domains:
       - field-development
       - reservoir-engineering
@@ -286,11 +288,11 @@ agents:
 
   - name: energy-emissions-agent
     version: "0.1.0"
-    description: "Performs preliminary energy-use and CO2-equivalent emissions screening for a facility or process, estimates a screening carbon intensity per boe, applies an optional CO2 tax, and recommends further analysis."
+    description: "Performs preliminary energy-use and CO2-equivalent emissions screening for a facility or process and recommends further analysis."
     repo: "equinor/neqsim-community-agents"
     path: "agents/energy-emissions-agent/AGENT.md"
     required_skills:
-      - energy-emissions-screening
+      - neqsim-energy-emissions-screening
     supported_domains:
       - environment
       - emissions
@@ -298,13 +300,13 @@ agents:
 
   - name: gas-export-pipeline-agent
     version: "0.1.0"
-    description: "Performs preliminary gas-export pipeline screening by chaining an erosional and recommended line-velocity check, a single-phase pressure-drop screening, and an indicative export-compression power estimate."
+    description: "Performs preliminary gas-export pipeline screening by chaining line velocity, pressure drop, and export compression power checks."
     repo: "equinor/neqsim-community-agents"
     path: "agents/gas-export-pipeline-agent/AGENT.md"
     required_skills:
-      - line-velocity-check
-      - pressure-drop-screening
-      - compressor-power-screening
+      - neqsim-line-velocity-check
+      - neqsim-pressure-drop-screening
+      - neqsim-compressor-power-screening
     supported_domains:
       - process
       - flow-assurance
@@ -316,7 +318,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/subsea-cooldown-agent/AGENT.md"
     required_skills:
-      - surf-cooldown-screening
+      - neqsim-surf-cooldown-screening
     supported_domains:
       - flow-assurance
       - subsea
@@ -329,7 +331,7 @@ agents:
     repo: "equinor/neqsim-community-agents"
     path: "agents/sand-erosion-agent/AGENT.md"
     required_skills:
-      - sand-erosion-screening
+      - neqsim-sand-erosion-screening
     supported_domains:
       - flow-assurance
       - integrity
@@ -338,22 +340,23 @@ agents:
 
   - name: produced-water-scale-agent
     version: "0.1.0"
-    description: "Provides early-stage produced-water brine building and screening-level scale evaluation, turning ion analyses, presets, or TDS values into NeqSim-ready electrolyte ion mappings and public BaSO4/SrSO4/CaSO4/CaCO3 scale-risk and mixing-incompatibility indicators."
+    description: "Provides early-stage produced-water brine building and screening-level scale evaluation, turning ion analyses, presets, or TDS values into NeqSim-ready electrolyte ion mappings and public scale-risk indicators."
     repo: "equinor/neqsim-community-agents"
     path: "agents/produced-water-scale-agent/AGENT.md"
     required_skills:
-      - produced-water-scale-screening
+      - neqsim-produced-water-scale-screening
     supported_domains:
       - flow-assurance
       - water-chemistry
       - standards-compliance
+
   - name: reciprocating-compressor-agent
     version: "0.1.0"
-    description: "Coordinates screening-level reciprocating compressor staging, volumetric-efficiency, discharge-temperature, and rod-load checks per API 618/619 before detailed machine selection."
+    description: "Screens reciprocating compressor staging, volumetric efficiency, discharge temperature, and rod load using public, educational methods."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reciprocating-compressor-agent/AGENT.md"
     required_skills:
-      - reciprocating-compressor-screening
+      - neqsim-reciprocating-compressor-screening
     supported_domains:
       - process-engineering
       - compressor-screening
@@ -361,11 +364,11 @@ agents:
 
   - name: gas-turbine-screening-agent
     version: "0.1.0"
-    description: "Coordinates screening-level gas-turbine driver site-rating, heat-rate, and exhaust checks with ambient and pressure-loss derates per ISO 3977 before detailed performance analysis."
+    description: "Screens gas-turbine driver site-rating, heat rate, and exhaust conditions using public, educational methods."
     repo: "equinor/neqsim-community-agents"
     path: "agents/gas-turbine-screening-agent/AGENT.md"
     required_skills:
-      - gas-turbine-performance-screening
+      - neqsim-gas-turbine-performance-screening
     supported_domains:
       - process-engineering
       - gas-turbine-screening
@@ -373,12 +376,12 @@ agents:
 
   - name: piping-mechanical-agent
     version: "0.1.0"
-    description: "Coordinates screening-level piping flexibility (ASME B31.3/B16.5) and acoustic-induced-vibration likelihood-of-failure checks before detailed piping mechanical and vibration assessment."
+    description: "Screens piping hoop and thermal-flexibility margins and acoustic-induced vibration likelihood using public, educational methods."
     repo: "equinor/neqsim-community-agents"
     path: "agents/piping-mechanical-agent/AGENT.md"
     required_skills:
-      - piping-flexibility-screening
-      - acoustic-induced-vibration-screening
+      - neqsim-piping-flexibility-screening
+      - neqsim-acoustic-induced-vibration-screening
     supported_domains:
       - piping-mechanical
       - vibration-screening
@@ -386,11 +389,11 @@ agents:
 
   - name: utilities-screening-agent
     version: "0.1.0"
-    description: "Coordinates screening-level utility balances for instrument air, fuel-gas Wobbe, and cooling water per NORSOK U-001 and ISA-7.0.01 before detailed utility-system design."
+    description: "Screens instrument air, fuel-gas Wobbe, and cooling-water balances using public, educational methods."
     repo: "equinor/neqsim-community-agents"
     path: "agents/utilities-screening-agent/AGENT.md"
     required_skills:
-      - utility-balance-screening
+      - neqsim-utility-balance-screening
     supported_domains:
       - process-engineering
       - utility-systems
@@ -398,11 +401,11 @@ agents:
 
   - name: artificial-lift-agent
     version: "0.1.0"
-    description: "Coordinates screening-level artificial-lift feasibility, comparing natural flow, gas lift, and ESP against a simple IPR before detailed artificial-lift design."
+    description: "Screens gas-lift versus ESP artificial-lift feasibility against a simple inflow performance relationship using public, educational methods."
     repo: "equinor/neqsim-community-agents"
     path: "agents/artificial-lift-agent/AGENT.md"
     required_skills:
-      - artificial-lift-screening
+      - neqsim-artificial-lift-screening
     supported_domains:
       - field-development
       - artificial-lift
@@ -410,14 +413,14 @@ agents:
 
   - name: production-optimization-agent
     version: "0.1.0"
-    description: "Coordinates early-stage production-optimization screening, combining separator, compressor operating-window, compressor-power, and production-network routing screening to flag operating-limit bottlenecks before a validated study."
+    description: "Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/production-optimization-agent/AGENT.md"
     required_skills:
-      - separator-modelling
-      - compressor-operating-window-check
-      - compressor-power-screening
-      - production-network-routing
+      - neqsim-separator-modelling
+      - neqsim-compressor-operating-window-check
+      - neqsim-compressor-power-screening
+      - neqsim-production-network-routing
     supported_domains:
       - production-optimization
       - process-screening
@@ -426,14 +429,14 @@ agents:
 
   - name: debottlenecking-agent
     version: "0.1.0"
-    description: "Coordinates early-stage debottlenecking screening across separator capacity, compressor operating window, line velocity, and line pressure drop to identify the likely limiting unit before a validated study."
+    description: "Screens a simple process train to identify the most likely capacity bottleneck — separator capacity, compressor operating window, line velocity, or line pressure drop — and ranks units by public screening-level utilization before a validated NeqSim study."
     repo: "equinor/neqsim-community-agents"
     path: "agents/debottlenecking-agent/AGENT.md"
     required_skills:
-      - separator-modelling
-      - compressor-operating-window-check
-      - line-velocity-check
-      - pressure-drop-screening
+      - neqsim-separator-modelling
+      - neqsim-compressor-operating-window-check
+      - neqsim-line-velocity-check
+      - neqsim-pressure-drop-screening
     supported_domains:
       - debottlenecking
       - capacity-screening
@@ -442,13 +445,13 @@ agents:
 
   - name: gas-lift-allocation-agent
     version: "0.1.0"
-    description: "Coordinates early-stage gas-lift allocation screening, combining artificial-lift, production-network routing, and reservoir-depletion screening to indicate lift-gas distribution before a validated study."
+    description: "Screens lift-gas allocation across a small set of gas-lifted wells, framing the allocation problem and ranking candidate splits using public artificial-lift, production-network-routing, and reservoir-depletion screening before a validated NeqSim study."
     repo: "equinor/neqsim-community-agents"
     path: "agents/gas-lift-allocation-agent/AGENT.md"
     required_skills:
-      - artificial-lift-screening
-      - production-network-routing
-      - reservoir-depletion-screening
+      - neqsim-artificial-lift-screening
+      - neqsim-production-network-routing
+      - neqsim-reservoir-depletion-screening
     supported_domains:
       - gas-lift-allocation
       - artificial-lift
@@ -457,15 +460,15 @@ agents:
 
   - name: concept-selection-agent
     version: "0.1.0"
-    description: "Coordinates early-stage concept-selection screening, chaining resource classification, CAPEX/OPEX, asset-value (NPV), energy/emissions, and step-out screening into a comparable concept summary before a validated study."
+    description: "Coordinates early-stage concept-selection screening for a field-development opportunity, chaining resource classification, CAPEX/OPEX, asset-value (NPV), energy/emissions, and step-out screening into a comparable concept summary before a validated study."
     repo: "equinor/neqsim-community-agents"
     path: "agents/concept-selection-agent/AGENT.md"
     required_skills:
-      - resource-classification-screening
-      - capex-opex-screening
-      - asset-value-npv-screening
-      - energy-emissions-screening
-      - step-out-screening
+      - neqsim-resource-classification-screening
+      - neqsim-capex-opex-screening
+      - neqsim-asset-value-npv-screening
+      - neqsim-energy-emissions-screening
+      - neqsim-step-out-screening
     supported_domains:
       - concept-selection
       - field-development

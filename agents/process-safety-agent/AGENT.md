@@ -3,12 +3,12 @@ name: process-safety-agent
 description: Provides early-stage process safety screening for fire-case relief loads and emergency depressurization with public, educational methods.
 version: 0.1.0
 required_skills:
-  - relief-load-screening
-  - depressurization-screening
-  - vacuum-collapse-screening
-  - flare-radiation-screening
-  - psv-orifice-screening
-  - safety-function-coverage-screening
+- neqsim-relief-load-screening
+- neqsim-depressurization-screening
+- neqsim-vacuum-collapse-screening
+- neqsim-flare-radiation-screening
+- neqsim-psv-orifice-screening
+- neqsim-safety-function-coverage-screening
 ---
 
 # Purpose

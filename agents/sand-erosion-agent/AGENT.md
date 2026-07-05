@@ -3,7 +3,7 @@ name: sand-erosion-agent
 description: Provides early-stage subsea and topside line sand-erosion screening that checks erosional velocity and remaining wall life against public integrity guidelines.
 version: 0.1.0
 required_skills:
-  - sand-erosion-screening
+- neqsim-sand-erosion-screening
 ---
 
 # Purpose

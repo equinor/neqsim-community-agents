@@ -51,6 +51,11 @@ human_review_required: true
 
 `human_review_required` must be `true` for engineering agents in this repository.
 
+Machine-readable `required_skills` values must use canonical community or core
+skill IDs that start with `neqsim-`. Legacy shorthand names may appear only in
+prose or alias tables. The shared schema and compatibility policy are defined in
+the main NeqSim documentation: `docs/integration/agent_skill_catalog_schema.md`.
+
 ## Agent Documentation Standards
 
 Agent documentation must be:
