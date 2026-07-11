@@ -35,7 +35,7 @@ Use this agent before any domain agent when source documents or images contain r
 1. Inventory sources recursively, preserve originals, calculate hashes, and identify unsupported/encrypted files.
 2. Load `neqsim-document-intelligence-extraction` and build an extraction plan for every file.
 3. Execute native parsers first, then OCR for scanned/low-yield pages, and vision for layouts, drawings, charts, symbols, and spatial relationships.
-4. Classify document type and extract only fields relevant to the stated objective, while retaining surrounding context.
+4. Classify the document type and extract comprehensively before prioritizing the stated objective. Cover body text, structured tables, title blocks, notes, legends, appendices, footnotes, figures, plots, revision marks, photographs, and unexpected engineering constraints; retain surrounding context and identify which facts are task-relevant without discarding the rest.
 5. Convert adapter output into evidence facts. Reject facts without original text and page or stable locator.
 6. Reconcile extraction methods and files. Record conflicts instead of selecting a value silently.
 7. Route safety-critical, ambiguous, conflicting, and confidence-below-0.85 facts to human review.
@@ -69,8 +69,10 @@ Read every file under the task references folder. Build source-traceable evidenc
 # Validation Checklist
 
 - Every source has a hash and extraction plan.
+- The evidence manifest has exactly one source entry per recursively inventoried input file, excluding generated evidence artifacts.
 - Native text/table extraction precedes OCR.
 - Visual semantics are handled with vision, not OCR alone.
+- Every page or sheet is accounted for as extracted, assessed as non-informative, unsupported, or requiring manual review.
 - Every fact has original text and page/locator provenance.
 - Originals and normalized values/units are both retained.
 - Conflicts, gaps, unsupported files, and review-required facts are explicit.
