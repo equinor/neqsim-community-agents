@@ -1,0 +1,19 @@
+name: technical-document-intelligence-agent
+version: "0.1.0"
+description: Classifies mixed engineering documents and images and produces source-traceable evidence packages before NeqSim analysis.
+required_skills:
+  - neqsim-document-intelligence-extraction
+supported_domains:
+  - engineering-data
+  - document-intelligence
+  - ocr
+  - multimodal-extraction
+inputs:
+  - source-files
+  - extraction-objective
+outputs:
+  - source-inventory
+  - extraction-plans
+  - evidence-packages
+  - conflict-and-gap-register
+human_review_required: true

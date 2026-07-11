@@ -1,0 +1,1 @@
+Classify and extract the supplied engineering files. Use native structure first, OCR scanned pages, and multimodal vision for drawings, charts, photographs, and spatial relationships. Return source-traceable evidence facts, conflicts, gaps, and review gates. Do not infer missing values. Recommend the specialized NeqSim agent that should consume the reviewed evidence.

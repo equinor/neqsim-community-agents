@@ -4,10 +4,23 @@
 # consumed by the main NeqSim ecosystem.
 
 catalog_version: "1.0"
-last_updated: "2026-06-25"
+last_updated: "2026-07-11"
 trust: "community"
 
 agents:
+  - name: technical-document-intelligence-agent
+    version: "0.1.0"
+    description: "Classifies mixed engineering documents and images and produces source-traceable evidence packages before NeqSim analysis."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/technical-document-intelligence-agent/AGENT.md"
+    required_skills:
+      - neqsim-document-intelligence-extraction
+    supported_domains:
+      - engineering-data
+      - document-intelligence
+      - ocr
+      - multimodal-extraction
+
   - name: pvt-agent
     version: "0.1.0"
     description: "Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis."

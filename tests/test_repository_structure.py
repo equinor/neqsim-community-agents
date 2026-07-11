@@ -48,6 +48,9 @@ REQUIRED_YAML_KEYS = [
 ]
 
 EXPECTED_AGENTS = {
+    "technical-document-intelligence-agent": [
+        "neqsim-document-intelligence-extraction",
+    ],
     "pvt-agent": ["neqsim-fluid-quality-check"],
     "hydrate-screening-agent": ["neqsim-hydrate-screening"],
     "tie-in-screening-agent": [
