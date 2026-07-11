@@ -28,3 +28,9 @@ jobs:
 
       - name: Run repository structure tests
         run: python -m unittest discover -s tests
+
+      - name: Validate agent manifests
+        run: python scripts/validate_agent_manifests.py
+
+      - name: Check agent-skill map is up to date
+        run: python scripts/generate_agent_skill_map.py --check

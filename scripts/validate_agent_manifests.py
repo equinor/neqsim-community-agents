@@ -23,6 +23,16 @@ and enterprise agent repositories. It performs three families of checks:
    vendored ``schemas/base-agents.index.json`` snapshot, and are skipped with a
    warning (not an error) when neither source is available.
 
+4. Optional-skill hygiene (warnings). ``context_skills`` ids are existence-
+   checked like ``required_skills``. When an ``AGENT.md`` sits next to the
+   manifest, any canonical skill id named in its prose that is not declared in
+   ``required_skills``/``context_skills`` (or inherited via ``extends``) is
+   flagged, so a skill can no longer be mentioned in prose while staying
+   invisible to the machine-checkable linkage. When validating the enterprise
+   catalog, an agent that shares its ``name`` with a community agent but does
+   not declare ``extends`` is flagged as a probable divergent fork (it should
+   either use an ``enterprise-*`` id or declare ``extends``).
+
 Exit codes:
     0 - all checks pass (warnings allowed)
     1 - one or more errors found
@@ -48,6 +58,11 @@ except ImportError:  # pragma: no cover
 
 
 SKILL_ID_RE = re.compile(r"^(neqsim|enterprise)-[a-z0-9]+(-[a-z0-9]+)*$")
+# Matches a canonical skill id embedded in free-text (AGENT.md prose). The
+# lookbehind/lookahead avoid matching a longer hyphenated token by accident.
+SKILL_ID_IN_TEXT_RE = re.compile(
+    r"(?<![a-z0-9-])((?:neqsim|enterprise)-[a-z0-9]+(?:-[a-z0-9]+)*)"
+)
 SIBLING_COMMUNITY_ENV = "NEQSIM_COMMUNITY_AGENTS_DIR"
 SIBLING_ENTERPRISE_ENV = "NEQSIM_ENTERPRISE_AGENTS_DIR"
 
@@ -191,6 +206,68 @@ def discover_known_skills(repo_root):
     return skills
 
 
+def declared_skills(manifest, bases):
+    """Return the skills an agent declares directly or inherits via extends."""
+    skills = set(manifest.get("required_skills") or [])
+    skills.update(manifest.get("context_skills") or [])
+    extends = manifest.get("extends")
+    if isinstance(extends, dict):
+        base = bases.get(extends.get("agent"))
+        if isinstance(base, dict):
+            skills.update(base.get("required_skills") or [])
+            skills.update(base.get("context_skills") or [])
+    return skills
+
+
+def check_agent_md_skills(manifest_dir, manifest, bases, known_skills):
+    """Warn when AGENT.md names a known skill id the manifest does not declare.
+
+    Closes the gap where a skill is only mentioned in AGENT.md prose (so it is
+    invisible to existence checks and the agent<->skill map). Only skill ids
+    that exist in a known skill catalog are flagged, so example ids or prose
+    that merely resembles a skill id do not produce false positives. When no
+    skill catalog is discoverable the check is skipped entirely.
+    """
+    warnings = []
+    if not known_skills:
+        return warnings
+    agent_md = manifest_dir / "AGENT.md"
+    if not agent_md.exists():
+        return warnings
+    try:
+        text = agent_md.read_text(encoding="utf-8")
+    except OSError:
+        return warnings
+    declared = declared_skills(manifest, bases)
+    mentioned = {m.group(1) for m in SKILL_ID_IN_TEXT_RE.finditer(text)}
+    for skill in sorted(mentioned - declared):
+        if skill in known_skills:
+            warnings.append(
+                "AGENT.md names skill '{}' but it is not in required_skills or "
+                "context_skills (declare it so the linkage is machine-checkable)".format(
+                    skill
+                )
+            )
+    return warnings
+
+
+def discover_community_agent_names(repo_root):
+    """Return the set of agent ids defined in the community agents catalog."""
+    names = set()
+    candidate_dirs = []
+    env_community = os.environ.get(SIBLING_COMMUNITY_ENV)
+    if env_community:
+        candidate_dirs.append(Path(env_community))
+    candidate_dirs.append(repo_root.parent / "neqsim-community-agents" / "agents")
+    for agents_dir in candidate_dirs:
+        if not agents_dir.is_dir():
+            continue
+        for agent_dir in agents_dir.iterdir():
+            if agent_dir.is_dir() and (agent_dir / "agent.yaml").exists():
+                names.add(agent_dir.name)
+    return names
+
+
 def check_extends(manifest, bases):
     """Return (errors, warnings) for an agent's extends declaration."""
     errors, warnings = [], []
@@ -228,6 +305,9 @@ def validate_repo(repo_root):
     repo_kind = "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
     bases = discover_base_agents(repo_root, repo_kind)
     known_skills = discover_known_skills(repo_root)
+    community_names = (
+        discover_community_agent_names(repo_root) if repo_kind == "enterprise" else set()
+    )
 
     all_errors, all_warnings = [], []
     manifests = sorted(agents_dir.glob("*/agent.yaml"))
@@ -260,6 +340,22 @@ def validate_repo(repo_root):
                         "[{}] required skill '{}' not found in known skill "
                         "catalogs (typo or missing skill?)".format(name, skill)
                     )
+            for skill in manifest.get("context_skills") or []:
+                if skill not in known_skills:
+                    all_warnings.append(
+                        "[{}] context skill '{}' not found in known skill "
+                        "catalogs (typo or missing skill?)".format(name, skill)
+                    )
+
+        for warn in check_agent_md_skills(manifest_path.parent, manifest, bases, known_skills):
+            all_warnings.append("[{}] {}".format(name, warn))
+
+        if repo_kind == "enterprise" and name in community_names and not manifest.get("extends"):
+            all_warnings.append(
+                "[{}] shares its name with a community agent but does not declare "
+                "`extends`; use an enterprise-* id or declare extends so the overlay "
+                "linkage is explicit".format(name)
+            )
 
         ext_errors, ext_warnings = check_extends(manifest, bases)
         all_errors.extend("[{}] {}".format(name, e) for e in ext_errors)
