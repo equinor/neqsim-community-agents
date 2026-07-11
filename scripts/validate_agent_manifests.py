@@ -31,7 +31,14 @@ and enterprise agent repositories. It performs three families of checks:
    invisible to the machine-checkable linkage. When validating the enterprise
    catalog, an agent that shares its ``name`` with a community agent but does
    not declare ``extends`` is flagged as a probable divergent fork (it should
-   either use an ``enterprise-*`` id or declare ``extends``).
+   either use an ``enterprise-*`` id or declare ``extends``). Orchestration
+   edges are checked too: ids in ``coordinated_agents`` are existence-checked
+   against the catalogs (self-reference is an error), an agent whose
+   ``agent_type`` is a coordinator/orchestrator but that declares no
+   ``coordinated_agents`` is flagged, a missing ``agent_type`` is flagged, any
+   known agent named in ``AGENT.md`` prose but not in ``coordinated_agents`` is
+   flagged, and the legacy ``referenced_skills`` field is flagged as deprecated
+   in favour of ``context_skills``.
 
 Exit codes:
     0 - all checks pass (warnings allowed)
@@ -63,6 +70,12 @@ SKILL_ID_RE = re.compile(r"^(neqsim|enterprise)-[a-z0-9]+(-[a-z0-9]+)*$")
 SKILL_ID_IN_TEXT_RE = re.compile(
     r"(?<![a-z0-9-])((?:neqsim|enterprise)-[a-z0-9]+(?:-[a-z0-9]+)*)"
 )
+# Matches an agent id in free text. Agent ids in the folder-per-agent catalogs
+# all end in ``-agent``, which keeps this precise and low-false-positive.
+AGENT_ID_IN_TEXT_RE = re.compile(
+    r"(?<![a-z0-9-])([a-z0-9]+(?:-[a-z0-9]+)*-agent)(?![a-z0-9-])"
+)
+ORCHESTRATION_TYPES = ("community-coordinator", "enterprise-coordinator", "enterprise-orchestrator")
 SIBLING_COMMUNITY_ENV = "NEQSIM_COMMUNITY_AGENTS_DIR"
 SIBLING_ENTERPRISE_ENV = "NEQSIM_ENTERPRISE_AGENTS_DIR"
 
@@ -251,6 +264,35 @@ def check_agent_md_skills(manifest_dir, manifest, bases, known_skills):
     return warnings
 
 
+def check_agent_md_agents(manifest_dir, manifest, known_agents):
+    """Warn when AGENT.md names a known agent the manifest does not coordinate.
+
+    Delegation to another agent that lives only in AGENT.md prose (or an
+    @mention table) is invisible to the orchestration graph. Only agent ids that
+    exist in a known catalog are flagged, and the agent's own id is ignored.
+    """
+    warnings = []
+    if not known_agents:
+        return warnings
+    agent_md = manifest_dir / "AGENT.md"
+    if not agent_md.exists():
+        return warnings
+    try:
+        text = agent_md.read_text(encoding="utf-8")
+    except OSError:
+        return warnings
+    own = manifest.get("name")
+    declared = set(manifest.get("coordinated_agents") or [])
+    mentioned = {m.group(1) for m in AGENT_ID_IN_TEXT_RE.finditer(text)}
+    for agent in sorted(mentioned - declared):
+        if agent != own and agent in known_agents:
+            warnings.append(
+                "AGENT.md names agent '{}' but it is not in coordinated_agents "
+                "(declare it so the orchestration graph is machine-checkable)".format(agent)
+            )
+    return warnings
+
+
 def discover_community_agent_names(repo_root):
     """Return the set of agent ids defined in the community agents catalog."""
     names = set()
@@ -308,6 +350,8 @@ def validate_repo(repo_root):
     community_names = (
         discover_community_agent_names(repo_root) if repo_kind == "enterprise" else set()
     )
+    known_agents = set(bases.keys())
+    known_agents.update(m.parent.name for m in agents_dir.glob("*/agent.yaml"))
 
     all_errors, all_warnings = [], []
     manifests = sorted(agents_dir.glob("*/agent.yaml"))
@@ -356,6 +400,39 @@ def validate_repo(repo_root):
                 "`extends`; use an enterprise-* id or declare extends so the overlay "
                 "linkage is explicit".format(name)
             )
+
+        coordinated = manifest.get("coordinated_agents") or []
+        for other in coordinated:
+            if other == name:
+                all_errors.append("[{}] coordinated_agents lists itself".format(name))
+            elif known_agents and other not in known_agents:
+                all_warnings.append(
+                    "[{}] coordinated agent '{}' not found in known agent catalogs "
+                    "(typo or missing agent?)".format(name, other)
+                )
+
+        agent_type = manifest.get("agent_type")
+        if agent_type in ORCHESTRATION_TYPES and not coordinated:
+            all_warnings.append(
+                "[{}] agent_type '{}' implies delegation but coordinated_agents is "
+                "empty (declare the delegated agents, or use a leaf agent_type)".format(
+                    name, agent_type
+                )
+            )
+        if agent_type is None:
+            all_warnings.append(
+                "[{}] no agent_type declared (add one so the orchestration role is "
+                "explicit; leaf agents use community-agent/enterprise-agent)".format(name)
+            )
+
+        if manifest.get("referenced_skills") is not None:
+            all_warnings.append(
+                "[{}] 'referenced_skills' is deprecated; move these ids into "
+                "'context_skills'".format(name)
+            )
+
+        for warn in check_agent_md_agents(manifest_path.parent, manifest, known_agents):
+            all_warnings.append("[{}] {}".format(name, warn))
 
         ext_errors, ext_warnings = check_extends(manifest, bases)
         all_errors.extend("[{}] {}".format(name, e) for e in ext_errors)

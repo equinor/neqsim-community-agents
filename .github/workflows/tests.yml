@@ -34,3 +34,6 @@ jobs:
 
       - name: Check agent-skill map is up to date
         run: python scripts/generate_agent_skill_map.py --check
+
+      - name: Check orchestration map is up to date
+        run: python scripts/generate_orchestration_map.py --check
