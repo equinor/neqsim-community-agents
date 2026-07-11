@@ -145,6 +145,52 @@ def discover_base_agents(repo_root, repo_kind):
     return bases
 
 
+def _skill_name_from_md(path):
+    """Return the `name:` field from a SKILL.md frontmatter, or None."""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    if not text.startswith("---"):
+        return None
+    frontmatter = text.split("---", 2)[1]
+    match = re.search(r"^name:\s*(.+)$", frontmatter, re.MULTILINE)
+    return match.group(1).strip().strip('"').strip("'") if match else None
+
+
+def discover_known_skills(repo_root):
+    """Return the set of known skill ids for required_skills existence checks.
+
+    Combines a vendored ``schemas/skills.index.json`` snapshot (self-contained
+    for standalone CI) with a fresh scan of sibling skill repositories when they
+    are checked out alongside this repo (core, community, and enterprise skills).
+    """
+    skills = set()
+
+    index_path = repo_root / "schemas" / "skills.index.json"
+    if index_path.exists():
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            skills.update(index.get("skills") or [])
+        except Exception:  # noqa: BLE001
+            pass
+
+    workspace = repo_root.parent
+    patterns = {
+        workspace / "neqsim" / ".github" / "skills": "*/SKILL.md",
+        workspace / "neqsim-community-skills" / "skills": "*/*/SKILL.md",
+        workspace / "neqsim-enterprise-skills" / "skills": "*/*/SKILL.md",
+    }
+    for base, pattern in patterns.items():
+        if not base.is_dir():
+            continue
+        for skill_md in base.glob(pattern):
+            name = _skill_name_from_md(skill_md)
+            if name:
+                skills.add(name)
+    return skills
+
+
 def check_extends(manifest, bases):
     """Return (errors, warnings) for an agent's extends declaration."""
     errors, warnings = [], []
@@ -181,6 +227,7 @@ def validate_repo(repo_root):
 
     repo_kind = "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
     bases = discover_base_agents(repo_root, repo_kind)
+    known_skills = discover_known_skills(repo_root)
 
     all_errors, all_warnings = [], []
     manifests = sorted(agents_dir.glob("*/agent.yaml"))
@@ -205,6 +252,14 @@ def validate_repo(repo_root):
             all_errors.append(
                 "[{}] name field '{}' does not match folder".format(name, manifest.get("name"))
             )
+
+        if known_skills:
+            for skill in manifest.get("required_skills") or []:
+                if skill not in known_skills:
+                    all_warnings.append(
+                        "[{}] required skill '{}' not found in known skill "
+                        "catalogs (typo or missing skill?)".format(name, skill)
+                    )
 
         ext_errors, ext_warnings = check_extends(manifest, bases)
         all_errors.extend("[{}] {}".format(name, e) for e in ext_errors)

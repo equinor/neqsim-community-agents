@@ -28,6 +28,14 @@ class AgentManifestSchemaTests(unittest.TestCase):
         errors, _warnings = validator.validate_repo(REPO_ROOT)
         self.assertEqual(errors, [], "agent manifest errors:\n" + "\n".join(errors))
 
+    def test_skills_index_present(self):
+        self.assertTrue((REPO_ROOT / "schemas" / "skills.index.json").exists())
+
+    def test_all_required_skills_resolve(self):
+        _errors, warnings = validator.validate_repo(REPO_ROOT)
+        unresolved = [w for w in warnings if "not found in known skill" in w]
+        self.assertEqual(unresolved, [], "unresolved skills:\n" + "\n".join(unresolved))
+
     def test_extends_superset_violation_is_error(self):
         bases = {"base-agent": {"required_skills": ["neqsim-a", "neqsim-b"]}}
         manifest = {
