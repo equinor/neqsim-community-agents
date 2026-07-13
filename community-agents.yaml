@@ -262,6 +262,22 @@ agents:
       - open-data
       - economics
 
+  - name: emissions-abatement-screening-agent
+    version: "0.1.0"
+    description: "Coordinates public, screening-level emission-abatement evaluation for the Norwegian Continental Shelf by combining field-life energy/emissions screening, the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund), and asset-value (NPV) screening to rank emission-reduction measures such as power-from-shore, waste-heat recovery, and flaring reduction before a validated NeqSim energy/economics workflow."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/emissions-abatement-screening-agent/AGENT.md"
+    required_skills:
+      - neqsim-energy-emissions-screening
+      - neqsim-norwegian-continental-shelf-data
+      - neqsim-asset-value-npv-screening
+    supported_domains:
+      - field-development
+      - environment
+      - emissions-abatement
+      - energy-management
+      - economics
+
   - name: pipe-route-screening-agent
     version: "0.1.0"
     description: "Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines."

@@ -1,0 +1,31 @@
+name: emissions-abatement-screening-agent
+description: Coordinates public, screening-level emission-abatement evaluation for the Norwegian Continental Shelf by combining field-life energy/emissions screening, the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund), and asset-value (NPV) screening to rank emission-reduction measures such as power-from-shore, waste-heat recovery, and flaring reduction before a validated NeqSim energy/economics workflow.
+required_skills:
+- neqsim-energy-emissions-screening
+- neqsim-norwegian-continental-shelf-data
+- neqsim-asset-value-npv-screening
+supported_domains:
+- field-development
+- environment
+- emissions-abatement
+- energy-management
+- economics
+inputs:
+- facility_energy_use_or_emissions_basis
+- abatement_measure_capex_and_added_energy_cost
+- avoided_fuel_gas_or_avoided_co2_nox_per_year
+- carbon_cost_year_and_cost_basis_choice
+- gas_price_horizon_and_discount_rate
+- screening_objective
+outputs:
+- screening_energy_and_emissions_baseline
+- public_norwegian_carbon_cost_basis
+- per_measure_avoided_cost_saving_payback_npv
+- breakeven_co2_price_and_verdict
+- ranked_abatement_measures
+- co2_source_split_and_power_from_shore_context
+- recommended_neqsim_workflows
+- required_follow_up_studies
+- validation_checklist
+human_review_required: true
+version: 0.1.0
