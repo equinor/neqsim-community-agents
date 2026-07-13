@@ -1,0 +1,32 @@
+name: reservoir-forecasting-agent
+description: Coordinates public, screening-level production forecasting on the Norwegian Continental Shelf by fitting an Arps decline curve to a produced-rate series, cross-checking against reservoir-depletion screening and a resource-classification maturity, to project a forward production profile, remaining volume, and estimated ultimate recovery before a validated NeqSim reservoir workflow.
+required_skills:
+- neqsim-norwegian-continental-shelf-data
+- neqsim-reservoir-depletion-screening
+- neqsim-resource-classification-screening
+supported_domains:
+- field-development
+- reservoir-engineering
+- production-analysis
+- production-forecasting
+- open-data
+inputs:
+- produced_rate_history_series
+- economic_limit_rate_and_horizon
+- cumulative_produced_to_date
+- recoverable_volume_and_pressures
+- offtake_rate
+- project_maturity_stage
+- forecasting_objective
+outputs:
+- fitted_arps_decline_model
+- forward_production_profile_and_years_to_limit
+- remaining_volume_and_eur
+- reservoir_depletion_cross_check_profile
+- resource_classification_maturity
+- public_ncs_reserves_and_production_context
+- recommended_neqsim_workflows
+- required_follow_up_studies
+- validation_checklist
+human_review_required: true
+version: 0.1.0

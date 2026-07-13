@@ -278,6 +278,22 @@ agents:
       - energy-management
       - economics
 
+  - name: reservoir-forecasting-agent
+    version: "0.1.0"
+    description: "Coordinates public, screening-level production forecasting on the Norwegian Continental Shelf by fitting an Arps decline curve to a produced-rate series, cross-checking against reservoir-depletion screening and a resource-classification maturity, to project a forward production profile, remaining volume, and estimated ultimate recovery before a validated NeqSim reservoir workflow."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-forecasting-agent/AGENT.md"
+    required_skills:
+      - neqsim-norwegian-continental-shelf-data
+      - neqsim-reservoir-depletion-screening
+      - neqsim-resource-classification-screening
+    supported_domains:
+      - field-development
+      - reservoir-engineering
+      - production-analysis
+      - production-forecasting
+      - open-data
+
   - name: pipe-route-screening-agent
     version: "0.1.0"
     description: "Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines."
