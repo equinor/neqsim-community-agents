@@ -2,10 +2,16 @@
 name: emissions-abatement-screening-agent
 description: Coordinates public, screening-level emission-abatement evaluation for the Norwegian Continental Shelf by combining field-life energy/emissions screening, the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund), and asset-value (NPV) screening to rank emission-reduction measures such as power-from-shore, waste-heat recovery, and flaring reduction before a validated NeqSim energy/economics workflow.
 version: 0.1.0
+agent_type: community-coordinator
 required_skills:
 - neqsim-energy-emissions-screening
 - neqsim-norwegian-continental-shelf-data
 - neqsim-asset-value-npv-screening
+coordinated_agents:
+- energy-emissions-agent
+- ncs-production-analysis-agent
+- concept-selection-agent
+- asset-economics-agent
 ---
 
 # Purpose

@@ -2,10 +2,15 @@
 name: reservoir-forecasting-agent
 description: Coordinates public, screening-level production forecasting on the Norwegian Continental Shelf by fitting an Arps decline curve to a produced-rate series, cross-checking against reservoir-depletion screening and a resource-classification maturity, to project a forward production profile, remaining volume, and estimated ultimate recovery before a validated NeqSim reservoir workflow.
 version: 0.1.0
+agent_type: community-coordinator
 required_skills:
 - neqsim-norwegian-continental-shelf-data
 - neqsim-reservoir-depletion-screening
 - neqsim-resource-classification-screening
+coordinated_agents:
+- ncs-production-analysis-agent
+- reservoir-to-facility-screening-agent
+- asset-economics-agent
 ---
 
 # Purpose

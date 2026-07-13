@@ -28,5 +28,10 @@ outputs:
 - recommended_neqsim_workflows
 - required_follow_up_studies
 - validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- ncs-production-analysis-agent
+- reservoir-to-facility-screening-agent
+- asset-economics-agent
 human_review_required: true
 version: 0.1.0
