@@ -33,6 +33,23 @@ agents:
       - thermodynamics
       - fluid-characterization
 
+  - name: fluid-characterization-agent
+    version: "0.1.0"
+    description: "Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, and PVT regression of a characterization factor for reproducible NeqSim fluid modelling."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/fluid-characterization-agent/AGENT.md"
+    required_skills:
+      - neqsim-fluid-quality-check
+      - neqsim-pseudocomponent-split-characterization
+      - neqsim-reference-fluid-synthetic-generation
+      - neqsim-pvt-regression-characterization-factor
+    supported_domains:
+      - pvt
+      - fluid-characterization
+      - pseudocomponent-splitting
+      - reference-fluid-generation
+      - pvt-regression
+
   - name: e300-fluid-agent
     version: "0.1.0"
     description: "Reads Eclipse E300 files into NeqSim fluids, writes NeqSim fluids to E300, and adds water with the public PVTsim water parameters."

@@ -1,0 +1,29 @@
+name: fluid-characterization-agent
+description: Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, and PVT regression of a characterization factor for reproducible NeqSim fluid modelling.
+required_skills:
+- neqsim-fluid-quality-check
+- neqsim-pseudocomponent-split-characterization
+- neqsim-reference-fluid-synthetic-generation
+- neqsim-pvt-regression-characterization-factor
+supported_domains:
+- pvt
+- fluid-characterization
+- pseudocomponent-splitting
+- reference-fluid-generation
+- pvt-regression
+inputs:
+- reference_fluid_composition
+- plus_fraction_properties
+- pvt_separator_measurements
+- per_well_compositions_and_rates
+- analysis_objective
+outputs:
+- composition_quality_summary
+- pseudocomponent_split
+- calibrated_split_factor
+- representative_fluid_cases
+- allocated_field_composition
+- assumptions_and_limitations
+- validation_checklist
+human_review_required: true
+version: 0.1.0
