@@ -20,6 +20,7 @@ Use this agent when an engineer needs to:
 - Decide whether a compressor chart must be generated because no vendor chart exists
 - Generate a NeqSim compressor chart with surge and stonewall curves from a design point
 - Build the NeqSim anti-surge recycle topology around a compressor
+- Model several compressor bodies on ONE driver shaft (a single gas turbine or motor) at a common speed with `CompressorShaft`, iterating the common speed to the string's final discharge while intermediate pressures float
 - Bind `CompressorAntiSurgeApplication` to an executable dynamic topology with hot/cold recycle valves and optional speed runback
 - Identify required follow-up compressor performance and anti-surge control studies
 - Generate a transparent anti-surge setup report outline
@@ -61,6 +62,19 @@ Typical outputs include:
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible anti-surge setup report outline.
 8. Document assumptions, limitations, and human review requirements.
+
+> **Multi-body shafts:** when the compressor is one body of a string on a single
+> driver shaft (e.g. a recompression train), group the bodies with
+> `neqsim.process.equipment.compressor.CompressorShaft` so they share ONE speed.
+> A shared shaft has one mechanical DOF (the common speed) and one target (the
+> final discharge): iterate the common speed with `solveSpeed(reference, targetP,
+> unit, runnable)` and let the intermediate inter-body pressures float — never fix
+> all interstage pressures AND a common speed (over-constrained). Model a unit
+> that ties into an interstage as a pressure equality (setter/small valve). Use
+> `runAtFixedSpeed(...)` for constant-speed motor drivers. Apply the shaft solve
+> after charts and anti-surge are active; the anti-surge loops set recycle flow
+> while the shaft sets speed. See the `neqsim-compressor-antisurge-recycle` skill
+> section "Multi-Body Compressor Trains on One Shaft".
 
 # Required Skills
 
