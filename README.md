@@ -1,5 +1,7 @@
 # NeqSim Community Agents
 
+> **Related repositories:** [NeqSim](https://github.com/equinor/neqsim) &nbsp;·&nbsp; [NeqSim Community Skills](https://github.com/equinor/neqsim-community-skills) (the skills these agents build on) &nbsp;·&nbsp; You are here: **NeqSim Community Agents**
+
 NeqSim Community Agents is the public open-source repository for community-developed AI agents built on [NeqSim](https://github.com/equinor/neqsim) and [NeqSim Community Skills](https://github.com/equinor/neqsim-community-skills).
 
 The repository provides reusable, transparent, and reproducible engineering agents for process engineering, thermodynamics, flow assurance, field development, energy systems, and sustainability applications.
