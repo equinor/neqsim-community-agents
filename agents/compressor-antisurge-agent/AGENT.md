@@ -24,6 +24,7 @@ Use this agent when an engineer needs to:
 - Converge the common shaft speed *inside* `process.run()` with `CompressorShaftCalculator` (process-integrated, added after the bodies) instead of the external `solveSpeed` callback
 - Report shaft feasibility (`isFeasible()` / `getLastSolveResult()` -> status + min/max-achievable discharge) and shed surplus head for a below-min-speed target with `setPressureControl(...)` (eCalc-style: NONE / DOWNSTREAM_CHOKE / UPSTREAM_CHOKE / ASV_RECYCLE)
 - Model parallel duty machines (A/B trains) and multi-stage compression (parallel 1st stage -> common 2nd stage), splitting flow 50/50 and commingling with a `Mixer`, so per-machine gas load and surge margin match the P&ID
+- Control a fixed-speed compressor's pressure/capacity with inlet guide vanes (IGV): `comp.setInletGuideVaneOpening(f)` / `setGuideVaneAngle(deg)` applies a parametric `InletGuideVaneModel` (reduces head & efficiency and lowers the surge flow at fixed speed), or attach a vendor IGV-position map family with `comp.setInletGuideVaneChart(CompressorChartIGV)` (interpolated per opening)
 - Bind `CompressorAntiSurgeApplication` to an executable dynamic topology with hot/cold recycle valves and optional speed runback
 - Identify required follow-up compressor performance and anti-surge control studies
 - Generate a transparent anti-surge setup report outline
