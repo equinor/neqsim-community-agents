@@ -21,6 +21,7 @@ Use this agent when an engineer needs to:
 - Generate a NeqSim compressor chart with surge and stonewall curves from a design point
 - Build the NeqSim anti-surge recycle topology around a compressor
 - Model several compressor bodies on ONE driver shaft (a single gas turbine or motor) at a common speed with `CompressorShaft`, iterating the common speed to the string's final discharge while intermediate pressures float
+- Model parallel duty machines (A/B trains) and multi-stage compression (parallel 1st stage -> common 2nd stage), splitting flow 50/50 and commingling with a `Mixer`, so per-machine gas load and surge margin match the P&ID
 - Bind `CompressorAntiSurgeApplication` to an executable dynamic topology with hot/cold recycle valves and optional speed runback
 - Identify required follow-up compressor performance and anti-surge control studies
 - Generate a transparent anti-surge setup report outline
