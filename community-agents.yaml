@@ -569,3 +569,19 @@ agents:
       - flow-assurance
       - corrosion-screening
       - mesh-quality
+
+  - name: fem-coupling-agent
+    version: "0.1.0"
+    description: "Runs finite-element models of the solid - layered heat conduction, transient cooldown, porous-medium diffusion and thermal stress - from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets, an insulation specification and an inspection report, takes the fluid side from a NeqSim flash, derives the film coefficient and the Biot number, solves the layered one-dimensional problem against a closed-form check, screens which finite-element backend is defensible, generates and runs a structured Gmsh plus scikit-fem or FEniCSx case where the geometry stops being radial, gates the result on discretisation, mesh independence, energy balance and boundary placement, and converts the field into the effective U-value, U-multiplier, hot-spot factor, no-touch time and wall stress a one-dimensional model consumes. Also qualifies an existing thermal or thermo-mechanical FEM report instead of running a new model."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/fem-coupling-agent/AGENT.md"
+    required_skills:
+      - neqsim-fem-coupling
+    supported_domains:
+      - finite-element-analysis
+      - heat-transfer
+      - thermal-stress
+      - flow-assurance
+      - insulation-and-cooldown
+      - materials-and-mechanical
+      - mesh-quality

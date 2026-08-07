@@ -1,0 +1,44 @@
+name: fem-coupling-agent
+description: "Runs finite-element models of the solid - layered heat conduction, transient cooldown, porous-medium diffusion and thermal stress - from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets, an insulation specification and an inspection report, takes the fluid side from a NeqSim flash, derives the film coefficient and the Biot number, solves the layered one-dimensional problem against a closed-form check, screens which finite-element backend is defensible, generates and runs a structured Gmsh plus scikit-fem or FEniCSx case where the geometry stops being radial, gates the result on discretisation, mesh independence, energy balance and boundary placement, and converts the field into the effective U-value, U-multiplier, hot-spot factor, no-touch time and wall stress a one-dimensional model consumes. Also qualifies an existing thermal or thermo-mechanical FEM report instead of running a new model."
+agent_type: community-agent
+required_skills:
+- neqsim-fem-coupling
+context_skills:
+- neqsim-cfd-coupling
+coordinated_agents:
+- cfd-coupling-agent
+- subsea-cooldown-agent
+- flow-assurance-engineer-agent
+- piping-mechanical-agent
+supported_domains:
+- finite-element-analysis
+- heat-transfer
+- thermal-stress
+- flow-assurance
+- insulation-and-cooldown
+- materials-and-mechanical
+- mesh-quality
+inputs:
+- pid_model_class_and_tag
+- stid_or_tag_register_dimensions
+- mechanical_datasheet_and_material_certificate
+- insulation_specification_and_inspection_report
+- plant_operating_data
+- neqsim_fluid_or_stream
+- target_temperature_hydrate_wax_or_mdmt
+- existing_thermal_or_stress_fem_report
+outputs:
+- traceable_design_basis
+- neqsim_derived_film_coefficient
+- biot_penetration_depth_and_discretisation_targets
+- verified_one_dimensional_temperature_profile
+- fem_backend_recommendation
+- gmsh_mesh_and_generated_case
+- solved_field_results_and_energy_balance
+- cooldown_no_touch_time
+- fem_quality_verdict
+- effective_u_value_and_multiplier
+- thermal_and_pressure_stress_verdict
+- assumptions_and_traceability
+human_review_required: true
+version: 0.1.0

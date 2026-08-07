@@ -1,6 +1,6 @@
 ---
 name: cfd-coupling-agent
-description: Runs single-phase and multiphase CFD from whatever engineering information is available - a P&ID, a STID tag register, datasheets, plant data - with the fluid, the phase split and the interfacial tension taken from a NeqSim flash, and feeds the solved field back into one-dimensional engineering models as enhancement factors.
+description: "Runs single-phase and multiphase CFD from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets and plant data, takes the fluid, the phase split and the interfacial tension from a NeqSim flash, screens which multiphase model is defensible, writes and executes an OpenFOAM case on the real geometry (steady RANS or transient volume of fluid), gates the result on wall treatment, mesh independence and turbulence model, and converts the solved field into velocity/shear/mass-transfer enhancement factors for one-dimensional models. Also qualifies an existing CFD report instead of running a new case."
 version: 0.3.0
 required_skills:
 - neqsim-cfd-coupling
@@ -138,7 +138,8 @@ inventing it.
   operating case; a PVT or process agent supplies the flashed NeqSim system.
 - **Downstream:** `flow-assurance-agent`, corrosion and erosion screening consume
   the mass-transfer and shear enhancement factors; vibration screening pairs with
-  unsteady CFD.
+  unsteady CFD; `fem-coupling-agent` consumes the film coefficient and the
+  near-wall heat-flux distribution and resolves what happens inside the wall.
 
 # Limitations
 
