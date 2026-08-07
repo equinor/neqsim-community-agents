@@ -1,0 +1,34 @@
+name: cfd-coupling-agent
+description: Runs single-phase and multiphase CFD from whatever engineering information is available - a P&ID, a STID tag register, datasheets, plant data - with the fluid, the phase split and the interfacial tension taken from a NeqSim flash, and feeds the solved field back into one-dimensional engineering models as enhancement factors.
+agent_type: community-agent
+required_skills:
+- neqsim-cfd-coupling
+coordinated_agents:
+- flow-assurance-agent
+supported_domains:
+- cfd
+- openfoam
+- multiphase-flow
+- process-engineering
+- flow-assurance
+- corrosion-screening
+- mesh-quality
+inputs:
+- pid_component_class_and_tag
+- stid_or_tag_register_dimensions
+- mechanical_and_process_datasheets
+- plant_operating_data
+- neqsim_fluid_or_stream
+- two_phase_flow_regime
+- existing_cfd_report_and_methodology
+outputs:
+- traceable_design_basis
+- neqsim_derived_boundary_conditions
+- multiphase_model_screening
+- openfoam_case_and_run_outcome
+- solved_field_results
+- cfd_quality_verdict
+- local_enhancement_factors
+- assumptions_and_traceability
+human_review_required: true
+version: 0.3.0
