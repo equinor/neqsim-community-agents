@@ -26,7 +26,9 @@ P&ID / STID / datasheets / insulation spec / inspection report
         |
         +--> backend screening: scikit-fem | fenicsx | sfepy | mfem | openseespy | pynite
         +--> structured Gmsh mesh, layer interfaces on element boundaries
+        +--> 3D when a circumferential feature warrants it: revolve or extrude
         +--> generated case, run at two refinement levels
+        +--> PyVista render: surface, cut plane, clipped view
         |
         v
   quality gate  ->  usable | usable_with_caution | not_usable
@@ -57,6 +59,7 @@ and produces the film coefficient; this agent consumes it and resolves the wall.
 - "What is the metal temperature gradient across the wall, and what thermal stress
   does it produce?"
 - "Size the mesh and the time step for a twelve-hour cooldown on this build-up."
+- "Show me the temperature field through the wall around the damaged section."
 - "We have a vendor thermal FEM report for the clamp - can we use its heat flux?"
 - "Does this problem even need a finite-element model?"
 

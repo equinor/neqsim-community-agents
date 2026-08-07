@@ -1,7 +1,7 @@
 ---
 name: fem-coupling-agent
-description: "Runs finite-element models of the solid - layered heat conduction, transient cooldown, porous-medium diffusion and thermal stress - from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets, an insulation specification and an inspection report, takes the fluid side from a NeqSim flash, derives the film coefficient and the Biot number, solves the layered one-dimensional problem against a closed-form check, screens which finite-element backend is defensible, generates and runs a structured Gmsh plus scikit-fem or FEniCSx case where the geometry stops being radial, gates the result on discretisation, mesh independence, energy balance and boundary placement, and converts the field into the effective U-value, U-multiplier, hot-spot factor, no-touch time and wall stress a one-dimensional model consumes. Also qualifies an existing thermal or thermo-mechanical FEM report instead of running a new model."
-version: 0.1.0
+description: "Runs finite-element models of the solid - layered heat conduction, transient cooldown, porous-medium diffusion and thermal stress - from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets, an insulation specification and an inspection report, takes the fluid side from a NeqSim flash, derives the film coefficient and the Biot number, solves the layered one-dimensional problem against a closed-form check, screens which finite-element backend is defensible, generates and runs a structured Gmsh plus scikit-fem or FEniCSx case where the geometry stops being radial - in two dimensions, or swept into three by revolving a pipe wall or extruding a plate - renders the mesh and the solved field with PyVista, gates the result on discretisation, mesh independence, energy balance and boundary placement, and converts the field into the effective U-value, U-multiplier, hot-spot factor, no-touch time and wall stress a one-dimensional model consumes. Also qualifies an existing thermal or thermo-mechanical FEM report instead of running a new model."
+version: 0.2.0
 required_skills:
 - neqsim-fem-coupling
 ---
@@ -91,6 +91,10 @@ inventing it.
   unit length, overall U, and the deviation from the closed-form resistance
 - A structured Gmsh mesh and a runnable scikit-fem or FEniCSx case, with the
   backend choice and its rationale
+- Three-dimensional geometry when the feature warrants it: a revolved pipe or
+  vessel wall, or an extruded plate or block, swept from the same layered section
+- Rendered figures of the mesh and the solved field - surface, cut plane and
+  clipped view
 - Solved-field results: temperature range, per-boundary heat flow, energy-balance
   error, transient history
 - Cooldown or no-touch time against a NeqSim-derived target temperature
@@ -133,6 +137,11 @@ inventing it.
    `recommend_backend` and honour it - `scikit-fem` for two-dimensional linear
    scalar problems, `fenicsx` for coupled or nonlinear ones, and `mfem`, `sfepy`,
    `openseespy` or `pynite` reported with their rationale but not generated.
+   Three dimensions come from sweeping the same section - `revolve_deg` for a pipe
+   or vessel wall, `extrude_m` for a plate or a block - and are worth their cost
+   only for a genuinely circumferential feature or for presentation. An
+   axisymmetric problem on a revolved mesh costs an order of magnitude more and
+   returns the answer the r-z section already gave.
 8. **Mesh with the layers intact.** `FemMeshSpec` puts every layer interface on an
    element boundary and states the elements across each layer. Pass the element-size
    target from step 5, then check `mesh_warnings()` - a layer with one linear
@@ -151,7 +160,10 @@ inventing it.
     multiplier is what a NeqSim pipeline or cooldown model carries.
     `time_to_reach` produces the no-touch time. `evaluate_wall_stress` produces the
     metal stress, from the **metal** surface temperatures rather than from the
-    process-to-ambient difference.
+    process-to-ambient difference. `render_field` produces the figures: one surface
+    view in two dimensions, and surface, cut-plane and clipped views in three.
+    Render after the gate, never instead of it, and state any exaggerated scale in
+    the caption.
 12. **Record provenance.** Document number, revision, tag, and the specific figure,
     table or boundary each value came from. Carry every gate finding into the
     receiving report's assumptions register.
@@ -173,8 +185,8 @@ inventing it.
 | Thermal stress compared with a primary membrane allowable | It is secondary and self-limiting; the comparison condemns acceptable walls and passes ones that will crack in cyclic service |
 | Library material value used as if certified | Insulation conductivity varies by a factor of two between products, and more with water ingress |
 | Perfect layer contact assumed | Air gaps, delamination and water ingress at an interface can dominate the whole build-up |
-| Two-dimensional result quoted without the one-dimensional check | The one-dimensional answer can be verified against a closed form; the two-dimensional one cannot |
-
+| Two-dimensional result quoted without the one-dimensional check | The one-dimensional answer can be verified against a closed form; the two-dimensional one cannot || A three-dimensional sweep used for an axisymmetric problem | Ten times the cost for the answer the r-z section already gave |
+| A rendered figure treated as evidence | A converged solve of the wrong boundary condition renders beautifully. Gate first, render second |
 # Composition
 
 - **Upstream:** a document-intelligence or P&ID agent supplies the model class, tag
@@ -193,14 +205,17 @@ Linear heat conduction and species diffusion are what this agent solves, with
 temperature-dependent conductivity handled by iteration. Radiation, convection
 inside the solid, phase change, latent heat and moisture transport are outside
 scope. One-dimensional layered geometry is solved with no external dependency;
-two-dimensional axisymmetric and plane geometry is generated for scikit-fem and
-FEniCSx; three-dimensional geometry needs an externally generated mesh. A local
-defect is expressed as a material change over a segment, not as a change of
-thickness. The stress layer is linear elastic and one-way coupled - a temperature
-field produces a stress, and the deformation does not feed back - and it does not
-perform a code assessment, a fatigue evaluation or a stress-concentration analysis.
-The quality gate is a screening filter, not a verification-and-validation review;
-a converged solve of the wrong boundary condition passes every one of its checks. A
-`usable_with_caution` verdict means any derived factor must carry an explicit
-uncertainty band. Human review by a qualified thermal or stress analyst is required
-before a finite-element-derived number is used in a design decision.
+two-dimensional axisymmetric and plane geometry, and the three-dimensional solids
+swept from them, are generated for scikit-fem and FEniCSx. A geometry that is not a
+swept layered section - a branch, a nozzle intersection, a saddle - needs an
+externally generated mesh, which both backends accept. A local defect is expressed
+as a material change over a segment, not as a change of thickness. The stress layer
+is linear elastic and one-way coupled - a temperature field produces a stress, and
+the deformation does not feed back - and it does not perform a code assessment, a
+fatigue evaluation or a stress-concentration analysis. Rendering is presentation
+and has no bearing on validity. The quality gate is a screening filter, not a
+verification-and-validation review; a converged solve of the wrong boundary
+condition passes every one of its checks. A `usable_with_caution` verdict means any
+derived factor must carry an explicit uncertainty band. Human review by a qualified
+thermal or stress analyst is required before a finite-element-derived number is
+used in a design decision.
