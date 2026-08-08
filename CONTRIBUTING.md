@@ -48,6 +48,22 @@ agent-name/
 
 `agent.yaml` must define `name`, `description`, `required_skills`, `supported_domains`, `inputs`, `outputs`, and `human_review_required`.
 
+### Referencing a newly added skill
+
+`required_skills` and `context_skills` are resolved against the vendored
+`schemas/skills.index.json` snapshot, because CI checks out this repo alone and
+cannot see the skill repositories. A skill added in `neqsim-community-skills`
+therefore resolves locally but fails CI until the snapshot is refreshed. From the
+core `neqsim` repo, run:
+
+```bash
+python devtools/generate_skill_index.py          # rewrites the snapshot in both agent repos
+python devtools/generate_skill_index.py --check  # verify the snapshots are current
+```
+
+Commit the regenerated `schemas/skills.index.json` in the same change as the
+agent that requires the new skill.
+
 ## Documentation Requirements
 
 Agent documentation must:
