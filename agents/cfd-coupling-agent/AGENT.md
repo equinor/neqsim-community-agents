@@ -130,6 +130,7 @@ inventing it.
 | Volume of fluid used on a dilute droplet mist | The interface is far below cell size. The screening says `lagrangian` for a reason |
 | One flash applied along the whole geometry | Phase split, density and interfacial tension change with pressure and temperature |
 | A VOF result read before the interface develops | The first residence times are start-up transient, not the flow pattern |
+| A forced-convection film coefficient carried into a stagnant or dead-leg region | Without through-flow the inside coefficient falls to natural-convection values, so the same wall heat flux gives a far larger film temperature rise. That needs a buoyant conjugate solver, which this agent does not generate |
 
 # Composition
 
@@ -145,8 +146,10 @@ inventing it.
 
 Steady single-phase RANS and transient two-phase volume of fluid are what this
 agent generates. Lagrangian parcel clouds and Euler-Euler dispersed models are
-recommended with a reason but not built. Phase change and interfacial mass
-transfer are outside scope, and a multiphase case fixes the phase properties at
+recommended with a reason but not built. Phase change, interfacial mass transfer
+and conjugate heat transfer are outside scope, so buoyancy-driven or stagnant
+regions and any temperature field must go to `fem-coupling-agent` or a
+hand-built buoyant case. A multiphase case fixes the phase properties at
 the inlet flash rather than re-flashing along the geometry. The quality gate is a
 screening filter, not a verification-and-validation review. A
 `usable_with_caution` verdict means any derived factor must carry an explicit
