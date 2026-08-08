@@ -4,6 +4,8 @@ description: Assists with fluid characterization, composition checks, phase beha
 version: 0.1.0
 required_skills:
 - neqsim-fluid-quality-check
+context_skills:
+- neqsim-benchmark-reference-data
 ---
 
 # Purpose
@@ -50,12 +52,17 @@ Typical outputs include:
 3. Identify missing, uncertain, or non-physical values.
 4. Recommend an equation-of-state and NeqSim workflow appropriate for a preliminary public example.
 5. Generate a reproducible example using synthetic or user-provided public data.
-6. Document assumptions, limitations, and required validation.
-7. Ask for qualified human review before conclusions are used for design or operations.
+6. When a property result will be quoted, use `neqsim-benchmark-reference-data` to compare it against an independent reference source and record the citation, deviation, and PASS/WARN/FAIL verdict.
+7. Document assumptions, limitations, and required validation.
+8. Ask for qualified human review before conclusions are used for design or operations.
 
 # Required Skills
 
 - `fluid-quality-check` mapped to community catalog ID `neqsim-fluid-quality-check`
+
+# Context Skills
+
+- `neqsim-benchmark-reference-data` — independent reference values and PASS/WARN/FAIL grading when a property result must be validated before it is quoted. Run it after the composition passes `fluid-quality-check`.
 
 # Example Usage
 

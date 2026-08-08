@@ -28,6 +28,8 @@ agents:
     path: "agents/pvt-agent/AGENT.md"
     required_skills:
       - neqsim-fluid-quality-check
+    context_skills:
+      - neqsim-benchmark-reference-data
     supported_domains:
       - pvt
       - thermodynamics
@@ -336,6 +338,8 @@ agents:
       - neqsim-capex-opex-screening
       - neqsim-energy-emissions-screening
       - neqsim-asset-value-npv-screening
+    context_skills:
+      - neqsim-uncertainty-quantification
     supported_domains:
       - field-development
       - economics
@@ -356,6 +360,9 @@ agents:
       - neqsim-capex-opex-screening
       - neqsim-energy-emissions-screening
       - neqsim-asset-value-npv-screening
+    context_skills:
+      - neqsim-uncertainty-quantification
+      - neqsim-benchmark-reference-data
     supported_domains:
       - field-development
       - reservoir-engineering

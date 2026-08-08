@@ -6,6 +6,8 @@ required_skills:
 - neqsim-capex-opex-screening
 - neqsim-energy-emissions-screening
 - neqsim-asset-value-npv-screening
+context_skills:
+- neqsim-uncertainty-quantification
 ---
 
 # Purpose
@@ -63,15 +65,20 @@ Typical outputs include:
 3. Use `energy-emissions-screening` to roll up field-life energy into CO2e, carbon intensity, and CO2-tax cost.
 4. Use `asset-value-npv-screening` to discount the net cash-flow profile into an NPV with payback, including the CO2-tax cost as an annual cost where relevant.
 5. Combine the cost, emissions, and value views into a single concept-economics summary.
-6. Summarize major uncertainties and required studies.
-7. Generate a reproducible asset-economics screening report outline.
-8. Document assumptions, limitations, and human review requirements.
+6. When the decision turns on the value verdict, use `neqsim-uncertainty-quantification` to propagate the cost, price, and production ranges into P10/P50/P90 and a swing-ranked tornado, and report the probability of a negative outcome.
+7. Summarize major uncertainties and required studies.
+8. Generate a reproducible asset-economics screening report outline.
+9. Document assumptions, limitations, and human review requirements.
 
 # Required Skills
 
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
+
+# Context Skills
+
+- `neqsim-uncertainty-quantification` — Monte Carlo P10/P50/P90, tornado sensitivity, and probability of a negative NPV. Place the CAPEX/OPEX and NPV screening in its cheap `economic` stage so cost and price ranges never trigger a re-run of the expensive stage.
 
 # Example Usage
 

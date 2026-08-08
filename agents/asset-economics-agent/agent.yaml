@@ -4,6 +4,8 @@ required_skills:
 - neqsim-capex-opex-screening
 - neqsim-energy-emissions-screening
 - neqsim-asset-value-npv-screening
+context_skills:
+- neqsim-uncertainty-quantification
 supported_domains:
 - field-development
 - economics

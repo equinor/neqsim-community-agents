@@ -11,6 +11,9 @@ required_skills:
 - neqsim-capex-opex-screening
 - neqsim-energy-emissions-screening
 - neqsim-asset-value-npv-screening
+context_skills:
+- neqsim-uncertainty-quantification
+- neqsim-benchmark-reference-data
 ---
 
 # Purpose
@@ -86,9 +89,11 @@ Typical outputs include:
 8. Use `energy-emissions-screening` to roll up field-life energy into CO2e, carbon intensity, and CO2-tax cost.
 9. Use `asset-value-npv-screening` to discount the net cash-flow profile into an NPV with payback.
 10. Combine the technical and economic results into a single reservoir-to-market concept summary.
-11. Summarize major uncertainties and required follow-up studies.
-12. Generate a reproducible reservoir-to-market screening report outline.
-13. Document assumptions, limitations, and human review requirements.
+11. When a technical result will be quoted, use `neqsim-benchmark-reference-data` to validate it against an independent reference source and record the citation and verdict.
+12. Propagate the resource, cost, and price ranges with `neqsim-uncertainty-quantification` into P10/P50/P90, a swing-ranked tornado, and a probability of a negative outcome; place the reservoir and process screening in its cached `technical` stage and the cost and price parameters in its `economic` stage.
+13. Summarize major uncertainties and required follow-up studies.
+14. Generate a reproducible reservoir-to-market screening report outline.
+15. Document assumptions, limitations, and human review requirements.
 
 # Required Skills
 
@@ -100,6 +105,11 @@ Typical outputs include:
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
+
+# Context Skills
+
+- `neqsim-benchmark-reference-data` — independent reference values and PASS/WARN/FAIL grading for any technical result that will be quoted.
+- `neqsim-uncertainty-quantification` — Monte Carlo P10/P50/P90, tornado sensitivity, and probability of a negative NPV over the resource, cost, and price ranges.
 
 # Example Usage
 
