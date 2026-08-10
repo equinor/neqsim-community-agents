@@ -1,0 +1,38 @@
+name: pipeline-survey-profile-agent
+description: Coordinates early-stage as-built pipeline survey processing that cleans survey data into a pipeline profile, flags erroneous points, screens free-span and cover candidates, compares repeat surveys, and hands an elevation profile to pipeline hydraulic and flow-assurance screening.
+required_skills:
+- neqsim-pipeline-survey-processing
+- neqsim-bathymetry-profile-screening
+- neqsim-pressure-drop-screening
+- neqsim-line-velocity-check
+context_skills:
+- neqsim-pipe-route-profile
+- neqsim-subsea-layout-geometry
+- neqsim-hydrate-margin-check
+agent_type: community-agent
+coordinated_agents:
+- pipe-route-screening-agent
+- subsea-layout-screening-agent
+- flow-assurance-engineer-agent
+supported_domains:
+- subsea
+- pipeline-integrity
+- flow-assurance
+- survey-data-processing
+inputs:
+- raw_survey_records_with_kp_depth_and_coordinates
+- pipeline_and_survey_identifiers
+- section_start_and_end_structures_or_kp
+- outer_diameter_when_absent_from_the_survey
+- repeat_survey_for_change_comparison
+- screening_objective
+outputs:
+- cleaned_pipeline_profile_and_processing_log
+- flagged_erroneous_points
+- free_span_and_cover_candidates
+- repeat_survey_change_summary
+- neqsim_elevation_profile_handoff
+- recommended_neqsim_and_dnv_workflows
+- data_gaps_and_validation_checklist
+human_review_required: true
+version: 0.1.0

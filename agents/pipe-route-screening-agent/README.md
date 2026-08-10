@@ -17,4 +17,4 @@ All inputs must be public, synthetic, or approved for open-source use. The agent
 
 ## Related Agents
 
-This agent is a companion to the `subsea-layout-screening-agent`, which prepares the route geometry, and to the `flow-assurance-engineer-agent`.
+This agent is a companion to the `subsea-layout-screening-agent`, which prepares the route geometry, and to the `flow-assurance-engineer-agent`. When the profile comes from an as-built survey export rather than planned waypoints, use the `pipeline-survey-profile-agent` to clean the survey first and hand its elevation profile to this agent.

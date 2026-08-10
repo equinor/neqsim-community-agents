@@ -329,6 +329,22 @@ agents:
       - pipeline-hydraulics
       - operating-limits
 
+  - name: pipeline-survey-profile-agent
+    version: "0.1.0"
+    description: "Coordinates early-stage as-built pipeline survey processing that cleans survey data into a pipeline profile, flags erroneous points, screens free-span and cover candidates, compares repeat surveys, and hands an elevation profile to pipeline hydraulic and flow-assurance screening."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/pipeline-survey-profile-agent/AGENT.md"
+    required_skills:
+      - neqsim-pipeline-survey-processing
+      - neqsim-bathymetry-profile-screening
+      - neqsim-pressure-drop-screening
+      - neqsim-line-velocity-check
+    supported_domains:
+      - subsea
+      - pipeline-integrity
+      - flow-assurance
+      - survey-data-processing
+
   - name: asset-economics-agent
     version: "0.1.0"
     description: "Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure."
