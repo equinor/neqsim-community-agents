@@ -1,0 +1,47 @@
+name: reservoir-simulator-agent
+description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow.
+required_skills:
+- neqsim-reservoir-model-builder
+- neqsim-norwegian-continental-shelf-data
+- neqsim-reservoir-depletion-screening
+- neqsim-resource-classification-screening
+- neqsim-fluid-quality-check
+context_skills:
+- neqsim-pseudocomponent-split-characterization
+- neqsim-production-network-routing
+- neqsim-asset-value-npv-screening
+supported_domains:
+- field-development
+- reservoir-engineering
+- reservoir-modelling
+- volumetrics
+- open-data
+inputs:
+- field_identity_and_fluid_type
+- public_in_place_or_recoverable_volume
+- datum_depth_and_water_depth
+- structural_and_rock_properties
+- reservoir_pressure_and_temperature
+- fluid_composition_or_characterized_fluid
+- aquifer_strength_and_injection_plan
+- target_plateau_rate_and_well_intent
+- data_provenance_and_source_reference
+outputs:
+- resolved_reservoir_parameter_set_with_provenance
+- in_place_and_recoverable_volumetrics
+- inferred_drive_mechanism_and_recovery_factor
+- data_tier_and_completeness_score
+- derivation_trail_and_consistency_warnings
+- neqsim_reservoir_specification
+- depletion_cross_check_profile
+- resource_classification_maturity
+- ranked_data_acquisition_plan
+- validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- reservoir-forecasting-agent
+- reservoir-to-facility-screening-agent
+- fluid-characterization-agent
+- asset-economics-agent
+human_review_required: true
+version: 0.1.0

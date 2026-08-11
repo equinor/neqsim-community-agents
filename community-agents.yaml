@@ -313,6 +313,24 @@ agents:
       - production-forecasting
       - open-data
 
+  - name: reservoir-simulator-agent
+    version: "0.1.0"
+    description: "Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-simulator-agent/AGENT.md"
+    required_skills:
+      - neqsim-reservoir-model-builder
+      - neqsim-norwegian-continental-shelf-data
+      - neqsim-reservoir-depletion-screening
+      - neqsim-resource-classification-screening
+      - neqsim-fluid-quality-check
+    supported_domains:
+      - field-development
+      - reservoir-engineering
+      - reservoir-modelling
+      - volumetrics
+      - open-data
+
   - name: pipe-route-screening-agent
     version: "0.1.0"
     description: "Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines."
