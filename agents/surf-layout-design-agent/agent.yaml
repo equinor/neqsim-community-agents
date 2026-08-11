@@ -1,0 +1,45 @@
+name: surf-layout-design-agent
+description: Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, then routes and sizes every flowline, riser and umbilical and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows.
+agent_type: community-coordinator
+required_skills:
+- neqsim-surf-field-layout-design
+- neqsim-subsea-layout-geometry
+- neqsim-pipe-route-profile
+- neqsim-bathymetry-profile-screening
+- neqsim-line-velocity-check
+context_skills:
+- neqsim-field-layout-import
+- neqsim-production-network-routing
+- neqsim-step-out-screening
+- neqsim-capex-opex-screening
+- neqsim-surf-cooldown-screening
+coordinated_agents:
+- reservoir-simulator-agent
+- subsea-layout-screening-agent
+- pipe-route-screening-agent
+- flow-assurance-engineer-agent
+- asset-economics-agent
+supported_domains:
+- field-development
+- subsea-layout
+- surf-design
+- host-placement
+- flow-assurance
+inputs:
+- well_counts_by_service_and_slots_per_template
+- reservoir_footprint_and_field_axis
+- water_depth_and_open_bathymetry
+- host_type_placement_and_riser_configuration
+- production_architecture_and_pigging_philosophy
+- design_rates_and_fluid_densities
+- licence_block_or_field_position
+outputs:
+- placed_drill_centres_wells_and_xmas_trees
+- templates_manifolds_plems_and_riser_base
+- routed_and_sized_flowline_riser_and_umbilical_schedule
+- georeferenced_layout_geojson_and_map
+- quantity_take_off_for_surf_cost
+- open_data_request_manifest_with_attribution
+- assumptions_warnings_and_validation_checklist
+human_review_required: true
+version: 0.1.0
