@@ -646,8 +646,8 @@ agents:
       - mesh-quality
 
   - name: near-well-injectivity-agent
-    version: "0.1.0"
-    description: "Derives productivity and injectivity indices from the rock rather than assuming them, using open-DARTS, pyscal, resdata and welltestpy, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, or when productivity decay through the bubble point matters."
+    version: "0.2.0"
+    description: "Derives productivity and injectivity indices from the rock rather than assuming them, using OPM Flow as the reservoir simulator with pyscal for relative permeability and resdata for output, converts NeqSim compositional fluids into black-oil PVT tables OPM Flow accepts, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, when productivity decay through the bubble point matters, or when a reservoir model must be built and run."
     author: "neqsim-community"
     repo: "equinor/neqsim-community-agents"
     path: "agents/near-well-injectivity-agent/AGENT.md"
@@ -662,3 +662,5 @@ agents:
       - productivity
       - relative-permeability
       - reservoir-engineering
+      - reservoir-simulation
+      - black-oil-pvt
