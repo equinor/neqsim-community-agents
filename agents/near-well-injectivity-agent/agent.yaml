@@ -1,0 +1,38 @@
+name: near-well-injectivity-agent
+description: Derives productivity and injectivity indices from the rock rather than assuming them, using open-DARTS, pyscal, resdata and welltestpy, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, or when productivity decay through the bubble point matters.
+agent_type: community-agent
+required_skills:
+- neqsim-near-well-and-injectivity
+- neqsim-api-patterns
+context_skills:
+- neqsim-subsea-and-wells
+- neqsim-benchmark-reference-data
+- neqsim-input-validation
+- neqsim-professional-reporting
+coordinated_agents:
+- reservoir-simulator-agent
+- flow-assurance-engineer-agent
+supported_domains:
+- subsurface
+- wells
+- injectivity
+- productivity
+- relative-permeability
+- reservoir-engineering
+inputs:
+- permeability_net_pay_and_drainage_geometry
+- relative_permeability_endpoints_or_scal_report
+- fluid_viscosities_and_formation_volume_factor
+- completion_type_drain_length_and_skin
+- voidage_replacement_requirement_over_field_life
+- well_test_data_if_available
+outputs:
+- productivity_index_initial_and_developed
+- injectivity_index_initial_and_developed
+- endpoint_mobility_ratio_and_its_implication
+- injector_count_checked_against_voidage
+- derived_versus_assumed_index_cross_check
+- neqsim_inflowperformance_handoff
+- basis_confidence_and_weakest_input
+human_review_required: true
+version: 0.1.0

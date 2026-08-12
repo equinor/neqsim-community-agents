@@ -644,3 +644,21 @@ agents:
       - insulation-and-cooldown
       - materials-and-mechanical
       - mesh-quality
+
+  - name: near-well-injectivity-agent
+    version: "0.1.0"
+    description: "Derives productivity and injectivity indices from the rock rather than assuming them, using open-DARTS, pyscal, resdata and welltestpy, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, or when productivity decay through the bubble point matters."
+    author: "neqsim-community"
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/near-well-injectivity-agent/AGENT.md"
+    agent_type: community-agent
+    required_skills:
+      - neqsim-near-well-and-injectivity
+      - neqsim-api-patterns
+    supported_domains:
+      - subsurface
+      - wells
+      - injectivity
+      - productivity
+      - relative-permeability
+      - reservoir-engineering
