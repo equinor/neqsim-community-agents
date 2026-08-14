@@ -89,11 +89,17 @@ screening skills already answer more cheaply.
    `TRENDDATA` / `PROFILEDATA` entries the case has.
 4. **Rule-check.** Run `-exitRC` first. It costs seconds and catches keyword,
    unit and topology errors before a full solve.
-5. **Prepare variants.** For a sweep, write each variant next to the original so
+5. **Discretise the geometry when building a case.** OLGA's batch engine does not
+   discretise — its own "discretize geometry" is GUI-only. Build the section list
+   with `discretize_route` from a target section length, a neighbour-ratio limit
+   and boundary refinement, never a fixed `NSEGMENT` per leg. Record the mesh
+   `summary()` and demonstrate grid independence by halving the target section
+   length.
+6. **Prepare variants.** For a sweep, write each variant next to the original so
    relative `.tab` references still resolve, and rule-check every variant.
-6. **Run.** Execute in batch with an explicit output directory, thread count and
+7. **Run.** Execute in batch with an explicit output directory, thread count and
    wall-clock limit, and with the working directory set to the case directory.
-7. **Interpret the stop.** Gate on exit code 0 *and* `NORMAL STOP IN EXECUTION`
+8. **Interpret the stop.** Gate on exit code 0 *and* `NORMAL STOP IN EXECUTION`
    in the `.out` file. Map any non-zero code through its category:
    initialization, module, communication, simulation or internal. Codes 65–73
    mean the solution diverged, not that the input is wrong — report that
@@ -104,11 +110,21 @@ screening skills already answer more cheaply.
 9. **Cross-check.** Compare the transient result against a screening estimate
    (`neqsim-two-phase-flow-regime-screening`, `neqsim-multiphase-flow-slug-screening`)
    and against the fluid basis (`pvt-agent`). A large disagreement is a finding,
-   not a rounding error.
-10. **Hand over.** Emit the arrival trends as boundary conditions for the NeqSim
+   not a rounding error. When benchmarking against a steady-state model, match the
+   inlet pressure first — gas friction scales as `G²/ρ`, so a comparison at two
+   different pressure levels is not a model comparison.
+10. **Audit before concluding.** Do not attribute a headline disagreement to
+    "correlation limitations" or to a bug until the intermediate terms have been
+    compared. Reimplement the steady-state correlation from the published
+    equations, drive it from the same flashed fluid object, evaluate it on a
+    1 m single-increment segment, sweep the inclination as well as the
+    horizontal case, and compare every intermediate term. Add an independent
+    single-phase Darcy–Weisbach hand check at the same pressure level as a third
+    opinion. Report which specific term carries the difference.
+11. **Hand over.** Emit the arrival trends as boundary conditions for the NeqSim
     topside model, and the cooldown or hydrate-margin question to
     `subsea-cooldown-agent` where relevant.
-11. **Document.** Record the engine version, command line, exit status, case
+12. **Document.** Record the engine version, command line, exit status, case
     file, output files, assumptions and limitations, and state that a qualified
     flow-assurance engineer must review the interpretation.
 
