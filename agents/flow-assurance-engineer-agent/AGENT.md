@@ -5,6 +5,8 @@ version: 0.1.0
 required_skills:
 - neqsim-hydrate-margin-check
 - neqsim-wax-margin-check
+coordinated_agents:
+- olga-simulation-agent
 ---
 
 # Purpose
@@ -53,6 +55,8 @@ Typical outputs include:
 4. Summarize major uncertainties and required studies.
 5. Generate a reproducible flow assurance screening report outline.
 6. Document assumptions, limitations, and human review requirements.
+
+When the answer depends on transient behaviour rather than a steady operating point — cooldown after a shutdown, liquid surge on ramp-up, terrain slugging, restart — hand over to `olga-simulation-agent`, which runs an OLGA transient case and returns the trends this screening cannot produce.
 
 # Required Skills
 
