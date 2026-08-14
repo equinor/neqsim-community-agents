@@ -201,6 +201,26 @@ agents:
       - operating-limits
       - standards-compliance
 
+  - name: olga-simulation-agent
+    version: "0.1.0"
+    description: "Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch, decodes the exit status, reads trend and profile results, and hands transient boundary conditions to the validated NeqSim workflow."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/olga-simulation-agent/AGENT.md"
+    required_skills:
+      - neqsim-olga-multiphase-simulator
+    context_skills:
+      - neqsim-multiphase-flow-slug-screening
+      - neqsim-two-phase-flow-regime-screening
+      - neqsim-hydrate-margin-check
+      - neqsim-surf-cooldown-screening
+      - neqsim-pipe-route-profile
+    supported_domains:
+      - flow-assurance
+      - multiphase-flow
+      - transient-simulation
+      - slugging
+      - simulator-integration
+
   - name: piping-integrity-agent
     version: "0.1.0"
     description: "Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, and flow-induced vibration against public guidelines."

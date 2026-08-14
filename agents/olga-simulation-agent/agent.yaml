@@ -1,0 +1,39 @@
+name: olga-simulation-agent
+description: Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch with the right flags, decodes the exit status, reads the trend and profile results, and hands the transient boundary conditions to the validated NeqSim workflow.
+required_skills:
+- neqsim-olga-multiphase-simulator
+context_skills:
+- neqsim-multiphase-flow-slug-screening
+- neqsim-two-phase-flow-regime-screening
+- neqsim-hydrate-margin-check
+- neqsim-surf-cooldown-screening
+- neqsim-pipe-route-profile
+supported_domains:
+- flow-assurance
+- multiphase-flow
+- transient-simulation
+- slugging
+- simulator-integration
+inputs:
+- olga_case_file_and_data_files
+- engineering_question_and_acceptance_criteria
+- case_parameter_overrides_for_sweeps
+- olga_version_thread_count_and_timeout
+- installation_override_environment
+outputs:
+- olga_installation_and_version_used
+- rule_check_verdict
+- batch_run_record_with_exit_status
+- trend_series_with_declared_units
+- spatial_profiles_at_output_times
+- parameter_sweep_table
+- neqsim_boundary_condition_handoff
+- assumptions_limitations_and_review_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- flow-assurance-engineer-agent
+- pipe-route-screening-agent
+- subsea-cooldown-agent
+- pvt-agent
+human_review_required: true
+version: 0.1.0
