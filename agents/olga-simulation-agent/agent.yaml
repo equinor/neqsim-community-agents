@@ -3,6 +3,7 @@ description: Runs the OLGA transient multiphase flow simulator end to end — lo
 required_skills:
 - neqsim-olga-multiphase-simulator
 context_skills:
+- neqsim-flow-assurance
 - neqsim-multiphase-flow-slug-screening
 - neqsim-two-phase-flow-regime-screening
 - neqsim-hydrate-margin-check
@@ -23,6 +24,8 @@ inputs:
 outputs:
 - olga_installation_and_version_used
 - rule_check_verdict
+- pvt_table_provenance_and_validation
+- source_phase_split_reconciliation
 - batch_run_record_with_exit_status
 - trend_series_with_declared_units
 - spatial_profiles_at_output_times
