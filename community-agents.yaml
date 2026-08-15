@@ -203,7 +203,7 @@ agents:
 
   - name: olga-simulation-agent
     version: "0.1.0"
-    description: "Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch, decodes the exit status, reads trend and profile results, and hands transient boundary conditions to the validated NeqSim workflow."
+    description: "Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch with the right flags, decodes the exit status, reads the trend and profile results, and hands the transient boundary conditions to the validated NeqSim workflow."
     repo: "equinor/neqsim-community-agents"
     path: "agents/olga-simulation-agent/AGENT.md"
     required_skills:
