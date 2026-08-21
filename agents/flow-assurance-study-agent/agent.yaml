@@ -1,0 +1,39 @@
+name: flow-assurance-study-agent
+description: Coordinates a reviewable flow-assurance study by freezing the engineering basis, delegating calculations to existing NeqSim and OLGA specialist agents, and enforcing like-for-like validation gates.
+version: 0.1.0
+agent_type: community-coordinator
+required_skills: []
+context_skills:
+- neqsim-benchmark-reference-data
+- neqsim-uncertainty-quantification
+coordinated_agents:
+- technical-document-intelligence-agent
+- pvt-agent
+- pipe-route-screening-agent
+- flow-assurance-engineer-agent
+- olga-simulation-agent
+- subsea-cooldown-agent
+- piping-integrity-agent
+- sand-erosion-agent
+supported_domains:
+- flow-assurance
+- multiphase-flow
+- pipeline-hydraulics
+- transient-simulation
+- study-coordination
+- model-validation
+inputs:
+- engineering-question-and-acceptance-criteria
+- source-and-evidence-register
+- fluid-and-pvt-basis
+- route-pipe-insulation-and-ambient-basis
+- operating-and-transient-scenario-matrix
+- existing-neqsim-and-olga-models
+outputs:
+- frozen-engineering-basis
+- scenario-and-agent-handoff-matrix
+- convergence-and-model-applicability-evidence
+- like-for-like-model-comparison
+- findings-gaps-and-recommendations-register
+- human-review-and-approval-checklist
+human_review_required: true

@@ -151,6 +151,7 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 | [Dynamic Process Preparation Agent](agents/dynamic-process-preparation-agent/README.md) | Prepares NeqSim process systems and process models for dynamic calculations | `neqsim-dynamic-process-preparation` |
 | [Dynamic Instrument Controller Agent](agents/dynamic-instrument-controller-agent/README.md) | Adds NeqSim transmitters and PID-style controllers for dynamic simulations | `neqsim-dynamic-instrument-controller-setup` |
 | [Flow Assurance Engineer Agent](agents/flow-assurance-engineer-agent/README.md) | Early-stage screening of operating points against hydrate-margin and wax-margin guidelines | `neqsim-hydrate-margin-check`, `neqsim-wax-margin-check` |
+| [Flow Assurance Study Agent](agents/flow-assurance-study-agent/README.md) | Coordinates a source-traceable flow-assurance study across existing NeqSim and OLGA specialists | None; pure coordinator with optional validation context skills |
 
 ## How To Create A New Agent
 

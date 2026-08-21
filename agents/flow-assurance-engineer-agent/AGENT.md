@@ -7,6 +7,7 @@ required_skills:
 - neqsim-wax-margin-check
 coordinated_agents:
 - olga-simulation-agent
+- flow-assurance-study-agent
 ---
 
 # Purpose
@@ -57,6 +58,11 @@ Typical outputs include:
 6. Document assumptions, limitations, and human review requirements.
 
 When the answer depends on transient behaviour rather than a steady operating point — cooldown after a shutdown, liquid surge on ramp-up, terrain slugging, restart — hand over to `olga-simulation-agent`, which runs an OLGA transient case and returns the trends this screening cannot produce.
+
+When the question spans several disciplines, operating scenarios, evidence sources,
+or a formal NeqSim/OLGA comparison, hand over to `flow-assurance-study-agent`.
+That coordinator freezes the common basis and delegates each bounded calculation
+back to this and the other specialist agents.
 
 # Required Skills
 

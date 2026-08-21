@@ -196,10 +196,40 @@ agents:
     required_skills:
       - neqsim-hydrate-margin-check
       - neqsim-wax-margin-check
+    coordinated_agents:
+      - olga-simulation-agent
+      - flow-assurance-study-agent
     supported_domains:
       - flow-assurance
       - operating-limits
       - standards-compliance
+
+  - name: flow-assurance-study-agent
+    version: "0.1.0"
+    description: "Coordinates a reviewable flow-assurance study by freezing the engineering basis, delegating calculations to existing NeqSim and OLGA specialist agents, and enforcing like-for-like validation gates."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/flow-assurance-study-agent/AGENT.md"
+    agent_type: community-coordinator
+    required_skills: []
+    context_skills:
+      - neqsim-benchmark-reference-data
+      - neqsim-uncertainty-quantification
+    coordinated_agents:
+      - technical-document-intelligence-agent
+      - pvt-agent
+      - pipe-route-screening-agent
+      - flow-assurance-engineer-agent
+      - olga-simulation-agent
+      - subsea-cooldown-agent
+      - piping-integrity-agent
+      - sand-erosion-agent
+    supported_domains:
+      - flow-assurance
+      - multiphase-flow
+      - pipeline-hydraulics
+      - transient-simulation
+      - study-coordination
+      - model-validation
 
   - name: olga-simulation-agent
     version: "0.1.0"
@@ -214,6 +244,12 @@ agents:
       - neqsim-hydrate-margin-check
       - neqsim-surf-cooldown-screening
       - neqsim-pipe-route-profile
+    coordinated_agents:
+      - flow-assurance-engineer-agent
+      - flow-assurance-study-agent
+      - pipe-route-screening-agent
+      - subsea-cooldown-agent
+      - pvt-agent
     supported_domains:
       - flow-assurance
       - multiphase-flow

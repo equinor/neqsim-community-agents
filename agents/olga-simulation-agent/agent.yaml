@@ -35,6 +35,7 @@ outputs:
 agent_type: community-coordinator
 coordinated_agents:
 - flow-assurance-engineer-agent
+- flow-assurance-study-agent
 - pipe-route-screening-agent
 - subsea-cooldown-agent
 - pvt-agent

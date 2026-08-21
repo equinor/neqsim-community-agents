@@ -14,6 +14,7 @@ context_skills:
 - neqsim-pipe-route-profile
 coordinated_agents:
 - flow-assurance-engineer-agent
+- flow-assurance-study-agent
 - pipe-route-screening-agent
 - subsea-cooldown-agent
 - pvt-agent
@@ -59,6 +60,10 @@ rate or a boundary condition that nobody has established — to book design marg
 from a single transient run, or for steady-state screening that
 `flow-assurance-engineer-agent` and the screening skills already answer more
 cheaply.
+
+For a study that still needs its basis frozen, scenario matrix assembled, or
+cross-discipline findings reconciled, hand control to `flow-assurance-study-agent`.
+This agent then remains the bounded OLGA execution and post-processing specialist.
 
 # Inputs
 

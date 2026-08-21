@@ -80,6 +80,7 @@ EXPECTED_AGENTS = {
         "neqsim-hydrate-margin-check",
         "neqsim-wax-margin-check",
     ],
+    "flow-assurance-study-agent": [],
     "subsea-cooldown-agent": [
         "neqsim-surf-cooldown-screening",
     ],
@@ -307,6 +308,19 @@ class RepositoryStructureTests(unittest.TestCase):
             with self.subTest(agent=agent_name):
                 self.assertIn("human review", combined_text)
                 self.assertIn("does not replace", combined_text)
+
+    def test_flow_assurance_study_model_hierarchy(self):
+        agent_text = read_text(AGENTS_DIR / "flow-assurance-study-agent" / "AGENT.md")
+        for required_text in [
+            "TwoFluidPipe",
+            "OLGA",
+            "PipeBeggsAndBrills",
+            "topside",
+            "simple",
+            "does not replace",
+        ]:
+            with self.subTest(required_text=required_text):
+                self.assertIn(required_text, agent_text)
 
 
 if __name__ == "__main__":

@@ -23,5 +23,6 @@ outputs:
 - validation_checklist
 coordinated_agents:
 - olga-simulation-agent
+- flow-assurance-study-agent
 human_review_required: true
 version: 0.1.0
