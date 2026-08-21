@@ -8,6 +8,7 @@ required_skills:
 - neqsim-fluid-quality-check
 context_skills:
 - neqsim-pseudocomponent-split-characterization
+- neqsim-near-well-and-injectivity
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
 supported_domains:
@@ -37,6 +38,7 @@ outputs:
 - resource_classification_maturity
 - ranked_data_acquisition_plan
 - validation_checklist
+- opm_flow_docker_deck_and_run_handoff
 agent_type: community-coordinator
 coordinated_agents:
 - reservoir-forecasting-agent
