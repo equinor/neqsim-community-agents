@@ -1,0 +1,27 @@
+name: resource-classification-agent
+description: Classifies petroleum resources on the public SODIR RC0-RC9 maturity ladder and SPE-PRMS category axis without confusing maturity with quantity uncertainty, and records evidence gaps and transitions for human review.
+version: 0.1.0
+required_skills:
+- neqsim-resource-classification-screening
+supported_domains:
+- petroleum-resource-classification
+- reserves-and-resources
+- field-development
+- resource-accounting
+inputs:
+- classification-effective-date
+- project-maturity-evidence
+- development-type-first-or-additional
+- prior-classification
+- independent-quantity-uncertainty
+- source-references
+outputs:
+- sodir-resource-class-and-category
+- prms-category
+- independent-uncertainty-basis
+- evidence-and-gap-register
+- classification-transition-summary
+- human-review-handoff
+human_review_required: true
+agent_type: community-agent
+status: draft

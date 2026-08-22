@@ -669,6 +669,19 @@ agents:
       - asset-economics
       - screening
 
+  - name: resource-classification-agent
+    version: "0.1.0"
+    description: "Classifies petroleum resources on the public SODIR RC0-RC9 maturity ladder and SPE-PRMS category axis without confusing maturity with quantity uncertainty, and records evidence gaps and transitions for human review."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/resource-classification-agent/AGENT.md"
+    required_skills:
+      - neqsim-resource-classification-screening
+    supported_domains:
+      - petroleum-resource-classification
+      - reserves-and-resources
+      - field-development
+      - resource-accounting
+
   - name: cfd-coupling-agent
     version: "0.3.0"
     description: "Runs single-phase and multiphase CFD from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets and plant data, takes the fluid, the phase split and the interfacial tension from a NeqSim flash, screens which multiphase model is defensible, writes and executes an OpenFOAM case on the real geometry (steady RANS or transient volume of fluid), gates the result on wall treatment, mesh independence and turbulence model, and converts the solved field into velocity/shear/mass-transfer enhancement factors for one-dimensional models. Also qualifies an existing CFD report instead of running a new case."

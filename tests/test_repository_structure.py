@@ -114,6 +114,9 @@ EXPECTED_AGENTS = {
         "neqsim-energy-emissions-screening",
         "neqsim-step-out-screening",
     ],
+    "resource-classification-agent": [
+        "neqsim-resource-classification-screening",
+    ],
 }
 
 
