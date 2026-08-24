@@ -697,8 +697,8 @@ agents:
       - resource-accounting
 
   - name: cfd-coupling-agent
-    version: "0.3.0"
-    description: "Runs single-phase and multiphase CFD from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets and plant data, takes the fluid, the phase split and the interfacial tension from a NeqSim flash, screens which multiphase model is defensible, writes and executes an OpenFOAM case on the real geometry (steady RANS or transient volume of fluid), gates the result on wall treatment, mesh independence and turbulence model, and converts the solved field into velocity/shear/mass-transfer enhancement factors for one-dimensional models. Also qualifies an existing CFD report instead of running a new case."
+    version: "0.4.0"
+    description: "Runs single-phase and multiphase CFD from governed engineering inputs, qualifies existing CFD, and assesses aeroacoustic readiness. Tonal-noise cases fail closed unless source topology, internal geometry, synchronized spectra, event conditions, acoustic terminations, and required structural boundaries exist; steady RANS is never used as tonal-source diagnosis."
     repo: "equinor/neqsim-community-agents"
     path: "agents/cfd-coupling-agent/AGENT.md"
     required_skills:
@@ -711,6 +711,8 @@ agents:
       - flow-assurance
       - corrosion-screening
       - mesh-quality
+      - aeroacoustics-readiness
+      - tonal-noise
 
   - name: fem-coupling-agent
     version: "0.2.0"

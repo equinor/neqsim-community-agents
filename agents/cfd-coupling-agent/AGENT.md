@@ -1,7 +1,7 @@
 ---
 name: cfd-coupling-agent
-description: "Runs single-phase and multiphase CFD from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets and plant data, takes the fluid, the phase split and the interfacial tension from a NeqSim flash, screens which multiphase model is defensible, writes and executes an OpenFOAM case on the real geometry (steady RANS or transient volume of fluid), gates the result on wall treatment, mesh independence and turbulence model, and converts the solved field into velocity/shear/mass-transfer enhancement factors for one-dimensional models. Also qualifies an existing CFD report instead of running a new case."
-version: 0.3.0
+description: "Runs single-phase and multiphase CFD from governed engineering inputs, qualifies existing CFD, and assesses aeroacoustic readiness. Tonal-noise cases fail closed unless source topology, internal geometry, synchronized spectra, event conditions, acoustic terminations, and required structural boundaries exist; steady RANS is never used as tonal-source diagnosis."
+version: 0.4.0
 required_skills:
 - neqsim-cfd-coupling
 ---
@@ -37,6 +37,8 @@ The agent works in both directions:
   P&ID and its numbers are about to be used.
 - A new CFD run is being specified and needs fluid properties, turbulence inlet
   values and near-wall mesh sizing.
+- A tonal flow-noise or vibration case needs a CFD/FSI go/no-go decision and a
+  source-traceable data-acquisition plan.
 
 # When Not to Use
 
@@ -45,6 +47,9 @@ The agent works in both directions:
   recommendation and stop rather than forcing a volume-of-fluid case.
 - As a substitute for a qualified CFD engineer on a design decision.
 - To quote a number from a study that failed the quality gate.
+- To diagnose tonal noise from overall dBA, a generic pipe, or steady RANS. Use
+  the aeroacoustic readiness gate and stop at `not_ready` when any diagnostic
+  input is missing.
 
 # Inputs
 
@@ -60,6 +65,9 @@ inventing it.
   mesh levels, grid-convergence index, and the figure or table each value came from
 - **NeqSim system or stream** — flashed, with `initProperties()` applied
 - **Flow regime** — from a two-phase regime screening, when the line is multiphase
+- **Tonal case evidence** — verified source tag/topology, actual internal
+  geometry, synchronized narrow-band spectra, event operating state, acoustic
+  lengths/terminations, and structural/support data when vibration is in scope
 
 # Outputs
 
@@ -70,47 +78,56 @@ inventing it.
 - Solved-field results: continuity error, pressure drop, peak and mean wall shear,
   y+ distribution
 - CFD quality verdict (`usable`, `usable_with_caution`, `not_usable`) with findings
+- Aeroacoustic readiness verdict (`not_ready`, `ready_for_transient_cfd`, or
+  `ready_for_coupled_study`) with missing inputs and required solver sequence
 - Local enhancement factors: velocity, wall shear, mass transfer
 - Assumptions and traceability entries for the receiving report
 
 # Workflow
 
-1. **Classify the component.** Read the component class off the P&ID (`pipe`,
+1. **Classify the intent.** If the observation is tonal noise, pulsation, or
+  coupled vibration, call `assess_aeroacoustic_readiness` before building a
+  mesh. Stop at `not_ready`; do not substitute generic geometry, overall dBA,
+  or a nearby tag. A ready case requires steady RANS initialization followed by
+  transient compressible LES/DES with spectral probes, acoustic propagation,
+  and structural modal analysis when vibration is in scope. The current skill
+  specifies but does not generate this solver chain.
+2. **Classify the component.** Read the component class off the P&ID (`pipe`,
    `bend`, `tee`, `reducer`, `orifice`, `valve`, `vessel`, `separator`,
    `manifold`, `tube_bundle`, `channel`). `required_fields` then states exactly
    which geometry and process values must be found.
-2. **Assemble the design basis.** Pass every source to `build_design_basis` with
+3. **Assemble the design basis.** Pass every source to `build_design_basis` with
    its `source` label and document reference. Stop if `ready_for_meshing` is false:
    report the missing fields and the conflicts, do not guess geometry.
-3. **Flash the fluid in NeqSim.** Build the fluid at the datasheet condition, set
+4. **Flash the fluid in NeqSim.** Build the fluid at the datasheet condition, set
    the mixing rule, flash, then `fluid_state_from_neqsim`. Take the phase that
    actually wets the surface in question.
-4. **Decide single-phase or multiphase.** If the flash produced one phase, or the
+5. **Decide single-phase or multiphase.** If the flash produced one phase, or the
    question is about wall shear in the wetting phase, stay single-phase. If two
    phases share the line and the interface matters, use
    `multiphase_state_from_neqsim` and `derive_multiphase_conditions`, and supply a
    `flow_regime` from a regime screening when one exists - it is a stronger basis
    than volume fraction. Honour the recommended model: `vof` builds a case,
    `lagrangian` and `euler_euler` are reported with their rationale, not forced.
-5. **Derive boundary conditions.** `derive_boundary_conditions` returns the
+6. **Derive boundary conditions.** `derive_boundary_conditions` returns the
    turbulence inlet state, the flow regime, the Mach number and the solver class.
    Act on its warnings before continuing - a laminar or transonic case needs a
    different setup, not a different number.
-6. **Size the near-wall cell.** `plan_wall_resolution` converts the fluid state and
+7. **Size the near-wall cell.** `plan_wall_resolution` converts the fluid state and
    a y+ target into a first-cell height. Pass it to `MeshSpec` so the grading is
    solved rather than guessed, then check `mesh_warnings()` - an expansion ratio
    above 1.3 means more cells are needed, not a coarser wall.
-7. **Write and run the case.** `OpenFoamCase.write` produces the full steady tree;
+8. **Write and run the case.** `OpenFoamCase.write` produces the full steady tree;
    `VofOpenFoamCase.write` produces the transient two-phase tree. `run` executes
    the mesh, check, solve and export steps. If OpenFOAM is absent the case is still
    written and the commands are returned - hand them over rather than failing.
-8. **Gate before quoting.** Run `assess_quality` with the y+ actually achieved and
+9. **Gate before quoting.** Run `assess_quality` with the y+ actually achieved and
    the number of mesh levels actually run. One mesh is never mesh independence. For
    a VOF case, also confirm the interface had time to develop.
-9. **Convert and hand off.** `evaluate_local_enhancement` turns local peaks into
+10. **Convert and hand off.** `evaluate_local_enhancement` turns local peaks into
    factors. Prefer CFD-reported wall shear over velocity: near-wall transport
    scales with the friction velocity, not the bulk velocity.
-10. **Record provenance.** Document number, revision, tag, and the specific figure,
+11. **Record provenance.** Document number, revision, tag, and the specific figure,
     table or patch each value came from. Carry every gate finding into the
     receiving report's assumptions register.
 
@@ -124,6 +141,8 @@ inventing it.
 | Model-wide maximum quoted as a local value | Often a single-cell artefact. Use section-plane or area-averaged values |
 | Differing cell counts read as a mesh study | Meshes usually differ because geometry differs, not for convergence testing |
 | Steady RANS used for a fatigue or erosion question | Steady RANS smooths the fluctuations those questions depend on |
+| Steady RANS or overall dBA used for tonal-source diagnosis | Require synchronized narrow-band spectra and a transient compressible scale-resolving workflow |
+| A nearby tag assumed to be the source | Verify the exact flow-path topology and candidate component before geometry retrieval or CFD |
 | Operating case mismatch | Factors are case-specific. Maldistribution is usually worst at low flow, which is often the throttled control condition |
 | Gas-side CFD applied to a liquid-side question | Gas-side CFD constrains the heat-flux distribution, which sets the liquid-side film temperature; it does not give liquid-side velocities |
 | Photograph treated as dimensional authority | Only with a calibrated scale reference and perspective correction |
@@ -147,7 +166,9 @@ inventing it.
 Steady single-phase RANS and transient two-phase volume of fluid are what this
 agent generates. Lagrangian parcel clouds and Euler-Euler dispersed models are
 recommended with a reason but not built. Phase change, interfacial mass transfer
-and conjugate heat transfer are outside scope, so buoyancy-driven or stagnant
+and conjugate heat transfer are outside scope. Transient compressible
+aeroacoustics, duct-acoustic propagation, structural modal analysis, and two-way
+FSI are readiness-scoped but not generated. Therefore buoyancy-driven or stagnant
 regions and any temperature field must go to `fem-coupling-agent` or a
 hand-built buoyant case. A multiphase case fixes the phase properties at
 the inlet flash rather than re-flashing along the geometry. The quality gate is a

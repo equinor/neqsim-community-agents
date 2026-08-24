@@ -1,5 +1,5 @@
 name: cfd-coupling-agent
-description: "Runs single-phase and multiphase CFD from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets and plant data, takes the fluid, the phase split and the interfacial tension from a NeqSim flash, screens which multiphase model is defensible, writes and executes an OpenFOAM case on the real geometry (steady RANS or transient volume of fluid), gates the result on wall treatment, mesh independence and turbulence model, and converts the solved field into velocity/shear/mass-transfer enhancement factors for one-dimensional models. Also qualifies an existing CFD report instead of running a new case."
+description: "Runs single-phase and multiphase CFD from governed engineering inputs, qualifies existing CFD, and assesses aeroacoustic readiness. Tonal-noise cases fail closed unless source topology, internal geometry, synchronized spectra, event conditions, acoustic terminations, and required structural boundaries exist; steady RANS is never used as tonal-source diagnosis."
 agent_type: community-agent
 required_skills:
 - neqsim-cfd-coupling
@@ -14,6 +14,8 @@ supported_domains:
 - flow-assurance
 - corrosion-screening
 - mesh-quality
+- aeroacoustics-readiness
+- tonal-noise
 inputs:
 - pid_component_class_and_tag
 - stid_or_tag_register_dimensions
@@ -22,6 +24,8 @@ inputs:
 - neqsim_fluid_or_stream
 - two_phase_flow_regime
 - existing_cfd_report_and_methodology
+- synchronized_narrow_band_spectra_for_tonal_cases
+- acoustic_and_structural_boundaries_for_coupled_cases
 outputs:
 - traceable_design_basis
 - neqsim_derived_boundary_conditions
@@ -29,7 +33,8 @@ outputs:
 - openfoam_case_and_run_outcome
 - solved_field_results
 - cfd_quality_verdict
+- aeroacoustic_readiness_verdict
 - local_enhancement_factors
 - assumptions_and_traceability
 human_review_required: true
-version: 0.3.0
+version: 0.4.0

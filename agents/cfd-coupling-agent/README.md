@@ -27,6 +27,12 @@ P&ID / STID / datasheets / plant data
   enhancement factors  ->  velocity, wall shear, mass transfer
 ```
 
+For tonal-noise or coupled-vibration requests, the first output is instead an
+aeroacoustic readiness verdict. Missing verified topology, internal geometry,
+synchronized narrow-band spectra, event conditions, acoustic terminations, or
+required structural boundaries returns `not_ready`. The agent does not present
+steady RANS as tonal-source diagnosis.
+
 The agent also works backwards: when a CFD report already exists, it qualifies
 that report and extracts factors from it instead of running a new case.
 
@@ -41,6 +47,7 @@ that report and extracts factors from it instead of running a new case.
 - "We have a vendor CFD report for the inlet device - can we use its peak velocity?"
 - "Size the near-wall mesh for a y+ of 50 on this gas stream."
 - "What local enhancement factor should the corrosion screening use at this bend?"
+- "Is this tonal valve or piping-noise case ready for transient CFD and FSI?"
 
 ## Human review
 
