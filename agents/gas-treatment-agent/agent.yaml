@@ -1,4 +1,5 @@
 name: gas-treatment-agent
+agent_type: community-agent
 description: Provides early-stage gas treatment screening that checks gas water content and dehydration against a sales-gas spec and estimates single-stage compression power.
 required_skills:
 - neqsim-water-dewpoint-dehydration-screening

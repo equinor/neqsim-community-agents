@@ -1,4 +1,5 @@
 name: pvt-agent
+agent_type: community-agent
 description: Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis.
 required_skills:
 - neqsim-fluid-quality-check

@@ -1,4 +1,5 @@
 name: energy-emissions-agent
+agent_type: community-agent
 description: Performs preliminary energy-use and CO2-equivalent emissions screening for a facility or process and recommends further analysis.
 required_skills:
 - neqsim-energy-emissions-screening

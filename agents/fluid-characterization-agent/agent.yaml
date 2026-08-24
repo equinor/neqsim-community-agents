@@ -1,4 +1,5 @@
 name: fluid-characterization-agent
+agent_type: community-agent
 description: Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, and PVT regression of a characterization factor for reproducible NeqSim fluid modelling.
 required_skills:
 - neqsim-fluid-quality-check

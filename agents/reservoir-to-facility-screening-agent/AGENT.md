@@ -132,9 +132,8 @@ functionality that a qualified engineer should use for design-grade work:
 
 In Python these classes are reachable through the `neqsim` package (for example
 `from neqsim.process.processTools import simplereservoir`). For governed, live,
-reservoir-to-facility routing from controlled engineering sources, the enterprise
-`enterprise-well-production-routing` skill and `well-production-routing-agent`
-are the counterparts. This agent is a companion to the
+reservoir-to-facility routing from controlled engineering sources, use the
+corresponding enterprise catalog workflow. This agent is a companion to the
 `subsea-layout-screening-agent` and the `tie-in-screening-agent`.
 
 # References
@@ -142,4 +141,4 @@ are the counterparts. This agent is a companion to the
 - NeqSim: https://github.com/equinor/neqsim
 - NeqSim Community Skills: https://github.com/equinor/neqsim-community-skills
 - Community skills: `reservoir-depletion-screening`, `production-network-routing`, `subsea-layout-geometry`, `step-out-screening`
-- Enterprise counterpart: `enterprise-well-production-routing` and `well-production-routing-agent`.
+- Enterprise counterpart: the governed well-production routing workflow in the enterprise catalogs.

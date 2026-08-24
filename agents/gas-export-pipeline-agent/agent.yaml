@@ -1,4 +1,5 @@
 name: gas-export-pipeline-agent
+agent_type: community-agent
 description: Performs preliminary gas-export pipeline screening by chaining line velocity, pressure drop, and export compression power checks.
 required_skills:
 - neqsim-line-velocity-check

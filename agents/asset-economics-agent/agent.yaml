@@ -1,4 +1,5 @@
 name: asset-economics-agent
+agent_type: community-coordinator
 description: Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure.
 required_skills:
 - neqsim-capex-opex-screening
@@ -6,6 +7,8 @@ required_skills:
 - neqsim-asset-value-npv-screening
 context_skills:
 - neqsim-uncertainty-quantification
+coordinated_agents:
+- reservoir-to-facility-screening-agent
 supported_domains:
 - field-development
 - economics

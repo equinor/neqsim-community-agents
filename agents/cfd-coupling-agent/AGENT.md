@@ -137,7 +137,7 @@ inventing it.
 - **Upstream:** a document-intelligence or P&ID agent supplies the component
   class, tag linkage and datasheet values; a plant-data agent supplies the
   operating case; a PVT or process agent supplies the flashed NeqSim system.
-- **Downstream:** `flow-assurance-agent`, corrosion and erosion screening consume
+- **Downstream:** `flow-assurance-engineer-agent`, corrosion and erosion screening consume
   the mass-transfer and shear enhancement factors; vibration screening pairs with
   unsteady CFD; `fem-coupling-agent` consumes the film coefficient and the
   near-wall heat-flux distribution and resolves what happens inside the wall.

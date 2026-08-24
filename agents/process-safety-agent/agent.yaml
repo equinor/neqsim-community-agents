@@ -1,4 +1,5 @@
 name: process-safety-agent
+agent_type: community-agent
 description: Provides early-stage process safety screening for fire-case relief loads and emergency depressurization with public, educational methods.
 required_skills:
 - neqsim-relief-load-screening

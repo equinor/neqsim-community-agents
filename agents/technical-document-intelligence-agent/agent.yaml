@@ -1,4 +1,5 @@
 name: technical-document-intelligence-agent
+agent_type: community-agent
 version: "0.1.0"
 description: Classifies mixed engineering documents and images and produces source-traceable evidence packages before NeqSim analysis.
 required_skills:

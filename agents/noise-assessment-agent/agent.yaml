@@ -1,4 +1,5 @@
 name: noise-assessment-agent
+agent_type: community-agent
 description: Assesses gas-valve and restriction noise from current measurements or process data, routes detailed source prediction to NeqSim IEC 60534-8-3, and keeps workplace noise and AIV decisions separate.
 required_skills:
 - neqsim-noise-screening

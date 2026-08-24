@@ -1,4 +1,5 @@
 name: production-optimization-agent
+agent_type: community-agent
 description: Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines.
 required_skills:
 - neqsim-separator-modelling

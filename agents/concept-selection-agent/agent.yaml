@@ -1,4 +1,5 @@
 name: concept-selection-agent
+agent_type: community-agent
 description: Coordinates early-stage concept-selection screening for a field-development opportunity, chaining resource classification, CAPEX/OPEX, asset-value (NPV), energy/emissions, and step-out screening into a comparable concept summary before a validated study.
 required_skills:
 - neqsim-resource-classification-screening

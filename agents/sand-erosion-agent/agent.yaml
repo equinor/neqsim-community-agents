@@ -1,4 +1,5 @@
 name: sand-erosion-agent
+agent_type: community-agent
 description: Provides early-stage subsea and topside line sand-erosion screening that checks erosional velocity and remaining wall life against public integrity guidelines.
 required_skills:
 - neqsim-sand-erosion-screening

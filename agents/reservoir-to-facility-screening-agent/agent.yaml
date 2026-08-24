@@ -1,10 +1,14 @@
 name: reservoir-to-facility-screening-agent
+agent_type: community-coordinator
 description: Coordinates early-stage reservoir-to-facility production screening that chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development.
 required_skills:
 - neqsim-reservoir-depletion-screening
 - neqsim-production-network-routing
 - neqsim-subsea-layout-geometry
 - neqsim-step-out-screening
+coordinated_agents:
+- subsea-layout-screening-agent
+- tie-in-screening-agent
 supported_domains:
 - field-development
 - reservoir-engineering

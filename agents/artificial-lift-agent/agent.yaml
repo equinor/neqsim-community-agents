@@ -1,4 +1,5 @@
 name: artificial-lift-agent
+agent_type: community-agent
 description: Screens gas-lift versus ESP artificial-lift feasibility against a simple inflow performance relationship using public, educational methods.
 required_skills:
 - neqsim-artificial-lift-screening

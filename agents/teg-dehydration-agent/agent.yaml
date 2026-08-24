@@ -1,4 +1,5 @@
 name: teg-dehydration-agent
+agent_type: community-agent
 description: Builds and runs a validated NeqSim TEG (triethylene glycol) dehydration plant and reports water dew point, lean-TEG purity, and regeneration still-vent emissions.
 required_skills:
 - neqsim-teg-dehydration-modeling

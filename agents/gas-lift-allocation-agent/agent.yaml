@@ -1,4 +1,5 @@
 name: gas-lift-allocation-agent
+agent_type: community-agent
 description: Screens lift-gas allocation across a small set of gas-lifted wells, framing the allocation problem and ranking candidate splits using public artificial-lift, production-network-routing, and reservoir-depletion screening before a validated NeqSim study.
 required_skills:
 - neqsim-artificial-lift-screening

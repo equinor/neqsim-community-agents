@@ -1,4 +1,5 @@
 name: dynamic-process-preparation-agent
+agent_type: community-agent
 description: Prepares NeqSim ProcessSystem and ProcessModel flowsheets for dynamic calculations with mechanical-design and volume-readiness checks.
 required_skills:
 - neqsim-dynamic-process-preparation

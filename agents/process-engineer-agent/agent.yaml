@@ -1,4 +1,5 @@
 name: process-engineer-agent
+agent_type: community-agent
 description: Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines.
 required_skills:
 - neqsim-line-velocity-check

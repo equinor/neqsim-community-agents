@@ -1,4 +1,5 @@
 name: piping-integrity-agent
+agent_type: community-agent
 description: Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, and flow-induced vibration against public guidelines.
 required_skills:
 - neqsim-line-velocity-check

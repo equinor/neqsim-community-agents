@@ -1,4 +1,5 @@
 name: hydrate-screening-agent
+agent_type: community-agent
 description: Performs preliminary hydrate risk assessment and recommends further analysis.
 required_skills:
 - neqsim-hydrate-screening

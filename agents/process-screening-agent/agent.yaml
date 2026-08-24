@@ -1,4 +1,5 @@
 name: process-screening-agent
+agent_type: community-agent
 description: Performs high-level process engineering screening studies and engineering checklist generation.
 required_skills:
 - neqsim-separator-modelling

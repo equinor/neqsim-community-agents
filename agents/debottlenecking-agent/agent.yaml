@@ -1,4 +1,5 @@
 name: debottlenecking-agent
+agent_type: community-agent
 description: "Screens a simple process train to identify the most likely capacity bottleneck \u2014 separator capacity, compressor operating window, line velocity, or line pressure drop \u2014 and ranks units by public screening-level utilization before a validated NeqSim study."
 required_skills:
 - neqsim-separator-modelling

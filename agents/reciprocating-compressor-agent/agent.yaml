@@ -1,4 +1,5 @@
 name: reciprocating-compressor-agent
+agent_type: community-agent
 description: Screens reciprocating compressor staging, volumetric efficiency, discharge temperature, and rod load using public, educational methods.
 required_skills:
 - neqsim-reciprocating-compressor-screening

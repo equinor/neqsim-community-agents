@@ -1,4 +1,5 @@
 name: utilities-screening-agent
+agent_type: community-agent
 description: Screens instrument air, fuel-gas Wobbe, and cooling-water balances using public, educational methods.
 required_skills:
 - neqsim-utility-balance-screening

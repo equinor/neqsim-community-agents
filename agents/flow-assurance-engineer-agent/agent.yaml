@@ -1,4 +1,5 @@
 name: flow-assurance-engineer-agent
+agent_type: community-coordinator
 description: Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines.
 required_skills:
 - neqsim-hydrate-margin-check

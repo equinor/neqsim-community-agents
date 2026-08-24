@@ -1,4 +1,5 @@
 name: compressor-antisurge-agent
+agent_type: community-agent
 description: Helps set up anti-surge recycle control for a centrifugal compressor in NeqSim, including compressor chart generation, steady-state recycle initialization, dynamic AntiSurgeController use, and CompressorAntiSurgeApplication topology binding for hot/cold recycle valves and speed runback.
 required_skills:
 - neqsim-compressor-antisurge-recycle

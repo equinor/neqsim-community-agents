@@ -4,7 +4,7 @@ agent_type: community-agent
 required_skills:
 - neqsim-cfd-coupling
 coordinated_agents:
-- flow-assurance-agent
+- flow-assurance-engineer-agent
 - fem-coupling-agent
 supported_domains:
 - cfd

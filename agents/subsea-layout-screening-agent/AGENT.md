@@ -106,7 +106,7 @@ The screening produced by this agent maps to validated, rigorous NeqSim Java fun
 - `neqsim.process.equipment.pipeline.PipeBeggsAndBrills` — multiphase pressure and temperature along a route from an elevation profile.
 - The NeqSim MCP `runPipeline` and `runFlowAssurance` tools for arrival-condition and hydrate screening along the route.
 
-In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`). For governed, live layout extraction and reservoir-to-facility routing from controlled engineering sources, the enterprise `enterprise-well-production-routing` skill is the counterpart. This agent is a companion to the `tie-in-screening-agent`.
+In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`). For governed, live layout extraction and reservoir-to-facility routing from controlled engineering sources, use the corresponding enterprise catalog workflow. This agent is a companion to the `tie-in-screening-agent`.
 
 # References
 

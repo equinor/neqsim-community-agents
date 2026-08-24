@@ -1,4 +1,5 @@
 name: gas-turbine-screening-agent
+agent_type: community-agent
 description: Screens gas-turbine driver site-rating, heat rate, and exhaust conditions using public, educational methods.
 required_skills:
 - neqsim-gas-turbine-performance-screening
