@@ -67,6 +67,10 @@ EXPECTED_AGENTS = {
         "neqsim-line-velocity-check",
         "neqsim-compressor-operating-window-check",
     ],
+    "noise-assessment-agent": [
+        "neqsim-noise-screening",
+        "neqsim-acoustic-induced-vibration-screening",
+    ],
     "compressor-antisurge-agent": [
         "neqsim-compressor-antisurge-recycle",
     ],

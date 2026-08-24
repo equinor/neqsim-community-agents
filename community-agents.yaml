@@ -581,6 +581,20 @@ agents:
       - vibration-screening
       - standards-compliance
 
+  - name: noise-assessment-agent
+    version: "0.1.0"
+    description: "Assesses gas-valve and restriction noise from current measurements or process data, routes detailed source prediction to NeqSim IEC 60534-8-3, and keeps workplace noise and AIV decisions separate."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/noise-assessment-agent/AGENT.md"
+    required_skills:
+      - neqsim-noise-screening
+      - neqsim-acoustic-induced-vibration-screening
+    supported_domains:
+      - acoustic-engineering
+      - occupational-noise
+      - process-engineering
+      - vibration-screening
+
   - name: utilities-screening-agent
     version: "0.1.0"
     description: "Screens instrument air, fuel-gas Wobbe, and cooling-water balances using public, educational methods."

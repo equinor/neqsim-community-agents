@@ -1,0 +1,27 @@
+name: noise-assessment-agent
+description: Assesses gas-valve and restriction noise from current measurements or process data, routes detailed source prediction to NeqSim IEC 60534-8-3, and keeps workplace noise and AIV decisions separate.
+required_skills:
+- neqsim-noise-screening
+- neqsim-acoustic-induced-vibration-screening
+supported_domains:
+- process-engineering
+- acoustic-engineering
+- occupational-noise
+- vibration-screening
+inputs:
+- source_and_operating_state
+- process_conditions_and_fluid_properties
+- valve_and_downstream_pipe_data
+- receiver_location_and_propagation_context
+- measured_level_method_and_uncertainty
+- project_and_jurisdiction_criteria
+outputs:
+- operating_and_evidence_basis
+- source_or_receiver_noise_assessment
+- uncertainty_and_data_gaps
+- standards_method_mapping
+- detailed_prediction_escalation
+- separate_aiv_handoff
+- recommendations_and_review_status
+human_review_required: true
+version: 0.1.0
