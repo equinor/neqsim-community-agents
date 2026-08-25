@@ -40,6 +40,11 @@ and enterprise agent repositories. It performs three families of checks:
    flagged, and the legacy ``referenced_skills`` field is flagged as deprecated
    in favour of ``context_skills``.
 
+5. Python-runtime consistency. Runtime instruction surfaces must not launch
+    bare Python tools, select/create/activate an interpreter environment, or
+    direct fallback to a different interpreter. The shared Harness policy owns
+    interpreter selection and defaults to the shared NeqSim environment.
+
 Exit codes:
     0 - all checks pass (warnings allowed)
     1 - one or more errors found
@@ -78,6 +83,21 @@ AGENT_ID_IN_TEXT_RE = re.compile(
 ORCHESTRATION_TYPES = ("community-coordinator", "enterprise-coordinator", "enterprise-orchestrator")
 SIBLING_COMMUNITY_ENV = "NEQSIM_COMMUNITY_AGENTS_DIR"
 SIBLING_ENTERPRISE_ENV = "NEQSIM_ENTERPRISE_AGENTS_DIR"
+RUNTIME_INSTRUCTION_GLOBS = ("AGENT.md", "prompts/*.md", "workflows/*.md")
+BARE_PYTHON_LAUNCH_RE = re.compile(
+    r"(?<![A-Za-z0-9_./\\-])(python(?:\.exe)?|py|pip|pytest)\s+"
+    r"(?:-m\s+)?[A-Za-z0-9_.\"'<]"
+)
+PYTHON_ENV_CONFLICT_RE = re.compile(
+    r"(?:select (?:a |another |the )?(?:python )?interpreter|"
+    r"(?:create|activate) (?:a |the )?(?:new |per-agent )?"
+    r"(?:virtual environment|venv)|"
+    r"fall back to (?:the )?(?:system|another|different) (?:python|interpreter))",
+    re.IGNORECASE,
+)
+NEGATED_RUNTIME_DIRECTIVE_RE = re.compile(
+    r"\b(?:do not|don't|never|must not|without)\b", re.IGNORECASE
+)
 
 
 def repo_root_from_script():
@@ -293,6 +313,39 @@ def check_agent_md_agents(manifest_dir, manifest, known_agents):
     return warnings
 
 
+def check_python_runtime_instructions(agent_dir):
+    """Return errors for agent instructions that conflict with shared Python runtime policy."""
+    errors = []
+    paths = []
+    for pattern in RUNTIME_INSTRUCTION_GLOBS:
+        paths.extend(agent_dir.glob(pattern))
+    for path in sorted(set(paths)):
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            continue
+        for line_number, line in enumerate(lines, start=1):
+            context = " ".join(lines[max(0, line_number - 4) : line_number])
+            if NEGATED_RUNTIME_DIRECTIVE_RE.search(context):
+                continue
+            bare_match = BARE_PYTHON_LAUNCH_RE.search(line)
+            conflict_match = PYTHON_ENV_CONFLICT_RE.search(line)
+            if bare_match:
+                errors.append(
+                    "{}:{} uses bare '{}' launcher; use the parent-selected absolute "
+                    "executable or sys.executable".format(
+                        path.relative_to(agent_dir), line_number, bare_match.group(1)
+                    )
+                )
+            elif conflict_match:
+                errors.append(
+                    "{}:{} conflicts with the shared Python runtime policy: '{}'".format(
+                        path.relative_to(agent_dir), line_number, conflict_match.group(0)
+                    )
+                )
+    return errors
+
+
 def discover_community_agent_names(repo_root):
     """Return the set of agent ids defined in the community agents catalog."""
     names = set()
@@ -433,6 +486,9 @@ def validate_repo(repo_root):
 
         for warn in check_agent_md_agents(manifest_path.parent, manifest, known_agents):
             all_warnings.append("[{}] {}".format(name, warn))
+
+        for err in check_python_runtime_instructions(manifest_path.parent):
+            all_errors.append("[{}] {}".format(name, err))
 
         ext_errors, ext_warnings = check_extends(manifest, bases)
         all_errors.extend("[{}] {}".format(name, e) for e in ext_errors)

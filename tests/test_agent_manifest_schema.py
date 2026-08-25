@@ -9,6 +9,7 @@ alongside this one.
 
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -62,6 +63,27 @@ class AgentManifestSchemaTests(unittest.TestCase):
         errors, warnings = validator.check_extends(manifest, {})
         self.assertEqual(errors, [])
         self.assertTrue(warnings)
+
+    def test_python_runtime_conflicts_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            agent_dir = Path(temp_dir)
+            (agent_dir / "AGENT.md").write_text(
+                "Run `python task.py`.\nCreate a virtual environment first.\n",
+                encoding="utf-8",
+            )
+            errors = validator.check_python_runtime_instructions(agent_dir)
+        self.assertEqual(len(errors), 2)
+
+    def test_compliant_python_runtime_policy_is_accepted(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            agent_dir = Path(temp_dir)
+            (agent_dir / "AGENT.md").write_text(
+                "Use C:\\appl\\neqsim-venv\\Scripts\\python.exe or sys.executable. "
+                "Never invoke bare python or activate a per-agent environment.\n",
+                encoding="utf-8",
+            )
+            errors = validator.check_python_runtime_instructions(agent_dir)
+        self.assertEqual(errors, [])
 
     def test_vendored_schema_matches_core_canonical_when_present(self):
         canonical = (

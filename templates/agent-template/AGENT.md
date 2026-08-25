@@ -26,6 +26,10 @@ List expected outputs, reports, examples, checklists, and validation material.
 
 Describe the reproducible workflow steps.
 
+# Python Runtime
+
+Reuse the Python interpreter explicitly selected by the user or parent workflow. If none was selected, use `C:\appl\neqsim-venv\Scripts\python.exe`. Launch child Python processes with that same absolute executable or `sys.executable`. Do not open interpreter selection, invoke bare `python`/`py`/`pip`/`pytest`, create or activate a per-agent environment, or silently fall back to another interpreter.
+
 # Required Skills
 
 List required NeqSim Community Skills and catalog mappings when available.
