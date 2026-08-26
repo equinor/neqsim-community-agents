@@ -32,13 +32,15 @@ and enterprise agent repositories. It performs three families of checks:
    catalog, an agent that shares its ``name`` with a community agent but does
    not declare ``extends`` is flagged as a probable divergent fork (it should
    either use an ``enterprise-*`` id or declare ``extends``). Orchestration
-   edges are checked too: ids in ``coordinated_agents`` are existence-checked
-   against the catalogs (self-reference is an error), an agent whose
+    edges are checked too: ids in ``coordinated_agents`` and sender ids in typed
+    ``inbound_handoffs`` are existence-checked against the catalogs
+    (self-reference is an error), an agent whose
    ``agent_type`` is a coordinator/orchestrator but that declares no
    ``coordinated_agents`` is flagged, a missing ``agent_type`` is flagged, any
-   known agent named in ``AGENT.md`` prose but not in ``coordinated_agents`` is
-   flagged, and the legacy ``referenced_skills`` field is flagged as deprecated
-   in favour of ``context_skills``.
+    known agent named in ``AGENT.md`` prose but not in ``coordinated_agents``,
+    ``inbound_handoffs``, or ``extends`` is flagged, and the legacy
+    ``referenced_skills`` field is flagged as deprecated in favour of
+    ``context_skills``.
 
 5. Python-runtime consistency. Runtime instruction surfaces must not launch
     bare Python tools, select/create/activate an interpreter environment, or
@@ -137,6 +139,18 @@ def minimal_structural_check(manifest, schema):
             errors.append("extends must be an object with 'agent' and 'repo'")
         elif extends.get("repo") not in props["extends"]["properties"]["repo"]["enum"]:
             errors.append("extends.repo '{}' is not a valid catalog".format(extends.get("repo")))
+    inbound_handoffs = manifest.get("inbound_handoffs")
+    if inbound_handoffs is not None:
+        if not isinstance(inbound_handoffs, list):
+            errors.append("inbound_handoffs must be an array")
+        else:
+            for handoff in inbound_handoffs:
+                if not isinstance(handoff, dict) or not all(
+                    key in handoff for key in ("agent", "schema", "purpose")
+                ):
+                    errors.append(
+                        "inbound_handoffs entries must contain agent, schema, and purpose"
+                    )
     return errors
 
 
@@ -285,11 +299,12 @@ def check_agent_md_skills(manifest_dir, manifest, bases, known_skills):
 
 
 def check_agent_md_agents(manifest_dir, manifest, known_agents):
-    """Warn when AGENT.md names a known agent the manifest does not coordinate.
+    """Warn when AGENT.md names a known agent with no declared relationship.
 
-    Delegation to another agent that lives only in AGENT.md prose (or an
-    @mention table) is invisible to the orchestration graph. Only agent ids that
-    exist in a known catalog are flagged, and the agent's own id is ignored.
+    Delegation and inbound provenance that live only in prose are invisible to
+    the orchestration graph. Accept outbound ``coordinated_agents``, typed
+    ``inbound_handoffs``, and the base linked through ``extends`` as distinct
+    machine-readable relationships.
     """
     warnings = []
     if not known_agents:
@@ -303,12 +318,21 @@ def check_agent_md_agents(manifest_dir, manifest, known_agents):
         return warnings
     own = manifest.get("name")
     declared = set(manifest.get("coordinated_agents") or [])
+    declared.update(
+        handoff.get("agent")
+        for handoff in manifest.get("inbound_handoffs") or []
+        if isinstance(handoff, dict) and handoff.get("agent")
+    )
+    extends = manifest.get("extends")
+    if isinstance(extends, dict) and extends.get("agent"):
+        declared.add(extends["agent"])
     mentioned = {m.group(1) for m in AGENT_ID_IN_TEXT_RE.finditer(text)}
     for agent in sorted(mentioned - declared):
         if agent != own and agent in known_agents:
             warnings.append(
-                "AGENT.md names agent '{}' but it is not in coordinated_agents "
-                "(declare it so the orchestration graph is machine-checkable)".format(agent)
+                "AGENT.md names agent '{}' but no coordinated_agents, inbound_handoffs, "
+                "or extends relationship declares it (declare the relationship so the "
+                "orchestration graph is machine-checkable)".format(agent)
             )
     return warnings
 
@@ -388,6 +412,24 @@ def check_extends(manifest, bases):
     return errors, warnings
 
 
+def check_inbound_handoffs(manifest, known_agents):
+    """Return errors and warnings for receiver-declared inbound handoffs."""
+    errors, warnings = [], []
+    name = manifest.get("name")
+    for handoff in manifest.get("inbound_handoffs") or []:
+        if not isinstance(handoff, dict):
+            continue
+        sender = handoff.get("agent")
+        if sender == name:
+            errors.append("inbound_handoffs lists itself")
+        elif sender and known_agents and sender not in known_agents:
+            warnings.append(
+                "inbound handoff agent '{}' not found in known agent catalogs "
+                "(typo or missing agent?)".format(sender)
+            )
+    return errors, warnings
+
+
 def validate_repo(repo_root):
     schema, schema_path = load_schema(repo_root)
     if schema is None:
@@ -463,6 +505,10 @@ def validate_repo(repo_root):
                     "[{}] coordinated agent '{}' not found in known agent catalogs "
                     "(typo or missing agent?)".format(name, other)
                 )
+
+        inbound_errors, inbound_warnings = check_inbound_handoffs(manifest, known_agents)
+        all_errors.extend("[{}] {}".format(name, error) for error in inbound_errors)
+        all_warnings.extend("[{}] {}".format(name, warning) for warning in inbound_warnings)
 
         agent_type = manifest.get("agent_type")
         if agent_type in ORCHESTRATION_TYPES and not coordinated:

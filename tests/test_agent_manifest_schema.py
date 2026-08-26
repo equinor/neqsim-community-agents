@@ -85,6 +85,97 @@ class AgentManifestSchemaTests(unittest.TestCase):
             errors = validator.check_python_runtime_instructions(agent_dir)
         self.assertEqual(errors, [])
 
+    def test_typed_inbound_handoff_conforms_to_schema(self):
+        schema, _path = validator.load_schema(REPO_ROOT)
+        manifest = {
+            "name": "receiver-agent",
+            "description": "Receives a typed task-basis handoff.",
+            "version": "0.1.0",
+            "required_skills": [],
+            "supported_domains": ["testing"],
+            "inputs": ["test task basis"],
+            "outputs": ["validated handoff"],
+            "human_review_required": True,
+            "inbound_handoffs": [
+                {
+                    "agent": "sender-agent",
+                    "schema": "test_handoff.v1",
+                    "purpose": "Preserve test provenance while ownership transfers.",
+                }
+            ],
+        }
+        self.assertEqual(validator.validate_against_schema(manifest, schema), [])
+
+    def test_malformed_inbound_handoff_fails_schema_validation(self):
+        schema, _path = validator.load_schema(REPO_ROOT)
+        manifest = {
+            "name": "receiver-agent",
+            "description": "Receives a test handoff.",
+            "version": "0.1.0",
+            "required_skills": [],
+            "supported_domains": ["testing"],
+            "inbound_handoffs": [
+                {"agent": "sender-agent", "schema": "test_handoff.v1"}
+            ],
+        }
+        errors = validator.validate_against_schema(manifest, schema)
+        self.assertTrue(any("purpose" in error for error in errors))
+
+    def test_inbound_handoff_sender_checks(self):
+        self_errors, self_warnings = validator.check_inbound_handoffs(
+            {
+                "name": "receiver-agent",
+                "inbound_handoffs": [
+                    {
+                        "agent": "receiver-agent",
+                        "schema": "test_handoff.v1",
+                        "purpose": "Test self-reference rejection.",
+                    }
+                ],
+            },
+            {"receiver-agent"},
+        )
+        self.assertTrue(self_errors)
+        self.assertEqual(self_warnings, [])
+
+        errors, warnings = validator.check_inbound_handoffs(
+            {
+                "name": "receiver-agent",
+                "inbound_handoffs": [
+                    {
+                        "agent": "missing-agent",
+                        "schema": "test_handoff.v1",
+                        "purpose": "Test unresolved sender warning.",
+                    }
+                ],
+            },
+            {"receiver-agent"},
+        )
+        self.assertEqual(errors, [])
+        self.assertTrue(warnings)
+
+    def test_inbound_agent_prose_reference_is_declared(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            agent_dir = Path(temp_dir)
+            (agent_dir / "AGENT.md").write_text(
+                "Accept a task basis from `sender-agent`.", encoding="utf-8"
+            )
+            warnings = validator.check_agent_md_agents(
+                agent_dir,
+                {
+                    "name": "receiver-agent",
+                    "inbound_handoffs": [
+                        {
+                            "agent": "sender-agent",
+                            "schema": "test_handoff.v1",
+                            "purpose": "Preserve test provenance while ownership transfers.",
+                        }
+                    ],
+                },
+                {"sender-agent", "receiver-agent"},
+            )
+        self.assertEqual(warnings, [])
+
     def test_vendored_schema_matches_core_canonical_when_present(self):
         canonical = (
             REPO_ROOT.parent
