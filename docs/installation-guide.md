@@ -11,7 +11,7 @@ screen, organize, calculate, and draft — they do not replace engineering judge
 
 ## 1. What you are installing
 
-Community agents and skills build on the NeqSim library and live in two public
+Community agents and skills build on the NeqSim library and live in three public
 repositories:
 
 | Repository | What it holds |
@@ -37,18 +37,20 @@ Higher layers may use lower ones; never the reverse.
 Install these tools (the ones referenced in the *Tools used in this workflow* slide):
 
 - **GitHub account.**
-- **GitHub Copilot** subscription with access to a modern LLM (e.g. GPT‑5.x,
-  Claude 4.x, or Gemini 3).
+- **GitHub Copilot** subscription.
 - **[Visual Studio Code](https://code.visualstudio.com/)** with the **GitHub
   Copilot** and **GitHub Copilot Chat** extensions.
   - Cloud alternative: **GitHub Codespaces** (no local install needed).
 - When working locally, also install:
   - **[Git](https://git-scm.com/downloads)**
   - **[Python 3.8+](https://www.python.org/downloads/)** (check *Add python.exe to PATH*)
-  - **[Java (JDK)](https://adoptium.net/)** — required to run NeqSim
-  - **[Maven](https://maven.apache.org/download.cgi)** — for building NeqSim from source
+  - **[Java (JDK)](https://adoptium.net/)** — required for NeqSim calculations and builds
 
-> **Tip:** A Python virtual environment avoids most PATH problems (see Troubleshooting).
+You do **not** need to install Maven separately. The NeqSim repository includes
+the Maven Wrapper (`mvnw` / `mvnw.cmd`).
+
+> **Tip:** A Python virtual environment keeps the CLI isolated and avoids most
+> PATH problems. The commands below create one inside the cloned repository.
 
 ---
 
@@ -61,6 +63,8 @@ Run these from a VS Code terminal (PowerShell) or `cmd.exe`.
 ```powershell
 git clone https://github.com/equinor/neqsim
 cd neqsim
+py -3 -m venv .venv
+\.\.venv\Scripts\Activate.ps1
 .\install.cmd
 ```
 
@@ -76,20 +80,24 @@ Verify the CLI:
 
 ```powershell
 neqsim --help
+neqsim doctor
 ```
 
-If `neqsim` is still not found, use `python -m neqsim_cli --help` and see Troubleshooting.
+`neqsim doctor` should finish with all required checks passing. If `neqsim` is
+still not found, use `python -m neqsim_cli --help` from the activated environment
+and see Troubleshooting.
 
 ### 3.2 Install the community agents into VS Code
 
-The public community catalog is used by default — no login or private catalog
-registration is required.
+The public community catalog requires no login or private catalog registration.
+Select it explicitly so previously registered private catalogs cannot affect this
+public installation:
 
 ```powershell
-neqsim agent install --all --vscode --force
+neqsim agent install --all --source community --vscode --force
 ```
 
-- `--all` installs all community agents.
+- `--all --source community` installs all agents in the public community catalog.
 - `--vscode` exports them so they appear in **GitHub Copilot Chat**.
 - Installing an agent **automatically installs the skills** it declares in
   `required_skills` — so a separate skill-install step is not needed for the
@@ -105,6 +113,16 @@ neqsim agent install <name> --vscode    # install a single agent
 neqsim skill install <name> --vscode    # install a single skill (standalone)
 ```
 
+Verify the exported agents and their required skills:
+
+```powershell
+neqsim agent doctor --target vscode --source community
+```
+
+Success means the install command exits with code `0` and doctor reports
+`Result: PASS`. Do not use a fixed expected agent count: the public catalog grows
+over time.
+
 ---
 
 ## 4. macOS / Linux equivalents
@@ -112,10 +130,14 @@ neqsim skill install <name> --vscode    # install a single skill (standalone)
 ```bash
 git clone https://github.com/equinor/neqsim
 cd neqsim
+python3 -m venv .venv
+source .venv/bin/activate
 ./install.sh
 # restart the terminal so `neqsim` is on PATH
 
-neqsim agent install --all --vscode --force
+neqsim doctor
+neqsim agent install --all --source community --vscode --force
+neqsim agent doctor --target vscode --source community
 ```
 
 ---
@@ -124,17 +146,19 @@ neqsim agent install --all --vscode --force
 
 1. Open the **Copilot Chat** panel in VS Code.
 2. Type `@` to see installed agents, or reference one directly, for example:
-   - `@solve.task` — end-to-end engineering task solving with a report
-   - `@thermo.fluid` — build thermodynamic fluids and phase envelopes
-   - `@process.model` — build and run process simulations
-   - `@flow.assurance` — hydrate / wax / corrosion / pipeline screening
-   - `@pvt.simulation` — PVT lab tests (CME, CVD, separator tests)
+  - `@pvt-agent` — fluid characterization and phase-behavior guidance
+  - `@process-engineer-agent` — early process-engineering screening
+  - `@flow-assurance-engineer-agent` — hydrate and wax margin screening
+  - `@process-safety-agent` — relief and depressurization screening
+  - `@asset-economics-agent` — concept-level cost and value screening
 3. Describe your task in plain language. The agent selects the right skills,
    runs NeqSim calculations, and produces a draft for your review.
 
 For agentic task-solving (task folders, notebooks, reports), the NeqSim code repo
 provides the full workflow — see `AGENTS.md` and
-`docs/development/TASK_SOLVING_GUIDE.md` in the cloned repo.
+`docs/development/TASK_SOLVING_GUIDE.md` in the cloned repo. Workspace-local core
+agents such as `@solve.task` are available when that NeqSim workspace is open;
+they are distinct from the globally exported community agents listed above.
 
 ---
 
@@ -144,7 +168,8 @@ provides the full workflow — see `AGENTS.md` and
 cd neqsim
 git pull
 .\install.cmd                       # refresh devtools if updated
-neqsim agent install --all --vscode --force   # re-export latest agents + skills
+neqsim agent install --all --source community --vscode --force
+neqsim agent doctor --target vscode --source community
 ```
 
 ---
@@ -153,11 +178,12 @@ neqsim agent install --all --vscode --force   # re-export latest agents + skills
 
 | Symptom | Fix |
 |---------|-----|
-| `neqsim` not recognized in VS Code terminal | Fully **quit and reopen VS Code** (PATH is captured at launch). Or use `python -m neqsim_cli ...`. A Python virtualenv avoids this. |
+| `neqsim` not recognized in VS Code terminal | Activate `.venv`, then fully **quit and reopen VS Code** (PATH is captured at launch). Or use `python -m neqsim_cli ...`. |
 | `install.cmd` can't find Python | Install Python 3.8+ and check *Add python.exe to PATH*, then re-run. |
-| PowerShell blocks scripts (execution policy) | Use `install.cmd` (pure batch — no PowerShell needed). |
-| Agents not visible in Copilot | Re-run `neqsim agent install --all --vscode --force` and reload VS Code. |
-| Catalog location | Installed agents/skills live under `~/.neqsim/` (`%USERPROFILE%\.neqsim\` on Windows). |
+| PowerShell blocks `.venv` activation | Open `cmd.exe`, run `.venv\Scripts\activate.bat`, then run `install.cmd`. The installer itself is pure batch. |
+| Agent install exits with code `1` | Read the final `Failed agents:` line. Re-run with `--source community` to exclude registered private catalogs, then resolve any named community failure. |
+| Agents not visible in Copilot | Re-run `neqsim agent install --all --source community --vscode --force`, run `neqsim agent doctor --target vscode --source community`, then use **Developer: Reload Window** in VS Code. |
+| Installation and export locations | Internal packages live under `~/.neqsim/`. VS Code user exports live under `~/.copilot/agents/` and `~/.copilot/skills/` (`%USERPROFILE%` on Windows). |
 
 ---
 
