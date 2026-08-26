@@ -56,7 +56,8 @@ the Maven Wrapper (`mvnw` / `mvnw.cmd`).
 
 ## 3. Install (Windows, VS Code terminal)
 
-Run these from a VS Code terminal (PowerShell) or `cmd.exe`.
+Run these from a VS Code PowerShell terminal. If PowerShell blocks activation,
+use the `cmd.exe` fallback in Troubleshooting.
 
 ### 3.1 Clone NeqSim and run the installer
 
@@ -64,7 +65,7 @@ Run these from a VS Code terminal (PowerShell) or `cmd.exe`.
 git clone https://github.com/equinor/neqsim
 cd neqsim
 py -3 -m venv .venv
-\.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 .\install.cmd
 ```
 
@@ -72,11 +73,7 @@ py -3 -m venv .venv
 PowerShell script execution is blocked). It finds a working Python, installs the
 NeqSim **devtools** package, and puts the `neqsim` command on your PATH.
 
-**Restart your terminal now** — PATH changes only apply to newly opened terminals.
-In VS Code, fully **quit and reopen** VS Code (a new integrated terminal alone is
-not enough, because VS Code captures PATH at launch).
-
-Verify the CLI:
+Keep this virtual environment active and verify the CLI in the same terminal:
 
 ```powershell
 neqsim --help
@@ -133,7 +130,6 @@ cd neqsim
 python3 -m venv .venv
 source .venv/bin/activate
 ./install.sh
-# restart the terminal so `neqsim` is on PATH
 
 neqsim doctor
 neqsim agent install --all --source community --vscode --force
@@ -178,7 +174,7 @@ neqsim agent doctor --target vscode --source community
 
 | Symptom | Fix |
 |---------|-----|
-| `neqsim` not recognized in VS Code terminal | Activate `.venv`, then fully **quit and reopen VS Code** (PATH is captured at launch). Or use `python -m neqsim_cli ...`. |
+| `neqsim` not recognized in VS Code terminal | Activate `.venv` and retry. If you installed outside a virtual environment, fully **quit and reopen VS Code** because PATH is captured at launch. You can always use `python -m neqsim_cli ...`. |
 | `install.cmd` can't find Python | Install Python 3.8+ and check *Add python.exe to PATH*, then re-run. |
 | PowerShell blocks `.venv` activation | Open `cmd.exe`, run `.venv\Scripts\activate.bat`, then run `install.cmd`. The installer itself is pure batch. |
 | Agent install exits with code `1` | Read the final `Failed agents:` line. Re-run with `--source community` to exclude registered private catalogs, then resolve any named community failure. |
