@@ -140,6 +140,8 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 
 ## Initial Example Agents
 
+> 📖 **Looking for the full picture?** [docs/agent-catalog.md](docs/agent-catalog.md) describes **all 48 agents** grouped by discipline and the multi-agent workflows that chain them together — read it as documentation, no need to open individual agent files.
+
 | Agent | Purpose | Required skills |
 | --- | --- | --- |
 | [PVT Agent](agents/pvt-agent/README.md) | Fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis | `neqsim-fluid-quality-check` |
