@@ -85,6 +85,16 @@ class AgentManifestSchemaTests(unittest.TestCase):
             errors = validator.check_python_runtime_instructions(agent_dir)
         self.assertEqual(errors, [])
 
+    def test_python_environment_setup_tools_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            agent_dir = Path(temp_dir)
+            (agent_dir / "AGENT.md").write_text(
+                "Call configure_python_environment before running the task.\n",
+                encoding="utf-8",
+            )
+            errors = validator.check_python_runtime_instructions(agent_dir)
+        self.assertEqual(len(errors), 1)
+
     def test_typed_inbound_handoff_conforms_to_schema(self):
         schema, _path = validator.load_schema(REPO_ROOT)
         manifest = {

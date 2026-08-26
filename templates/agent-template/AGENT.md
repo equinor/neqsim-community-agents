@@ -28,7 +28,7 @@ Describe the reproducible workflow steps.
 
 # Python Runtime
 
-Reuse the Python interpreter explicitly selected by the user or parent workflow. If none was selected, use `C:\appl\neqsim-venv\Scripts\python.exe`. Launch child Python processes with that same absolute executable or `sys.executable`. Do not open interpreter selection, invoke bare `python`/`py`/`pip`/`pytest`, create or activate a per-agent environment, or silently fall back to another interpreter.
+Treat `C:\appl\neqsim-venv\Scripts\python.exe` as already selected and configured. Launch child Python processes with that absolute executable or `sys.executable`. Never call Python environment configuration tools, open interpreter selection, ask the user to choose an environment, invoke bare `python`/`py`/`pip`/`pytest`, create or activate a per-agent environment, or silently fall back to another interpreter.
 
 # Required Skills
 

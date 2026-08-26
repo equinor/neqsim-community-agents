@@ -97,6 +97,11 @@ PYTHON_ENV_CONFLICT_RE = re.compile(
     r"fall back to (?:the )?(?:system|another|different) (?:python|interpreter))",
     re.IGNORECASE,
 )
+PYTHON_ENV_SETUP_TOOL_RE = re.compile(
+    r"(?:configure_python_environment|pylanceUpdatePythonEnvironment|"
+    r"Python:\s*Select Interpreter)",
+    re.IGNORECASE,
+)
 NEGATED_RUNTIME_DIRECTIVE_RE = re.compile(
     r"\b(?:do not|don't|never|must not|without)\b", re.IGNORECASE
 )
@@ -354,6 +359,7 @@ def check_python_runtime_instructions(agent_dir):
                 continue
             bare_match = BARE_PYTHON_LAUNCH_RE.search(line)
             conflict_match = PYTHON_ENV_CONFLICT_RE.search(line)
+            setup_tool_match = PYTHON_ENV_SETUP_TOOL_RE.search(line)
             if bare_match:
                 errors.append(
                     "{}:{} uses bare '{}' launcher; use the parent-selected absolute "
@@ -361,10 +367,11 @@ def check_python_runtime_instructions(agent_dir):
                         path.relative_to(agent_dir), line_number, bare_match.group(1)
                     )
                 )
-            elif conflict_match:
+            elif conflict_match or setup_tool_match:
+                matched_directive = conflict_match or setup_tool_match
                 errors.append(
                     "{}:{} conflicts with the shared Python runtime policy: '{}'".format(
-                        path.relative_to(agent_dir), line_number, conflict_match.group(0)
+                        path.relative_to(agent_dir), line_number, matched_directive.group(0)
                     )
                 )
     return errors
