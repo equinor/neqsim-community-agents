@@ -78,7 +78,8 @@ class AgentManifestSchemaTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             agent_dir = Path(temp_dir)
             (agent_dir / "AGENT.md").write_text(
-                "Use C:\\appl\\neqsim-venv\\Scripts\\python.exe or sys.executable. "
+                "Reuse the already-selected interpreter (active .venv, VS Code "
+                "selection, or NEQSIM_PYTHON) or sys.executable. "
                 "Never invoke bare python or activate a per-agent environment.\n",
                 encoding="utf-8",
             )
@@ -94,6 +95,26 @@ class AgentManifestSchemaTests(unittest.TestCase):
             )
             errors = validator.check_python_runtime_instructions(agent_dir)
         self.assertEqual(len(errors), 1)
+
+    def test_hardcoded_author_machine_path_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            agent_dir = Path(temp_dir)
+            (agent_dir / "AGENT.md").write_text(
+                "Use C:\\appl\\neqsim-venv\\Scripts\\python.exe or sys.executable.\n",
+                encoding="utf-8",
+            )
+            errors = validator.check_hardcoded_local_paths(agent_dir)
+        self.assertEqual(len(errors), 1)
+
+    def test_portable_path_wording_is_accepted(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            agent_dir = Path(temp_dir)
+            (agent_dir / "AGENT.md").write_text(
+                "Reuse the active .venv or NEQSIM_PYTHON, or sys.executable.\n",
+                encoding="utf-8",
+            )
+            errors = validator.check_hardcoded_local_paths(agent_dir)
+        self.assertEqual(errors, [])
 
     def test_typed_inbound_handoff_conforms_to_schema(self):
         schema, _path = validator.load_schema(REPO_ROOT)

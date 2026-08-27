@@ -1,0 +1,73 @@
+name: community-router-agent
+agent_type: community-coordinator
+description: Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself.
+version: 0.1.0
+required_skills: []
+coordinated_agents:
+- artificial-lift-agent
+- asset-economics-agent
+- cfd-coupling-agent
+- compressor-antisurge-agent
+- concept-selection-agent
+- debottlenecking-agent
+- dynamic-instrument-controller-agent
+- dynamic-process-preparation-agent
+- e300-fluid-agent
+- emissions-abatement-screening-agent
+- energy-emissions-agent
+- fem-coupling-agent
+- field-development-economics-agent
+- flow-assurance-engineer-agent
+- flow-assurance-study-agent
+- fluid-characterization-agent
+- gas-export-pipeline-agent
+- gas-lift-allocation-agent
+- gas-treatment-agent
+- gas-turbine-screening-agent
+- hydrate-screening-agent
+- ncs-production-analysis-agent
+- near-well-injectivity-agent
+- noise-assessment-agent
+- olga-simulation-agent
+- pipe-route-screening-agent
+- pipeline-survey-profile-agent
+- piping-integrity-agent
+- piping-mechanical-agent
+- process-engineer-agent
+- process-safety-agent
+- process-screening-agent
+- produced-water-scale-agent
+- production-optimization-agent
+- pvt-agent
+- reciprocating-compressor-agent
+- reservoir-forecasting-agent
+- reservoir-simulator-agent
+- reservoir-to-facility-screening-agent
+- resource-classification-agent
+- sand-erosion-agent
+- subsea-cooldown-agent
+- subsea-layout-screening-agent
+- surf-layout-design-agent
+- technical-document-intelligence-agent
+- teg-dehydration-agent
+- tie-in-screening-agent
+- utilities-screening-agent
+supported_domains:
+- request classification
+- community agent routing
+- multi-agent workflow composition
+- calculation-rigor selection
+- task scoping handoff
+inputs:
+- plain-language request or task description
+- available fluid, operating, or asset data (optional)
+- intended deliverable (screening answer, study, report)
+- required rigor (screening versus NeqSim-calculation-grade)
+outputs:
+- selected community agent(s) with rationale
+- suggested invocation and the inputs that agent needs
+- multi-agent workflow plan when the task spans disciplines
+- calculation-basis note (screening versus NeqSim-backed)
+- human-review and follow-up-study notes
+human_review_required: true
+trust_level: community

@@ -377,6 +377,41 @@ def check_python_runtime_instructions(agent_dir):
     return errors
 
 
+HARDCODED_LOCAL_PATH_RE = re.compile(
+    r"[A-Za-z]:[\\/](?:Users|home|appl)[\\/]", re.IGNORECASE
+)
+
+
+def check_hardcoded_local_paths(agent_dir):
+    """Return errors for absolute local machine paths baked into shipped agent text.
+
+    AGENT.md/prompts/workflows are copied verbatim into every user's install
+    directory by ``neqsim agent install``, so an absolute path such as
+    ``C:\\Users\\<name>\\...`` or ``C:\\appl\\...`` that only exists on the
+    author's machine breaks the agent for everyone else.
+    """
+    errors = []
+    paths = []
+    for pattern in RUNTIME_INSTRUCTION_GLOBS:
+        paths.extend(agent_dir.glob(pattern))
+    for path in sorted(set(paths)):
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            continue
+        for line_number, line in enumerate(lines, start=1):
+            match = HARDCODED_LOCAL_PATH_RE.search(line)
+            if match:
+                errors.append(
+                    "{}:{} hardcodes an author-machine path '{}'; describe the "
+                    "runtime portably (active venv, sys.executable, or an env "
+                    "var) instead of a literal local path".format(
+                        path.relative_to(agent_dir), line_number, match.group(0)
+                    )
+                )
+    return errors
+
+
 def discover_community_agent_names(repo_root):
     """Return the set of agent ids defined in the community agents catalog."""
     names = set()
@@ -541,6 +576,9 @@ def validate_repo(repo_root):
             all_warnings.append("[{}] {}".format(name, warn))
 
         for err in check_python_runtime_instructions(manifest_path.parent):
+            all_errors.append("[{}] {}".format(name, err))
+
+        for err in check_hardcoded_local_paths(manifest_path.parent):
             all_errors.append("[{}] {}".format(name, err))
 
         ext_errors, ext_warnings = check_extends(manifest, bases)

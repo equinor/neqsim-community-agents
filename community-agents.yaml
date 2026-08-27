@@ -683,6 +683,19 @@ agents:
       - asset-economics
       - screening
 
+  - name: community-router-agent
+    version: "0.1.0"
+    description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/community-router-agent/AGENT.md"
+    folder: "agents/community-router-agent"
+    required_skills: []
+    supported_domains:
+      - request-classification
+      - community-agent-routing
+      - multi-agent-workflow-composition
+      - task-scoping
+
   - name: resource-classification-agent
     version: "0.1.0"
     description: "Classifies petroleum resources on the public SODIR RC0-RC9 maturity ladder and SPE-PRMS category axis without confusing maturity with quantity uncertainty, and records evidence gaps and transitions for human review."

@@ -99,7 +99,9 @@ neqsim agent install --all --source community --vscode --force
 - Installing an agent **automatically installs the skills** it declares in
   `required_skills` — so a separate skill-install step is not needed for the
   agent workflow.
-- `--force` overwrites existing exports (safe to re-run after updates).
+- `--force` reinstalls each agent **and** each required skill from the catalog
+  (not just re-exporting the existing copy), then re-exports both — safe to
+  re-run after a catalog update.
 
 Browse and install individually:
 

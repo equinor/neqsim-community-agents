@@ -8,6 +8,9 @@ required_skills:
 - neqsim-flare-radiation-screening
 - neqsim-psv-orifice-screening
 - neqsim-safety-function-coverage-screening
+context_skills:
+- neqsim-gas-dispersion-distance-screening
+- neqsim-jet-fire-radiation-screening
 supported_domains:
 - process-safety
 - relief-screening
