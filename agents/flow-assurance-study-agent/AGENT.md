@@ -87,6 +87,16 @@ Typical outputs include:
    EOS/PVT range. Ask `pipe-route-screening-agent` to normalize route, elevation,
    diameter, roughness, wall, insulation, ambient, and boundary-condition data.
    Version the resulting basis before running cases.
+   **Pin the operating point to the line itself, not to a convenient upstream
+   measurement.** A well flowline sits downstream of the choke, so its pressure is
+   the receiving manifold/separator pressure; the reported "wellhead pressure"
+   overstates it and makes the gas too dense. Where measured data exists, take the
+   after-choke pressure, identify the receiving vessel by matching it against the
+   separator pressures, and check the trend for well-test routings, which run at a
+   different pressure and are often the governing case. Derive the line temperature
+   by an isenthalpic flash across the choke if no transmitter exists. A wrong
+   operating pressure invalidates every velocity, hold-up and transport result
+   afterwards, and no amount of model sophistication recovers it.
 4. **Build the scenario matrix.** For every case state the engineering question,
    changed inputs, fixed inputs, expected outputs, simulator, acceptance criterion,
    and escalation trigger. Include at least a base case and two discriminating
