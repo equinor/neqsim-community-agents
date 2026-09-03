@@ -17,6 +17,7 @@
       "neqsim-autonomous-investigation",
       "neqsim-capability-map",
       "neqsim-ccs-hydrogen",
+      "neqsim-compressor-antisurge-recycle",
       "neqsim-consequence-analysis",
       "neqsim-controllability-operability",
       "neqsim-depressurization-mdmt",
