@@ -1,7 +1,7 @@
 ---
 name: reservoir-simulator-agent
-description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow.
-version: 0.1.0
+description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, and models that must be sized backwards from a mandated production profile.
+version: 0.2.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
@@ -13,11 +13,13 @@ context_skills:
 - neqsim-pseudocomponent-split-characterization
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
+- neqsim-near-well-and-injectivity
 coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-to-facility-screening-agent
 - fluid-characterization-agent
 - asset-economics-agent
+- near-well-injectivity-agent
 ---
 
 # Purpose
@@ -165,6 +167,35 @@ Loaded as context when the task calls for them:
 - `pseudocomponent-split-characterization` mapped to community catalog ID `neqsim-pseudocomponent-split-characterization`
 - `production-network-routing` mapped to community catalog ID `neqsim-production-network-routing`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
+- `near-well-and-injectivity` mapped to community catalog ID `neqsim-near-well-and-injectivity`
+
+# Two cases that need the near-well-and-injectivity skill
+
+Load `neqsim-near-well-and-injectivity` before building a deck whenever either
+applies. Both change the model type, not just its parameters.
+
+**The fluid is a gas condensate.** Compute the liquid dropout curve at reservoir
+temperature before choosing a PVT formulation. More than roughly 2-3 vol% peak
+retrograde dropout and a dry-gas or standard black-oil model is indefensible:
+liquid drops out in the reservoir, is left behind below the critical condensate
+saturation, and cuts gas relative permeability around the wells. The skill
+carries the vaporised-oil (`VAPOIL` / `PVTG` / `PVDO`) recipe and the EQUIL
+contact trap that otherwise leaves the gas producers with no mobility.
+`BlackOilConverter.Result` now reports `saturationPressure` and
+`retrogradeCondensate`, so the fluid type can be read off directly rather than
+assumed - note that the older `bubblePoint` field is meaningless for a
+condensate.
+
+**The recoverable volume is an input rather than a result.** When a mandated
+production profile must be reproduced, the usual workflow inverts and the
+geometry is sized backwards from the volume, with net-to-gross as the closing
+free parameter. Two rules then apply:
+
+- Say plainly in the deliverable that **the volume is an input and the model
+  cannot defend it**. The model tests deliverability, not resource size.
+- Read the well count and phasing off the profile - step changes in the annual
+  rate are wells coming on. If those steps reproduce a published development
+  description, that is corroboration rather than a fitted parameter.
 
 # Example Usage
 

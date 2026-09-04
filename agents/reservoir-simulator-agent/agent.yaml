@@ -1,5 +1,5 @@
 name: reservoir-simulator-agent
-description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow.
+description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, and models that must be sized backwards from a mandated production profile.
 required_skills:
 - neqsim-reservoir-model-builder
 - neqsim-norwegian-continental-shelf-data
@@ -45,5 +45,6 @@ coordinated_agents:
 - reservoir-to-facility-screening-agent
 - fluid-characterization-agent
 - asset-economics-agent
+- near-well-injectivity-agent
 human_review_required: true
-version: 0.1.0
+version: 0.2.0
