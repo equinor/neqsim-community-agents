@@ -217,15 +217,36 @@ Plan the open bathymetry and Sodir FactMaps requests I would need to replace the
 The layout produced by this agent maps to validated, rigorous NeqSim Java
 functionality that a qualified engineer should use for design-grade work:
 
-- `neqsim.process.equipment.pipeline.PipeBeggsAndBrills` — flowline and riser
-  hydraulics on the routed segments.
-- `neqsim.process.equipment.reservoir.WellFlow` — inflow performance at each
-  tree.
+- `neqsim.process.equipment.pipeline.TwoFluidPipe` — mechanistic two-fluid
+  hydraulics on the routed segments. Prefer it over `PipeBeggsAndBrills` for a
+  wellstream or wet-gas tie-back, where the Beggs & Brill friction multiplier is
+  extrapolated below its calibration range and over-predicts pressure drop.
+  Assert `isSteadyStateConverged()` and `getSteadyStateIterationsUsed() > 1`.
+- `neqsim.process.equipment.pipeline.RouteProfile` — converts a bathymetric
+  survey into the mesh either pipe model needs, and reports the low points where
+  liquid collects.
+- `neqsim.process.equipment.pipeline.PipeBeggsAndBrills` — correlation check.
+  `CalculationMode.CALCULATE_INLET_PRESSURE` answers the tie-back question
+  directly: what inlet pressure does the host's arrival pressure demand?
+- `neqsim.process.mechanicaldesign.subsea.FlowlineSizeSelector` — API RP 14E size
+  selection, evaluated at the arrival condition where the mixture is least dense.
 - `neqsim.process.equipment.subsea.SubseaWell` and `SubseaTree` — subsea
-  equipment models.
+  equipment models. `calculateShutInWellheadPressure` gives the static-column
+  pressure that sets the flowline design pressure.
+- `neqsim.process.mechanicaldesign.subsea.TiebackThermalDesign` — sweeps wall
+  thickness against insulation together, since the steel is part of the cooldown
+  thermal mass and a thinner wall needs more insulation.
 - `neqsim.process.mechanicaldesign.subsea` — SURF mechanical design and cost
   estimation.
 - The NeqSim MCP `runPipeline`, `runFlowAssurance` and `runFieldEconomics` tools.
+
+Two traps worth stating to the user when they arise: a cooldown run on a fluid
+without a water component reports no hydrate risk and an unbounded no-touch time
+— correct for a dry gas, and indistinguishable from a wet line whose file is
+missing water, so check `isWaterPresent()` (add water with
+`EclipseFluidReadWrite.read(file, true)`); and calling `setMixingRule` after
+`EclipseFluidReadWrite.read` silently discards the characterisation's regressed
+binary interaction parameters.
 
 In Python these classes are reachable through the `neqsim` package. This agent is
 a companion to the `reservoir-simulator-agent` (which supplies the well count and
