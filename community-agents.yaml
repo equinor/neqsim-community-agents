@@ -388,8 +388,8 @@ agents:
       - open-data
 
   - name: reservoir-simulator-agent
-    version: "0.2.0"
-    description: "Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, and models that must be sized backwards from a mandated production profile."
+    version: "0.3.0"
+    description: "Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, models that must be sized backwards from a mandated production profile, and the no-subsurface-data case where a best-guess structural model is assumed from the play, calibrated against published volumes, and issued with a full assumption register."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-simulator-agent/AGENT.md"
     required_skills:

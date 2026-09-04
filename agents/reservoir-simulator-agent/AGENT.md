@@ -1,7 +1,7 @@
 ---
 name: reservoir-simulator-agent
-description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, and models that must be sized backwards from a mandated production profile.
-version: 0.2.0
+description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, models that must be sized backwards from a mandated production profile, and the no-subsurface-data case where a best-guess structural model is assumed from the play, calibrated against published volumes, and issued with a full assumption register.
+version: 0.3.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
@@ -56,6 +56,10 @@ statements. A qualified human review is always required.
 Use this agent when an engineer or analyst needs to:
 
 - Build a first reservoir model for a field where only open data is available.
+- Build a model when there is **no subsurface data at all** - no seismic, no
+  logs, no contacts - by assuming the play-typical structure, solving the
+  contact and compartment split against published volumes, placing the wells on
+  the resulting structure, and publishing the assumption register.
 - Compute volumetrics from area, net pay, porosity and water saturation, or
   back-calculate an in-place volume from a reported recoverable volume.
 - Default reservoir pressure and temperature from depth when neither is known.
@@ -129,7 +133,11 @@ Typical outputs include:
    and take the resulting composition as the input.
 4. **Build the first model.** Use `reservoir-model-builder` with everything known
    so far. Record the resulting data tier, completeness score, derivations and
-   warnings. State explicitly which parameters are analogues or defaults.
+   warnings. State explicitly which parameters are analogues or defaults. If
+   there is no subsurface data at all, follow "When there is no subsurface data
+   at all" below: build the featureless model first, then a best-guess
+   structural model on the play-typical trap style, and publish the assumption
+   register alongside both.
 5. **Check consistency.** Review the warnings. Reconcile any divergence between a
    geometry-derived in-place volume and a reported recoverable volume, resolve
    any net-pay versus net-to-gross double counting, and confirm whether the
@@ -169,8 +177,61 @@ Loaded as context when the task calls for them:
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `near-well-and-injectivity` mapped to community catalog ID `neqsim-near-well-and-injectivity`
 
-# Two cases that need the near-well-and-injectivity skill
+# When there is no subsurface data at all
 
+This is the normal starting point, not the exception. If the task gives no
+seismic, no logs, no contacts and no PVT sample, **do not refuse and do not
+quietly build a featureless box**. A rectangular tank is a guess too - just an
+unlabelled one that happens to be geologically impossible. Make the best guess
+explicitly, then state every part of it.
+
+The rule is: **assume the geology, derive everything that can be derived, and
+publish an assumption register that says what would replace each guess.** The
+`reservoir-model-builder` skill carries the machinery
+(`assume_structure`, `solve_contact_for_volume`, `solve_amplitude_for_split`,
+`longest_run_above_contact`, `assumption_register`).
+
+1. **Assume the play-typical structural style.** Pick the trap geometry that
+   dominates the play rather than inventing one - rotated Brent fault blocks on
+   Tampen, Jurassic fault blocks on the Halten Terrace, low-relief platform
+   closures in the Barents Sea, chalk drape over salt in the central North Sea.
+   Name the analogue fields. If the play is unknown, fall back to a generic
+   anticline and say so.
+2. **Layer the reservoir; never average it.** Use the play stratigraphy with its
+   per-formation porosity, net-to-gross, permeability and kv/kh. The property
+   *contrast* is what decides whether a horizontal drain drains the interval or
+   only one layer of it, and that is usually the question being asked. Put the
+   better rock at the crest.
+3. **Solve rather than guess whatever a published number constrains.** A fluid
+   contact can be bisected until the closure holds the reported volume. A
+   secondary culmination height can be bisected until the compartment split
+   matches a reported resource split. Re-solve the contact inside every
+   amplitude trial - growing a culmination adds pore volume and moves the
+   contact. If the assumed structure cannot hold the reported volume, report
+   that as a finding: relief, area, porosity or the published volume has to
+   move.
+4. **Place wells on the structure, not on the plan.** Check every drain against
+   the contact and place it on the longest contiguous run above it. A nominal
+   position taken from a tank model routinely lands in the water leg, and a gas
+   well completed below the contact produces nothing. If no part of the track is
+   above the contact, say the well as planned does not work.
+5. **Check the fault actually seals.** A bounding fault relied on for
+   compartmentalisation needs a throw larger than the gross reservoir interval,
+   or the reservoir is self-juxtaposed and the two-compartment story is void.
+6. **Publish the assumption register.** One row per assumed element: value,
+   provenance, rationale, and the measurement that would replace it. Label every
+   number in the deliverable with a confidence tier - `Given`, `Published`,
+   `Strong inference`, `Derived`, `Analogue`, `Assumption`.
+7. **State the direction of the inversion.** If the volume was an input and the
+   geometry was sized to honour it, the model cannot defend the volume - only
+   test whether it is deliverable. Put that in the conclusions, not a footnote.
+
+Build the featureless model first anyway. It fixes the material balance, the
+well count and the phasing without committing to a structural interpretation,
+and keeping it alongside the structural model isolates which conclusions depend
+on structure and which do not.
+
+# Two cases that need the near-well-and-injectivity skill
 Load `neqsim-near-well-and-injectivity` before building a deck whenever either
 applies. Both change the model type, not just its parameters.
 
