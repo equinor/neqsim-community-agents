@@ -1,7 +1,7 @@
 ---
 name: surf-layout-design-agent
-description: Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, then routes and sizes every flowline, riser and umbilical and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows.
-version: 0.1.0
+description: Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, routes and sizes every flowline, riser and umbilical, renders a presentation-grade reservoir-to-host illustration carrying the study's headline numbers, and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows.
+version: 0.2.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-surf-field-layout-design
@@ -15,6 +15,7 @@ context_skills:
 - neqsim-step-out-screening
 - neqsim-capex-opex-screening
 - neqsim-surf-cooldown-screening
+- neqsim-professional-reporting
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent
