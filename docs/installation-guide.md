@@ -181,6 +181,8 @@ neqsim agent doctor --target vscode --source community
 | PowerShell blocks `.venv` activation | Open `cmd.exe`, run `.venv\Scripts\activate.bat`, then run `install.cmd`. The installer itself is pure batch. |
 | Agent install exits with code `1` | Read the final `Failed agents:` line. Re-run with `--source community` to exclude registered private catalogs, then resolve any named community failure. |
 | Agents not visible in Copilot | Re-run `neqsim agent install --all --source community --vscode --force`, run `neqsim agent doctor --target vscode --source community`, then use **Developer: Reload Window** in VS Code. |
+| A skill's Python package is not importable | Run `neqsim skill doctor --target vscode` — it reports how many packaged skills are importable and names the rest. Fix all with `neqsim skill sync-packages`, or one with `neqsim skill ensure <name>`. |
+| Reinstalling everything is slow | A refresh only re-runs pip for a skill whose `pyproject.toml` changed, so repeat `--force` runs are cheap. For a cold install you can add `--no-pip` and run `neqsim skill sync-packages` afterwards. |
 | Installation and export locations | Internal packages live under `~/.neqsim/`. VS Code user exports live under `~/.copilot/agents/` and `~/.copilot/skills/` (`%USERPROFILE%` on Windows). |
 
 ---
