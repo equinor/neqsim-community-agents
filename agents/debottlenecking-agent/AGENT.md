@@ -7,6 +7,8 @@ required_skills:
 - neqsim-compressor-operating-window-check
 - neqsim-line-velocity-check
 - neqsim-pressure-drop-screening
+coordinated_agents:
+- production-optimization-agent
 ---
 
 # Purpose
@@ -54,7 +56,9 @@ quantitative decision.
 6. Rank units by approximate utilization and identify the tightest constraint.
 7. Suggest candidate debottlenecking directions for the limiting unit.
 8. Document assumptions, limitations, and human-review requirements.
-9. Recommend a validated NeqSim capacity study for the decision.
+9. Recommend a validated NeqSim capacity study for the decision. Once the limiting
+   unit is known, hand the ranked utilization to `production-optimization-agent`
+   to frame the setpoint search that would relieve it.
 
 # Required Skills
 

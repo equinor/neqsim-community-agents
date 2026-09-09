@@ -7,6 +7,11 @@ required_skills:
 - neqsim-compressor-operating-window-check
 - neqsim-compressor-power-screening
 - neqsim-production-network-routing
+context_skills:
+- neqsim-agentic-process-optimization
+- neqsim-optimization-and-doe
+coordinated_agents:
+- debottlenecking-agent
 ---
 
 # Purpose
@@ -57,7 +62,12 @@ NeqSim optimization run for any quantitative decision.
 5. Use `compressor-power-screening` to estimate compression power for each candidate.
 6. Rank candidate operating directions and flag any that violate a guideline.
 7. Document assumptions, limitations, and human-review requirements.
-8. Recommend a validated NeqSim optimization run for the quantitative decision.
+8. Recommend a validated NeqSim optimization run for the quantitative decision,
+   using `neqsim-optimization-and-doe` to pick the algorithm class and
+   `neqsim-agentic-process-optimization` for the closed-loop setup on a verified
+   model. Use `debottlenecking-agent` first when the limiting unit is not yet
+   known — optimizing before the bottleneck is identified searches the wrong
+   decision space.
 
 # Required Skills
 

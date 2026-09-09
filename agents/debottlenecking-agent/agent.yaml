@@ -6,6 +6,8 @@ required_skills:
 - neqsim-compressor-operating-window-check
 - neqsim-line-velocity-check
 - neqsim-pressure-drop-screening
+coordinated_agents:
+- production-optimization-agent
 supported_domains:
 - debottlenecking
 - capacity-screening
