@@ -90,6 +90,7 @@
     "community": [
       "neqsim-acoustic-induced-vibration-screening",
       "neqsim-adsorbent-capillary-condensation-screening",
+      "neqsim-ageing-life-extension-screening",
       "neqsim-artificial-lift-screening",
       "neqsim-asset-value-npv-screening",
       "neqsim-bathymetry-profile-screening",
@@ -173,6 +174,7 @@
     "journal_formatting",
     "neqsim-acoustic-induced-vibration-screening",
     "neqsim-adsorbent-capillary-condensation-screening",
+    "neqsim-ageing-life-extension-screening",
     "neqsim-agent-handoff",
     "neqsim-agentic-process-optimization",
     "neqsim-api-patterns",
