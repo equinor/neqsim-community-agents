@@ -36,8 +36,8 @@ agents:
       - fluid-characterization
 
   - name: fluid-characterization-agent
-    version: "0.1.0"
-    description: "Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, and PVT regression of a characterization factor for reproducible NeqSim fluid modelling."
+    version: "0.2.0"
+    description: "Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, PVT regression of a characterization factor, and building a declared best-guess fluid basis from depth, province and named analogues when no PVT study exists, for reproducible NeqSim fluid modelling."
     repo: "equinor/neqsim-community-agents"
     path: "agents/fluid-characterization-agent/AGENT.md"
     required_skills:

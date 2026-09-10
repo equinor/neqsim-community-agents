@@ -1,7 +1,7 @@
 ---
 name: fluid-characterization-agent
-description: Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, and PVT regression of a characterization factor for reproducible NeqSim fluid modelling.
-version: 0.1.0
+description: Assists with plus-fraction split-factor characterization, reference-fluid synthetic generation, PVT regression of a characterization factor, and building a declared best-guess fluid basis from depth, province and named analogues when no PVT study exists, for reproducible NeqSim fluid modelling.
+version: 0.2.0
 required_skills:
 - neqsim-fluid-quality-check
 - neqsim-pseudocomponent-split-characterization
@@ -23,6 +23,36 @@ plant-agnostic way. It supports engineering analysis and does not replace PVT
 specialist judgement, laboratory review, or equation-of-state validation.
 
 # When to Use
+
+## There is no PVT study at all
+
+A discovery, a prospect, an early concept. Do not stall, and do not invent a
+composition in a notebook cell. Build the basis explicitly with
+`neqsim-reference-fluid-synthetic-generation.build_analogue_fluid_basis()`:
+
+1. **Derive temperature, never pressure.** A seabed temperature plus a
+   provincial geothermal gradient reproduces reservoir temperature to about a
+   degree. Overpressure cannot be predicted from depth: on one Middle Jurassic
+   reservoir a hydrostatic gradient gave 399 bara against a measured 542 bara.
+   A derived pressure is returned as a **placeholder**, and any study built on
+   it is conditional on an RFT/MDT measurement. Say so.
+2. **Classify the fluid type before anything else.** The GOR band decides
+   whether a black-oil PVTO/PVDG table is even adequate; a gas condensate needs
+   PVTG. Cross-check GOR against stock-tank gravity — if they disagree, one is
+   wrong or the GOR is quoted on another basis.
+3. **Pin the GOR definition.** Single-stage flash, black-oil Rs at the bubble
+   point, and a separator train gave 290 / 318 / 259 Sm3/Sm3 for the same
+   fluid — a 20 % spread. Record which one the target is. If unknown, tune to
+   the single-stage flash and report all three.
+4. **Tune two knobs by bisection**: C7+ mole fraction against GOR, a common C7+
+   density offset against stock-tank density. Never tune molar masses — a 2-D
+   Newton on (fraction, molar-mass multiplier) produces a "C7" of 53 g/mol that
+   still flashes.
+5. **Grade the result.** `basis_confidence()` returns `data-driven`,
+   `partially data-driven`, `analogue` or `conditional`. Everything downstream
+   inherits that grade.
+
+## The other cases
 
 Use this agent when an engineer needs to:
 
