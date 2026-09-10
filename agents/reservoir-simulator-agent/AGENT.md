@@ -1,7 +1,7 @@
 ---
 name: reservoir-simulator-agent
 description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, models that must be sized backwards from a mandated production profile, and the no-subsurface-data case where a best-guess structural model is assumed from the play, calibrated against published volumes, and issued with a full assumption register.
-version: 0.3.0
+version: 0.4.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
@@ -131,35 +131,61 @@ Typical outputs include:
    without a composition and record it as the highest-priority gap. When a
    characterised fluid is required, delegate to `fluid-characterization-agent`
    and take the resulting composition as the input.
-4. **Build the first model.** Use `reservoir-model-builder` with everything known
-   so far. Record the resulting data tier, completeness score, derivations and
-   warnings. State explicitly which parameters are analogues or defaults. If
-   there is no subsurface data at all, follow "When there is no subsurface data
-   at all" below: build the featureless model first, then a best-guess
-   structural model on the play-typical trap style, and publish the assumption
-   register alongside both.
-5. **Check consistency.** Review the warnings. Reconcile any divergence between a
+4. **Sweep for data before building anything.** Enumerate every source that
+   could supply each of the six modelling ingredients — `geometry`,
+   `petrophysics`, `fluid`, `scal`, `contacts`, `volumes` — and drive each rung
+   of its ladder to a recorded outcome of `used`, `blocked` or `absent`, then
+   run the gate:
+
+   ```python
+   from reservoir_model_builder import data_first_gate, acquisition_plan
+   gate = data_first_gate(attempts_by_ingredient)
+   ```
+
+   **If `gate["decision"] == "blocked"`, do not build.** A rung marked
+   `not_attempted` is a blocker: an unattempted source and an absent one
+   produce the same model and opposite recommendations. Carry
+   `gate["mustDisclose"]` into the report and `acquisition_plan(gate)` into the
+   recommendations, keeping its distinction between an *access request* (the
+   data exists and is catalogued) and an *acquisition programme* (nothing was
+   found).
+
+5. **Build the first model with the best source for each ingredient.** Use
+   `reservoir-model-builder` with everything the sweep found. Record the
+   resulting data tier, completeness score, derivations and warnings. State
+   explicitly which parameters are analogues or defaults. If there is no
+   subsurface data at all, follow "When there is no subsurface data at all"
+   below: build the featureless model first, then a best-guess structural model
+   on the play-typical trap style, and publish the assumption register
+   alongside both.
+
+   Where `geometry` or `scal` was downgraded, the forecast is an **upper
+   bound**: decompose recovery factor into displacement × sweep
+   (`RF = E_d × E_v`, `E_d = (1 - S_wl - S_orw) / (1 - S_wl)`) and report both
+   halves, so the reader can see which one is assumed. A homogeneous unfaulted
+   block cannot do worse than near-piston displacement.
+6. **Check consistency.** Review the warnings. Reconcile any divergence between a
    geometry-derived in-place volume and a reported recoverable volume, resolve
    any net-pay versus net-to-gross double counting, and confirm whether the
    pressure basis is virgin or current.
-6. **Cross-check the depletion behaviour.** Use `reservoir-depletion-screening`
+7. **Cross-check the depletion behaviour.** Use `reservoir-depletion-screening`
    with the recoverable volume, initial and abandonment pressure and the plateau
    rate to produce an independent pressure-and-production profile versus time,
    and compare its horizon with the plateau the model implies.
-7. **Place the volumes in context.** Use `resource-classification-screening` to
+8. **Place the volumes in context.** Use `resource-classification-screening` to
    record the maturity category (reserves, contingent or prospective) and its
    basis.
-8. **Refine.** As each new data source arrives — appraisal logs, a DST, a PVT
+9. **Refine.** As each new data source arrives — appraisal logs, a DST, a PVT
    report, a seismic remap — apply it as a separate refinement batch with its own
    provenance and reference. Report the resulting change list, the tier change
    and the completeness change.
-9. **Hand over to NeqSim.** Emit the reservoir specification, stating that the
-   volumes handed to `SimpleReservoir` are in-situ reservoir volumes, that the
-   aquifer is reported separately, and that the NeqSim production index is the
-   quadratic form in MSm3/day/bar^2.
-10. **Report the gaps.** Present the ranked data-acquisition plan and turn the
+10. **Hand over to NeqSim.** Emit the reservoir specification, stating that the
+    volumes handed to `SimpleReservoir` are in-situ reservoir volumes, that the
+    aquifer is reported separately, and that the NeqSim production index is the
+    quadratic form in MSm3/day/bar^2.
+11. **Report the gaps.** Present the ranked data-acquisition plan and turn the
     top items into concrete data requests.
-11. **Document** assumptions, limitations, source attribution and the human
+12. **Document** assumptions, limitations, source attribution and the human
     review requirement.
 
 # Required Skills
