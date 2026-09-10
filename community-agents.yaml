@@ -116,6 +116,16 @@ agents:
       - process-screening
       - separator-screening
 
+  - name: firewater-coverage-agent
+    version: "0.1.0"
+    description: "Screens fire-water and deluge coverage for a process area - required application rate and demand, blanket area coverage against dedicated object protection, deluge nozzle-net sizing, fire-monitor feasibility with wind drift, and the active-versus-passive substitution rules."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/firewater-coverage-agent/AGENT.md"
+    required_skills:
+      - neqsim-firewater-deluge-design
+      - neqsim-safety-function-coverage-screening
+      - neqsim-jet-fire-radiation-screening
+
   - name: process-safety-agent
     version: "0.1.0"
     description: "Provides early-stage process safety screening for fire-case relief loads and emergency depressurization with public, educational methods."

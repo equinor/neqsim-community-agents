@@ -1,0 +1,47 @@
+name: firewater-coverage-agent
+agent_type: community-agent
+description: Screens fire-water and deluge coverage for a process area — required application rate and demand, blanket area coverage against dedicated object protection, deluge nozzle-net sizing, fire-monitor feasibility with wind drift, and the active-versus-passive substitution rules.
+required_skills:
+- neqsim-firewater-deluge-design
+- neqsim-safety-function-coverage-screening
+- neqsim-jet-fire-radiation-screening
+context_skills:
+- neqsim-depressurization-screening
+- neqsim-relief-load-screening
+- neqsim-flare-radiation-screening
+coordinated_agents:
+- process-safety-agent
+- piping-integrity-agent
+inbound_handoffs:
+- agent: community-router-agent
+  schema: firewater_coverage_request.v1
+  purpose: Routed fire-water and deluge coverage requests, preserving the originating finding reference, the governing standard and edition, and the area identification supplied by the requester.
+supported_domains:
+- active-fire-protection
+- firewater-coverage-screening
+- deluge-nozzle-layout
+- fire-monitor-screening
+- passive-versus-active-protection
+inputs:
+- area_description_and_plan_area
+- equipment_inventory_and_exposed_surfaces
+- governing_standard_and_application_rate
+- nozzle_type_k_factor_and_operating_pressure
+- existing_coverage_and_supply_capacity
+- fire_scenario_type_and_heat_flux
+- blowdown_time_and_steel_time_to_failure
+- wind_exposure_and_deck_openness
+- screening_objective
+outputs:
+- required_application_rate_and_basis
+- area_and_object_firewater_demand
+- selective_versus_blanket_coverage_comparison
+- deluge_nozzle_count_grid_pitch_and_governing_criterion
+- monitor_feasibility_and_wind_drift_verdict
+- supply_flow_and_pressure_feasibility_verdict
+- active_versus_passive_substitution_ruling
+- recommended_neqsim_workflows
+- required_follow_up_studies
+- validation_checklist
+human_review_required: true
+version: 0.1.0
