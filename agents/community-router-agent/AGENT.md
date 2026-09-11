@@ -84,6 +84,7 @@ already obvious.
 | Capacity bottleneck, debottlenecking, throughput | `debottlenecking-agent`, `production-optimization-agent` |
 | Dynamic simulation, controllers, transmitters | `dynamic-process-preparation-agent`, `dynamic-instrument-controller-agent` |
 | Relief, blowdown, fire, dispersion, safety functions | `process-safety-agent` |
+| Deluge coverage, fire water, nozzle count, fire monitors, active vs passive fire protection | `firewater-coverage-agent` |
 | Valve or line noise | `noise-assessment-agent` |
 | Local flow detail, CFD | `cfd-coupling-agent` |
 | Heat conduction in a solid, cooldown, thermal stress, FEM | `fem-coupling-agent` |
