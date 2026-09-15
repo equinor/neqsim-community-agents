@@ -93,6 +93,7 @@ data/cache/
 *-results/
 task_solve/
 figures/
+!docs/figures/
 documents/
 _assets/
 *.zip

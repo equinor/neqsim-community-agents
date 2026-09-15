@@ -144,6 +144,58 @@ Success means the install command exits with code `0` and doctor reports
 `Result: PASS`. Do not use a fixed expected agent count: the public catalog grows
 over time.
 
+### 3.3 Open the repos (and your task folder) in one VS Code workspace
+
+Agents are installed per user, so they are available in any window — but the work
+is much easier when the repos and your task folder are open together, because
+Copilot Chat can then read a skill, the agent definition, the NeqSim source, and
+the task you are solving in the same conversation.
+
+Clone the repos into one parent folder, open the first with **File → Open
+Folder...**, add the rest with **File → Add Folder to Workspace...**, then
+**File → Save Workspace As...** → `neqsim-and-related-repos.code-workspace`:
+
+```powershell
+cd "$env:USERPROFILE\Documents\GitHub"
+git clone https://github.com/equinor/neqsim.git
+git clone https://github.com/equinor/neqsim-community-agents.git
+git clone https://github.com/equinor/neqsim-community-skills.git
+```
+
+![VS Code Explorer showing a multi-root workspace with the NeqSim repositories and a separate task folder](figures/fig01_vscode_workspace.png)
+
+*Figure — one workspace, the repos plus your task folder. (The screenshot also
+shows the two Equinor-internal repos; on the public side you have the three
+above.)*
+
+Or write the workspace file yourself and open it:
+
+```json
+{
+  "folders": [
+    { "path": "neqsim" },
+    { "path": "neqsim-community-agents" },
+    { "path": "neqsim-community-skills" },
+    { "name": "neqsim-task-solve", "path": "C:\\Users\\<user>\\neqsim-task-solve" }
+  ],
+  "settings": {}
+}
+```
+
+**The task folder is deliberately not a clone.** Task output — evidence,
+notebooks, results, reports — must never be written into a code repository.
+Register it once, then add that same folder to the workspace so new tasks appear
+in the Explorer immediately:
+
+```powershell
+neqsim --set-task-root "C:\Users\<user>\neqsim-task-solve"
+neqsim --show-task-root
+```
+
+Relative paths in the workspace file resolve from the folder holding it; the task
+folder uses an absolute path because it lives outside the code folder. Only add
+folders you actually work in — unrelated folders make agent answers noisier.
+
 ---
 
 ## 4. macOS / Linux equivalents
@@ -182,6 +234,42 @@ provides the full workflow — see `AGENTS.md` and
 `docs/development/TASK_SOLVING_GUIDE.md` in the cloned repo. Workspace-local core
 agents such as `@solve.task` are available when that NeqSim workspace is open;
 they are distinct from the globally exported community agents listed above.
+
+### 5.1 Push back what the task taught you
+
+Solving a task is also a test of NeqSim, the agents, and the skills:
+
+![Continuous-improvement loop: engineering task, AI orchestration with agents and skills, NeqSim physics core, with the improvements committed and pushed back](figures/fig02_improvement_loop.png)
+
+Whenever a task needed a workaround, a rediscovery, or repeated trial and error
+that a class, agent, or skill *should* have handled, fix it and **push it** — the
+loop only closes when the fix leaves your machine:
+
+| What you learned | Repo | Change |
+|------------------|------|--------|
+| Missing or wrong calculation, equipment, property | `equinor/neqsim` | Java + JUnit test, `mvnw spotless:apply`, PR |
+| Wrong API recipe, gotcha, unit trap, better pattern | `neqsim-community-skills` | edit the `SKILL.md` |
+| Wrong skill choice, missed hand-off, bad routing | `neqsim-community-agents` | edit the `*.agent.md` |
+| Useful new multi-agent pipeline | `neqsim-community-agents` | record it as a composition pattern |
+
+Each folder in the workspace is its own repository, so commit in the one you
+changed, then refresh your install:
+
+```powershell
+cd "$env:USERPROFILE\Documents\GitHub\neqsim-community-skills"
+git checkout -b task/<slug>
+git add skills/<skill-name>/SKILL.md
+git commit -m "<what the task taught>"
+git push -u origin task/<slug>
+gh pr create --fill
+
+neqsim agent install --all --source community --vscode --force
+```
+
+Never commit task output (evidence, notebooks, results, reports) or any
+company-specific data into these public repos — only the reusable, plant-agnostic
+distillation. See [contribution-guide.md](contribution-guide.md) for review
+expectations.
 
 ---
 
