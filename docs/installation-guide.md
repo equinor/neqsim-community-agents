@@ -66,23 +66,30 @@ git clone https://github.com/equinor/neqsim
 cd neqsim
 py -3 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-.\install.cmd
+.\install.ps1
 ```
 
-`install.cmd` is a pure-batch installer (works on locked-down machines where
-PowerShell script execution is blocked). It finds a working Python, installs the
-NeqSim **devtools** package, and puts the `neqsim` command on your PATH.
+Run `.\install.ps1` **from PowerShell**: it runs in your current session, so
+`neqsim` works in the window you are already in. If your execution policy blocks
+scripts, use the pure-batch `.\install.cmd` instead — launched from PowerShell it
+runs as a child process and cannot update your session, so you then need a new
+terminal. Either one finds a working Python, installs the NeqSim **devtools**
+package, puts the `neqsim` command on your PATH, and then checks whether it
+actually resolves and tells you which form to use.
 
-Keep this virtual environment active and verify the CLI in the same terminal:
+Keep this virtual environment active and verify the CLI in the same terminal
+(`--skip-jar` because the Java library is not built yet):
 
 ```powershell
 neqsim --help
-neqsim doctor
+neqsim doctor --skip-jar
 ```
 
-`neqsim doctor` should finish with all required checks passing. If `neqsim` is
-still not found, use `python -m neqsim_cli --help` from the activated environment
-and see Troubleshooting.
+That should report *"All checks passed! Environment is ready."* Without
+`--skip-jar` the doctor also requires a built JAR, which fails on a fresh clone —
+that is expected, not a broken install. If `neqsim` is not found, use
+`python -m neqsim_cli --help` from the activated environment and see
+Troubleshooting; the doctor's **CLI command** check names the cause.
 
 > **`neqsim` not recognized? Use `python -m neqsim_cli` instead.**
 > Without administrator rights the console script frequently does not land on
@@ -148,7 +155,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ./install.sh
 
-neqsim doctor
+neqsim doctor --skip-jar
 neqsim agent install --all --source community --vscode --force
 neqsim agent doctor --target vscode --source community
 ```
@@ -183,7 +190,7 @@ they are distinct from the globally exported community agents listed above.
 ```powershell
 cd neqsim
 git pull
-.\install.cmd                       # refresh devtools if updated
+.\install.ps1                       # refresh devtools if updated
 neqsim agent install --all --source community --vscode --force
 neqsim agent doctor --target vscode --source community
 ```
