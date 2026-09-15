@@ -84,6 +84,21 @@ neqsim doctor
 still not found, use `python -m neqsim_cli --help` from the activated environment
 and see Troubleshooting.
 
+> **`neqsim` not recognized? Use `python -m neqsim_cli` instead.**
+> Without administrator rights the console script frequently does not land on
+> PATH. That is not a failed install — just replace `neqsim` with
+> `python -m neqsim_cli` (`python3 -m neqsim_cli` on macOS/Linux) in **every**
+> command in this guide; the arguments are identical. The whole setup then reads:
+>
+> ```powershell
+> python -m neqsim_cli doctor
+> python -m neqsim_cli agent install --all --source community --vscode --force
+> python -m neqsim_cli agent doctor --target vscode --source community
+> ```
+>
+> Run it from the same activated environment you installed into, so each skill's
+> Python package is installed for that interpreter.
+
 ### 3.2 Install the community agents into VS Code
 
 The public community catalog requires no login or private catalog registration.
@@ -137,6 +152,9 @@ neqsim doctor
 neqsim agent install --all --source community --vscode --force
 neqsim agent doctor --target vscode --source community
 ```
+
+If the `neqsim` command is not found, prefix each of the last three commands with
+`python3 -m neqsim_cli` instead — same arguments.
 
 ---
 
