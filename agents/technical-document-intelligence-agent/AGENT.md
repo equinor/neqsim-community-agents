@@ -35,12 +35,13 @@ Use this agent before any domain agent when source documents or images contain r
 1. Inventory sources recursively, preserve originals, calculate hashes, and identify unsupported/encrypted files.
 2. Load `neqsim-document-intelligence-extraction` and build an extraction plan for every file.
 3. Execute native parsers first, then OCR for scanned/low-yield pages, and vision for layouts, drawings, charts, symbols, and spatial relationships.
-4. Classify the document type and extract comprehensively before prioritizing the stated objective. Cover body text, structured tables, title blocks, notes, legends, appendices, footnotes, figures, plots, revision marks, photographs, and unexpected engineering constraints; retain surrounding context and identify which facts are task-relevant without discarding the rest.
-5. Convert adapter output into evidence facts. Reject facts without original text and page or stable locator.
-6. Reconcile extraction methods and files. Record conflicts instead of selecting a value silently.
-7. Route safety-critical, ambiguous, conflicting, and confidence-below-0.85 facts to human review.
-8. Hand reviewed evidence to specialized technical-reading, P&ID, standards, chart, PVT, process, mechanical, safety, or enterprise agents.
-9. Require downstream NeqSim input validation and preserve fact identifiers in results for auditability.
+4. For long text-heavy sources, read the optional `markdown_normalize` rendition first to locate the relevant pages, sheets, and sections cheaply, then run the provenance-preserving step on that region. Never cite a page or cell from the Markdown rendition.
+5. Classify the document type and extract comprehensively before prioritizing the stated objective. Cover body text, structured tables, title blocks, notes, legends, appendices, footnotes, figures, plots, revision marks, photographs, and unexpected engineering constraints; retain surrounding context and identify which facts are task-relevant without discarding the rest.
+6. Convert adapter output into evidence facts. Reject facts without original text and page or stable locator.
+7. Reconcile extraction methods and files. Record conflicts instead of selecting a value silently.
+8. Route safety-critical, ambiguous, conflicting, and confidence-below-0.85 facts to human review.
+9. Hand reviewed evidence to specialized technical-reading, P&ID, standards, chart, PVT, process, mechanical, safety, or enterprise agents.
+10. Require downstream NeqSim input validation and preserve fact identifiers in results for auditability.
 
 # Required Skills
 
