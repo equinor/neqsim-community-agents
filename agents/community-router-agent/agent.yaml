@@ -17,6 +17,7 @@ coordinated_agents:
 - energy-emissions-agent
 - fem-coupling-agent
 - field-development-economics-agent
+- firewater-coverage-agent
 - flow-assurance-engineer-agent
 - flow-assurance-study-agent
 - fluid-characterization-agent
