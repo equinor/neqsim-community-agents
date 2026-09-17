@@ -668,6 +668,57 @@ agents:
       - bottleneck-identification
       - process-screening
 
+  - name: heat-exchanger-condition-agent
+    version: "0.1.0"
+    description: "Assesses heat-exchanger condition and fouling: reduces an operating snapshot to a U-value, normalises it to design flow without scaling the deposit, separates fouling resistance from film resistance, rules out maldistribution, and converts the degradation into a capacity limitation and a cleaning interval for coolers, condensers, and cooling-water or cooling-medium loops."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/heat-exchanger-condition-agent/AGENT.md"
+    agent_type: community-agent
+    required_skills:
+      - neqsim-heat-exchanger-fouling-assessment
+      - neqsim-technical-document-reading
+      - neqsim-plant-data
+    context_skills:
+      - neqsim-benchmark-reference-data
+      - neqsim-uncertainty-quantification
+    coordinated_agents:
+      - technical-document-intelligence-agent
+      - debottlenecking-agent
+      - utilities-screening-agent
+    supported_domains:
+      - heat-transfer
+      - heat-exchanger-monitoring
+      - fouling-assessment
+      - equipment-degradation
+      - capacity-limitation
+      - cooling-water-systems
+
+  - name: control-authority-agent
+    version: "0.1.0"
+    description: "Screens a regulatory control loop for loss of control authority: saturation fraction at both stops, the trend in saturation across comparable periods, the variance and disturbance-gain ratio between saturated and modulating regimes, and time-to-limit, so that a growing disturbance is separated from a loop that has simply run out of margin before an external investigation is launched."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/control-authority-agent/AGENT.md"
+    agent_type: community-agent
+    required_skills:
+      - neqsim-control-authority-screening
+      - neqsim-plant-data
+      - neqsim-technical-document-reading
+    context_skills:
+      - neqsim-control-valve-cv-screening
+      - neqsim-heat-exchanger-fouling-assessment
+      - neqsim-uncertainty-quantification
+    coordinated_agents:
+      - heat-exchanger-condition-agent
+      - debottlenecking-agent
+      - process-engineer-agent
+    supported_domains:
+      - process-control
+      - loop-performance
+      - valve-saturation
+      - disturbance-rejection
+      - operability
+      - root-cause-screening
+
   - name: gas-lift-allocation-agent
     version: "0.1.0"
     description: "Screens lift-gas allocation across a small set of gas-lifted wells, framing the allocation problem and ranking candidate splits using public artificial-lift, production-network-routing, and reservoir-depletion screening before a validated NeqSim study."

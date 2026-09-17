@@ -117,6 +117,8 @@ question they answer.
 | `process-engineer-agent` | Checks unit operations against line-velocity and compressor operating-window guidelines. |
 | `process-screening-agent` | High-level process screening studies and engineering checklist generation. |
 | `debottlenecking-agent` | Identifies the most likely capacity bottleneck in a train — separator, compressor window, line velocity, or pressure drop — and ranks units by utilization. |
+| `heat-exchanger-condition-agent` | Assesses whether a cooler, condenser, or cooling-medium exchanger has fouled or degraded — U-value against design, fouling resistance in excess of allowance, maldistribution rule-out, capacity limitation, and cleaning interval. |
+| `control-authority-agent` | Decides whether a loop still has authority or its valve has been driven onto a stop — saturation at both stops, its trend against the disturbance measure, lost disturbance rejection, and the intervention margin before a trip. |
 | `production-optimization-agent` | Searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power within capacity and operating-window limits. |
 | `gas-treatment-agent` | Checks gas water content and dehydration against a sales-gas spec and estimates single-stage compression power. |
 | `teg-dehydration-agent` | Builds and runs a validated NeqSim TEG dehydration plant and reports water dew point, lean-TEG purity, and regeneration still-vent emissions. |
