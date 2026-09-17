@@ -1,0 +1,40 @@
+name: heat-exchanger-condition-agent
+agent_type: community-agent
+description: "Assesses heat-exchanger condition and fouling: reduces an operating snapshot to a U-value, normalises it to design flow without scaling the deposit, separates fouling resistance from film resistance, rules out maldistribution, and converts the degradation into a capacity limitation and a cleaning interval for coolers, condensers, and cooling-water or cooling-medium loops."
+required_skills:
+- neqsim-heat-exchanger-fouling-assessment
+- neqsim-technical-document-reading
+- neqsim-plant-data
+context_skills:
+- neqsim-benchmark-reference-data
+- neqsim-uncertainty-quantification
+coordinated_agents:
+- technical-document-intelligence-agent
+- debottlenecking-agent
+- utilities-screening-agent
+supported_domains:
+- heat-transfer
+- heat-exchanger-monitoring
+- fouling-assessment
+- equipment-degradation
+- capacity-limitation
+- cooling-water-systems
+inputs:
+- vendor-data-sheet-design-basis
+- operating-snapshot-from-historian
+- fluid-and-specific-heat-basis
+- exchanger-arrangement-and-correction-factor
+- operating-constraint-or-set-point
+- cleaning-history
+outputs:
+- reconciled-duty-and-imbalance
+- measured-overall-coefficient-and-basis
+- coefficient-normalised-to-design-flow
+- fouling-resistance-in-excess-of-allowance
+- maldistribution-rule-out-table
+- condition-verdict
+- capacity-limit-and-binding-constraint
+- cleaning-interval-and-effectiveness-finding
+- assumptions-and-limitations
+human_review_required: true
+version: 0.1.0

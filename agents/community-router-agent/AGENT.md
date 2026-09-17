@@ -81,6 +81,8 @@ already obvious.
 | Compressor performance, surge, anti-surge control | `compressor-antisurge-agent`, `reciprocating-compressor-agent` |
 | Gas turbine driver rating and fuel | `gas-turbine-screening-agent` |
 | Utilities: instrument air, fuel gas, cooling water | `utilities-screening-agent` |
+| Heat exchanger fouling, U-value degradation, cleaning interval, cooler capacity limitation | `heat-exchanger-condition-agent` |
+| Control valve saturated, loop stopped controlling, "the disturbance got worse" | `control-authority-agent` |
 | Capacity bottleneck, debottlenecking, throughput | `debottlenecking-agent`, `production-optimization-agent` |
 | Dynamic simulation, controllers, transmitters | `dynamic-process-preparation-agent`, `dynamic-instrument-controller-agent` |
 | Relief, blowdown, fire, dispersion, safety functions | `process-safety-agent` |

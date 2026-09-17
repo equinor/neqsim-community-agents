@@ -9,6 +9,7 @@ coordinated_agents:
 - cfd-coupling-agent
 - compressor-antisurge-agent
 - concept-selection-agent
+- control-authority-agent
 - debottlenecking-agent
 - dynamic-instrument-controller-agent
 - dynamic-process-preparation-agent
@@ -25,6 +26,7 @@ coordinated_agents:
 - gas-lift-allocation-agent
 - gas-treatment-agent
 - gas-turbine-screening-agent
+- heat-exchanger-condition-agent
 - hydrate-screening-agent
 - ncs-production-analysis-agent
 - near-well-injectivity-agent

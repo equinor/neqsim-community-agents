@@ -1,0 +1,41 @@
+name: control-authority-agent
+agent_type: community-agent
+description: "Screens a regulatory control loop for loss of control authority: saturation fraction at both stops, the trend in saturation across comparable periods, the variance and disturbance-gain ratio between saturated and modulating regimes, and time-to-limit, so that a growing disturbance is separated from a loop that has simply run out of margin before an external investigation is launched."
+required_skills:
+- neqsim-control-authority-screening
+- neqsim-plant-data
+- neqsim-technical-document-reading
+context_skills:
+- neqsim-control-valve-cv-screening
+- neqsim-heat-exchanger-fouling-assessment
+- neqsim-uncertainty-quantification
+coordinated_agents:
+- heat-exchanger-condition-agent
+- debottlenecking-agent
+- process-engineer-agent
+supported_domains:
+- process-control
+- loop-performance
+- valve-saturation
+- disturbance-rejection
+- operability
+- root-cause-screening
+inputs:
+- controller-output-history
+- controlled-variable-history
+- controller-configuration-and-output-stops
+- suspected-disturbance-history
+- set-point-and-trip-limit
+- comparable-period-definition
+outputs:
+- saturation-fraction-at-both-stops
+- saturation-trend-across-periods
+- variance-ratio-between-regimes
+- disturbance-gain-per-regime
+- off-set-point-fraction
+- time-to-limit-and-intervention-margin
+- authority-verdict
+- disturbance-versus-authority-adjudication
+- assumptions-and-limitations
+human_review_required: true
+version: 0.1.0
