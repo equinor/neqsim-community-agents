@@ -18,7 +18,7 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/subsea/field-layout-import/tests`,
-`skills/subsea/subsea-layout-geometry/tests`,
-`skills/subsea/bathymetry-profile-screening/tests`, and
-`skills/subsea/pipe-route-profile/tests`.
+`skills/subsea/neqsim-field-layout-import/tests`,
+`skills/subsea/neqsim-subsea-layout-geometry/tests`,
+`skills/subsea/neqsim-bathymetry-profile-screening/tests`, and
+`skills/subsea/neqsim-pipe-route-profile/tests`.

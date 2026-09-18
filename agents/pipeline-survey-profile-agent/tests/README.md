@@ -18,7 +18,7 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/subsea/pipeline-survey-processing/tests`,
-`skills/subsea/bathymetry-profile-screening/tests`,
-`skills/process/pressure-drop-screening/tests`, and
-`skills/process/line-velocity-check/tests`.
+`skills/subsea/neqsim-pipeline-survey-processing/tests`,
+`skills/subsea/neqsim-bathymetry-profile-screening/tests`,
+`skills/process/neqsim-pressure-drop-screening/tests`, and
+`skills/process/neqsim-line-velocity-check/tests`.

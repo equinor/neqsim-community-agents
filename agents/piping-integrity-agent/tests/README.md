@@ -18,7 +18,7 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/process/line-velocity-check/tests`,
-`skills/process/pressure-drop-screening/tests`,
-`skills/process/pipe-wall-thickness-screening/tests`, and
-`skills/process/flow-induced-vibration-screening/tests`.
+`skills/process/neqsim-line-velocity-check/tests`,
+`skills/process/neqsim-pressure-drop-screening/tests`,
+`skills/process/neqsim-pipe-wall-thickness-screening/tests`, and
+`skills/process/neqsim-flow-induced-vibration-screening/tests`.

@@ -18,5 +18,5 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/safety/relief-load-screening/tests` and
-`skills/safety/depressurization-screening/tests`.
+`skills/safety/neqsim-relief-load-screening/tests` and
+`skills/safety/neqsim-depressurization-screening/tests`.

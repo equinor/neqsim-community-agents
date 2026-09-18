@@ -18,5 +18,5 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/process/line-velocity-check/tests` and
-`skills/process/compressor-operating-window-check/tests`.
+`skills/process/neqsim-line-velocity-check/tests` and
+`skills/process/neqsim-compressor-operating-window-check/tests`.

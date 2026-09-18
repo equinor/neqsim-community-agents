@@ -9,7 +9,7 @@ skills.
 1. Run the underlying skill tests (from inside each skill folder):
 
    ```bash
-   cd ../../neqsim-community-skills/skills/environment/energy-emissions-screening
+   cd ../../neqsim-community-skills/skills/environment/neqsim-energy-emissions-screening
    python -m pytest
 
    cd ../../field-development/norwegian-continental-shelf-data
