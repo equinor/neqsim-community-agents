@@ -18,4 +18,4 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/process/compressor-antisurge-recycle/tests`.
+`skills/process/neqsim-compressor-antisurge-recycle/tests`.

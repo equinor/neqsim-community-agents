@@ -91,7 +91,7 @@ The community skill ships a runnable three-stage example that follows this
 checklist end to end:
 
 ```bash
-cd ../../neqsim-community-skills/skills/field-development/reservoir-model-builder
+cd ../../neqsim-community-skills/skills/field-development/neqsim-reservoir-model-builder
 python examples/build_wisting_style_model.py
 ```
 

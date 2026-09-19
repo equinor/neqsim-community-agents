@@ -19,8 +19,8 @@ The repository tests confirm that this agent has:
 
 The underlying design logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/subsea/surf-field-layout-design/tests`,
-`skills/subsea/subsea-layout-geometry/tests`,
-`skills/subsea/pipe-route-profile/tests`,
-`skills/subsea/bathymetry-profile-screening/tests`, and
-`skills/process/line-velocity-check/tests`.
+`skills/subsea/neqsim-surf-field-layout-design/tests`,
+`skills/subsea/neqsim-subsea-layout-geometry/tests`,
+`skills/subsea/neqsim-pipe-route-profile/tests`,
+`skills/subsea/neqsim-bathymetry-profile-screening/tests`, and
+`skills/process/neqsim-line-velocity-check/tests`.

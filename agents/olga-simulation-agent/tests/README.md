@@ -10,7 +10,7 @@ skill.
    synthetic fixtures and a fake installation tree):
 
    ```bash
-   cd ../../../neqsim-community-skills/skills/flow-assurance/olga-multiphase-simulator
+   cd ../../../neqsim-community-skills/skills/flow-assurance/neqsim-olga-multiphase-simulator
    python -m pytest        # discovery, genkey editing, batch command, result parsing
    ```
 
@@ -28,7 +28,7 @@ skill.
 3. Run the worked example against a real case:
 
    ```bash
-   python ../../../neqsim-community-skills/skills/flow-assurance/olga-multiphase-simulator/examples/run_olga_case.py case.genkey
+   python ../../../neqsim-community-skills/skills/flow-assurance/neqsim-olga-multiphase-simulator/examples/run_olga_case.py case.genkey
    ```
 
 4. Walk through the prompts in `prompts/example-prompts.md`.

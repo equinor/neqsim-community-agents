@@ -18,5 +18,5 @@ The repository tests confirm that this agent has:
 
 The underlying screening logic is validated by the skill tests in the
 `neqsim-community-skills` repository under
-`skills/process/water-dewpoint-dehydration-screening/tests` and
-`skills/process/compressor-power-screening/tests`.
+`skills/process/neqsim-water-dewpoint-dehydration-screening/tests` and
+`skills/process/neqsim-compressor-power-screening/tests`.

@@ -9,7 +9,7 @@ skills.
 1. Run the underlying skill tests (from inside each skill folder):
 
    ```bash
-   cd ../../neqsim-community-skills/skills/field-development/reservoir-model-builder
+   cd ../../neqsim-community-skills/skills/field-development/neqsim-reservoir-model-builder
    python -m pytest        # volumetrics, provenance ladder, refinement, NeqSim spec
 
    cd ../norwegian-continental-shelf-data
@@ -29,7 +29,7 @@ skills.
    NeqSim specification are produced:
 
    ```bash
-   cd ../../neqsim-community-skills/skills/field-development/reservoir-model-builder
+   cd ../../neqsim-community-skills/skills/field-development/neqsim-reservoir-model-builder
    python examples/build_wisting_style_model.py
    ```
 

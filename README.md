@@ -95,8 +95,8 @@ A *harness* is any driver — a test, a script, a CLI, or the main NeqSim repo's
 1. Install the skill packages the agent declares. For the Flow Assurance Engineer Agent (`hydrate-margin-check`, `wax-margin-check`):
 
    ```bash
-   python -m pip install -e ../neqsim-community-skills/skills/flow-assurance/hydrate-margin-check
-   python -m pip install -e ../neqsim-community-skills/skills/flow-assurance/wax-margin-check
+   python -m pip install -e ../neqsim-community-skills/skills/flow-assurance/neqsim-hydrate-margin-check
+   python -m pip install -e ../neqsim-community-skills/skills/flow-assurance/neqsim-wax-margin-check
    ```
 
 2. Drive the agent's skills from one harness:

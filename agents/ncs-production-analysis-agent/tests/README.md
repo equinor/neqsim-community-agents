@@ -9,7 +9,7 @@ skills.
 1. Run the underlying skill tests (from inside each skill folder):
 
    ```bash
-   cd ../../neqsim-community-skills/skills/field-development/norwegian-continental-shelf-data
+   cd ../../neqsim-community-skills/skills/field-development/neqsim-norwegian-continental-shelf-data
    python -m pytest
 
    cd ../reservoir-depletion-screening
