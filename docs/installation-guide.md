@@ -49,6 +49,13 @@ Install these tools (the ones referenced in the *Tools used in this workflow* sl
 You do **not** need to install Maven separately. The NeqSim repository includes
 the Maven Wrapper (`mvnw` / `mvnw.cmd`).
 
+> **Docker (only for Linux-only engines):** A few skills wrap external engines
+> with no native Windows build — **OpenFOAM** (CFD, `neqsim-cfd-coupling`) and
+> **OPM Flow** (reservoir simulation, `neqsim-near-well-and-injectivity`) are
+> Linux software. On Windows, install **Docker Desktop** (or WSL2) before
+> actually running one of these — it is not needed for NeqSim itself or most
+> other skills/agents.
+
 > **Tip:** A Python virtual environment keeps the CLI isolated and avoids most
 > PATH problems. The commands below create one inside the cloned repository.
 
