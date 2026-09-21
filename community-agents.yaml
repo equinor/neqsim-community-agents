@@ -398,7 +398,7 @@ agents:
       - open-data
 
   - name: reservoir-simulator-agent
-    version: "0.4.0"
+    version: "0.5.0"
     description: "Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, models that must be sized backwards from a mandated production profile, and the no-subsurface-data case where a best-guess structural model is assumed from the play, calibrated against published volumes, and issued with a full assumption register."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-simulator-agent/AGENT.md"
@@ -812,8 +812,8 @@ agents:
       - mesh-quality
 
   - name: near-well-injectivity-agent
-    version: "0.2.0"
-    description: "Derives productivity and injectivity indices from the rock rather than assuming them, using OPM Flow as the reservoir simulator with pyscal for relative permeability and resdata for output, converts NeqSim compositional fluids into black-oil PVT tables OPM Flow accepts, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, when productivity decay through the bubble point matters, or when a reservoir model must be built and run."
+    version: "0.3.0"
+    description: "Derives productivity and injectivity indices from the rock rather than assuming them, using OPM Flow as the reservoir simulator with pyscal for relative permeability and resdata for output, converts NeqSim compositional fluids into black-oil PVT tables OPM Flow accepts, generates Eclipse/OPM VFPPROD lift-curve tables from a NeqSim flowline or tubing model so the deck sees the real lift constraint, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, when productivity decay through the bubble point matters, when a well or network branch needs a VFP table, or when a reservoir model must be built and run."
     author: "neqsim-community"
     repo: "equinor/neqsim-community-agents"
     path: "agents/near-well-injectivity-agent/AGENT.md"
