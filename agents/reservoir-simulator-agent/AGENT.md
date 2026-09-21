@@ -1,7 +1,7 @@
 ---
 name: reservoir-simulator-agent
 description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, models that must be sized backwards from a mandated production profile, and the no-subsurface-data case where a best-guess structural model is assumed from the play, calibrated against published volumes, and issued with a full assumption register.
-version: 0.4.0
+version: 0.5.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
@@ -283,6 +283,18 @@ free parameter. Two rules then apply:
 - Read the well count and phasing off the profile - step changes in the annual
   rate are wells coming on. If those steps reproduce a published development
   description, that is corroboration rather than a fitted parameter.
+
+# When the lift path, not the rock, limits the wells
+A `WCONPROD` bottomhole-pressure floor assumes the wells can always lift what the
+reservoir gives. Once a tubing string, flowline or riser is part of the question
+- a long subsea tie-back, a late-life low-pressure phase, a well count set by
+deliverability - the deck needs a `VFPPROD` lift-curve table generated from the
+real geometry, and the wells (or the `NETWORK` branch) are then controlled on
+THP. Delegate the table to `near-well-injectivity-agent` (step 8 of its
+workflow: standard-condition recombination, `PipeBeggsAndBrills`, secant on inlet
+pressure, `EclipseVFPExporter`); include the `.inc` in SCHEDULE and report the
+rate at the lift-curve minimum as the minimum stable rate. Do not present a
+BHP-floor forecast as deliverability when the lift path was never modelled.
 
 # Example Usage
 
