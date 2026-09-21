@@ -1,12 +1,13 @@
 ---
 name: near-well-injectivity-agent
-description: Derives productivity and injectivity indices from the rock rather than assuming them, using OPM Flow as the reservoir simulator with pyscal for relative permeability and resdata for output, converts NeqSim compositional fluids into black-oil PVT tables OPM Flow accepts, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, when productivity decay through the bubble point matters, or when a reservoir model must be built and run.
-version: 0.2.0
+description: Derives productivity and injectivity indices from the rock rather than assuming them, using OPM Flow as the reservoir simulator with pyscal for relative permeability and resdata for output, converts NeqSim compositional fluids into black-oil PVT tables OPM Flow accepts, generates Eclipse/OPM VFPPROD lift-curve tables from a NeqSim flowline or tubing model so the deck sees the real lift constraint, and hands a defensible inflow relationship to NeqSim wellbore and process models. Use when an inflow number is about to be assumed, when injectors must be checked against a voidage requirement, when productivity decay through the bubble point matters, when a well or network branch needs a VFP table, or when a reservoir model must be built and run.
+version: 0.3.0
 agent_type: community-agent
 required_skills:
 - neqsim-near-well-and-injectivity
 - neqsim-api-patterns
 context_skills:
+- neqsim-production-optimization
 - neqsim-subsea-and-wells
 - neqsim-benchmark-reference-data
 - neqsim-input-validation
@@ -33,6 +34,8 @@ assumptions behind it — handed to a NeqSim wellbore or process model.
 - A completion decision — horizontal drain length, screens, inflow control,
   fracture — needs its productivity consequence quantified.
 - A NeqSim fluid must become the PVT section of a reservoir deck.
+- The tubing, flowline or riser — not the rock — limits what a well delivers,
+  and the deck still controls the wells on a bottomhole-pressure floor.
 
 ## How to work
 
@@ -74,6 +77,21 @@ initial value is how a waterflood ends up short of injectors five years in.
 to NeqSim. Do not rebuild wellbore hydraulics — that is `PipeBeggsAndBrills`,
 and it is already done.
 
+**8. Put the lift constraint in the deck as `VFPPROD`, not as a BHP floor.** When
+the tubing or the flowline limits the well, generate the lift-curve table from
+the real geometry: flash the wellstream to standard conditions, recombine each
+(rate, THP, WFR, GFR) point in Sm3/d, run `PipeBeggsAndBrills`, solve the inlet
+pressure by secant, and write the keyword with `EclipseVFPExporter` (recipe in
+`neqsim-production-optimization` § "Lift curves / VFPPROD"; deck usage in
+`neqsim-near-well-and-injectivity` § "Lift curves for the deck"). Choose the
+basis from the fluid — `'GAS' 'WGR' 'OGR'` for a condensate, `'OIL' 'WCT' 'GOR'`
+for an oil — and bracket the operating point on every axis. A tubing table goes
+into `WCONPROD` as a THP control; a flowline table is a `NETWORK` branch
+(`BRANPROP`). Do not use `LiftCurveGenerator` output for this: it sweeps kg/hr,
+which the exporter rejects, and `RecombinationFlashGenerator` wipes an E300 BIC
+block through `setMixingRule`. Report the rate at the lift-curve minimum as the
+minimum stable rate.
+
 ## What you must report
 
 ```
@@ -82,6 +100,7 @@ BASIS:        permeability, net pay, drain geometry, skin, SCAL endpoints
 MECHANISM:    why it moves the way it does over field life
 MOBILITY:     endpoint mobility ratio, and what it implies
 CROSS-CHECK:  derived vs assumed, and which to believe
+LIFT:         VFPPROD table basis, axes, minimum stable rate (when the lift path is modelled)
 CONFIDENCE:   high | medium | low, with the weakest input named
 ```
 
