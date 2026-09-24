@@ -4,6 +4,8 @@ description: Provides early-stage gas treatment screening that checks gas water 
 required_skills:
 - neqsim-water-dewpoint-dehydration-screening
 - neqsim-compressor-power-screening
+context_skills:
+- neqsim-adsorbent-capillary-condensation-screening
 supported_domains:
 - process-engineering
 - gas-treatment

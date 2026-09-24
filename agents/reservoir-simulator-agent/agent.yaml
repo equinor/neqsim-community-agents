@@ -11,6 +11,7 @@ context_skills:
 - neqsim-near-well-and-injectivity
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
+- neqsim-reservoir-3d-visualisation
 supported_domains:
 - field-development
 - reservoir-engineering

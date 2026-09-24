@@ -6,6 +6,7 @@ required_skills: []
 context_skills:
 - neqsim-benchmark-reference-data
 - neqsim-uncertainty-quantification
+- neqsim-final-report-writing-style
 coordinated_agents:
 - technical-document-intelligence-agent
 - pvt-agent

@@ -7,6 +7,7 @@ required_skills: []
 context_skills:
 - neqsim-benchmark-reference-data
 - neqsim-uncertainty-quantification
+- neqsim-final-report-writing-style
 coordinated_agents:
 - technical-document-intelligence-agent
 - pvt-agent
@@ -154,7 +155,8 @@ This is a pure coordinator and has no direct calculation skill. It delegates to:
 
 It may load `neqsim-benchmark-reference-data` and
 `neqsim-uncertainty-quantification` as context when validation or uncertainty is
-part of the study.
+part of the study, and `neqsim-final-report-writing-style` only at the final
+reporting step to select the report writing style.
 
 # Example Usage
 

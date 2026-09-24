@@ -5,6 +5,8 @@ version: 0.1.0
 required_skills:
 - neqsim-water-dewpoint-dehydration-screening
 - neqsim-compressor-power-screening
+context_skills:
+- neqsim-adsorbent-capillary-condensation-screening
 ---
 
 # Purpose
@@ -57,6 +59,10 @@ Typical outputs include:
 
 - `water-dewpoint-dehydration-screening` mapped to community catalog ID `neqsim-water-dewpoint-dehydration-screening`
 - `compressor-power-screening` mapped to community catalog ID `neqsim-compressor-power-screening`
+
+Loaded as context when the train has a fixed adsorbent bed (mercury guard bed, molecular sieve, catalyst guard):
+
+- `adsorbent-capillary-condensation-screening` mapped to community catalog ID `neqsim-adsorbent-capillary-condensation-screening`
 
 # Example Usage
 
