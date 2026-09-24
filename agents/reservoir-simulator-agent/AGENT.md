@@ -14,6 +14,7 @@ context_skills:
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
 - neqsim-near-well-and-injectivity
+- neqsim-reservoir-3d-visualisation
 coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-to-facility-screening-agent
@@ -202,6 +203,7 @@ Loaded as context when the task calls for them:
 - `production-network-routing` mapped to community catalog ID `neqsim-production-network-routing`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `near-well-and-injectivity` mapped to community catalog ID `neqsim-near-well-and-injectivity`
+- `reservoir-3d-visualisation` mapped to community catalog ID `neqsim-reservoir-3d-visualisation` (3D figures of an OPM Flow / Eclipse run)
 
 # When there is no subsurface data at all
 
