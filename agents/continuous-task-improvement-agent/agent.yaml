@@ -1,0 +1,39 @@
+name: continuous-task-improvement-agent
+agent_type: community-agent
+description: "Keeps a NeqSim engineering task improving after its first report: makes the task living, turns a Word or Markdown brief into a confirmed goal, backtests the monitoring against known events, runs scheduled or on-demand cycles, solves until the goal is met or improvement becomes marginal, triages triggered cycles, and prepares ledger decisions and baseline promotion for a named reviewer. Works for any task type and without enterprise access."
+required_skills:
+- neqsim-continuous-task-improvement
+- neqsim-continuous-improvement-toolkit
+- neqsim-model-calibration-and-data-reconciliation
+context_skills:
+- neqsim-plant-data
+- neqsim-uncertainty-quantification
+- neqsim-professional-reporting
+coordinated_agents:
+- production-optimization-agent
+- debottlenecking-agent
+- heat-exchanger-condition-agent
+- control-authority-agent
+supported_domains:
+- continuous-improvement
+- living-tasks
+- monitoring
+- drift-detection
+- iterative-solving
+- backtesting
+inputs:
+- existing-task-folder
+- task-brief-docx-or-markdown
+- data-drop-folder-or-historian-source
+- goal-metric-target-and-constraints
+- expected-events-for-backtest
+outputs:
+- living-task-scaffold
+- confirmed-goal
+- backtest-report
+- cycle-digests
+- improvement-ledger-proposals
+- stop-state-and-next-action
+- promotion-recommendation
+human_review_required: true
+version: 0.1.0

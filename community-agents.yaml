@@ -719,6 +719,33 @@ agents:
       - operability
       - root-cause-screening
 
+  - name: continuous-task-improvement-agent
+    version: "0.1.0"
+    description: "Keeps a NeqSim engineering task improving after its first report: makes the task living, turns a Word or Markdown brief into a confirmed goal, backtests the monitoring against known events, runs scheduled or on-demand cycles, solves until the goal is met or improvement becomes marginal, triages triggered cycles, and prepares ledger decisions and baseline promotion for a named reviewer. Works for any task type and without enterprise access."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/continuous-task-improvement-agent/AGENT.md"
+    agent_type: community-agent
+    required_skills:
+      - neqsim-continuous-task-improvement
+      - neqsim-continuous-improvement-toolkit
+      - neqsim-model-calibration-and-data-reconciliation
+    context_skills:
+      - neqsim-plant-data
+      - neqsim-uncertainty-quantification
+      - neqsim-professional-reporting
+    coordinated_agents:
+      - production-optimization-agent
+      - debottlenecking-agent
+      - heat-exchanger-condition-agent
+      - control-authority-agent
+    supported_domains:
+      - continuous-improvement
+      - living-tasks
+      - monitoring
+      - drift-detection
+      - iterative-solving
+      - backtesting
+
   - name: gas-lift-allocation-agent
     version: "0.1.0"
     description: "Screens lift-gas allocation across a small set of gas-lifted wells, framing the allocation problem and ranking candidate splits using public artificial-lift, production-network-routing, and reservoir-depletion screening before a validated NeqSim study."
