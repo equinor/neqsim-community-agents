@@ -53,7 +53,9 @@ must take.
 
 # Workflow
 
-1. `neqsim task-status <task>`; if not living, `neqsim task-living <task> --brief <file>`.
+1. `neqsim task-status <task>` and read `continuous/LIVING_REPORT.md` (always current:
+   state, goal progress, trends, events, pending decisions, next actions); if not
+   living, `neqsim task-living <task> --brief <file>`.
 2. Fill `continuous/goal.yaml` from the brief sections; ask the user to confirm (`confirmed_by`).
 3. Edit `continuous/cycle_plan.yaml`: sources (file drop or
    `continuous_improvement_toolkit.tagreader_adapter:TagreaderAdapter`), task-local
@@ -67,8 +69,10 @@ must take.
 6. Triage each triggered cycle: classify every trigger as data fault, model
    mismatch, real plant change or new opportunity, name the check that would
    discriminate, and write `cycles/<id>/agent_review.md`.
-7. Hand over: list ledger items needing a decision and the cycle to promote;
-   the reviewer runs `neqsim task-promote <task> <cycle> --reviewer NAME`.
+7. Hand over: list ledger items needing a decision and the cycle to promote (both
+   appear under "Next actions" in the living report); the reviewer runs
+   `neqsim task-promote <task> <cycle> --reviewer NAME`. Recommend
+   `report.formal: on_promote` in the plan so the Word/HTML report follows each promotion.
 
 # Required Skills
 
