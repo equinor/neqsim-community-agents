@@ -55,7 +55,10 @@ must take.
 
 1. `neqsim task-status <task>` and read `continuous/LIVING_REPORT.md` (always current:
    state, goal progress, trends, events, pending decisions, next actions); if not
-   living, `neqsim task-living <task> --brief <file>`.
+   living, `neqsim task-living <task> --brief <file>`. Living tasks share the task
+   root of all other tasks (`neqsim --show-task-root`): `<task>` may be a path or a
+   folder name inside it, and `task-status` / `task-reference-case` without a folder
+   use the task root.
 2. Fill `continuous/goal.yaml` from the brief sections; ask the user to confirm (`confirmed_by`).
 3. Edit `continuous/cycle_plan.yaml`: sources (file drop or
    `continuous_improvement_toolkit.tagreader_adapter:TagreaderAdapter`), task-local
