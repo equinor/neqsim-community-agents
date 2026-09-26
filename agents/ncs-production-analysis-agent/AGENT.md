@@ -12,6 +12,7 @@ coordinated_agents:
 - reservoir-to-facility-screening-agent
 - concept-selection-agent
 - asset-economics-agent
+- ncs-value-chain-agent
 ---
 
 # Purpose
@@ -160,6 +161,12 @@ In Python these classes are reachable through the `neqsim` package (for example
 `from neqsim.process.processTools import simplereservoir`). This agent is a
 companion to the `reservoir-to-facility-screening-agent`, the
 `concept-selection-agent`, and the `asset-economics-agent`.
+
+For whole-shelf questions - how fields share pipelines, plants and terminals,
+where capacity binds, what an outage strands, and how to optimise production and
+value across the NCS - hand off to the `ncs-value-chain-agent`, which uses the
+`neqsim-ncs-infrastructure-network` and `neqsim-ncs-value-chain-optimization`
+skills on the same Sodir data.
 
 # References
 

@@ -36,5 +36,9 @@ coordinated_agents:
 - reservoir-to-facility-screening-agent
 - concept-selection-agent
 - asset-economics-agent
+- ncs-value-chain-agent
+context_skills:
+- neqsim-ncs-infrastructure-network
+- neqsim-ncs-value-chain-optimization
 human_review_required: true
 version: 0.1.0

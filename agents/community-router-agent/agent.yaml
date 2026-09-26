@@ -29,6 +29,7 @@ coordinated_agents:
 - heat-exchanger-condition-agent
 - hydrate-screening-agent
 - ncs-production-analysis-agent
+- ncs-value-chain-agent
 - near-well-injectivity-agent
 - noise-assessment-agent
 - olga-simulation-agent
