@@ -123,6 +123,35 @@ def load_schema(repo_root):
     return json.loads(schema_path.read_text(encoding="utf-8")), schema_path
 
 
+# Every chat request resends each installed agent's description, so the catalog is a
+# per-call token cost; detail belongs in the AGENT.md body.
+MAX_CATALOG_DESCRIPTION = 500
+
+
+def check_description_length(manifest_dir, manifest):
+    """Return errors for agent.yaml / AGENT.md descriptions over the catalog cap."""
+    sources = [("agent.yaml", manifest.get("description"))]
+    agent_md = manifest_dir / "AGENT.md"
+    if agent_md.exists():
+        match = re.match(r"^---\s*\n(.*?)\n---", agent_md.read_text(encoding="utf-8"), re.S)
+        if match:
+            try:
+                front = yaml.safe_load(match.group(1)) or {}
+            except yaml.YAMLError:
+                front = {}
+            if isinstance(front, dict):
+                sources.append(("AGENT.md", front.get("description")))
+    errors = []
+    for label, description in sources:
+        if isinstance(description, str) and len(description) > MAX_CATALOG_DESCRIPTION:
+            errors.append(
+                "{} description is {} chars; keep it <= {} (resent on every chat request) "
+                "and move detail into the AGENT.md body".format(
+                    label, len(description), MAX_CATALOG_DESCRIPTION)
+            )
+    return errors
+
+
 def minimal_structural_check(manifest, schema):
     """Fallback validation used when jsonschema is not installed."""
     errors = []
@@ -579,6 +608,9 @@ def validate_repo(repo_root):
             all_errors.append("[{}] {}".format(name, err))
 
         for err in check_hardcoded_local_paths(manifest_path.parent):
+            all_errors.append("[{}] {}".format(name, err))
+
+        for err in check_description_length(manifest_path.parent, manifest):
             all_errors.append("[{}] {}".format(name, err))
 
         ext_errors, ext_warnings = check_extends(manifest, bases)
