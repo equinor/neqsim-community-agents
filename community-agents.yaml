@@ -365,6 +365,26 @@ agents:
       - open-data
       - economics
 
+  - name: ncs-value-chain-agent
+    version: "0.1.0"
+    description: "Coordinates whole-system Norwegian Continental Shelf (NCS) value-chain studies on open data - how every field, discovery, trunkline, processing plant and receiving terminal connects, how loaded the system is, what an outage or new tie-in does, and how to maximise production and value across the shelf with a capacity-constrained optimiser - and hands results to NeqSim tie-back, hydraulics, value-chain economics, debottlenecking and host process-model workflows."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/ncs-value-chain-agent/AGENT.md"
+    required_skills:
+      - neqsim-ncs-infrastructure-network
+      - neqsim-ncs-value-chain-optimization
+      - neqsim-norwegian-continental-shelf-data
+      - neqsim-resource-classification-screening
+      - neqsim-asset-value-npv-screening
+      - neqsim-energy-emissions-screening
+    supported_domains:
+      - field-development
+      - production-optimization
+      - gas-transport
+      - value-chain
+      - open-data
+      - economics
+
   - name: emissions-abatement-screening-agent
     version: "0.1.0"
     description: "Coordinates public, screening-level emission-abatement evaluation for the Norwegian Continental Shelf by combining field-life energy/emissions screening, the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund), and asset-value (NPV) screening to rank emission-reduction measures such as power-from-shore, waste-heat recovery, and flaring reduction before a validated NeqSim energy/economics workflow."

@@ -1,0 +1,48 @@
+name: ncs-value-chain-agent
+description: Coordinates whole-system Norwegian Continental Shelf (NCS) value-chain studies on open data - how every field, discovery, trunkline, processing plant and receiving terminal connects, how loaded the system is, what an outage or new tie-in does, and how to maximise production and value across the shelf with a capacity-constrained optimiser - and hands results to NeqSim tie-back, hydraulics, value-chain economics, debottlenecking and host process-model workflows.
+required_skills:
+- neqsim-ncs-infrastructure-network
+- neqsim-ncs-value-chain-optimization
+- neqsim-norwegian-continental-shelf-data
+- neqsim-resource-classification-screening
+- neqsim-asset-value-npv-screening
+- neqsim-energy-emissions-screening
+supported_domains:
+- field-development
+- production-optimization
+- gas-transport
+- value-chain
+- open-data
+- economics
+inputs:
+- value_chain_question_or_planning_objective
+- planning_horizon_and_scenario
+- prices_tariffs_and_discount_rate
+- capacity_overrides_and_outages
+- forecast_overrides
+- host_capacities_and_debottleneck_capex
+- user_exported_gassco_umm_messages
+outputs:
+- export_routes_and_shared_elements
+- trunkline_and_plant_utilization
+- single_points_of_failure_and_outage_impact
+- optimized_production_per_field_and_year
+- shadow_prices_and_bottlenecks
+- ullage_timeline
+- tiein_ranking_and_stranded_discoveries
+- production_uplift_list
+- neqsim_tieback_hydraulics_economics_results
+- process_model_rate_targets
+- validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- ncs-production-analysis-agent
+- reservoir-forecasting-agent
+- resource-classification-agent
+- gas-export-pipeline-agent
+- tie-in-screening-agent
+- production-optimization-agent
+- emissions-abatement-screening-agent
+- field-development-economics-agent
+human_review_required: true
+version: 0.1.0
