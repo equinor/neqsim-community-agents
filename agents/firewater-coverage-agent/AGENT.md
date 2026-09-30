@@ -92,4 +92,6 @@ Work the four questions in order. Reversing the order is the usual way these stu
 
 - `process-safety-agent` — relief loads, blowdown, flare radiation, PSV sizing
 - `piping-integrity-agent` — line velocities and wall thickness in the same area
+- `installation-weather-agent` — live or forecast wind speed for the fire-monitor
+  wind-drift screening, instead of an assumed value
 - `community-router-agent` — routing when the request spans disciplines

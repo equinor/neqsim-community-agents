@@ -126,6 +126,19 @@ agents:
       - neqsim-safety-function-coverage-screening
       - neqsim-jet-fire-radiation-screening
 
+  - name: installation-weather-agent
+    version: "0.1.0"
+    description: "Reads live, forecast and historical weather, wind and sea-state data for an installation from open APIs (worldwide via Open-Meteo, with a Norwegian Continental Shelf cross-check via MET Norway and the Sodir facility register) and hands it to other screening agents."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/installation-weather-agent/AGENT.md"
+    required_skills:
+      - neqsim-weather-data
+    supported_domains:
+      - environment
+      - meteorology
+      - site-conditions
+      - norwegian-continental-shelf
+
   - name: process-safety-agent
     version: "0.1.0"
     description: "Provides early-stage process safety screening for fire-case relief loads and emergency depressurization with public, educational methods."

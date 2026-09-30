@@ -101,6 +101,9 @@ The screening produced by this agent maps to validated, rigorous NeqSim Java fun
 
 In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
 
+For the seabed/ambient temperature input, `installation-weather-agent` can supply live or
+historical sea-surface temperature for the installation instead of an assumed value.
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim

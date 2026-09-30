@@ -96,6 +96,9 @@ The screening produced by this agent maps to validated, rigorous NeqSim Java fun
 
 In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
 
+For the site ambient temperature and elevation inputs, `installation-weather-agent` can supply
+live, forecast, or historical values for the installation instead of an assumed value.
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim
