@@ -177,7 +177,8 @@
       "neqsim-utility-balance-screening",
       "neqsim-vacuum-collapse-screening",
       "neqsim-water-dewpoint-dehydration-screening",
-      "neqsim-wax-margin-check"
+      "neqsim-wax-margin-check",
+      "neqsim-weather-data"
     ]
   },
   "skills": [
@@ -337,6 +338,7 @@
     "neqsim-water-hammer",
     "neqsim-wax-calculations",
     "neqsim-wax-margin-check",
+    "neqsim-weather-data",
     "paperlab-book-release-orchestration",
     "paperlab-book-to-paper-extraction",
     "paperlab-journal-positioning",
