@@ -34,6 +34,12 @@ must take.
 - "Solve until the goal is reached" or "until the improvements are minimal".
 - A Word or Markdown task description should become a task with a checkable goal.
 - A monitoring set-up must be shown to find known faults, and nothing else, before it runs unattended.
+- A plant model should be kept current and used to recommend operating changes (production optimisation):
+  `neqsim task-living <task> --template production`. The loop is advisory: it checks model validity gates and
+  hard constraints (product spec, equipment limits with demonstrated experience), withholds every proposal that
+  is not safe to show, and tracks what approved changes delivered. It never writes to a control system.
+  Engineers add comments and restrictions between cycles with `neqsim task-note` (lever bounds and freezes,
+  constraint limits, free text); each cycle applies and shows them, and an agent must read them before acting.
 
 # Inputs
 
@@ -61,6 +67,10 @@ must take.
    `continuous_improvement_toolkit.tagreader_adapter:TagreaderAdapter`), task-local
    stage scripts that run the NeqSim model, KPIs, drift signals with engineering
    floors (`min_sigma`), triggers, solve settings and expected events.
+   For a production-optimisation task also set `gates:` (model residuals, mass balance, input age),
+   the goal `constraints:` (limit, margin, source; a hard constraint with no limit withholds all advice),
+   and the optimiser levers; see the `neqsim-continuous-task-improvement` skill, section
+   "Production optimisation loop".
 4. Backtest: `neqsim task-backtest <task> --start ... --end ... --repeat`. Tune
    floors and `confirm` until every expected event is found within its delay with
    near-zero false alarms. Record the result.
