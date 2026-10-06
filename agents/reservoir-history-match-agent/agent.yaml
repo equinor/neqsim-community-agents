@@ -1,0 +1,45 @@
+name: reservoir-history-match-agent
+description: "Follows a field with a compositional multi-tank reservoir model: loads well and field history, splits formations and pressure compartments, history-matches volumes, aquifer and condensate yield, models produced composition versus depletion, forecasts under wellhead-pressure limits, and feeds process models with reservoir-driven wellstreams to show history and future production."
+required_skills:
+- neqsim-reservoir-history-match-forecast
+- neqsim-pseudocomponent-split-characterization
+- neqsim-pvt-regression-characterization-factor
+- neqsim-reservoir-depletion-screening
+context_skills:
+- neqsim-reservoir-model-builder
+- neqsim-reference-fluid-synthetic-generation
+- neqsim-near-well-and-injectivity
+- neqsim-production-network-routing
+- neqsim-fluid-quality-check
+supported_domains:
+- reservoir-engineering
+- history-matching
+- production-forecasting
+- fluid-composition
+- process-integration
+inputs:
+- well_and_field_production_history
+- static_pressure_gauges_and_flowing_bhp
+- well_to_formation_and_compartment_map
+- tuned_reservoir_fluid_per_formation
+- reservoir_pressure_and_temperature
+- forecast_scenarios_and_wellhead_pressure_limits
+- process_model_or_simulator_callable
+outputs:
+- tank_layout_and_assumption_register
+- matched_tank_parameters_with_uncertainty
+- match_quality_by_kind_and_tank
+- well_deliverability_table
+- produced_composition_versus_date
+- history_and_forecast_tables_per_tank_and_well
+- wellstream_tables_for_process_models
+- process_kpi_series_history_and_future
+- data_gaps_and_review_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- reservoir-simulator-agent
+- fluid-characterization-agent
+- reservoir-forecasting-agent
+- reservoir-to-facility-screening-agent
+human_review_required: true
+version: 0.1.0

@@ -430,6 +430,22 @@ agents:
       - production-forecasting
       - open-data
 
+  - name: reservoir-history-match-agent
+    version: "0.1.0"
+    description: "Follows a field with a compositional multi-tank reservoir model: loads well and field history, splits formations and pressure compartments, history-matches volumes, aquifer and condensate yield, models produced composition versus depletion, forecasts under wellhead-pressure limits, and feeds process models with reservoir-driven wellstreams to show history and future production."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-history-match-agent/AGENT.md"
+    required_skills:
+      - neqsim-reservoir-history-match-forecast
+      - neqsim-pseudocomponent-split-characterization
+      - neqsim-pvt-regression-characterization-factor
+      - neqsim-reservoir-depletion-screening
+    supported_domains:
+      - reservoir-engineering
+      - history-matching
+      - production-forecasting
+      - fluid-composition
+      - process-integration
   - name: reservoir-simulator-agent
     version: "0.5.0"
     description: "Sets up a screening-level reservoir simulation from whatever data exists - starting from open data such as an NCS field page and refining as appraisal, well-test and PVT data arrive - and hands a provenance-traced specification to the NeqSim reservoir workflow. Also covers gas-condensate vaporised-oil PVT, models sized backwards from a mandated profile, and best-guess structures calibrated to published volumes with an assumption register."
