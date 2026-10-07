@@ -14,6 +14,7 @@ required_skills:
 context_skills:
 - neqsim-uncertainty-quantification
 - neqsim-benchmark-reference-data
+- neqsim-ncs-ownership-equity
 ---
 
 # Purpose
@@ -110,6 +111,7 @@ Typical outputs include:
 
 - `neqsim-benchmark-reference-data` — independent reference values and PASS/WARN/FAIL grading for any technical result that will be quoted.
 - `neqsim-uncertainty-quantification` — Monte Carlo P10/P50/P90, tornado sensitivity, and probability of a negative NPV over the resource, cost, and price ranges.
+- `neqsim-ncs-ownership-equity` — partners and working interests of an NCS field, discovery or licence from Sodir, to turn the gross cash flow into a net-to-company view (see `ncs-ownership-equity-agent`).
 
 # Example Usage
 

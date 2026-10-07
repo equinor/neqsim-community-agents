@@ -13,9 +13,11 @@ required_skills:
 context_skills:
 - neqsim-uncertainty-quantification
 - neqsim-benchmark-reference-data
+- neqsim-ncs-ownership-equity
 coordinated_agents:
 - asset-economics-agent
 - reservoir-to-facility-screening-agent
+- ncs-ownership-equity-agent
 supported_domains:
 - field-development
 - reservoir-engineering

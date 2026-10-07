@@ -345,7 +345,7 @@ agents:
       - flow-assurance
 
   - name: reservoir-to-facility-screening-agent
-    version: "0.1.0"
+    version: "0.2.0"
     description: "Coordinates early-stage reservoir-to-facility production screening that chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-to-facility-screening-agent/AGENT.md"
@@ -354,6 +354,7 @@ agents:
       - neqsim-production-network-routing
       - neqsim-subsea-layout-geometry
       - neqsim-step-out-screening
+      - neqsim-reservoir-facility-value-chain
     supported_domains:
       - field-development
       - reservoir-engineering
@@ -398,6 +399,23 @@ agents:
       - open-data
       - economics
 
+  - name: ncs-ownership-equity-agent
+    version: "0.1.0"
+    description: "Reads who owns Norwegian Continental Shelf fields, discoveries and licences from Sodir (partners, equity %, operator, history, company portfolio) and turns it into net-equity inputs for field evaluation and economics. Prospect equity is not public, so it is user-supplied or shown as a labelled licence proxy."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/ncs-ownership-equity-agent/AGENT.md"
+    required_skills:
+      - neqsim-ncs-ownership-equity
+      - neqsim-norwegian-continental-shelf-data
+      - neqsim-resource-classification-screening
+      - neqsim-asset-value-npv-screening
+      - neqsim-capex-opex-screening
+      - neqsim-economy-basis-screening
+    supported_domains:
+      - field-development
+      - economics
+      - norwegian-continental-shelf
+      - open-data
   - name: emissions-abatement-screening-agent
     version: "0.1.0"
     description: "Coordinates public, screening-level emission-abatement evaluation for the Norwegian Continental Shelf by combining field-life energy/emissions screening, the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund), and asset-value (NPV) screening to rank emission-reduction measures such as power-from-shore, waste-heat recovery, and flaring reduction before a validated NeqSim energy/economics workflow."
@@ -530,6 +548,7 @@ agents:
     context_skills:
       - neqsim-uncertainty-quantification
       - neqsim-benchmark-reference-data
+      - neqsim-ncs-ownership-equity
     supported_domains:
       - field-development
       - reservoir-engineering

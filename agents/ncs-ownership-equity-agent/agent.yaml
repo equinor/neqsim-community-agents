@@ -1,0 +1,39 @@
+name: ncs-ownership-equity-agent
+description: Reads who owns Norwegian Continental Shelf fields, discoveries and licences from Sodir (partners, equity %, operator, history, company portfolio) and turns it into net-equity inputs for field evaluation and economics. Prospect equity is not public, so it is user-supplied or shown as a labelled licence proxy.
+required_skills:
+- neqsim-ncs-ownership-equity
+- neqsim-norwegian-continental-shelf-data
+- neqsim-resource-classification-screening
+- neqsim-asset-value-npv-screening
+- neqsim-capex-opex-screening
+- neqsim-economy-basis-screening
+supported_domains:
+- field-development
+- economics
+- norwegian-continental-shelf
+- open-data
+inputs:
+- asset_names_field_discovery_licence_or_prospect
+- company_or_partner_of_interest
+- as_of_date_or_back_cast_dates
+- gross_volumes_revenue_capex_opex_series
+- user_supplied_prospect_equity_and_source
+- known_pending_transfers_or_carry_terms
+outputs:
+- partners_with_equity_operator_and_valid_dates
+- ownership_history_and_changes
+- net_to_company_volumes_capex_opex_and_cash_flow
+- company_portfolio_of_fields_and_discoveries
+- equity_basis_label_and_data_currency
+- equity_completeness_and_warnings
+- economics_handoff_with_equity_fractions
+- validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- ncs-production-analysis-agent
+- resource-classification-agent
+- field-development-economics-agent
+- concept-selection-agent
+- tie-in-screening-agent
+human_review_required: true
+version: 0.1.0

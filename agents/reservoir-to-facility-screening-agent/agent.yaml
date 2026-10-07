@@ -6,6 +6,7 @@ required_skills:
 - neqsim-production-network-routing
 - neqsim-subsea-layout-geometry
 - neqsim-step-out-screening
+- neqsim-reservoir-facility-value-chain
 coordinated_agents:
 - subsea-layout-screening-agent
 - tie-in-screening-agent
@@ -36,4 +37,4 @@ outputs:
 - required_follow_up_studies
 - validation_checklist
 human_review_required: true
-version: 0.1.0
+version: 0.2.0

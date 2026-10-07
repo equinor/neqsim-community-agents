@@ -1,12 +1,13 @@
 ---
 name: reservoir-to-facility-screening-agent
 description: Coordinates early-stage reservoir-to-facility production screening that chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development.
-version: 0.1.0
+version: 0.2.0
 required_skills:
 - neqsim-reservoir-depletion-screening
 - neqsim-production-network-routing
 - neqsim-subsea-layout-geometry
 - neqsim-step-out-screening
+- neqsim-reservoir-facility-value-chain
 ---
 
 # Purpose
@@ -73,6 +74,7 @@ Typical outputs include:
 4. Use `production-network-routing` to estimate per-well inflow, aggregate rates by manifold, and roll up the platform arrival pressure.
 4a. Optionally use `production-network-routing.regulate_flow_from_inlet_pressure` to solve each well's rate from a fixed facility inlet/separator pressure and the reservoir pressures, mirroring NeqSim `WellFlowlineNetwork.setTargetEndpointPressure`.
 5. Combine the reservoir profile and the network roll-up into a time-development summary (how falling reservoir pressure erodes arrival-pressure margin).
+5a. For a producing gas field with a pressure and rate history, use `reservoir-facility-value-chain` instead of the constant-offtake profile: fit the p/z tank from shut-in wellhead pressure, fit the well law on choke-open rows, take facility capacity versus separator pressure from process-model throughput sweeps, then balance supply and capacity each month. Report which side binds, hold out the latest 2-3 years, and bootstrap the p/z fit jointly for P10/P90.
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible reservoir-to-facility screening report outline.
 8. Document assumptions, limitations, and human review requirements.
@@ -83,6 +85,7 @@ Typical outputs include:
 - `production-network-routing` mapped to community catalog ID `neqsim-production-network-routing`
 - `subsea-layout-geometry` mapped to community catalog ID `neqsim-subsea-layout-geometry`
 - `step-out-screening` mapped to community catalog ID `neqsim-step-out-screening`
+- `reservoir-facility-value-chain` mapped to community catalog ID `neqsim-reservoir-facility-value-chain`
 
 # Example Usage
 
@@ -140,5 +143,5 @@ corresponding enterprise catalog workflow. This agent is a companion to the
 
 - NeqSim: https://github.com/equinor/neqsim
 - NeqSim Community Skills: https://github.com/equinor/neqsim-community-skills
-- Community skills: `reservoir-depletion-screening`, `production-network-routing`, `subsea-layout-geometry`, `step-out-screening`
+- Community skills: `reservoir-depletion-screening`, `production-network-routing`, `subsea-layout-geometry`, `step-out-screening`, `reservoir-facility-value-chain`
 - Enterprise counterpart: the governed well-production routing workflow in the enterprise catalogs.
