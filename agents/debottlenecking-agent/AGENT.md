@@ -113,6 +113,10 @@ breakdown on `neqsim.process.processmodel.ProcessSystem` / `ProcessModel`, and
 screening skills ultimately drive these `ProcessSystem` workflows. This agent only
 screens and ranks; it does not itself run these calculations.
 
+When the question moves from "where is the bottleneck" to "which ideas across wells,
+subsea and topside lift it, and which to mature", hand over to the core agent
+`capacity-increase-screening` (skill `neqsim-capacity-increase-screening`).
+
 # References
 
 - NeqSim: https://github.com/equinor/neqsim
