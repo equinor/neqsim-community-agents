@@ -22,6 +22,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - flow-assurance-study-agent
 - fluid-characterization-agent
+- frontier-block-bid-agent
 - gas-export-pipeline-agent
 - gas-lift-allocation-agent
 - gas-treatment-agent

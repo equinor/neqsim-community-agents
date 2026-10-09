@@ -65,6 +65,7 @@ already obvious.
 | Request is about | Route to |
 |---|---|
 | Which concept, tie-in, or development option to pick | `concept-selection-agent`, `tie-in-screening-agent` |
+| Bid on an exploration block, PSC bid round, break-even profit-oil share | `frontier-block-bid-agent` |
 | Field economics, NPV, CAPEX/OPEX, emissions cost | `asset-economics-agent`, `field-development-economics-agent` |
 | Emission reduction / abatement on the NCS | `emissions-abatement-screening-agent`, `energy-emissions-agent` |
 | Reservoir model, depletion, forecast, resources | `reservoir-simulator-agent`, `reservoir-forecasting-agent`, `resource-classification-agent`, `ncs-production-analysis-agent` |

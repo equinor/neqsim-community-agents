@@ -925,3 +925,21 @@ agents:
       - reservoir-engineering
       - reservoir-simulation
       - black-oil-pvt
+
+  - name: frontier-block-bid-agent
+    version: "0.1.0"
+    description: "Coordinates public, screening-level evaluation of a bid on an exploration block under a production sharing contract - resource and fluid basis, near-field tie-back versus stand-alone concept, and PSC bid economics with the break-even offered profit-oil share - before a validated NeqSim study."
+    author: "neqsim-community"
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/frontier-block-bid-agent/AGENT.md"
+    agent_type: community-coordinator
+    required_skills:
+      - neqsim-psc-bid-economics-screening
+      - neqsim-anp-open-data
+      - neqsim-brazil-presalt-analogue-basis
+      - neqsim-asset-value-npv-screening
+    supported_domains:
+      - field-development
+      - exploration
+      - economics
+      - brazil

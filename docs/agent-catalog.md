@@ -167,6 +167,7 @@ question they answer.
 | `emissions-abatement-screening-agent` *(coordinator)* | Ranks emission-reduction measures — power-from-shore, waste-heat recovery, flaring reduction — using the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund) and NPV screening. |
 | `asset-economics-agent` *(coordinator)* | Chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted NPV into one concept-economics view with carbon intensity and CO2-tax exposure. |
 | `concept-selection-agent` | Chains resource classification, CAPEX/OPEX, NPV, energy/emissions, and step-out screening into a comparable concept summary. |
+| `frontier-block-bid-agent` *(coordinator)* | Screens an exploration-block PSC bid: declared resource and fluid basis, near-field tie-back versus stand-alone, EMV and the break-even offered profit-oil share. |
 | `field-development-economics-agent` *(coordinator)* | End-to-end reservoir-to-market screening: reservoir fluid and depletion, subsea hydrate margins, topside separation duty, gas-export line, and an asset-economics roll-up. |
 
 ### 2.13 Numerical coupling (CFD and FEM)
