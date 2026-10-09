@@ -100,9 +100,12 @@ assumptions and human-review requirements.
 
 # Related NeqSim Functionality
 
-`neqsim.process.fielddevelopment.economics.PscBidEconomics` (bid EMV and break-even
-share), `TaxModelRegistry` (`BR-PSA`) with `CashFlowEngine` for full-life fiscal cash
-flow, and the field-development tie-back and concept-screening classes.
+`neqsim.process.fielddevelopment.economics.PscBidEconomics` (bid EMV, break-even
+share, price-band share table, Monte Carlo P10/P50/P90 and probability of loss,
+tornado), `neqsim.process.fielddevelopment.tieback.HostSynergyScreening` (host
+ullage cover and synergy value), `TaxModelRegistry` (`BR-PSA`) with `CashFlowEngine`
+for full-life fiscal cash flow, and the field-development tie-back and
+concept-screening classes.
 
 # References
 
