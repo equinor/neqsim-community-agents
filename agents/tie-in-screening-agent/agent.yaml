@@ -6,6 +6,7 @@ required_skills:
 - neqsim-hydrate-screening
 - neqsim-separator-modelling
 - neqsim-resource-classification-screening
+- neqsim-ageing-life-extension-screening
 supported_domains:
 - field-development
 - tie-in-screening

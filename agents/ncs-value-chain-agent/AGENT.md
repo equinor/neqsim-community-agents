@@ -10,6 +10,7 @@ required_skills:
 - neqsim-resource-classification-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
+- neqsim-ageing-life-extension-screening
 coordinated_agents:
 - ncs-production-analysis-agent
 - reservoir-forecasting-agent
@@ -93,7 +94,12 @@ Use this agent when an engineer or analyst needs to:
 # Workflow
 
 1. **Frame.** Classify the request as map, load, resilience, optimise, tie-in,
-   invest or process-handoff, and agree the horizon and scenario.
+   invest or process-handoff, and agree the horizon and scenario. For any
+   host, tie-in or ullage question, also establish the host technical life
+   basis with `neqsim-ageing-life-extension-screening` (design life, economic
+   cut-off, programme validity, cessation year, life-limiting populations) and
+   cap the host tail at the earliest unmitigated limiter; a snapshot capacity
+   or forecast year beyond that tail is a data gap, not capacity.
 2. **Refresh when needed.** `neqsim-ncs-infrastructure-network` bundles a
    snapshot. For current data, run `scripts/build_snapshot.py`, which reads
    Sodir and norskpetroleum live. Use `EntsogTransparency` for observed
@@ -133,6 +139,7 @@ Use this agent when an engineer or analyst needs to:
 - `resource-classification-screening` mapped to community catalog ID `neqsim-resource-classification-screening`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
+- `ageing-life-extension-screening` mapped to community catalog ID `neqsim-ageing-life-extension-screening`
 
 # Example Usage
 
@@ -167,6 +174,8 @@ Using open data, optimise gas and oil production across the whole Norwegian Cont
 
 - Snapshot date and sources are stated; a live refresh is used when the
   question is about the current year.
+- Host tie-in and ullage conclusions state the host technical life basis
+  (horizons, limiters, usable tail, sources not read).
 - Recent-year utilisation routes >99 % of production with no element above
   capacity.
 - Optimiser years are all `optimal`; the NeqSim `ValueChainObjective` cross-check

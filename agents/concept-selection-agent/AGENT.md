@@ -8,6 +8,7 @@ required_skills:
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
 - neqsim-step-out-screening
+- neqsim-ageing-life-extension-screening
 ---
 
 # Purpose
@@ -48,6 +49,11 @@ NeqSim field-development and economics studies for any quantitative decision.
 # Workflow
 
 1. Restate the opportunity, concept options, and economic basis.
+1a. Use `ageing-life-extension-screening` to establish the technical life basis
+   of any existing host or reused infrastructure (design life, economic cut-off,
+   programme validity, cessation year, life-limiting populations such as risers,
+   moorings, pipelines, obsolescence). Cap the field life used in value and
+   emissions screening at the usable host tail; list missing items as data gaps.
 2. Use `resource-classification-screening` to place the resource on a public
    classification basis.
 3. Use `capex-opex-screening` to build an indicative cost picture per concept.
@@ -69,6 +75,8 @@ NeqSim field-development and economics studies for any quantitative decision.
 - `resource-classification-screening` mapped to community catalog ID
   `neqsim-resource-classification-screening`.
 - `step-out-screening` mapped to community catalog ID `neqsim-step-out-screening`.
+- `ageing-life-extension-screening` mapped to community catalog ID
+  `neqsim-ageing-life-extension-screening`.
 
 # Example Usage
 
@@ -97,6 +105,9 @@ a screening ranking. Include assumptions, limitations, and human review requirem
 # Validation Checklist
 
 - [ ] Concept options and economic basis are stated.
+- [ ] The field life is consistent with the technical life basis of any reused
+      host or infrastructure (horizons, limiters, usable tail, and sources read
+      or not read are stated).
 - [ ] Each concept is screened on the same resource, cost, value, emissions, and
       step-out basis.
 - [ ] Composition (where used) sums to 1.0 and uses valid component names.

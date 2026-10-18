@@ -86,6 +86,7 @@ agents:
       - neqsim-hydrate-screening
       - neqsim-separator-modelling
       - neqsim-resource-classification-screening
+      - neqsim-ageing-life-extension-screening
     supported_domains:
       - field-development
       - tie-in-screening
@@ -355,6 +356,7 @@ agents:
       - neqsim-subsea-layout-geometry
       - neqsim-step-out-screening
       - neqsim-reservoir-facility-value-chain
+      - neqsim-ageing-life-extension-screening
     supported_domains:
       - field-development
       - reservoir-engineering
@@ -391,6 +393,7 @@ agents:
       - neqsim-resource-classification-screening
       - neqsim-asset-value-npv-screening
       - neqsim-energy-emissions-screening
+      - neqsim-ageing-life-extension-screening
     supported_domains:
       - field-development
       - production-optimization
@@ -523,6 +526,7 @@ agents:
       - neqsim-capex-opex-screening
       - neqsim-energy-emissions-screening
       - neqsim-asset-value-npv-screening
+      - neqsim-ageing-life-extension-screening
     context_skills:
       - neqsim-uncertainty-quantification
     supported_domains:
@@ -545,6 +549,7 @@ agents:
       - neqsim-capex-opex-screening
       - neqsim-energy-emissions-screening
       - neqsim-asset-value-npv-screening
+      - neqsim-ageing-life-extension-screening
     context_skills:
       - neqsim-uncertainty-quantification
       - neqsim-benchmark-reference-data
@@ -742,6 +747,8 @@ agents:
       - neqsim-compressor-operating-window-check
       - neqsim-line-velocity-check
       - neqsim-pressure-drop-screening
+    context_skills:
+      - neqsim-ageing-life-extension-screening
     coordinated_agents:
       - production-optimization-agent
     supported_domains:
@@ -854,6 +861,7 @@ agents:
       - neqsim-asset-value-npv-screening
       - neqsim-energy-emissions-screening
       - neqsim-step-out-screening
+      - neqsim-ageing-life-extension-screening
     supported_domains:
       - concept-selection
       - field-development

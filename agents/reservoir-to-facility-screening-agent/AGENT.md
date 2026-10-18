@@ -8,6 +8,7 @@ required_skills:
 - neqsim-subsea-layout-geometry
 - neqsim-step-out-screening
 - neqsim-reservoir-facility-value-chain
+- neqsim-ageing-life-extension-screening
 ---
 
 # Purpose
@@ -69,6 +70,7 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the screening objective and the available public reservoir, well, and layout data.
+1a. Use `ageing-life-extension-screening` to establish the technical life basis of the host and the riser/flowline/pipeline populations (design life, economic cut-off, cessation year, life-limiting populations). Cap the time-development horizon at the earliest unmitigated limiter and flag missing items as data gaps.
 2. Use `reservoir-depletion-screening` to build the reservoir pressure and production profile versus time, including water-cut development.
 3. Optionally use `subsea-layout-geometry` and `step-out-screening` to confirm the well/manifold/host layout and tie-back distances.
 4. Use `production-network-routing` to estimate per-well inflow, aggregate rates by manifold, and roll up the platform arrival pressure.
@@ -86,6 +88,7 @@ Typical outputs include:
 - `subsea-layout-geometry` mapped to community catalog ID `neqsim-subsea-layout-geometry`
 - `step-out-screening` mapped to community catalog ID `neqsim-step-out-screening`
 - `reservoir-facility-value-chain` mapped to community catalog ID `neqsim-reservoir-facility-value-chain`
+- `ageing-life-extension-screening` mapped to community catalog ID `neqsim-ageing-life-extension-screening`
 
 # Example Usage
 
@@ -114,6 +117,7 @@ Use public synthetic data to screen a gas field from reservoir to facility. Buil
 # Validation Checklist
 
 - Screening objective and required arrival pressure are documented.
+- The production horizon is consistent with the technical life basis (limiters and sources stated).
 - Reservoir fluid type, recoverable volume, and pressure limits are stated.
 - Well productivity indices and tubing-head pressures are stated and consistent.
 - Manifold/flowline/riser layout and screening gradients are documented.

@@ -7,6 +7,7 @@ required_skills:
 - neqsim-subsea-layout-geometry
 - neqsim-step-out-screening
 - neqsim-reservoir-facility-value-chain
+- neqsim-ageing-life-extension-screening
 coordinated_agents:
 - subsea-layout-screening-agent
 - tie-in-screening-agent
