@@ -1,0 +1,34 @@
+name: jv-cost-control-agent
+agent_type: community-coordinator
+description: Coordinates joint-venture cost control for a non-operating partner - loading operator Joint Interest Billing, budget, operations and cost-recovery reports, proving them complete, ranking variances against budget or forecast, splitting unit-cost variances into volume and rate effects, reconciling reports with each other, and drafting fact-only variance commentary and operator questions for human review.
+required_skills:
+- neqsim-jv-cost-control-screening
+context_skills:
+- neqsim-capex-opex-screening
+- neqsim-asset-value-npv-screening
+- neqsim-uncertainty-quantification
+coordinated_agents:
+- asset-economics-agent
+supported_domains:
+- joint-venture accounting
+- cost control
+- budget and forecast variance
+- cost recovery
+inputs:
+- operator_jib_pdf_and_excel
+- budget_breakdown_by_version
+- monthly_operations_report
+- cost_recovery_report
+- participating_interest
+- materiality_thresholds
+- earlier_period_reports
+outputs:
+- consolidated_cost_tables
+- subtotal_and_statement_integrity_results
+- variance_ranking_and_commentary
+- unit_cost_volume_rate_split
+- reconciliation_and_roll_forward
+- operator_questions
+- assumptions_and_limitations
+human_review_required: true
+version: 0.1.0

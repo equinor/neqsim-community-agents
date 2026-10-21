@@ -551,6 +551,26 @@ agents:
       - environment
       - cost-estimation
 
+  - name: jv-cost-control-agent
+    version: "0.1.0"
+    description: "Coordinates joint-venture cost control for a non-operating partner - loading operator Joint Interest Billing, budget, operations and cost-recovery reports, proving them complete, ranking variances against budget or forecast, splitting unit-cost variances into volume and rate effects, reconciling reports with each other, and drafting fact-only variance commentary and operator questions for human review."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/jv-cost-control-agent/AGENT.md"
+    agent_type: community-coordinator
+    required_skills:
+      - neqsim-jv-cost-control-screening
+    context_skills:
+      - neqsim-capex-opex-screening
+      - neqsim-asset-value-npv-screening
+      - neqsim-uncertainty-quantification
+    coordinated_agents:
+      - asset-economics-agent
+    supported_domains:
+      - joint-venture accounting
+      - cost control
+      - budget and forecast variance
+      - cost recovery
+
   - name: field-development-economics-agent
     version: "0.1.0"
     description: "Coordinates an end-to-end reservoir-to-market field-development screening that chains reservoir fluid and depletion screening, subsea hydrate flow-assurance margins, topside separation duty, gas-export line screening, and an asset-economics roll-up (CAPEX/OPEX, energy and emissions, and a discounted NPV) into one concept-level value-chain view."
