@@ -6,6 +6,7 @@ required_skills:
 - neqsim-api-patterns
 context_skills:
 - neqsim-production-optimization
+- neqsim-vfp-lift-curves
 - neqsim-subsea-and-wells
 - neqsim-benchmark-reference-data
 - neqsim-input-validation
@@ -13,6 +14,7 @@ context_skills:
 coordinated_agents:
 - reservoir-simulator-agent
 - flow-assurance-engineer-agent
+- vfp-lift-curve-agent
 supported_domains:
 - subsurface
 - wells
@@ -44,4 +46,4 @@ outputs:
 - neqsim_inflowperformance_handoff
 - basis_confidence_and_weakest_input
 human_review_required: true
-version: 0.3.0
+version: 0.3.1

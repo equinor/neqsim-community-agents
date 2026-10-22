@@ -60,8 +60,9 @@ coordinated_agents:
 - tie-in-screening-agent
 - export-tie-in-concept-agent
 - utilities-screening-agent
+- vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
-version: 0.1.1
+version: 0.1.2
 required_skills: []
 supported_domains:
 - request classification
@@ -132,6 +133,7 @@ already obvious.
 | Reservoir model, depletion, forecast, resources | `reservoir-simulator-agent`, `reservoir-forecasting-agent`, `resource-classification-agent`, `ncs-production-analysis-agent` |
 | Whole-NCS system: how fields, pipelines, plants and terminals connect; bottlenecks, outages, tie-in capacity, shelf-wide production/value optimisation | `ncs-value-chain-agent` |
 | Well inflow, productivity, injectivity, artificial lift | `near-well-injectivity-agent`, `artificial-lift-agent`, `gas-lift-allocation-agent` |
+| Lift curve, VFP table (VFPPROD/VFPINJ), vertical lift performance, THP/BHP table for Eclipse or OPM Flow | `vfp-lift-curve-agent` (inflow side: `near-well-injectivity-agent`) |
 | Well path, directional plan, anti-collision, separation factor, slot occupancy, sidetrack from a template | `well-trajectory-anticollision-agent` |
 | Reservoir-to-facility rates and arrival conditions | `reservoir-to-facility-screening-agent` |
 | Fluid characterization, PVT, phase behaviour, E300 files | `pvt-agent`, `fluid-characterization-agent`, `e300-fluid-agent` |

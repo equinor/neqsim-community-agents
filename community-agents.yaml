@@ -905,7 +905,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"
@@ -965,7 +965,7 @@ agents:
       - mesh-quality
 
   - name: near-well-injectivity-agent
-    version: "0.3.0"
+    version: "0.3.1"
     description: "Derives productivity and injectivity indices from the rock with OPM Flow, pyscal and resdata, converts NeqSim fluids to black-oil PVT tables, generates VFPPROD lift curves from NeqSim flowline/tubing models, and hands a defensible inflow relationship to NeqSim well and process models. Use when an inflow number is about to be assumed, injectors vs voidage, productivity decay below bubble point, a VFP table is needed, or a reservoir model must be built and run."
     author: "neqsim-community"
     repo: "equinor/neqsim-community-agents"
@@ -983,6 +983,25 @@ agents:
       - reservoir-engineering
       - reservoir-simulation
       - black-oil-pvt
+
+  - name: vfp-lift-curve-agent
+    version: "0.1.0"
+    description: "Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models: calibrates the lift model, builds tubing-only, flowline or full-system tables with NeqSim VfpTableBuilder, validates by IPR x VFP and off-grid solves, and exports the deck with provenance. Use for new, regenerated or repaired lift curves (U-shaped BHP, extrapolation, dry-gas jump)."
+    author: "neqsim-community"
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/vfp-lift-curve-agent/AGENT.md"
+    agent_type: community-agent
+    required_skills:
+      - neqsim-vfp-lift-curves
+      - neqsim-api-patterns
+    supported_domains:
+      - wells
+      - lift-curves
+      - vertical-lift-performance
+      - reservoir-simulation
+      - production-systems
+      - flowlines
+      - subsurface
 
   - name: frontier-block-bid-agent
     version: "0.2.0"

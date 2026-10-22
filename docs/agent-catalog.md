@@ -79,6 +79,7 @@ question they answer.
 | `ncs-production-analysis-agent` *(coordinator)* | Frames production, resource-accounting, and field-inventory studies from a source-attributed Norwegian Continental Shelf reference-facts database. |
 | `resource-classification-agent` | Classifies resources on the public SODIR RC0–RC9 maturity ladder and the SPE-PRMS category axis, without confusing maturity with quantity uncertainty. |
 | `near-well-injectivity-agent` | Derives productivity and injectivity indices from the rock instead of assuming them, using OPM Flow with pyscal and resdata, and hands a defensible inflow relationship to wellbore and process models. |
+| `vfp-lift-curve-agent` | Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models with NeqSim `VfpTableBuilder`, validated against the IPR and off-grid solves. |
 | `reservoir-to-facility-screening-agent` *(coordinator)* | Chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development. |
 
 ### 2.3 Wells and artificial lift

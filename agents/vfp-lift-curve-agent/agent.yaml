@@ -1,0 +1,45 @@
+name: vfp-lift-curve-agent
+description: "Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models: calibrates the lift model, builds tubing-only, flowline or full-system tables with NeqSim VfpTableBuilder, validates by IPR x VFP and off-grid solves, and exports the deck with provenance. Use for new, regenerated or repaired lift curves (U-shaped BHP, extrapolation, dry-gas jump)."
+version: 0.1.0
+agent_type: community-agent
+required_skills:
+- neqsim-vfp-lift-curves
+- neqsim-api-patterns
+context_skills:
+- neqsim-near-well-and-injectivity
+- neqsim-subsea-and-wells
+- neqsim-production-optimization
+- neqsim-integrated-production-and-lifecycle
+- neqsim-capacity-and-utilization-analysis
+- neqsim-rotating-equipment-design
+- neqsim-model-calibration-and-data-reconciliation
+- neqsim-input-validation
+coordinated_agents:
+- near-well-injectivity-agent
+- reservoir-simulator-agent
+- flow-assurance-engineer-agent
+supported_domains:
+- wells
+- lift-curves
+- vertical-lift-performance
+- reservoir-simulation
+- production-systems
+- flowlines
+- subsurface
+inputs:
+- well_survey_inner_diameter_roughness_and_datum
+- surface_gas_condensate_and_water_compositions_or_e300_fluid
+- expected_ratio_ranges_wgr_ogr_gor_wct
+- flowline_and_topside_geometry_and_valve_data_if_network_or_full_system_curve
+- compressor_or_train_capacity_limits_if_rate_cap
+- gauge_wellhead_and_historian_calibration_data
+- simulator_target_unit_system_and_table_numbers
+- late_life_pressure_and_rate_envelope
+outputs:
+- vfpprod_or_vfpinj_include_file_with_provenance_header
+- validation_report_round_trip_off_grid_and_ipr_x_vfp
+- calibrated_lift_model_settings_and_residuals
+- minimum_stable_rate_from_raw_curve
+- axis_ranges_and_extrapolation_limits
+- assumptions_and_open_data_gaps
+human_review_required: true

@@ -4,13 +4,15 @@ description: "Derives productivity and injectivity indices from the rock with OP
 coordinated_agents:
 - reservoir-simulator-agent
 - flow-assurance-engineer-agent
-version: 0.3.0
+- vfp-lift-curve-agent
+version: 0.3.1
 agent_type: community-agent
 required_skills:
 - neqsim-near-well-and-injectivity
 - neqsim-api-patterns
 context_skills:
 - neqsim-production-optimization
+- neqsim-vfp-lift-curves
 - neqsim-subsea-and-wells
 - neqsim-benchmark-reference-data
 - neqsim-input-validation
@@ -81,11 +83,11 @@ to NeqSim. Do not rebuild wellbore hydraulics — that is `PipeBeggsAndBrills`,
 and it is already done.
 
 **8. Put the lift constraint in the deck as `VFPPROD`, not as a BHP floor.** When
-the tubing or the flowline limits the well, generate the lift-curve table from
-the real geometry: flash the wellstream to standard conditions, recombine each
-(rate, THP, WFR, GFR) point in Sm3/d, run `PipeBeggsAndBrills`, solve the inlet
-pressure by secant, and write the keyword with `EclipseVFPExporter` (recipe in
-`neqsim-production-optimization` § "Lift curves / VFPPROD"; deck usage in
+the tubing or the flowline limits the well, hand the table to
+`vfp-lift-curve-agent` (skill `neqsim-vfp-lift-curves`: `VfpTableBuilder` with a
+tubing, flowline or full-system lift model recombines each (rate, THP, WFR, GFR)
+point in Sm3/d, solves the inlet pressure, enforces sanity and writes the keyword
+with `EclipseVFPExporter`; deck usage in
 `neqsim-near-well-and-injectivity` § "Lift curves for the deck"). Choose the
 basis from the fluid — `'GAS' 'WGR' 'OGR'` for a condensate, `'OIL' 'WCT' 'GOR'`
 for an oil — and bracket the operating point on every axis. A tubing table goes

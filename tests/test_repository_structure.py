@@ -48,6 +48,10 @@ REQUIRED_YAML_KEYS = [
 ]
 
 EXPECTED_AGENTS = {
+    "vfp-lift-curve-agent": [
+        "neqsim-vfp-lift-curves",
+        "neqsim-api-patterns",
+    ],
     "technical-document-intelligence-agent": [
         "neqsim-document-intelligence-extraction",
     ],
