@@ -111,6 +111,7 @@
       "paperlab-reproducibility-capsule",
       "paperlab-scientific-traceability-audit",
       "paperlab-student-readability",
+      "process-study-report",
       "run-flash-experiments",
       "write-methods-section"
     ],
@@ -159,6 +160,7 @@
       "neqsim-hydrate-margin-check",
       "neqsim-hydrate-screening",
       "neqsim-jet-fire-radiation-screening",
+      "neqsim-jv-cost-control-screening",
       "neqsim-line-velocity-check",
       "neqsim-multiphase-flow-slug-screening",
       "neqsim-ncs-area-process-model",
@@ -303,6 +305,7 @@
     "neqsim-integrated-production-and-lifecycle",
     "neqsim-java8-rules",
     "neqsim-jet-fire-radiation-screening",
+    "neqsim-jv-cost-control-screening",
     "neqsim-line-velocity-check",
     "neqsim-literature-search",
     "neqsim-lng-liquefaction",
@@ -416,6 +419,7 @@
     "paperlab-reproducibility-capsule",
     "paperlab-scientific-traceability-audit",
     "paperlab-student-readability",
+    "process-study-report",
     "run-flash-experiments",
     "write-methods-section"
   ]
