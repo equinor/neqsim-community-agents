@@ -13,6 +13,10 @@ supported_domains:
 - field-development
 - asset-economics
 - screening
+inbound_handoffs:
+- agent: concept-longlist-shortlist-agent
+  schema: concept_short_list.v1
+  purpose: Screened short list with an owner-proposed reference case, decision matrix, weight crossovers and open questions, to be compared in depth.
 inputs:
 - opportunity-description
 - per-concept-cost-drivers
@@ -26,4 +30,4 @@ outputs:
 - assumptions-and-limitations
 - neqsim-study-recommendation
 human_review_required: true
-version: 0.1.0
+version: 0.1.1

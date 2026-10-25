@@ -122,6 +122,13 @@ EXPECTED_AGENTS = {
         "neqsim-energy-emissions-screening",
         "neqsim-step-out-screening",
     ],
+    "concept-longlist-shortlist-agent": [
+        "neqsim-concept-longlist-shortlist-screening",
+        "neqsim-capex-opex-screening",
+        "neqsim-asset-value-npv-screening",
+        "neqsim-energy-emissions-screening",
+        "neqsim-step-out-screening",
+    ],
     "resource-classification-agent": [
         "neqsim-resource-classification-screening",
     ],

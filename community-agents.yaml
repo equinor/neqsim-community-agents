@@ -887,7 +887,7 @@ agents:
       - well-screening
 
   - name: concept-selection-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Coordinates early-stage concept-selection screening for a field-development opportunity, chaining resource classification, CAPEX/OPEX, asset-value (NPV), energy/emissions, and step-out screening into a comparable concept summary before a validated study."
     repo: "equinor/neqsim-community-agents"
     path: "agents/concept-selection-agent/AGENT.md"
@@ -902,6 +902,23 @@ agents:
       - concept-selection
       - field-development
       - asset-economics
+      - screening
+
+  - name: concept-longlist-shortlist-agent
+    version: "0.1.0"
+    description: "Coordinates development-concept long-list generation and short-list selection - frames the decision elements, generates and screens the long list, scores it on a common basis, tests weight robustness and crossovers, and hands a defended short list with a reference case to concept-selection-agent."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/concept-longlist-shortlist-agent/AGENT.md"
+    required_skills:
+      - neqsim-concept-longlist-shortlist-screening
+      - neqsim-capex-opex-screening
+      - neqsim-asset-value-npv-screening
+      - neqsim-energy-emissions-screening
+      - neqsim-step-out-screening
+    supported_domains:
+      - concept-selection
+      - field-development
+      - decision-analysis
       - screening
 
   - name: community-router-agent

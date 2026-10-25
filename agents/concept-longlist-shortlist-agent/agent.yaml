@@ -1,0 +1,42 @@
+name: concept-longlist-shortlist-agent
+agent_type: community-coordinator
+description: Coordinates development-concept long-list generation and short-list selection - frames the decision elements, generates and screens the long list, scores it on a common basis, tests weight robustness and crossovers, and hands a defended short list with a reference case to concept-selection-agent.
+required_skills:
+- neqsim-concept-longlist-shortlist-screening
+- neqsim-capex-opex-screening
+- neqsim-asset-value-npv-screening
+- neqsim-energy-emissions-screening
+- neqsim-step-out-screening
+context_skills:
+- neqsim-stage-gate-project-timeline
+- neqsim-uncertainty-quantification
+- neqsim-ageing-life-extension-screening
+coordinated_agents:
+- concept-selection-agent
+- subsea-layout-screening-agent
+- tie-in-screening-agent
+- energy-emissions-agent
+- asset-economics-agent
+supported_domains:
+- concept-selection
+- field-development
+- decision-analysis
+- screening
+inputs:
+- opportunity-description
+- decision-elements-and-options
+- compatibility-rules-and-givens
+- must-pass-criteria-and-evidence
+- scoring-criteria-weights-and-values
+- short-list-size-and-reference-case
+outputs:
+- long-list-and-topology-count
+- capacity-variant-and-coverage-warnings
+- must-pass-and-elimination-log
+- decision-matrix-ranking-and-pareto-front
+- weight-robustness-and-crossovers
+- short-list-with-reference-case
+- open-questions-and-assumptions
+- concept-selection-handoff
+human_review_required: true
+version: 0.1.0
