@@ -17,6 +17,7 @@ coordinated_agents:
 - tie-in-screening-agent
 - energy-emissions-agent
 - asset-economics-agent
+- surf-layout-design-agent
 supported_domains:
 - concept-selection
 - field-development
@@ -37,6 +38,7 @@ outputs:
 - weight-robustness-and-crossovers
 - short-list-with-reference-case
 - open-questions-and-assumptions
+- screening-figures-and-concept-schematics
 - concept-selection-handoff
 human_review_required: true
 version: 0.1.0

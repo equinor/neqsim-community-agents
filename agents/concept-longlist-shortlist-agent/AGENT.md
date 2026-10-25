@@ -86,6 +86,9 @@ For comparing two or three concepts that are already chosen, use
   reference) and a conditional short list for pending concepts.
 - Elimination log, open questions, warnings, a `SCREENING` readiness label, and
   an explicit human-review requirement.
+- Screening figures (funnel, decision-matrix heatmap, Pareto trade-off, rank
+  acceptability, weight crossovers) and a block schematic per short-listed
+  concept, each with a caption and the result keys it shows.
 
 # Workflow
 
@@ -111,10 +114,18 @@ For comparing two or three concepts that are already chosen, use
    when per-concept values carry ranges.
 7. **Select.** Run `select_short_list` with the agreed size, threshold, diversity
    element, and reference case. Or run the whole chain with `run_screening`.
-8. **Hand off.** Pass the short list, reference case, decision matrix, and open
-   questions to `concept-selection-agent` for the detailed comparison.
-9. **Report.** Present the elimination log, robustness, and open questions, and
-   state that the short list requires human review.
+8. **Illustrate.** Run `render_screening_figures` (figures module of
+   `concept-longlist-shortlist-screening`, needs matplotlib) to draw the funnel,
+   decision matrix, Pareto trade-off, rank acceptability, crossovers, and a block
+   schematic per short-listed concept, and put the returned entries in the
+   `figures` list of `results.json`. Numbers on a schematic come from results
+   only (`key_facts`). When a short-listed concept needs a map-true layout over
+   bathymetry, delegate it to `surf-layout-design-agent`. An installed company
+   overlay may draw the concepts over its own infrastructure maps instead.
+9. **Hand off.** Pass the short list, reference case, decision matrix, figures,
+   and open questions to `concept-selection-agent` for the detailed comparison.
+10. **Report.** Present the elimination log, robustness, figures, and open
+   questions, and state that the short list requires human review.
 
 # Required Skills
 
@@ -169,6 +180,8 @@ case. Include the elimination log, open questions and human review requirements.
 - [ ] All concepts are scored on the same criteria and basis.
 - [ ] Weight robustness and crossovers are reported.
 - [ ] The short list names the role of each member and the reference case.
+- [ ] Every figure has a caption and linked result keys; no number on a figure
+      is typed by hand.
 - [ ] Human review requirement is stated.
 - [ ] The short list is handed to `concept-selection-agent` or a validated study.
 
