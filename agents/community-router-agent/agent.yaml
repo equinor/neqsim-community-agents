@@ -8,6 +8,7 @@ coordinated_agents:
 - asset-economics-agent
 - cfd-coupling-agent
 - compressor-antisurge-agent
+- concept-longlist-shortlist-agent
 - concept-selection-agent
 - continuous-task-improvement-agent
 - control-authority-agent

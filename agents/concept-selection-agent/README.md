@@ -5,7 +5,8 @@ concepts on a consistent resource, cost, value, emissions, and step-out basis.
 
 ## Status
 
-Draft (version 0.1.0). Screening only.
+Draft (version 0.1.1). Screening only. Use `concept-longlist-shortlist-agent`
+upstream when the concepts to compare are not yet chosen.
 
 ## What it does
 

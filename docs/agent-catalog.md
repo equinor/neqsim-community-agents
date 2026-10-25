@@ -167,6 +167,7 @@ question they answer.
 | `energy-emissions-agent` | Preliminary energy-use and CO2-equivalent emissions screening for a facility or process. |
 | `emissions-abatement-screening-agent` *(coordinator)* | Ranks emission-reduction measures — power-from-shore, waste-heat recovery, flaring reduction — using the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund) and NPV screening. |
 | `asset-economics-agent` *(coordinator)* | Chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted NPV into one concept-economics view with carbon intensity and CO2-tax exposure. |
+| `concept-longlist-shortlist-agent` | Generates and screens a development-concept long list, scores it on a common basis, tests weight robustness and crossovers, and hands a short list with a reference case to concept selection. |
 | `concept-selection-agent` | Chains resource classification, CAPEX/OPEX, NPV, energy/emissions, and step-out screening into a comparable concept summary. |
 | `frontier-block-bid-agent` *(coordinator)* | Screens an exploration-block PSC bid: declared resource and fluid basis, near-field tie-back versus stand-alone, EMV and the break-even offered profit-oil share. |
 | `field-development-economics-agent` *(coordinator)* | End-to-end reservoir-to-market screening: reservoir fluid and depletion, subsea hydrate margins, topside separation duty, gas-export line, and an asset-economics roll-up. |
@@ -220,6 +221,9 @@ reservoir-forecasting-agent        decline fit → production profile, EUR
         │
         ▼
 reservoir-to-facility-screening-agent   depletion → inflow → routing → arrival pressure
+        │
+        ▼
+concept-longlist-shortlist-agent   long list → screened short list + reference case
         │
         ▼
 concept-selection-agent            comparable concept summary

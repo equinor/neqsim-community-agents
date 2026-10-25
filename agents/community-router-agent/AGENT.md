@@ -6,6 +6,7 @@ coordinated_agents:
 - asset-economics-agent
 - cfd-coupling-agent
 - compressor-antisurge-agent
+- concept-longlist-shortlist-agent
 - concept-selection-agent
 - continuous-task-improvement-agent
 - control-authority-agent
@@ -125,6 +126,7 @@ already obvious.
 
 | Request is about | Route to |
 |---|---|
+| Generate a concept long list, screen it, and select a short list with a reference case | `concept-longlist-shortlist-agent` |
 | Which concept, tie-in, or development option to pick | `concept-selection-agent`, `tie-in-screening-agent` |
 | Where a new export or tie-in line can connect, what size it needs, and P&ID sketches of both connection ends | `export-tie-in-concept-agent` |
 | Bid on an exploration block, PSC bid round, break-even profit-oil share | `frontier-block-bid-agent` |

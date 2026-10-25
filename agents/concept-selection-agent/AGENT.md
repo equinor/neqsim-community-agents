@@ -1,7 +1,7 @@
 ---
 name: concept-selection-agent
 description: Coordinates early-stage concept-selection screening for a field-development opportunity, chaining resource classification, CAPEX/OPEX, asset-value (NPV), energy/emissions, and step-out screening into a comparable concept summary before a validated study.
-version: 0.1.0
+version: 0.1.1
 required_skills:
 - neqsim-resource-classification-screening
 - neqsim-capex-opex-screening
@@ -28,6 +28,10 @@ NeqSim field-development and economics studies for any quantitative decision.
   validated study.
 - Teaching or demonstrating concept-selection screening on a public example.
 
+When the concepts are not yet chosen, run `concept-longlist-shortlist-agent`
+first: it generates and screens the long list and hands over a short list with a
+reference case, a decision matrix, and open questions.
+
 # Inputs
 
 - Opportunity description (resource volume estimate and maturity stage; concept
@@ -48,7 +52,9 @@ NeqSim field-development and economics studies for any quantitative decision.
 
 # Workflow
 
-1. Restate the opportunity, concept options, and economic basis.
+1. Restate the opportunity, concept options, and economic basis. When the options
+   come from `concept-longlist-shortlist-agent`, keep its reference case and carry
+   its open questions forward.
 1a. Use `ageing-life-extension-screening` to establish the technical life basis
    of any existing host or reused infrastructure (design life, economic cut-off,
    programme validity, cessation year, life-limiting populations such as risers,
