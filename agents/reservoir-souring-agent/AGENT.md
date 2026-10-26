@@ -33,10 +33,12 @@ materials selection or process design, and a qualified human review is always re
 # Inputs
 
 - Gas H2S series with timestamps, sampled stage and basis (ppmv, dry or wet).
-- Separator pressure and temperature at sample time; wellstream composition, GOR and water fraction.
+- Wellstream composition and water fraction (from a FluidMagic export when available), and a characterised E300 model of the field when one exists. With an E300 model the EOS is fixed: no new fluid, pseudo-components or characterisation are created.
+- Measured test-separator GOR (standard gas per actual separator-oil volume) with the gas H2S, when available.
 - Produced-water analyses with a conservative tracer (Cl, Mg, Br) and formation and seawater end members.
 - Injected-water sulfate, formation-water VFA, mixing-zone temperature, mitigation status, estimated reservoir sink.
-- Well-to-separator routing, so the measured gas can be tied to the wells that contributed to it.
+- Separator pressure and temperature at sample time.
+- H2S, and water if it is to be modelled, must be components of the E300 model; otherwise request an E300 that includes them.
 
 # Outputs
 
@@ -50,7 +52,7 @@ materials selection or process design, and a qualified human review is always re
 
 1. Confirm objective, wells, period, and that data are measured values; record the sampled stage and ppmv basis.
 2. Tie gas measurements to wells. If several wells feed one separator, state the allocation basis; correlations are per well only when well-level gas or test data exist.
-3. Use `neqsim-h2s-phase-partitioning` to build the wellstream with its water fraction and convert measured gas H2S to wellstream H2S per sample. Review mass-balance warnings and the conversion-factor curve; the factor depends strongly on water fraction.
+3. Use `neqsim-h2s-phase-partitioning` to convert measured gas H2S to wellstream H2S per sample. When a characterised E300 model exists (for example the Snorre E300) and the composition comes from FluidMagic, do not create a fluid or a new characterised EOS model: load the E300 as is, set the FluidMagic composition, and use only the recombination logic (`recombine_to_gor_and_h2s`), which matches measured separator GOR and gas H2S together. Without an E300 and without a measured GOR, use the back-calculation. Review mass-balance warnings; the factor depends strongly on water fraction.
 4. Compute seawater fraction per well with `neqsim-reservoir-souring-correlation` from a conservative tracer; use several tracers and check the residual. Never use sulfate or barium as tracers.
 5. Fit per-well correlations (linear, power, saturating, breakthrough threshold, mixing zone), keep the best by AICc, and record data range, R2 and warnings. Wells with few points or no breakthrough stay low-confidence.
 6. Check each correlation against the mixing-zone bound and sulfate balance, with thermal cutoff, mitigation and sink assumptions stated.
@@ -74,7 +76,8 @@ Separator gas H2S for well A-12 rose from 5 to 40 ppmv over 18 months, measured 
 
 - Gas H2S measurements are representative of the sampled stage, with a stated basis.
 - Seawater fraction follows two end-member mixing of a conservative tracer.
-- H2S partitioning is physical (SRK-CPA); aqueous ionisation and iron-sulphide scavenging are not modelled.
+- A given E300 model fixes the EOS: the agent never builds a fluid, adds components or re-characterises when one is supplied.
+- Aqueous ionisation and iron-sulphide scavenging are not modelled; partitioning is physical.
 - Correlations hold only while injection-water treatment, rates and temperature regime stay unchanged.
 - Follow-up studies and qualified review are required before any decision.
 
