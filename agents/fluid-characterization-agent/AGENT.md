@@ -8,7 +8,8 @@ required_skills:
 - neqsim-reference-fluid-synthetic-generation
 - neqsim-pvt-regression-characterization-factor
 context_skills:
-- neqsim-sodir-open-data---
+- neqsim-sodir-open-data
+---
 
 # Purpose
 

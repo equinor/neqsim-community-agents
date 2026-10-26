@@ -5,10 +5,10 @@ version: 0.1.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-ncs-infrastructure-network
-- neqsim-sodir-open-data
 - neqsim-ncs-value-chain-optimization
 - neqsim-ncs-area-process-model
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
 - neqsim-resource-classification-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
