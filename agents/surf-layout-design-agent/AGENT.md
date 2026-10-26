@@ -10,6 +10,7 @@ required_skills:
 - neqsim-bathymetry-profile-screening
 - neqsim-line-velocity-check
 context_skills:
+- neqsim-sodir-open-data
 - neqsim-field-layout-import
 - neqsim-production-network-routing
 - neqsim-step-out-screening
@@ -63,6 +64,12 @@ Use this agent when an engineer or analyst needs to:
 
 Do not use this agent for detailed SURF engineering, installation planning, or
 any decision that requires a qualified subsea design study.
+
+# Sodir Open Data
+
+On the Norwegian shelf use `neqsim-sodir-open-data` for blocks (1001), facilities (6000), main pipelines
+(6100), wellbores (5000), field and discovery outlines and licence areas. Request `out_sr=4326`: the
+DataService geometry is ED50.
 
 # Inputs
 

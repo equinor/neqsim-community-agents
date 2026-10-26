@@ -8,6 +8,7 @@ version: 0.1.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
 - neqsim-reservoir-depletion-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
@@ -50,6 +51,14 @@ Use this agent when an engineer or analyst needs to:
 - Frame a screening production-to-value story: reservoir decline -> NPV ->
   energy and emissions
 - Identify the validated NeqSim reservoir and economics workflows to use next
+
+# Sodir Open Data
+
+Load `neqsim-sodir-open-data` before reading any Norwegian Offshore Directorate fact. Use its
+`use_case("production_history")` and `use_case("reserves_and_resources")` recipes: `profiles` (7300) or the
+FactPages `field_production_monthly` view for rates, `field_reserves` (latest `fldVersion`) and
+`discovery_reserves` for volumes and resource class. Join on `*Npdid*` keys, record `provenance()` and cite
+Sodir (NLOD 2.0) with the retrieval date.
 
 # Inputs
 

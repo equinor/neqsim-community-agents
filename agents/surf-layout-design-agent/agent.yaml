@@ -8,6 +8,7 @@ required_skills:
 - neqsim-bathymetry-profile-screening
 - neqsim-line-velocity-check
 context_skills:
+- neqsim-sodir-open-data
 - neqsim-field-layout-import
 - neqsim-production-network-routing
 - neqsim-step-out-screening

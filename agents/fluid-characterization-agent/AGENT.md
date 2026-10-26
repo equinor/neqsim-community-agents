@@ -7,7 +7,8 @@ required_skills:
 - neqsim-pseudocomponent-split-characterization
 - neqsim-reference-fluid-synthetic-generation
 - neqsim-pvt-regression-characterization-factor
----
+context_skills:
+- neqsim-sodir-open-data---
 
 # Purpose
 
@@ -65,6 +66,13 @@ Use this agent when an engineer needs to:
 - Combine several well or fluid compositions into one field composition by
   molar-rate allocation.
 - Prepare a characterized fluid for downstream NeqSim process modelling.
+
+# Sodir Open Data
+
+When the field or discovery is on the Norwegian shelf, check `neqsim-sodir-open-data` for measured anchors
+before using analogues: DST bottom-hole pressure and temperature, GOR and oil/gas densities
+(`wellbore_dst`), `wellbore_oil_sample` (what was sampled), `wlbBottomHoleTemperature` (0 = not reported)
+and formation depths. Feed them as measured values and label them as open-data priors, not a PVT study.
 
 # Inputs
 

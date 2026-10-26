@@ -386,6 +386,7 @@ agents:
     path: "agents/ncs-production-analysis-agent/AGENT.md"
     required_skills:
       - neqsim-norwegian-continental-shelf-data
+      - neqsim-sodir-open-data
       - neqsim-reservoir-depletion-screening
       - neqsim-asset-value-npv-screening
       - neqsim-energy-emissions-screening
@@ -421,6 +422,7 @@ agents:
       - neqsim-ncs-value-chain-optimization
       - neqsim-ncs-area-process-model
       - neqsim-norwegian-continental-shelf-data
+      - neqsim-sodir-open-data
       - neqsim-resource-classification-screening
       - neqsim-asset-value-npv-screening
       - neqsim-energy-emissions-screening
@@ -440,6 +442,7 @@ agents:
     path: "agents/ncs-ownership-equity-agent/AGENT.md"
     required_skills:
       - neqsim-ncs-ownership-equity
+      - neqsim-sodir-open-data
       - neqsim-norwegian-continental-shelf-data
       - neqsim-resource-classification-screening
       - neqsim-asset-value-npv-screening
@@ -473,6 +476,7 @@ agents:
     path: "agents/reservoir-forecasting-agent/AGENT.md"
     required_skills:
       - neqsim-norwegian-continental-shelf-data
+      - neqsim-sodir-open-data
       - neqsim-reservoir-depletion-screening
       - neqsim-resource-classification-screening
     supported_domains:
@@ -522,6 +526,7 @@ agents:
     required_skills:
       - neqsim-reservoir-model-builder
       - neqsim-norwegian-continental-shelf-data
+      - neqsim-sodir-open-data
       - neqsim-reservoir-depletion-screening
       - neqsim-resource-classification-screening
       - neqsim-fluid-quality-check

@@ -3,6 +3,7 @@ description: "Sets up a screening-level reservoir simulation from whatever data 
 required_skills:
 - neqsim-reservoir-model-builder
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
 - neqsim-reservoir-depletion-screening
 - neqsim-resource-classification-screening
 - neqsim-fluid-quality-check

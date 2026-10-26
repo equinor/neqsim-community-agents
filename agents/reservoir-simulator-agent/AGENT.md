@@ -6,6 +6,7 @@ agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
 - neqsim-reservoir-depletion-screening
 - neqsim-resource-classification-screening
 - neqsim-fluid-quality-check
@@ -78,6 +79,14 @@ Use this agent when an engineer or analyst needs to:
 
 Do not use this agent for grid-based reservoir simulation, formal reserves
 booking, or any decision that requires a qualified reservoir-engineering study.
+
+# Sodir Open Data
+
+Run the data-first search with `neqsim-sodir-open-data` before assuming anything on the shelf: offset
+`wellbore` rows (5000) near the target, then `wellbore_formation_top`, `wellbore_dst`, `wellbore_core`,
+`wellbore_oil_sample`, plus `field_reserves`, `discovery_reserves`, `profiles` and `field_description`.
+`use_case("pvt_and_reservoir_data")` lists keys and traps. Cite each read; open data gives priors and
+bounds, so list the missing PVT, SCAL and static model in `data_gaps`.
 
 # Inputs
 

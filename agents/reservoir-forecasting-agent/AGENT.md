@@ -5,6 +5,7 @@ version: 0.1.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
 - neqsim-reservoir-depletion-screening
 - neqsim-resource-classification-screening
 coordinated_agents:
@@ -45,6 +46,12 @@ Use this agent when an engineer or analyst needs to:
 - Seed the forecast with public NCS per-field reserves and production history and
   keep the source attribution
 - Identify the validated NeqSim reservoir workflow to use next
+
+# Sodir Open Data
+
+Load `neqsim-sodir-open-data` (`use_case("production_history")`) to pull the produced-rate series
+(`profiles` 7300, yearly or monthly) and the latest `field_reserves` row used to bound EUR. Monthly series
+are the better decline basis; note shut-in months and cite Sodir (NLOD 2.0).
 
 # Inputs
 

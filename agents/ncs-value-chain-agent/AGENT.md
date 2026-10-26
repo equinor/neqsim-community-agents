@@ -5,6 +5,7 @@ version: 0.1.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-ncs-infrastructure-network
+- neqsim-sodir-open-data
 - neqsim-ncs-value-chain-optimization
 - neqsim-ncs-area-process-model
 - neqsim-norwegian-continental-shelf-data
@@ -67,6 +68,13 @@ Use this agent when an engineer or analyst needs to:
   and export pipelines, using `neqsim-ncs-area-process-model`.
 - Pull live open data (Sodir DataService/FactPages, ENTSOG flows) to refresh or
   calibrate the model.
+
+# Sodir Open Data
+
+Load `neqsim-sodir-open-data` for the shelf-wide facts: `facility` (6000), `pipeline` (6100, main TUF lines
+only), `tuf` owners and operators, `field`/`discovery` layers and `profiles` for history. Request
+`out_sr=4326` for geometry. Infield lines and plant capacities are not in Sodir: take those from the
+infrastructure-network skill sources and say so.
 
 # Inputs
 

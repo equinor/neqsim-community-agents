@@ -5,6 +5,7 @@ version: 0.1.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-ncs-ownership-equity
+- neqsim-sodir-open-data
 - neqsim-norwegian-continental-shelf-data
 - neqsim-resource-classification-screening
 - neqsim-asset-value-npv-screening
@@ -39,6 +40,13 @@ Use this agent when an engineer or analyst needs to:
 - Back-cast equity to an earlier date, or see how ownership changed.
 - Check an equity assumption in a model against the public record.
 - Set up equity for a prospect, where the public record has none.
+
+# Sodir Open Data
+
+Load `neqsim-sodir-open-data` (`use_case("ownership_and_operators")`) for the full table list behind
+equity: `field_licensee_hst`, `field_operator_hst`, `discovery_owner_hst`, `licence_licensee_hst`,
+`licence_transfer_hst`, `company`. Filter the `*_hst` valid-to columns for the as-of date and join on
+`*Npdid*` keys.
 
 # Inputs
 

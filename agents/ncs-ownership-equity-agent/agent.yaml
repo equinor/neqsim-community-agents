@@ -2,6 +2,7 @@ name: ncs-ownership-equity-agent
 description: Reads who owns Norwegian Continental Shelf fields, discoveries and licences from Sodir (partners, equity %, operator, history, company portfolio) and turns it into net-equity inputs for field evaluation and economics. Prospect equity is not public, so it is user-supplied or shown as a labelled licence proxy.
 required_skills:
 - neqsim-ncs-ownership-equity
+- neqsim-sodir-open-data
 - neqsim-norwegian-continental-shelf-data
 - neqsim-resource-classification-screening
 - neqsim-asset-value-npv-screening
