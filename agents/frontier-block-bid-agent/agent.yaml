@@ -35,6 +35,7 @@ coordinated_agents:
 - fluid-characterization-agent
 - reservoir-simulator-agent
 - tie-in-screening-agent
+- brazil-offshore-infrastructure-agent
 - resource-classification-agent
 human_review_required: true
 version: 0.2.0

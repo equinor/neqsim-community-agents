@@ -109,6 +109,7 @@ question they answer.
 | `subsea-layout-screening-agent` *(coordinator)* | Turns a supplied subsea map into a well and tie-back inventory with step-out distances, route profiles, and seabed slope flags. |
 | `surf-layout-design-agent` *(coordinator)* | Designs a screening SURF layout and places the host from open map, bathymetry, and licence-block data, then routes and sizes every flowline, riser, and umbilical. |
 | `pipeline-survey-profile-agent` | Cleans as-built survey data into a pipeline profile, flags erroneous points, screens free-span and cover candidates, and compares repeat surveys. |
+| `brazil-offshore-infrastructure-agent` *(coordinator)* | Locates Brazilian fields, wells, FPSOs (placed from their wells), gas pipelines and processing plants from ANP open data, measures distances and ranks tie-in hosts against a stand-alone development. |
 | `tie-in-screening-agent` | Early-stage screening of tie-in opportunities with fluid, flow-assurance, and process checks. |
 
 ### 2.6 Process engineering and screening

@@ -4,6 +4,7 @@ description: Front door for the public NeqSim community agent catalog. Classifie
 coordinated_agents:
 - artificial-lift-agent
 - asset-economics-agent
+- brazil-offshore-infrastructure-agent
 - cfd-coupling-agent
 - compressor-antisurge-agent
 - concept-longlist-shortlist-agent
@@ -141,6 +142,7 @@ already obvious.
 | Fluid characterization, PVT, phase behaviour, E300 files | `pvt-agent`, `fluid-characterization-agent`, `e300-fluid-agent` |
 | Hydrate, wax, scale, cooldown, flow assurance | `flow-assurance-engineer-agent`, `flow-assurance-study-agent`, `hydrate-screening-agent`, `subsea-cooldown-agent`, `produced-water-scale-agent` |
 | Transient multiphase flow, slugging, OLGA | `olga-simulation-agent` |
+| Brazilian offshore infrastructure: fields, FPSOs, wells, gas pipelines, tie-in host ranking | `brazil-offshore-infrastructure-agent` |
 | Pipeline route, survey, subsea layout, SURF design | `pipe-route-screening-agent`, `pipeline-survey-profile-agent`, `subsea-layout-screening-agent`, `surf-layout-design-agent` |
 | Line sizing, velocity, pressure drop, erosion, vibration | `piping-integrity-agent`, `piping-mechanical-agent`, `sand-erosion-agent` |
 | Gas export pipeline sizing and compression | `gas-export-pipeline-agent` |

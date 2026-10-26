@@ -396,6 +396,21 @@ agents:
       - open-data
       - economics
 
+  - name: brazil-offshore-infrastructure-agent
+    version: "0.1.0"
+    description: "Locates Brazilian offshore infrastructure from ANP open data - fields, blocks, wells, production installations (FPSOs and platforms placed from their wells), gas outflow pipelines and gas processing plants - measures distances from a discovery or prospect, and ranks tie-in hosts and gas-export routes against a stand-alone development before a validated NeqSim tie-back study."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/brazil-offshore-infrastructure-agent/AGENT.md"
+    required_skills:
+      - neqsim-anp-open-data
+      - neqsim-brazil-offshore-infrastructure-market
+      - neqsim-step-out-screening
+    supported_domains:
+      - field-development
+      - subsea
+      - infrastructure
+      - brazil
+
   - name: ncs-value-chain-agent
     version: "0.1.0"
     description: "Coordinates whole-system Norwegian Continental Shelf (NCS) value-chain studies on open data - how every field, discovery, trunkline, processing plant and receiving terminal connects, how loaded the system is, what an outage or new tie-in does, and how to maximise production and value across the shelf with a capacity-constrained optimiser - and hands results to NeqSim tie-back, hydraulics, value-chain economics, debottlenecking and host process-model workflows."

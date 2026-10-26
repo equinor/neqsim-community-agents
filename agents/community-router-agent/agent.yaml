@@ -6,6 +6,7 @@ required_skills: []
 coordinated_agents:
 - artificial-lift-agent
 - asset-economics-agent
+- brazil-offshore-infrastructure-agent
 - cfd-coupling-agent
 - compressor-antisurge-agent
 - concept-longlist-shortlist-agent

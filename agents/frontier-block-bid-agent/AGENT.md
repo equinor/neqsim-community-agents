@@ -6,6 +6,7 @@ coordinated_agents:
 - fluid-characterization-agent
 - reservoir-simulator-agent
 - tie-in-screening-agent
+- brazil-offshore-infrastructure-agent
 - resource-classification-agent
 version: 0.2.0
 required_skills:
@@ -71,7 +72,10 @@ and economics studies for any quantitative decision.
    gas export route and plant, CO2 removal for the declared gas, wellhead net-back, gas export
    as a share of oil revenue, and `host_capacity_check` for a tie-back (gas handling or
    compression can bind before oil nameplate). Quote every UNKNOWN as UNKNOWN; no numeric
-   offshore tariff is public. Then use the `tie-in-screening-agent` for near-field constraints.
+   offshore tariff is public. Use the `brazil-offshore-infrastructure-agent` to locate the
+   neighbouring FPSOs, wells and gas pipelines from ANP open data and rank the tie-in hosts
+   against a stand-alone development. Then use the `tie-in-screening-agent` for near-field
+   constraints.
 7. Use the `concept-selection-agent` to give each concept a consistent cost picture.
 8. Apply the profit-oil table for a Brazilian round: `load_annex_xx()` with the rate per
    producer, cost-oil cap converted with `net_cost_oil_cap`. Run `psc-bid-economics-screening`
