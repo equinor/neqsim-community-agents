@@ -50,6 +50,7 @@ coordinated_agents:
 - reciprocating-compressor-agent
 - reservoir-forecasting-agent
 - reservoir-history-match-agent
+- reservoir-souring-agent
 - reservoir-simulator-agent
 - reservoir-to-facility-screening-agent
 - resource-classification-agent
@@ -162,6 +163,7 @@ already obvious.
 | Heat conduction in a solid, cooldown, thermal stress, FEM | `fem-coupling-agent` |
 | Reading engineering documents, drawings, datasheets | `technical-document-intelligence-agent` |
 | Follow a field with a multi-tank reservoir model: history match, produced composition, forecast under wellhead-pressure limits | `reservoir-history-match-agent` |
+| Reservoir souring: H2S in separator gas to wellstream H2S, H2S versus seawater fraction per well, mixing-zone plausibility, sour-service pH2S | `reservoir-souring-agent` |
 | Who owns a field, discovery or licence; partners, equity, operator, net-equity inputs | `ncs-ownership-equity-agent` |
 | Weather, wind or sea-state data for an installation | `installation-weather-agent` |
 | Keep a solved task improving: monitor cycles, backtest, goal-driven re-solve, ledger, baseline promotion (a "living task") | `continuous-task-improvement-agent` |

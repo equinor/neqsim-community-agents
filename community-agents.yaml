@@ -482,6 +482,22 @@ agents:
       - production-forecasting
       - open-data
 
+  - name: reservoir-souring-agent
+    version: "0.1.0"
+    description: "Screens reservoir souring and H2S from measured separator-gas H2S: converts gas H2S to wellstream H2S with NeqSim, derives seawater fraction from tracers, fits and updates per-well H2S-versus-seawater-fraction correlations, and checks them against a substrate-limited mixing-zone bound and sour-service pH2S before a validated reservoir or process study."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-souring-agent/AGENT.md"
+    required_skills:
+      - neqsim-h2s-phase-partitioning
+      - neqsim-reservoir-souring-correlation
+      - neqsim-production-chemistry
+    supported_domains:
+      - reservoir-engineering
+      - production-chemistry
+      - flow-assurance
+      - sour-service
+      - waterflood
+
   - name: reservoir-history-match-agent
     version: "0.1.0"
     description: "Follows a field with a compositional multi-tank reservoir model: loads well and field history, splits formations and pressure compartments, history-matches volumes, aquifer and condensate yield, models produced composition versus depletion, forecasts under wellhead-pressure limits, and feeds process models with reservoir-driven wellstreams to show history and future production."

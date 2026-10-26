@@ -1,0 +1,35 @@
+name: reservoir-souring-agent
+description: "Screens reservoir souring and H2S from measured separator-gas H2S: converts gas H2S to wellstream H2S with NeqSim, derives seawater fraction from tracers, fits and updates per-well H2S-versus-seawater-fraction correlations, and checks them against a substrate-limited mixing-zone bound and sour-service pH2S before a validated reservoir or process study."
+required_skills:
+- neqsim-h2s-phase-partitioning
+- neqsim-reservoir-souring-correlation
+- neqsim-production-chemistry
+supported_domains:
+- reservoir-engineering
+- production-chemistry
+- flow-assurance
+- sour-service
+- waterflood
+inputs:
+- measured_separator_or_export_gas_h2s_series
+- separator_pressure_temperature_and_sampled_stage
+- wellstream_composition_and_water_fraction
+- produced_water_tracer_analyses_and_end_members
+- injected_water_sulfate_and_formation_water_vfa
+- mitigation_status_sulfate_removal_nitrate_biocide
+- mixing_zone_temperature_and_reservoir_sink_estimate
+outputs:
+- wellstream_h2s_and_gas_to_well_conversion_factor_table
+- h2s_split_between_gas_oil_and_produced_water
+- seawater_fraction_per_well_and_period
+- per_well_h2s_correlation_registry_with_fit_quality_and_warnings
+- mixing_zone_upper_bound_and_plausibility_check
+- sour_service_ph2s_screen
+- required_follow_up_studies
+- validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- reservoir-history-match-agent
+- produced-water-scale-agent
+human_review_required: true
+version: 0.1.0
