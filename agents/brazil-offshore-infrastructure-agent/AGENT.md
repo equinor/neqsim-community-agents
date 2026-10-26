@@ -56,6 +56,12 @@ tie-in, layout, flow-assurance and economics agents for the numbers that decide 
 - Distance table from the discovery to every host and to the nearest point of each pipeline.
 - Ranked tie-in hosts with scores and notes, with the stand-alone case as the reference row.
 - Gas export route: nearest outflow pipeline, landing plant and the route length.
+- National pipeline register and connection-point register (platforms, UPGN, terminals,
+  refineries, LNG terminals, junctions, unconnected endpoints) with an overview map
+  (`anp_open_data.overview`).
+- Water depth at the discovery, field-area relief and seabed profiles (KP-depth, slope flags)
+  along each candidate tie-in route from NOAA ETOPO 1' (`anp_open_data.bathymetry`), validated
+  against ANP well and platform water depths.
 - Data-source log, assumptions, data gaps, limitations and human-review requirements.
 
 # Workflow
@@ -87,7 +93,14 @@ tie-in, layout, flow-assurance and economics agents for the numbers that decide 
    map), the `flow-assurance-engineer-agent` (arrival pressure, hydrate and wax margin on the
    routed length) and, for a bid, the `frontier-block-bid-agent`. For a long list of concepts
    hand the ranked hosts to the `concept-longlist-shortlist-agent`.
-8. Document every data gap: unpublished FPSO coordinates, unknown ullage, unknown remaining
+8. For a national or basin overview, build the pipeline and connection-point registers with
+   `overview.load_cached_layers`, `pipeline_register`, `node_register` and `connect_pipelines`; list unconnected
+   endpoints as gaps.
+9. For SURF and pipeline design input, fetch ETOPO with `bathymetry.fetch_etopo_grid`, check
+   it against ANP well/platform water depths (report the mean and maximum deviation), and
+   produce `profile_along_route` + `flag_slopes` for each route. ETOPO is screening data; say
+   that an MBES route survey is needed before detailed design.
+10. Document every data gap: unpublished FPSO coordinates, unknown ullage, unknown remaining
    life, offshore tariffs (not public), and any truncated or failed read.
 
 # Required Skills
