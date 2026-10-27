@@ -940,6 +940,24 @@ agents:
       - asset-economics
       - screening
 
+  - name: technology-qualification-agent
+    version: "0.1.0"
+    description: "Evaluates any new or step-out technology a project may need - builds the qualification basis, decomposes the technology, categorises novelty and TRL, defines step-out, ranks failure modes (FMIRR), outlines qualification activities and writes a full technology assessment report (Markdown and Word) as a study deliverable."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/technology-qualification-agent/AGENT.md"
+    required_skills:
+      - neqsim-technology-assessment
+      - neqsim-technology-fmirr
+      - neqsim-technology-assessment-report
+    coordinated_agents:
+      - technical-document-intelligence-agent
+    supported_domains:
+      - technology-qualification
+      - technology-assessment
+      - field-development
+      - project-studies
+      - reliability
+
   - name: concept-longlist-shortlist-agent
     version: "0.1.0"
     description: "Coordinates development-concept long-list generation and short-list selection - frames the decision elements, generates and screens the long list, scores it on a common basis, tests weight robustness and crossovers, and hands a defended short list with a reference case to concept-selection-agent."

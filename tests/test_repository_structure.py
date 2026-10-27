@@ -132,6 +132,11 @@ EXPECTED_AGENTS = {
     "resource-classification-agent": [
         "neqsim-resource-classification-screening",
     ],
+    "technology-qualification-agent": [
+        "neqsim-technology-assessment",
+        "neqsim-technology-fmirr",
+        "neqsim-technology-assessment-report",
+    ],
 }
 
 
