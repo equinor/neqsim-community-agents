@@ -9,6 +9,7 @@ required_skills:
 - neqsim-ncs-area-process-model
 - neqsim-norwegian-continental-shelf-data
 - neqsim-sodir-open-data
+- neqsim-near-field-discoveries
 - neqsim-resource-classification-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
@@ -68,6 +69,10 @@ Use this agent when an engineer or analyst needs to:
   and export pipelines, using `neqsim-ncs-area-process-model`.
 - Pull live open data (Sodir DataService/FactPages, ENTSOG flows) to refresh or
   calibrate the model.
+- Establish the near-field picture around a discovery, prospect or host before a
+  tie-back or area study: which discoveries and fields lie within a radius, their
+  status (producing, approved, in clarification, not evaluated, unlikely),
+  operator, recoverable volumes, concept text, nearest hosts, and a map.
 
 # Sodir Open Data
 
@@ -93,6 +98,8 @@ infrastructure-network skill sources and say so.
 - Utilisation per trunkline and plant, single points of failure, outage impact.
 - Optimised production per field and year, curtailment, and shadow prices per
   element.
+- Near-field discovery inventory for the target (CSV, JSON, GeoJSON, Markdown) with stage
+  counts, joint-development clusters and a near-field map.
 - Ullage timelines, tie-in ranking, stranded discoveries, production-uplift
   list.
 - NeqSim results:
@@ -119,6 +126,13 @@ infrastructure-network skill sources and say so.
 3. **Map.** Use `NcsNetwork.export_routes`, `upstream_fields`, `utilization`,
    `outage_impact` and `single_points_of_failure`. Quote capacities with
    `source_url`, and read `needs_review` routes against the Sodir text.
+   For a field-development, tie-back or area question, first build the near-field
+   picture with `neqsim-near-field-discoveries` (`fetch_ncs_near_field`, `near_field`,
+   `plot_near_field`): read the discoveries inside the radius with status, operator,
+   Sodir recoverable volumes and resource class, the description text (stand-alone or
+   tie-back hints) and the nearest hosts; note the approved and in-clarification
+   neighbours that will compete for the same host capacity, and the open discoveries
+   that cluster for a joint development. Include the map and the GeoJSON in the report.
 4. **Supply.** `neqsim-ncs-value-chain-optimization` builds history plus
    forecasts. For a better forecast of a specific field, delegate to
    `reservoir-forecasting-agent` and pass the result as `forecast_overrides`.
@@ -203,6 +217,8 @@ Using open data, optimise gas and oil production across the whole Norwegian Cont
 - Shadow prices are explained in MNOK/yr per MSm3/d (gas) or per Sm3/d (liquid).
 - Tie-ins carry status, RC, host, distance and NeqSim TiebackAnalyzer outcome.
 - Debottleneck CAPEX comes from the user or a cited source, never invented.
+- Near-field inventories state the target position and radius, the Sodir read date, the stage of
+  every neighbour from its status, and volumes only where Sodir publishes them.
 - Facts, assumptions and recommendations are separated. Qualified human review
   is completed before any decision.
 

@@ -1,7 +1,8 @@
 name: brazil-offshore-infrastructure-agent
-description: Locates Brazilian offshore infrastructure from ANP open data - fields, blocks, wells, production installations (FPSOs and platforms placed from their wells), gas outflow pipelines and gas processing plants - measures distances from a discovery or prospect, and ranks tie-in hosts and gas-export routes against a stand-alone development before a validated NeqSim tie-back study.
+description: Locates Brazilian offshore infrastructure and neighbouring discoveries from ANP open data - fields, blocks, wells, discovery-evaluation plans, discovery candidates with a development stage, production installations (FPSOs and platforms), gas outflow pipelines and gas processing plants - draws them on a near-field map, measures distances from a discovery or prospect, and ranks tie-in hosts and gas-export routes against a stand-alone development before a validated NeqSim tie-back study.
 required_skills:
 - neqsim-anp-open-data
+- neqsim-near-field-discoveries
 - neqsim-brazil-offshore-infrastructure-market
 - neqsim-step-out-screening
 context_skills:
@@ -18,9 +19,11 @@ inputs:
 - search_radius_and_basin
 - expected_fluid_and_rates
 - host_capacity_and_life_facts_if_known
+- operator_discovery_names_and_volumes_with_sources
 - scoring_weights
 outputs:
 - infrastructure_inventory_with_positions
+- near_field_discovery_inventory_stage_summary_and_map
 - installation_positions_with_spread_and_provenance
 - host_and_pipeline_distance_table
 - ranked_tie_in_hosts_against_stand_alone

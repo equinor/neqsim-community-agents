@@ -74,8 +74,10 @@ and economics studies for any quantitative decision.
    compression can bind before oil nameplate). Quote every UNKNOWN as UNKNOWN; no numeric
    offshore tariff is public. Use the `brazil-offshore-infrastructure-agent` to locate the
    neighbouring FPSOs, wells and gas pipelines from ANP open data and rank the tie-in hosts
-   against a stand-alone development. Then use the `tie-in-screening-agent` for near-field
-   constraints.
+   against a stand-alone development, and to build the near-field discovery inventory and
+   map (fields, discovery candidates, evaluation-plan areas, returned blocks) so that the
+   bid and the host screening reflect what is already planned next to the block. Then use the
+   `tie-in-screening-agent` for near-field constraints.
 7. Use the `concept-selection-agent` to give each concept a consistent cost picture.
 8. Apply the profit-oil table for a Brazilian round: `load_annex_xx()` with the rate per
    producer, cost-oil cap converted with `net_cost_oil_cap`. Run `psc-bid-economics-screening`

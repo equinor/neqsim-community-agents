@@ -6,6 +6,7 @@ required_skills:
 - neqsim-ncs-area-process-model
 - neqsim-norwegian-continental-shelf-data
 - neqsim-sodir-open-data
+- neqsim-near-field-discoveries
 - neqsim-resource-classification-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
@@ -25,7 +26,9 @@ inputs:
 - forecast_overrides
 - host_capacities_and_debottleneck_capex
 - user_exported_gassco_umm_messages
+- target_position_and_radius_for_near_field_inventory
 outputs:
+- near_field_discovery_inventory_stage_summary_and_map
 - export_routes_and_shared_elements
 - trunkline_and_plant_utilization
 - single_points_of_failure_and_outage_impact

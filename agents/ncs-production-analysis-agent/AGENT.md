@@ -9,6 +9,7 @@ agent_type: community-coordinator
 required_skills:
 - neqsim-norwegian-continental-shelf-data
 - neqsim-sodir-open-data
+- neqsim-near-field-discoveries
 - neqsim-reservoir-depletion-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
@@ -51,6 +52,7 @@ Use this agent when an engineer or analyst needs to:
 - Frame a screening production-to-value story: reservoir decline -> NPV ->
   energy and emissions
 - Identify the validated NeqSim reservoir and economics workflows to use next
+- Establish the near-field discovery picture around a target (status, volumes, concept text, nearest hosts) with a map
 
 # Sodir Open Data
 
@@ -83,6 +85,7 @@ Typical outputs include:
 - An annual production series with trend, CAGR, and oil/gas/NGL/condensate share
 - An optional screening reservoir-depletion profile versus time
 - An optional asset-value (NPV/IRR/payback) and energy/emissions screening
+- For a target position: the near-field discovery inventory (stage, operator, Sodir recoverable volumes and resource class, concept hints, nearest hosts, joint-development clusters) as CSV, GeoJSON and a map
 - Recommended validated NeqSim reservoir and economics workflows
 - Assumptions, limitations, source attribution, and a human review checklist
 
@@ -98,6 +101,11 @@ Typical outputs include:
    reserves-to-production horizon; for time series, compute trend and product
    share; for per-field reserves, rank fields by remaining oil equivalent and
    aggregate remaining reserves by sea area.
+   For a field-development or tie-back question about one target, use
+   `near-field-discoveries` (`fetch_ncs_near_field`, `near_field`, `plot_near_field`) to list
+   the discoveries, fields and hosts within a radius with status, operator, recoverable
+   volumes, resource class and the Sodir concept text, and to draw them on a map; sum
+   volumes only where Sodir publishes them.
 4. For a forward screening, use `reservoir-depletion-screening` to build a
    reservoir pressure and production profile versus time from a recoverable
    volume and offtake rate.
@@ -113,6 +121,7 @@ Typical outputs include:
 
 - `norwegian-continental-shelf-data` mapped to community catalog ID `neqsim-norwegian-continental-shelf-data`
 - `reservoir-depletion-screening` mapped to community catalog ID `neqsim-reservoir-depletion-screening`
+- `near-field-discoveries` mapped to community catalog ID `neqsim-near-field-discoveries`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
 
