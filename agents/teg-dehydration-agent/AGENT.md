@@ -28,6 +28,8 @@ Use this agent when an engineer needs to:
 - Evaluate dry-gas water dew point and lean-TEG purity
 - Quantify and classify regeneration still-vent emissions
 - Compare once-through versus recirculated stripping gas for emission reduction
+- Model a Drizo (solvent-stripped) regeneration unit, e.g. Oseberg D, and screen the solvent
+  circulation rate against measured lean-TEG quality
 - Screen the effect of TEG circulation rate, reboiler temperature, or stripping
   gas on dew point and emissions
 - Identify missing fluid, water, and operating data needed for design-grade work
@@ -59,13 +61,19 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the feed composition, flow, and absorber/regeneration conditions.
-2. Use `teg-dehydration-modeling` to build the closed-loop plant and run it.
-3. Read the water dew point, lean-TEG purity, and still-vent emissions.
-4. When relevant, compare once-through and recirculated stripping gas.
-5. Identify missing fluid, water, salinity, and design data.
-6. Explain convergence assumptions and screening limitations.
-7. Recommend validated NeqSim or specialist follow-up analysis.
-8. Document limitations and human review requirements.
+2. Identify the regeneration scheme before choosing the stripping option: read the system
+   description or P&ID for a solvent recovery loop and superheated solvent stripping vapour
+   (Drizo, `stripping_mode="drizo"`) versus fuel-gas stripping (`stripping_mode="gas"`).
+3. Use `teg-dehydration-modeling` to build the closed-loop plant and run it; if `solved()` is
+   false, warm-restart with `process.run()` before changing inputs.
+4. Read the water dew point, lean-TEG purity (TEG/(TEG+water), `glycol_purity_wt`), and
+   still-vent emissions. Real stripped units run at about 99.9 wt% lean glycol (0.1 wt% water);
+   a 97-99 wt% result means the regeneration is not representative (rate, stages or loop).
+5. When relevant, compare once-through and recirculated stripping gas.
+6. Identify missing fluid, water, salinity, and design data.
+7. Explain convergence assumptions and screening limitations.
+8. Recommend validated NeqSim or specialist follow-up analysis.
+9. Document limitations and human review requirements.
 
 # Required Skills
 
