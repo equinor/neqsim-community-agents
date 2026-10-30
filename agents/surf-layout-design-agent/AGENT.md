@@ -23,6 +23,7 @@ coordinated_agents:
 - pipe-route-screening-agent
 - flow-assurance-engineer-agent
 - asset-economics-agent
+- subsea-infrastructure-capacity-agent
 ---
 
 # Purpose
@@ -114,7 +115,9 @@ Typical outputs include:
 3. **Plan the open data.** Use `surf-field-layout-design` to plan the bathymetry,
    licence-block and infrastructure requests, and record the attribution each
    source requires. Execute them only with a read-only fetch adapter the user
-   supplies; report the plan when offline.
+   supplies; report the plan when offline. Before placing new templates or lines, ask
+   `subsea-infrastructure-capacity-agent` for free slots, spare tees and reusable lines
+   and show them (with verification level) in the layout.
 4. **Take the well count from the reservoir side.** Where a reservoir model
    exists, take the producer and injector counts, the plateau rate and the
    injection rates from `reservoir-simulator-agent` rather than assuming them.

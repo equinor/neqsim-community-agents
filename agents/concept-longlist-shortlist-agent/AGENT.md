@@ -18,6 +18,7 @@ coordinated_agents:
 - tie-in-screening-agent
 - energy-emissions-agent
 - asset-economics-agent
+- surf-layout-design-agent
 ---
 
 # Purpose

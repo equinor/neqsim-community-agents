@@ -21,6 +21,7 @@ coordinated_agents:
 - pipe-route-screening-agent
 - flow-assurance-engineer-agent
 - asset-economics-agent
+- subsea-infrastructure-capacity-agent
 supported_domains:
 - field-development
 - subsea-layout

@@ -14,6 +14,7 @@ coordinated_agents:
 - tie-in-screening-agent
 - pipe-route-screening-agent
 - ncs-value-chain-agent
+- subsea-infrastructure-capacity-agent
 supported_domains:
 - field-development
 - tie-in-screening

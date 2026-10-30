@@ -1,6 +1,8 @@
 ---
 name: technology-qualification-agent
 description: Evaluates any new or step-out technology a project may need - builds the qualification basis, decomposes the technology, categorises novelty and TRL, defines step-out, ranks failure modes (FMIRR), outlines qualification activities and writes a full technology assessment report (Markdown and Word) as a study deliverable.
+coordinated_agents:
+- technical-document-intelligence-agent
 version: 0.1.0
 required_skills:
 - neqsim-technology-assessment

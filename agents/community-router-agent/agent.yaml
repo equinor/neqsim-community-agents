@@ -64,6 +64,7 @@ coordinated_agents:
 - teg-dehydration-agent
 - tie-in-screening-agent
 - export-tie-in-concept-agent
+- subsea-infrastructure-capacity-agent
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent

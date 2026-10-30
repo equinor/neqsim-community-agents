@@ -9,6 +9,7 @@ required_skills:
 coordinated_agents:
 - flow-assurance-engineer-agent
 - subsea-layout-screening-agent
+- subsea-infrastructure-capacity-agent
 supported_domains:
 - flow-assurance
 - process-engineering

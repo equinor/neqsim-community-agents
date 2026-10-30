@@ -7,6 +7,8 @@ required_skills:
 - neqsim-separator-modelling
 - neqsim-resource-classification-screening
 - neqsim-ageing-life-extension-screening
+coordinated_agents:
+- subsea-infrastructure-capacity-agent
 supported_domains:
 - field-development
 - tie-in-screening

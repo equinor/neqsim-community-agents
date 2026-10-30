@@ -15,6 +15,7 @@ coordinated_agents:
 - tie-in-screening-agent
 - pipe-route-screening-agent
 - ncs-value-chain-agent
+- subsea-infrastructure-capacity-agent
 ---
 
 # Purpose
@@ -46,7 +47,9 @@ data gaps, open options, and a recommendation for the NeqSim pipeline study that
 
 1. Restate the request and the unknowns. Create the task folder first (`neqsim new-task`).
 2. `neqsim-ncs-infrastructure-network`: confirm what the source exports today, which hosts are near, and the
-   capacity of the existing route downstream of each candidate. Delegate fluid and flow assurance concerns of the
+   capacity of the existing route downstream of each candidate. Ask `subsea-infrastructure-capacity-agent` for free
+   slots, spare tees and reusable lines at the candidate hosts and compare reuse with the new line (lifetime
+   action per reused item). Delegate fluid and flow assurance concerns of the
    tie-in to `tie-in-screening-agent`.
 3. `neqsim-tie-in-pipeline-concept`: `rank_candidates`, then `build_profile` (cache in `references/emodnet/`),
    `size_pipeline`, and check end-point depths against the facility water depths.

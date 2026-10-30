@@ -4,6 +4,7 @@ description: Coordinates early-stage pipe-route screening that builds a route el
 coordinated_agents:
 - flow-assurance-engineer-agent
 - subsea-layout-screening-agent
+- subsea-infrastructure-capacity-agent
 version: 0.1.0
 required_skills:
 - neqsim-pipe-route-profile
@@ -53,7 +54,7 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the screening objective and the available public input data.
-2. Use `pipe-route-profile` to build the along-route horizontal and elevation profile and screen route slope.
+2. Use `pipe-route-profile` to build the along-route horizontal and elevation profile and screen route slope. For a reused line (spare, gas-lift, injection) take length, size and rating from `subsea-infrastructure-capacity-agent` and apply the same route checks.
 3. Use `pressure-drop-screening` to estimate the single-phase pressure drop and compare against the recommended gradient.
 4. Use `line-velocity-check` to screen the line velocity against erosional and recommended limits.
 5. Use `hydrate-margin-check` to screen the hydrate temperature margin against the guideline.

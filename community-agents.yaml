@@ -91,6 +91,22 @@ agents:
       - pipeline-concept
       - export-route-screening
 
+  - name: subsea-infrastructure-capacity-agent
+    version: "0.1.0"
+    description: "Builds an inventory of tie-in capacity in existing subsea and host infrastructure (free template/manifold slots, spare tees and hubs, J-tube/riser slots, spare or reusable pipelines, gas-lift, injection and MEG lines, umbilical cores) with status, remaining life, source and verification level, ranks reuse against a new-build tie-back and flags lifetime actions (replace, refurbish, life-extend, monitor) before a validated NeqSim study."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/subsea-infrastructure-capacity-agent/AGENT.md"
+    required_skills:
+      - neqsim-subsea-slot-tee-reuse-inventory
+      - neqsim-ncs-infrastructure-network
+      - neqsim-ageing-life-extension-screening
+    supported_domains:
+      - field-development
+      - tie-in-screening
+      - subsea-infrastructure
+      - production-uplift
+      - lifetime-screening
+
   - name: tie-in-screening-agent
     version: "0.1.0"
     description: "Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks."

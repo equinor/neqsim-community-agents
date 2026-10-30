@@ -62,6 +62,7 @@ coordinated_agents:
 - teg-dehydration-agent
 - tie-in-screening-agent
 - export-tie-in-concept-agent
+- subsea-infrastructure-capacity-agent
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
@@ -131,6 +132,7 @@ already obvious.
 | Generate a concept long list, screen it, and select a short list with a reference case | `concept-longlist-shortlist-agent` |
 | Which concept, tie-in, or development option to pick | `concept-selection-agent`, `tie-in-screening-agent` |
 | Where a new export or tie-in line can connect, what size it needs, and P&ID sketches of both connection ends | `export-tie-in-concept-agent` |
+| Which existing slots, tees, hubs, spare or reusable lines (gas-lift, injection, MEG, umbilical cores) can take a tie-in or raise production; reuse versus new build with lifetime actions | `subsea-infrastructure-capacity-agent` |
 | Bid on an exploration block, PSC bid round, break-even profit-oil share | `frontier-block-bid-agent` |
 | Field economics, NPV, CAPEX/OPEX, emissions cost | `asset-economics-agent`, `field-development-economics-agent` |
 | Emission reduction / abatement on the NCS | `emissions-abatement-screening-agent`, `energy-emissions-agent` |

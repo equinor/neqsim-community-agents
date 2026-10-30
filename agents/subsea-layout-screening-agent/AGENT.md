@@ -3,6 +3,7 @@ name: subsea-layout-screening-agent
 description: Coordinates early-stage subsea layout screening that turns a supplied subsea map into a well and tie-back inventory with step-out distances, route profiles, and seabed slope flags.
 coordinated_agents:
 - tie-in-screening-agent
+- subsea-infrastructure-capacity-agent
 version: 0.1.0
 required_skills:
 - neqsim-field-layout-import
@@ -55,6 +56,7 @@ Typical outputs include:
 1. Confirm the screening objective and the available public map data.
 2. Use `field-layout-import` to normalize the supplied map into a validated node list and surface data-quality issues.
 3. Use `subsea-layout-geometry` to compute host-to-node step-out distances, straight-line distances, and a distance matrix.
+3a. Ask `subsea-infrastructure-capacity-agent` for existing free slots, spare tees and reusable lines before assuming new templates or flowlines, and mark them in the layout with their verification level.
 4. Use `pipe-route-profile` to build the along-route horizontal and elevation profile and screen route slope.
 5. Use `bathymetry-profile-screening` to interpolate seabed depth and flag candidate steep sections.
 6. Summarize major uncertainties and required studies.

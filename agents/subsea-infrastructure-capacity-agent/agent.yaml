@@ -1,0 +1,42 @@
+name: subsea-infrastructure-capacity-agent
+agent_type: community-agent
+description: "Builds an inventory of tie-in capacity in existing subsea and host infrastructure (free template/manifold slots, spare tees and hubs, J-tube/riser slots, spare or reusable pipelines, gas-lift, injection and MEG lines, umbilical cores) with status, remaining life, source and verification level, ranks reuse against a new-build tie-back and flags lifetime actions (replace, refurbish, life-extend, monitor) before a validated NeqSim study."
+required_skills:
+- neqsim-subsea-slot-tee-reuse-inventory
+- neqsim-ncs-infrastructure-network
+- neqsim-ageing-life-extension-screening
+context_skills:
+- neqsim-tie-in-pipeline-concept
+- neqsim-tie-in-pid-sketch
+- neqsim-subsea-layout-geometry
+- neqsim-field-layout-import
+- neqsim-pipe-route-profile
+- neqsim-production-network-routing
+coordinated_agents:
+- export-tie-in-concept-agent
+- surf-layout-design-agent
+- tie-in-screening-agent
+- pipe-route-screening-agent
+- subsea-layout-screening-agent
+- ncs-value-chain-agent
+- gas-lift-allocation-agent
+supported_domains:
+- field-development
+- tie-in-screening
+- subsea-infrastructure
+- production-uplift
+- lifetime-screening
+inputs:
+- question-host-or-area-and-target
+- optional-slot-register-line-list-or-pid-excerpts
+- target-position-fluid-rate-pressures-and-horizon
+- open-data-scope
+outputs:
+- inventory-json-with-status-service-size-life-source-verification
+- free-slot-and-reusable-line-tables
+- ranked-reuse-options-against-new-build
+- lifetime-actions-replace-refurbish-life-extend-monitor
+- hand-offs-to-tie-in-surf-and-area-development-agents
+- assumptions-data-gaps-and-owner-questions
+human_review_required: true
+version: 0.1.0
