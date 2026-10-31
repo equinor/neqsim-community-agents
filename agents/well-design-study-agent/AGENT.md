@@ -1,11 +1,18 @@
 ---
 name: well-design-study-agent
-description: Leads a screening-level well design study and report from public data - offset-well evidence (regulator casing, leak-off, mud, pressure and time data), pressure and mud-weight window, casing seats and kick tolerance, casing and tubing design, torque and drag, time and cost ranges, standards register, fail-closed validation and a Word report - using public educational methods.
-version: 0.1.0
+description: "DEPRECATED - superseded by well-planning-engineer (integrated well planning). Still available for a drilling-focused screening study: offset-well evidence, pressure window, casing seats, kick tolerance, casing and tubing design, torque and drag, time and cost P10/P50/P90, well-plan graphics and report from public educational methods."
+version: 0.2.1
+status: deprecated
 required_skills:
 - neqsim-well-design-study
 - neqsim-erd-reach-screening
+context_skills:
+- neqsim-well-trajectory-anticollision
+coordinated_agents:
+- well-planning-engineer
 ---
+
+> **Deprecated.** Use `well-planning-engineer`, which coordinates integrated well planning (basis, reservoir-well-facility chain, envelopes, barriers, alternatives, drawings, report) and uses `neqsim-well-design-study` as its drilling and casing design module. This agent stays only as a drilling-focused entry point; it does not replace the well engineer and results need human review.
 
 # Purpose
 
@@ -35,7 +42,7 @@ It supports early concept work. It does not replace the well engineer, the compa
 - Tubing, erosional and loading screens, torque-and-drag and ECD results.
 - Time and cost P10/P50/P90 with contributors.
 - Validation checks, standards register, assumption and data-gap registers.
-- Word report with figures and provenance.
+- Word report with figures and provenance; optionally a well-plan report (cover with document control, key-data summary, A3 well schematic sheet, BOP and barrier sketches, Gantt, risk matrix, contingency tree, registers).
 
 # Workflow
 
@@ -46,6 +53,10 @@ It supports early concept work. It does not replace the well engineer, the compa
 5. Screen drilling feasibility with torque and drag (with a tortuosity allowance) and ECD; use `neqsim-erd-reach-screening` and `neqsim-well-trajectory-anticollision` for deviated or long-reach wells.
 6. Build the time and cost range from offsets without recorded NPT (productive time), the offset event frequency (NPT) and a calibrated common performance factor; keep assumed costs labelled.
 7. Validate (fail closed), view every figure, write the report and registers, and mark the result for human review.
+8. When a drilling-programme style document is wanted, build the **well-plan report** with `report.WellPlanReport`: cover with document control (prepared / reviewed / approved left blank), summary with key data, objectives and well data (location map, prognosis, pressure and temperature), offset review with lessons learned, pressure and mud-weight basis, well design (A3 schematic sheet, hole sections, casing and tubing, wellhead and BOP, kick tolerance, shallow-gas outline, cementing, fluids, bits and drill string, torque and drag, directional), evaluation, testing and suspension (barrier sketch), time and cost (Gantt, time-depth, S-curves, cost breakdown), risk register with matrix and contingency tree, HSE (qualitative), registers, standards, validation and appendices.
+9. Graphic set of the well plan (module `wellplan_graphics` and `wellplan_charts`): A3 well schematic sheet, BOP stack sketch, abandonment barrier schematic, trajectory plan and section with a clearance sweep, location map, offset comparison, time-depth chart with P10-P90 band, Gantt, S-curves, cost breakdown, risk matrix, decision tree. Every figure gets a caption, units, a provenance line and a visual check; flow-diagram-type figures go through the layout review.
+10. Resolve open engineering issues instead of hiding them: for a failing string compare the external-load bases (`collapse_basis_comparison`), the drift against the next bit (`alternative_pipes`) and the fluid-level limit; check that the internal fluid in the loss-of-returns case is the planned mud; state the recommendation, the trade-off and the residual decision for the well engineer.
+11. Run the report-design QA (repository `report-design` tool), render and view every page, fix clipped text, overlaps, orphan headings, blank pages and overflowing tables, repeat until clean, and keep a QA log.
 
 # Required Skills
 

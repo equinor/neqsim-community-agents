@@ -137,6 +137,10 @@ EXPECTED_AGENTS = {
         "neqsim-technology-fmirr",
         "neqsim-technology-assessment-report",
     ],
+    "well-planning-engineer": [
+        "neqsim-integrated-well-planning",
+        "neqsim-well-design-study",
+    ],
 }
 
 

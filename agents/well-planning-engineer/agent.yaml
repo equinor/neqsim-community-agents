@@ -1,0 +1,76 @@
+name: well-planning-engineer
+description: "Coordinates an integrated well-planning study for oil, gas-condensate, water-injection and gas-injection wells (onshore, platform, subsea): planning basis and registers, reservoir-well-facility models, operating envelopes, barrier schematics, alternatives, drawings, hand-offs and a well-planning report, with an honest ledger of implemented, screening and not-performed work."
+version: 0.1.0
+agent_type: community-coordinator
+required_skills:
+- neqsim-integrated-well-planning
+- neqsim-well-design-study
+context_skills:
+- neqsim-near-well-and-injectivity
+- neqsim-erd-reach-screening
+- neqsim-well-trajectory-anticollision
+- neqsim-agent-handoff
+- neqsim-flow-assurance
+- neqsim-api-patterns
+coordinated_agents:
+- field-development
+- flow-assurance-study-agent
+- flow-assurance-engineer-agent
+- near-well-injectivity-agent
+- vfp-lift-curve-agent
+- well-trajectory-anticollision-agent
+- artificial-lift-agent
+- gas-lift-allocation-agent
+- reservoir-simulator-agent
+- reservoir-history-match-agent
+- fluid-characterization-agent
+- pvt-agent
+- e300-fluid-agent
+- production-optimization-agent
+- reservoir-to-facility-screening-agent
+- concept-selection-agent
+- process-safety-agent
+- energy-emissions-agent
+- asset-economics-agent
+- hydrate-screening-agent
+- produced-water-scale-agent
+- tie-in-screening-agent
+- olga-simulation-agent
+- technical-document-intelligence-agent
+inbound_handoffs:
+- agent: fluid-characterization-agent
+  schema: iwp_fluid_basis.v1
+  purpose: Receive the characterised fluid, PVT evidence and validity range as SUPPLIED inputs with their source.
+- agent: well-trajectory-anticollision-agent
+  schema: iwp_trajectory.v1
+  purpose: Receive the surveyed or planned trajectory and separation results as SUPPLIED inputs.
+- agent: tie-in-screening-agent
+  schema: iwp_host_constraints.v1
+  purpose: Receive host pressure, temperature, rate and fluid-quality constraints with their source and validity.
+- agent: flow-assurance-study-agent
+  schema: iwp_flow_assurance_requirements.v1
+  purpose: Receive returned flow-assurance margins and open threats for the well conditions sent out.
+supported_domains:
+- well-planning
+- well-design
+- nodal-analysis
+- injectivity
+- operating-envelope
+- well-barriers
+- flow-assurance
+- study-coordination
+inputs:
+- planning_basis_with_provenance
+- reservoir_fluid_and_host_constraints
+- trajectory_completion_and_casing_basis
+- approved_limits_and_standards_basis
+outputs:
+- source_assumption_and_gap_registers
+- reservoir_well_facility_model_results
+- operating_envelope_table
+- barrier_schematics_and_integrity_inputs
+- alternatives_comparison_and_recommendation
+- drawings_and_figures_with_provenance
+- handoff_messages_and_interface_specifications
+- well_planning_report_and_capability_ledger
+human_review_required: true

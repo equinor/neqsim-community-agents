@@ -808,19 +808,73 @@ agents:
       - field-development
 
   - name: well-design-study-agent
-    version: "0.1.0"
-    description: "Leads a screening-level well design study and report from public data - offset-well evidence (regulator casing, leak-off, mud, pressure and time data), pressure and mud-weight window, casing seats and kick tolerance, casing and tubing design, torque and drag, time and cost ranges, standards register, fail-closed validation and a Word report - using public educational methods."
+    version: "0.2.1"
+    description: "DEPRECATED - superseded by well-planning-engineer (integrated well planning). Still available for a drilling-focused screening study: offset-well evidence, pressure window, casing seats, kick tolerance, casing and tubing design, torque and drag, time and cost P10/P50/P90, well-plan graphics and report from public educational methods."
     repo: "equinor/neqsim-community-agents"
     path: "agents/well-design-study-agent/AGENT.md"
+    status: deprecated
     required_skills:
       - neqsim-well-design-study
       - neqsim-erd-reach-screening
+    coordinated_agents:
+      - well-planning-engineer
     supported_domains:
       - well-design
       - casing-design
       - kick-tolerance
       - offset-wells
       - field-development
+
+  - name: well-planning-engineer
+    version: "0.1.0"
+    description: "Coordinates an integrated well-planning study for oil, gas-condensate, water-injection and gas-injection wells (onshore, platform, subsea): planning basis and registers, reservoir-well-facility models, operating envelopes, barrier schematics, alternatives, drawings, hand-offs and a well-planning report, with an honest ledger of implemented, screening and not-performed work."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/well-planning-engineer/AGENT.md"
+    agent_type: community-coordinator
+    required_skills:
+      - neqsim-integrated-well-planning
+      - neqsim-well-design-study
+    context_skills:
+      - neqsim-near-well-and-injectivity
+      - neqsim-erd-reach-screening
+      - neqsim-well-trajectory-anticollision
+      - neqsim-agent-handoff
+      - neqsim-flow-assurance
+      - neqsim-api-patterns
+    coordinated_agents:
+      - field-development
+      - flow-assurance-study-agent
+      - flow-assurance-engineer-agent
+      - near-well-injectivity-agent
+      - vfp-lift-curve-agent
+      - well-trajectory-anticollision-agent
+      - artificial-lift-agent
+      - gas-lift-allocation-agent
+      - reservoir-simulator-agent
+      - reservoir-history-match-agent
+      - fluid-characterization-agent
+      - pvt-agent
+      - e300-fluid-agent
+      - production-optimization-agent
+      - reservoir-to-facility-screening-agent
+      - concept-selection-agent
+      - process-safety-agent
+      - energy-emissions-agent
+      - asset-economics-agent
+      - hydrate-screening-agent
+      - produced-water-scale-agent
+      - tie-in-screening-agent
+      - olga-simulation-agent
+      - technical-document-intelligence-agent
+    supported_domains:
+      - well-planning
+      - well-design
+      - nodal-analysis
+      - injectivity
+      - operating-envelope
+      - well-barriers
+      - flow-assurance
+      - study-coordination
 
   - name: production-optimization-agent
     version: "0.1.0"
