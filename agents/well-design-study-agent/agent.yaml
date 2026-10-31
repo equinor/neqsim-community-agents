@@ -1,0 +1,28 @@
+name: well-design-study-agent
+agent_type: community-agent
+description: Leads a screening-level well design study and report from public data - offset-well evidence (regulator casing, leak-off, mud, pressure and time data), pressure and mud-weight window, casing seats and kick tolerance, casing and tubing design, torque and drag, time and cost ranges, standards register, fail-closed validation and a Word report - using public educational methods.
+required_skills:
+- neqsim-well-design-study
+- neqsim-erd-reach-screening
+supported_domains:
+- well-design
+- casing-design
+- kick-tolerance
+- offset-wells
+- field-development
+inputs:
+- well_purpose_depth_reference_target_depth
+- prospect_pressure_temperature_fluid_ranges
+- planned_casing_programme_or_request_to_propose
+- offset_evidence_tables
+- rig_and_material_cost_assumptions
+outputs:
+- offset_evidence_tables
+- pressure_window_and_casing_schematic
+- kick_tolerance_and_casing_design_factors
+- time_and_cost_p10_p50_p90
+- validation_checks_standards_register
+- assumption_and_data_gap_registers
+- word_report
+human_review_required: true
+version: 0.1.0

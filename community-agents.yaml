@@ -807,6 +807,21 @@ agents:
       - anti-collision
       - field-development
 
+  - name: well-design-study-agent
+    version: "0.1.0"
+    description: "Leads a screening-level well design study and report from public data - offset-well evidence (regulator casing, leak-off, mud, pressure and time data), pressure and mud-weight window, casing seats and kick tolerance, casing and tubing design, torque and drag, time and cost ranges, standards register, fail-closed validation and a Word report - using public educational methods."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/well-design-study-agent/AGENT.md"
+    required_skills:
+      - neqsim-well-design-study
+      - neqsim-erd-reach-screening
+    supported_domains:
+      - well-design
+      - casing-design
+      - kick-tolerance
+      - offset-wells
+      - field-development
+
   - name: production-optimization-agent
     version: "0.1.0"
     description: "Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines."
