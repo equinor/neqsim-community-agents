@@ -1,6 +1,6 @@
 name: well-planning-engineer
 description: "Coordinates an integrated well-planning study for oil, gas-condensate, water-injection and gas-injection wells (onshore, platform, subsea): planning basis and registers, reservoir-well-facility models, operating envelopes, barrier schematics, alternatives, drawings, hand-offs and a well-planning report, with an honest ledger of implemented, screening and not-performed work."
-version: 0.1.0
+version: 0.2.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-integrated-well-planning
