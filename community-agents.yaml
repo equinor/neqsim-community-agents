@@ -826,7 +826,7 @@ agents:
       - field-development
 
   - name: well-planning-engineer
-    version: "0.1.0"
+    version: "0.2.0"
     description: "Coordinates an integrated well-planning study for oil, gas-condensate, water-injection and gas-injection wells (onshore, platform, subsea): planning basis and registers, reservoir-well-facility models, operating envelopes, barrier schematics, alternatives, drawings, hand-offs and a well-planning report, with an honest ledger of implemented, screening and not-performed work."
     repo: "equinor/neqsim-community-agents"
     path: "agents/well-planning-engineer/AGENT.md"
