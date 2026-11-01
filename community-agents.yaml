@@ -522,11 +522,12 @@ agents:
       - waterflood
 
   - name: reservoir-history-match-agent
-    version: "0.1.0"
-    description: "Follows a field with a compositional multi-tank reservoir model: loads well and field history, splits formations and pressure compartments, history-matches volumes, aquifer and condensate yield, models produced composition versus depletion, forecasts under wellhead-pressure limits, and feeds process models with reservoir-driven wellstreams to show history and future production."
+    version: "0.2.0"
+    description: "Coordinates history matching and forecasting for multi-formation reservoirs: selects a conventional gas/oil material-balance or compositional gas-condensate route, reconciles pressure, allocated production and PVT, estimates in-place volumes, tests drive mechanisms and identifiability, and hands validated wellstreams to process models. USE WHEN: an MBAL history match, formation volume reconciliation, aquifer-support evaluation or reservoir-driven process forecast is needed."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-history-match-agent/AGENT.md"
     required_skills:
+      - neqsim-reservoir-material-balance
       - neqsim-reservoir-history-match-forecast
       - neqsim-pseudocomponent-split-characterization
       - neqsim-pvt-regression-characterization-factor
