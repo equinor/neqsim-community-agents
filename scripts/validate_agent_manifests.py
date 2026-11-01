@@ -458,6 +458,14 @@ def discover_community_agent_names(repo_root):
     return names
 
 
+def discover_core_agent_names(repo_root):
+    """Return agent ids defined by the core NeqSim repo (``.github/agents``)."""
+    agents_dir = repo_root.parent / "neqsim" / ".github" / "agents"
+    if not agents_dir.is_dir():
+        return set()
+    return {p.name[: -len(".agent.md")] for p in agents_dir.glob("*.agent.md")}
+
+
 def check_extends(manifest, bases):
     """Return (errors, warnings) for an agent's extends declaration."""
     errors, warnings = [], []
@@ -518,6 +526,7 @@ def validate_repo(repo_root):
     )
     known_agents = set(bases.keys())
     known_agents.update(m.parent.name for m in agents_dir.glob("*/agent.yaml"))
+    known_agents.update(discover_core_agent_names(repo_root))
 
     all_errors, all_warnings = [], []
     manifests = sorted(agents_dir.glob("*/agent.yaml"))
