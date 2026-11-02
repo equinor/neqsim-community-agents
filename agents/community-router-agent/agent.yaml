@@ -7,6 +7,7 @@ coordinated_agents:
 - artificial-lift-agent
 - asset-economics-agent
 - brazil-offshore-infrastructure-agent
+- brazil-well-production-agent
 - cfd-coupling-agent
 - compressor-antisurge-agent
 - concept-longlist-shortlist-agent

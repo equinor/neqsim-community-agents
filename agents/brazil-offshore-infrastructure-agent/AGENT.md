@@ -8,6 +8,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - frontier-block-bid-agent
 - concept-longlist-shortlist-agent
+- brazil-well-production-agent
 version: 0.1.0
 required_skills:
 - neqsim-anp-open-data
@@ -88,6 +89,8 @@ tie-in, layout, flow-assurance and economics agents for the numbers that decide 
    `locate_installations` (median wellhead position per installation). Report
    `well_spread_max_km`; a spread above about 15 km means the installation serves several
    fields and its position is uncertain. Use `installation_production` for current rates.
+   For the production history, decline, GOR or fluid basis of a host or neighbouring field,
+   hand over to the `brazil-well-production-agent`.
 3a. **Discoveries and plans.** Add the ANP `evaluation_plans` (`geoanp:pad`), `relinquished_blocks`
    and `production_units` reads with `near_field_discoveries.fetch_anp_layers`, then
    `brazil_records`, `near_field` and `plot_near_field`. State for every neighbour whether it is a

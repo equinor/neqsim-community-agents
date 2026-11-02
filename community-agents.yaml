@@ -430,6 +430,23 @@ agents:
       - infrastructure
       - brazil
 
+  - name: brazil-well-production-agent
+    version: "0.1.0"
+    description: "Reads public ANP well-level production data for Brazilian wells and fields - monthly rates, volumes and injection, zone production, well status, API gravity and gas composition - into verified unit-explicit series, then runs decline, GOR and water-cut screening, field aggregation and a declared fluid basis, and states what the public data can and cannot support before a calibrated NeqSim reservoir, well-flow or process model."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/brazil-well-production-agent/AGENT.md"
+    required_skills:
+      - neqsim-anp-well-production-history
+      - neqsim-anp-open-data
+      - neqsim-norwegian-continental-shelf-data
+      - neqsim-reservoir-depletion-screening
+    supported_domains:
+      - field-development
+      - reservoir-engineering
+      - production-analysis
+      - open-data
+      - brazil
+
   - name: ncs-value-chain-agent
     version: "0.1.0"
     description: "Coordinates whole-system Norwegian Continental Shelf (NCS) value-chain studies on open data - how every field, discovery, trunkline, processing plant and receiving terminal connects, how loaded the system is, what an outage or new tie-in does, and how to maximise production and value across the shelf with a capacity-constrained optimiser - and hands results to NeqSim tie-back, hydraulics, value-chain economics, debottlenecking and host process-model workflows."

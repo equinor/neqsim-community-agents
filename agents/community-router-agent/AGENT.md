@@ -5,7 +5,7 @@ coordinated_agents:
 - artificial-lift-agent
 - asset-economics-agent
 - brazil-offshore-infrastructure-agent
-- cfd-coupling-agent
+- brazil-well-production-agent
 - compressor-antisurge-agent
 - concept-longlist-shortlist-agent
 - concept-selection-agent
@@ -146,6 +146,7 @@ already obvious.
 | Hydrate, wax, scale, cooldown, flow assurance | `flow-assurance-engineer-agent`, `flow-assurance-study-agent`, `hydrate-screening-agent`, `subsea-cooldown-agent`, `produced-water-scale-agent` |
 | Transient multiphase flow, slugging, OLGA | `olga-simulation-agent` |
 | Brazilian offshore infrastructure: fields, FPSOs, wells, gas pipelines, tie-in host ranking | `brazil-offshore-infrastructure-agent` |
+| Brazilian well and field production history (ANP): decline, GOR, water cut, field totals, fluid basis, what public data supports | `brazil-well-production-agent` |
 | Pipeline route, survey, subsea layout, SURF design | `pipe-route-screening-agent`, `pipeline-survey-profile-agent`, `subsea-layout-screening-agent`, `surf-layout-design-agent` |
 | Line sizing, velocity, pressure drop, erosion, vibration | `piping-integrity-agent`, `piping-mechanical-agent`, `sand-erosion-agent` |
 | Gas export pipeline sizing and compression | `gas-export-pipeline-agent` |

@@ -111,6 +111,7 @@ question they answer.
 | `surf-layout-design-agent` *(coordinator)* | Designs a screening SURF layout and places the host from open map, bathymetry, and licence-block data, then routes and sizes every flowline, riser, and umbilical. |
 | `pipeline-survey-profile-agent` | Cleans as-built survey data into a pipeline profile, flags erroneous points, screens free-span and cover candidates, and compares repeat surveys. |
 | `brazil-offshore-infrastructure-agent` *(coordinator)* | Locates Brazilian fields, wells, FPSOs (placed from their wells), gas pipelines and processing plants from ANP open data, measures distances and ranks tie-in hosts against a stand-alone development. |
+| `brazil-well-production-agent` *(coordinator)* | Reads ANP well-level production data into verified series (pre-salt/offshore merge, split wells, publication lag), screens decline, GOR and water cut, prepares a declared fluid basis and lists what public data can and cannot support for a reservoir or well-flow model. |
 | `tie-in-screening-agent` | Early-stage screening of tie-in opportunities with fluid, flow-assurance, and process checks. |
 
 ### 2.6 Process engineering and screening

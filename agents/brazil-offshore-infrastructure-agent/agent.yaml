@@ -38,5 +38,6 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - frontier-block-bid-agent
 - concept-longlist-shortlist-agent
+- brazil-well-production-agent
 human_review_required: true
 version: 0.1.0
