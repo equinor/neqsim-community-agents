@@ -1,7 +1,7 @@
 ---
 name: well-planning-engineer
 description: "Coordinates an integrated well-planning study for oil, gas-condensate, water-injection and gas-injection wells (onshore, platform, subsea): planning basis and registers, reservoir-well-facility models, operating envelopes, barrier schematics, alternatives, drawings, hand-offs and a well-planning report, with an honest ledger of implemented, screening and not-performed work."
-version: 0.1.0
+version: 0.2.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-integrated-well-planning
@@ -123,7 +123,8 @@ Use the shared NeqSim interpreter (active environment or `NEQSIM_PYTHON`; `sys.e
 8. **Integrity and safety interfaces.** Provide `iwp_integrity_inputs.v1` and the barrier proposal to the integrity review (`process-safety-agent` for relief and depressurisation questions). Keep the envelope table separating calculated conditions from verified ratings and approved limits.
 9. **Interface specifications.** For anti-collision, geomechanics, drilling hydraulics, cementing and detailed mechanical design, issue `iwp_interface_spec.v1` documents; status stays UNRESOLVED until a specialist result returns. Use `technical-document-intelligence-agent` to extract data from supplied documents.
 10. **Drawings and report.** `drawings`, then `report`. Every flow diagram must pass `pfd-layout-review` before it is used. Close with the readiness label, the capability ledger, the open actions and the revision record.
-11. **Maintain the log.** Every decision gets an id, rationale and alternatives; every open action an owner. Update `decisions/` after each step.
+11. **Real-case practices (learned on a full study).** (a) Cross-check the first chain run against any earlier independent VLP or model and quote the agreement; (b) compare the NeqSim dew point and wellhead temperature with every number already quoted in the project and record a discrepancy as a data gap instead of choosing silently; (c) use `facility.boundary_table` to take an upstream flowline study as the hydraulic boundary rather than re-doing it; (d) report plateau-hold pressure, choke margin by year and the binding constraint, never recovery; (e) run `hydraulics_compare.compare_methods` when the recommendation could change with the correlation; (f) run `lifecycle_tubing_matrix` and APB bleed tables before talking about tubing size; (g) view every figure and every page of the report, fix defects in the shared chart code, and log pages inspected, renderer and fixes in a QA log; (h) keep a skill test log of every gap found.
+12. **Maintain the log.** Every decision gets an id, rationale and alternatives; every open action an owner. Update `decisions/` after each step.
 
 Hand-off schemas: planning basis in; well model out; VFP request to `vfp-lift-curve-agent`; trajectory in and out with `well-trajectory-anticollision-agent`; host constraints in; fluid basis in; cost and profile out to `asset-economics-agent` and `field-development`; flow-assurance requirements out and returned margins in; integrity inputs out with verification evidence in.
 
