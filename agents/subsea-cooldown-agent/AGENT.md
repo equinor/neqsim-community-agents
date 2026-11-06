@@ -3,6 +3,7 @@ name: subsea-cooldown-agent
 description: Provides early-stage subsea flowline and riser cooldown screening that checks no-touch time against public hydrate-margin guidelines.
 coordinated_agents:
 - installation-weather-agent
+- seabed-protection-agent
 version: 0.1.0
 required_skills:
 - neqsim-surf-cooldown-screening
@@ -50,9 +51,10 @@ Typical outputs include:
 1. Confirm the screening objective and available public input data.
 2. If only geometry is available, use `surf-cooldown-screening` to estimate the lumped time constant from density, specific heat, internal diameter, and an overall heat transfer coefficient.
 3. Use `surf-cooldown-screening` to estimate the no-touch time from the initial temperature, seabed temperature, hydrate equilibrium temperature, and time constant.
-4. Summarize major uncertainties and required studies.
-5. Generate a reproducible cooldown screening report outline.
-6. Document assumptions, limitations, and human review requirements.
+4. Where the line is trenched, rock-covered or exposed along its length, take the burial schedule from `seabed-protection-agent` and run the screening per burial state (or length-weighted) instead of one overall heat transfer coefficient for the whole line; report the protected and unprotected no-touch time.
+5. Summarize major uncertainties and required studies.
+6. Generate a reproducible cooldown screening report outline.
+7. Document assumptions, limitations, and human review requirements.
 
 # Required Skills
 

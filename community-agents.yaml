@@ -606,6 +606,28 @@ agents:
       - flow-assurance
       - survey-data-processing
 
+  - name: seabed-protection-agent
+    version: "0.1.0"
+    description: "Coordinates early-stage subsea pipeline trenching, burial and rock-dump screening that uses route and map-layer data (seabed substrate, fishing intensity, ice scour, existing pipelines) to size trenching and rock scope, and hands the protected burial state to cooldown and hydrate-margin screening."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/seabed-protection-agent/AGENT.md"
+    required_skills:
+      - neqsim-seabed-protection-screening
+      - neqsim-pipeline-survey-processing
+      - neqsim-surf-cooldown-screening
+      - neqsim-hydrate-margin-check
+    context_skills:
+      - neqsim-pipe-route-profile
+      - neqsim-bathymetry-profile-screening
+      - neqsim-surf-field-layout-design
+      - neqsim-subsea-layout-geometry
+    supported_domains:
+      - subsea
+      - flow-assurance
+      - pipeline-integrity
+      - surf
+      - map-data
+
   - name: asset-economics-agent
     version: "0.1.0"
     description: "Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure."

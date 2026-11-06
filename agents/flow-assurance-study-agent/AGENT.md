@@ -15,6 +15,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - olga-simulation-agent
 - subsea-cooldown-agent
+- seabed-protection-agent
 - piping-integrity-agent
 - sand-erosion-agent
 ---
@@ -113,7 +114,12 @@ Typical outputs include:
 7. **Delegate specialist checks.** Send operating-margin questions to
    `flow-assurance-engineer-agent`, shutdown cooldown to `subsea-cooldown-agent`,
    line/integrity and vibration questions to `piping-integrity-agent`, and sand
-   exposure to `sand-erosion-agent`. Only invoke checks relevant to the decision.
+   exposure to `sand-erosion-agent`. Send trenching, burial and rock-dump scope to
+   `seabed-protection-agent`, which samples map layers along the route; whenever
+   burial changes the thermal basis, run cooldown and hydrate margin for the
+   protected and the unprotected state and carry the burial schedule into the
+   `TwoFluidPipe` sections instead of one burial depth for the whole line. Only
+   invoke checks relevant to the decision.
 8. **Escalate transients.** Delegate terrain slugging, ramp-up liquid surge,
    shutdown/restart, blowdown, well clean-up, or design-critical independent
    comparison to `olga-simulation-agent`. Do not spend an OLGA licence on a question

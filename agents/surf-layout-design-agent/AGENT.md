@@ -24,6 +24,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - asset-economics-agent
 - subsea-infrastructure-capacity-agent
+- seabed-protection-agent
 ---
 
 # Purpose
@@ -135,9 +136,12 @@ Typical outputs include:
    flag any line above the target velocity or the erosional limit.
 9. **Screen the thermal side.** Where a cooldown or hydrate requirement drives
    the insulation, hand the flowline lengths to `surf-cooldown-screening` and to
-   `flow-assurance-engineer-agent`.
-10. **Cost it.** Pass the quantity take-off to `capex-opex-screening` or
-    `asset-economics-agent`.
+   `flow-assurance-engineer-agent`. Hand the routes to `seabed-protection-agent`
+   to scope trenching, burial and rock dump from the same map layers, including
+   rock at crossings of existing pipelines, and carry the protected burial state
+   into the cooldown screening.
+10. **Cost it.** Pass the quantity take-off, including trenching and rock
+    tonnes, to `capex-opex-screening` or `asset-economics-agent`.
 11. **Hand over.** Emit the GeoJSON, the map and the line schedule, and map the
     drill centres and wells onto a NeqSim production-network model.
 12. **Document** assumptions, limitations, source attribution and the human

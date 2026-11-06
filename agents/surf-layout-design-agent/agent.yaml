@@ -22,6 +22,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - asset-economics-agent
 - subsea-infrastructure-capacity-agent
+- seabed-protection-agent
 supported_domains:
 - field-development
 - subsea-layout

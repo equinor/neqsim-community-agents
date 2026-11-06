@@ -5,6 +5,7 @@ coordinated_agents:
 - pipe-route-screening-agent
 - subsea-layout-screening-agent
 - flow-assurance-engineer-agent
+- seabed-protection-agent
 version: 0.1.0
 required_skills:
 - neqsim-pipeline-survey-processing
@@ -74,7 +75,7 @@ Typical outputs include:
 7. Use `bathymetry-profile-screening` when only seabed soundings are available and a route profile has to be interpolated instead.
 8. Hand the elevation profile to `pressure-drop-screening` and `line-velocity-check` when arrival conditions are also in scope.
 9. Record every data gap, in particular a manually supplied outer diameter or a missing seabed depth.
-10. Produce a screening summary that separates facts, assumptions and recommendations, and route the span candidates to a qualified DNV-RP-F105 assessment.
+10. Produce a screening summary that separates facts, assumptions and recommendations, route the span candidates to a qualified DNV-RP-F105 assessment, and hand the surveyed cover and span candidates to `seabed-protection-agent` when trenching, burial or rock dump scope is in question.
 
 # Required Skills
 

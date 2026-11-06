@@ -5,6 +5,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - subsea-layout-screening-agent
 - subsea-infrastructure-capacity-agent
+- seabed-protection-agent
 version: 0.1.0
 required_skills:
 - neqsim-pipe-route-profile

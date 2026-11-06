@@ -5,6 +5,7 @@ required_skills:
 - neqsim-surf-cooldown-screening
 coordinated_agents:
 - installation-weather-agent
+- seabed-protection-agent
 supported_domains:
 - flow-assurance
 - subsea

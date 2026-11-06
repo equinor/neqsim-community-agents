@@ -1,0 +1,44 @@
+name: seabed-protection-agent
+description: Coordinates early-stage subsea pipeline trenching, burial and rock-dump screening that uses route and map-layer data (seabed substrate, fishing intensity, ice scour, existing pipelines) to size trenching and rock scope, and hands the protected burial state to cooldown and hydrate-margin screening.
+required_skills:
+- neqsim-seabed-protection-screening
+- neqsim-pipeline-survey-processing
+- neqsim-surf-cooldown-screening
+- neqsim-hydrate-margin-check
+context_skills:
+- neqsim-pipe-route-profile
+- neqsim-bathymetry-profile-screening
+- neqsim-surf-field-layout-design
+- neqsim-subsea-layout-geometry
+agent_type: community-agent
+coordinated_agents:
+- pipe-route-screening-agent
+- pipeline-survey-profile-agent
+- surf-layout-design-agent
+- subsea-cooldown-agent
+- flow-assurance-engineer-agent
+supported_domains:
+- subsea
+- flow-assurance
+- pipeline-integrity
+- surf
+- map-data
+inputs:
+- route_vertices_and_pipe_outer_diameter
+- map_layers_substrate_fishing_ice_scour_and_no_rock_zones
+- existing_pipeline_and_cable_layer
+- surveyed_cover_and_free_span_candidates
+- rock_only_requirements_from_their_own_assessments
+- contractor_trencher_capability_and_rates
+- fluid_insulation_and_ambient_data_for_cooldown
+- screening_objective
+outputs:
+- hazard_driven_cover_requirement_per_segment
+- trench_or_rock_dump_strategy_per_segment
+- trench_length_depth_and_days
+- rock_volume_tonnes_and_days_for_route_crossings_and_spans
+- burial_handoff_for_neqsim_thermal_models
+- protected_vs_unprotected_cooldown_and_hydrate_margin
+- data_gaps_assumptions_and_validation_checklist
+human_review_required: true
+version: 0.1.0
