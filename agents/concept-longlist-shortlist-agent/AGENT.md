@@ -97,6 +97,12 @@ For comparing two or three concepts that are already chosen, use
    compatibility rules, and givens. Use `stage-gate-project-timeline` to place the
    decision in its phase (long list in identification, short list and reference
    case in feasibility).
+   **Fluid-type gate:** establish the fluid type (oil, gas, gas-condensate) from the
+   prospect profile or a stated owner assumption with its source before any concept
+   is generated; if it is open, stop and ask. For an undrilled frontier prospect also
+   declare the pressure, temperature, fluid and PVT, equity and host-candidate
+   assumptions (basis, owner, data that would replace them) and carry them as
+   labelled assumptions.
 2. **Generate.** Use `concept-longlist-shortlist-screening`
    (`generate_long_list`) to enumerate all compatible combinations.
 3. **Check spread.** Run `detect_capacity_variants` and `coverage_report`. A long
@@ -174,6 +180,8 @@ case. Include the elimination log, open questions and human review requirements.
 # Validation Checklist
 
 - [ ] Decision elements, options, rules, and givens are stated.
+- [ ] The fluid type was established before the long list and every concept fits it;
+      frontier assumptions are declared and labelled.
 - [ ] The long list spans more than one topology, or the capacity-variant warning
       is reported.
 - [ ] Every elimination names the criterion and its evidence.
