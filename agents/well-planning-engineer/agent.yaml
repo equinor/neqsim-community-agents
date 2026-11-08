@@ -6,6 +6,7 @@ required_skills:
 - neqsim-integrated-well-planning
 - neqsim-well-design-study
 context_skills:
+- neqsim-jurisdiction-regulatory-basis
 - neqsim-near-well-and-injectivity
 - neqsim-erd-reach-screening
 - neqsim-well-trajectory-anticollision
