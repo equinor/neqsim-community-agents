@@ -1,0 +1,48 @@
+name: subsea-equipment-placement-agent
+description: Decides where subsea equipment goes and defends the choice by screening and ranking sites for drill centres, templates, manifolds, PLETs and tie-in points, and the connecting routes, against hosts and safety zones, existing lines and crossings, seabed slope and depth, fishing exposure, installation constraints and well reach, with every limit carrying its source and basis.
+agent_type: community-coordinator
+required_skills:
+- neqsim-subsea-equipment-placement
+- neqsim-subsea-layout-geometry
+- neqsim-pipe-route-profile
+- neqsim-bathymetry-profile-screening
+context_skills:
+- neqsim-surf-field-layout-design
+- neqsim-seabed-protection-screening
+- neqsim-subsea-slot-tee-reuse-inventory
+- neqsim-erd-reach-screening
+- neqsim-step-out-screening
+- neqsim-field-layout-import
+- neqsim-jurisdiction-regulatory-basis
+- neqsim-standards-lookup
+coordinated_agents:
+- surf-layout-design-agent
+- subsea-layout-screening-agent
+- subsea-infrastructure-capacity-agent
+- seabed-protection-agent
+- export-tie-in-concept-agent
+- well-planning-engineer
+- flow-assurance-study-agent
+supported_domains:
+- subsea-layout
+- surf-design
+- tie-in-screening
+- field-development
+inputs:
+- host_and_tie_in_options_with_positions
+- reservoir_targets_with_tvd_and_footprint
+- existing_pipelines_cables_structures_with_status
+- safety_exclusion_and_caution_zones_as_polygons
+- bathymetry_grid_with_resolution
+- fishing_and_shipping_density_if_available
+- project_or_operator_limits_with_source
+- installation_and_rig_constraints
+outputs:
+- ranked_candidate_sites_with_check_tables
+- route_screening_with_crossing_table
+- placement_decision_record_with_robustness_to_weights
+- siting_checklist_status_ok_action_gap
+- geojson_of_screened_sites_and_routes
+- open_gaps_and_specialist_handoffs
+human_review_required: true
+version: 0.1.0

@@ -358,6 +358,22 @@ agents:
       - tie-in-screening
       - flow-assurance
 
+  - name: subsea-equipment-placement-agent
+    version: "0.1.0"
+    description: "Decides where subsea equipment goes and defends the choice by screening and ranking sites for drill centres, templates, manifolds, PLETs and tie-in points, and the connecting routes, against hosts and safety zones, existing lines and crossings, seabed slope and depth, fishing exposure, installation constraints and well reach, with every limit carrying its source and basis."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/subsea-equipment-placement-agent/AGENT.md"
+    required_skills:
+      - neqsim-subsea-equipment-placement
+      - neqsim-subsea-layout-geometry
+      - neqsim-pipe-route-profile
+      - neqsim-bathymetry-profile-screening
+    supported_domains:
+      - subsea-layout
+      - surf-design
+      - tie-in-screening
+      - field-development
+
   - name: surf-layout-design-agent
     version: "0.2.0"
     description: "Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, routes and sizes every flowline, riser and umbilical, renders a presentation-grade reservoir-to-host illustration carrying the study's headline numbers, and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows."
