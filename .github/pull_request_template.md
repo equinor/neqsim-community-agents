@@ -8,3 +8,4 @@ Thank you for contributing to NeqSim Community Agents! Please complete the follo
 - [ ] Linked to an associated issue or discussion
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for the full contribution process.
+- [ ] Quiet by default: hidden child processes, no run-time installs, silent auth (see CONTRIBUTING)

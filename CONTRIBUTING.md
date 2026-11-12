@@ -99,6 +99,16 @@ Run the current tests with:
 python -m unittest discover -s tests
 ```
 
+## Quiet by default (no pop-ups, no installs, no surprise sign-ins)
+
+Agents and skills run from hooks, MCP servers and chat tool calls with no visible console. Anything that opens a window or asks the user to act breaks the flow, so every new or changed skill and agent must follow these rules:
+
+- **Hidden child processes.** Every `subprocess.run/Popen/check_output/call` in skill code passes `creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)`. Never use `os.system`, `os.startfile` or `shell=True` to start tools. The repository test `test_quiet_processes.py` fails the build otherwise; annotate a deliberate user-requested exception with `# quiet-ok: <reason>`.
+- **No installs at run time.** Declare dependencies in the skill's `pyproject.toml`; the plugin installs them once, in the background. Skill code and agent instructions must not run `pip install`, `npm install` or download tools mid-task. If a package is missing, report the blocker and the remedy.
+- **Silent authentication first.** Get tokens through `enterprise-sso-auth` (cached tokens, `az account get-access-token`, session warm-up via `session_warmup.json`). Register new APIs in its service registry so they are warmed at session start. Never call `az login`, device-code flows, browser sign-in or credential prompts from skill code or agent steps unless every silent route has failed, and then ask once with the exact remedy.
+- **Background by default.** Long installs, downloads and warm-ups run detached with output in a log file, never in the foreground chat. Agent instructions must tell the model to continue with other work rather than wait on them.
+- **GUI automation is the exception.** Computer-use skills may start a visible application only when the user's task needs it; say so in the skill's Limitations section.
+
 ## Review Checklist
 
 Before submitting a pull request, confirm that:

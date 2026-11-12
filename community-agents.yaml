@@ -53,7 +53,7 @@ agents:
       - pvt-regression
 
   - name: e300-fluid-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Reads Eclipse E300 files into NeqSim fluids, writes NeqSim fluids to E300, and adds water with the public PVTsim water parameters."
     repo: "equinor/neqsim-community-agents"
     path: "agents/e300-fluid-agent/AGENT.md"
@@ -287,7 +287,7 @@ agents:
       - model-validation
 
   - name: olga-simulation-agent
-    version: "0.1.0"
+    version: "0.2.0"
     description: "Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch with the right flags, decodes the exit status, reads the trend and profile results, and hands the transient boundary conditions to the validated NeqSim workflow."
     repo: "equinor/neqsim-community-agents"
     path: "agents/olga-simulation-agent/AGENT.md"
