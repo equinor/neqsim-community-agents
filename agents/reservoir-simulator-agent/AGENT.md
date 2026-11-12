@@ -115,6 +115,10 @@ Typical outputs include:
 - Volumetrics: hydrocarbon pore volume, in-place and recoverable volumes at
   standard conditions, and the corresponding in-situ reservoir volumes.
 - The inferred drive mechanism and the recovery factor with its basis.
+- For OPM Flow black-oil results, separate total stock-tank recovery from
+  source-origin recovery. A source-specific conversion must be validated across
+  the compared strategies and the same PVT basis; if its uncertainty overlaps
+  the strategy difference, report the ranking as unresolved.
 - A data tier and a weighted completeness score.
 - The written-out arithmetic behind every derived number.
 - Physics and consistency warnings: cold or shallow reservoir, over- or
