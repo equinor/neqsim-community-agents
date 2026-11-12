@@ -11,6 +11,7 @@ required_skills:
 context_skills:
 - neqsim-gas-dispersion-distance-screening
 - neqsim-jet-fire-radiation-screening
+- neqsim-open-incident-data
 supported_domains:
 - process-safety
 - relief-screening

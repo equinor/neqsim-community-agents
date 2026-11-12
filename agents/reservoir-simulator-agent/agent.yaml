@@ -13,6 +13,7 @@ context_skills:
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
 - neqsim-reservoir-3d-visualisation
+- neqsim-opm-open-reservoir-decks
 supported_domains:
 - field-development
 - reservoir-engineering

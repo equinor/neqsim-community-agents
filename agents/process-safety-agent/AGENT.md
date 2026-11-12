@@ -4,6 +4,7 @@ description: Provides early-stage process safety screening for fire-case relief 
 context_skills:
 - neqsim-gas-dispersion-distance-screening
 - neqsim-jet-fire-radiation-screening
+- neqsim-open-incident-data
 version: 0.1.0
 required_skills:
 - neqsim-relief-load-screening

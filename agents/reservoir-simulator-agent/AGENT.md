@@ -12,6 +12,7 @@ required_skills:
 - neqsim-fluid-quality-check
 context_skills:
 - neqsim-pseudocomponent-split-characterization
+- neqsim-opm-open-reservoir-decks
 - neqsim-near-well-and-injectivity
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening

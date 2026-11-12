@@ -6,6 +6,7 @@ required_skills:
 - neqsim-fluid-quality-check
 context_skills:
 - neqsim-benchmark-reference-data
+- neqsim-thermoml-experimental-data
 ---
 
 # Purpose
