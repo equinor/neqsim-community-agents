@@ -12,6 +12,7 @@ context_skills:
 - neqsim-field-layout-import
 - neqsim-pipe-route-profile
 - neqsim-production-network-routing
+- neqsim-umbilical-design
 coordinated_agents:
 - export-tie-in-concept-agent
 - surf-layout-design-agent
