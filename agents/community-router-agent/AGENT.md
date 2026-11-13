@@ -58,6 +58,7 @@ coordinated_agents:
 - subsea-cooldown-agent
 - subsea-layout-screening-agent
 - surf-layout-design-agent
+- umbilical-design-agent
 - technical-document-intelligence-agent
 - teg-dehydration-agent
 - tie-in-screening-agent
@@ -148,6 +149,7 @@ already obvious.
 | Brazilian offshore infrastructure: fields, FPSOs, wells, gas pipelines, tie-in host ranking | `brazil-offshore-infrastructure-agent` |
 | Brazilian well and field production history (ANP): decline, GOR, water cut, field totals, fluid basis, what public data supports | `brazil-well-production-agent` |
 | Pipeline route, survey, subsea layout, SURF design | `pipe-route-screening-agent`, `pipeline-survey-profile-agent`, `subsea-layout-screening-agent`, `surf-layout-design-agent` |
+| Umbilical sizing and drawings: chemical injection lines, hydraulic response, power cable, armour and bend radius | `umbilical-design-agent` |
 | Line sizing, velocity, pressure drop, erosion, vibration | `piping-integrity-agent`, `piping-mechanical-agent`, `sand-erosion-agent` |
 | Gas export pipeline sizing and compression | `gas-export-pipeline-agent` |
 | Separator, scrubber, unit-operation screening | `process-engineer-agent`, `process-screening-agent` |

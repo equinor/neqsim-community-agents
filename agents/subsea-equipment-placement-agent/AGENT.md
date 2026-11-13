@@ -62,6 +62,7 @@ A placement decision record containing the ranked sites with full check tables, 
 - Map positions and statuses are screening grade; "status unknown" is a gap, not clearance.
 - Do not state a standard's requirement from memory or from a summary; read the text first and cite the clause.
 - Keep company-internal requirements, project data and licensed tables out of community outputs; they belong to the enterprise layer.
+- **Brazilian deepwater pre-salt:** do not default to templates or drill centres. D&W limits wells to about 30 deg inclination and a step-out of about 500 m (angle is built through the salt, so salt thickness matters), so siting means single vertical wells over their targets, connected by loops or daisy chains. Apply `neqsim-brazil-presalt-well-reach-and-layout`, take the limits and salt thickness from D&W, and report the step-out per well. Not applicable outside this region.
 
 # Human Review
 

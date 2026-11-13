@@ -11,6 +11,7 @@ context_skills:
 - neqsim-stage-gate-project-timeline
 - neqsim-uncertainty-quantification
 - neqsim-ageing-life-extension-screening
+- neqsim-brazil-presalt-well-reach-and-layout
 coordinated_agents:
 - concept-selection-agent
 - subsea-layout-screening-agent

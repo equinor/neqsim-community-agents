@@ -61,6 +61,7 @@ coordinated_agents:
 - subsea-cooldown-agent
 - subsea-layout-screening-agent
 - surf-layout-design-agent
+- umbilical-design-agent
 - technical-document-intelligence-agent
 - teg-dehydration-agent
 - tie-in-screening-agent

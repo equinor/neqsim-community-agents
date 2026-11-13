@@ -7,6 +7,7 @@ required_skills:
 - neqsim-step-out-screening
 context_skills:
 - neqsim-brazil-presalt-analogue-basis
+- neqsim-brazil-presalt-well-reach-and-layout
 - neqsim-pressure-drop-screening
 - neqsim-hydrate-margin-check
 supported_domains:

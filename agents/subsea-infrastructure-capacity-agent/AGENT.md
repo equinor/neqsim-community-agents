@@ -21,6 +21,7 @@ coordinated_agents:
 - subsea-layout-screening-agent
 - ncs-value-chain-agent
 - gas-lift-allocation-agent
+- umbilical-design-agent
 ---
 
 # Purpose
@@ -73,6 +74,7 @@ and whether it lasts the tie-in horizon as four separate answers, and compares e
 # Required Skills
 
 - `neqsim-subsea-slot-tee-reuse-inventory`, `neqsim-ncs-infrastructure-network`, `neqsim-ageing-life-extension-screening`.
+- For existing umbilicals, list tubes, quads and fibres per umbilical, mark spare or unconnected tubes, and screen extension in series from a template before sizing a new umbilical with `umbilical-design-agent` (skill `neqsim-umbilical-design`); design capacity is not spare capacity.
 
 # Example Usage
 
