@@ -78,7 +78,9 @@ and economics studies for any quantitative decision.
    map (fields, discovery candidates, evaluation-plan areas, returned blocks) so that the
    bid and the host screening reflect what is already planned next to the block. Then use the
    `tie-in-screening-agent` for near-field constraints.
-7. Use the `concept-selection-agent` to give each concept a consistent cost picture.
+7. Use the `concept-selection-agent` to give each concept a consistent cost picture. For deepwater
+   pre-salt concepts, count single vertical wells in loops or daisy chains and no multi-slot
+   templates (D&W: about 30 deg, about 500 m step-out; `neqsim-brazil-presalt-well-reach-and-layout`).
 8. Apply the profit-oil table for a Brazilian round: `load_annex_xx()` with the rate per
    producer, cost-oil cap converted with `net_cost_oil_cap`. Run `psc-bid-economics-screening`
    (Swanson-weighted EMV, forced development and with the development option) and

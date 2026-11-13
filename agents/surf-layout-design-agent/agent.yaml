@@ -12,6 +12,7 @@ context_skills:
 - neqsim-field-layout-import
 - neqsim-production-network-routing
 - neqsim-step-out-screening
+- neqsim-brazil-presalt-well-reach-and-layout
 - neqsim-capex-opex-screening
 - neqsim-surf-cooldown-screening
 - neqsim-professional-reporting

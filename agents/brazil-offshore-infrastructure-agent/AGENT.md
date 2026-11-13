@@ -114,7 +114,11 @@ tie-in, layout, flow-assurance and economics agents for the numbers that decide 
    the `subsea-layout-screening-agent` or `surf-layout-design-agent` (routed length, layout,
    map), the `flow-assurance-engineer-agent` (arrival pressure, hydrate and wax margin on the
    routed length) and, for a bid, the `frontier-block-bid-agent`. For a long list of concepts
-   hand the ranked hosts to the `concept-longlist-shortlist-agent`.
+   hand the ranked hosts to the `concept-longlist-shortlist-agent`. For any new subsea layout
+   on a pre-salt field, tell `surf-layout-design-agent` to apply
+   `neqsim-brazil-presalt-well-reach-and-layout`: wells are near vertical (about 30 deg, about
+   500 m step-out per D&W), so the layout is single vertical wells in loops or daisy chains,
+   not templates or drill centres.
 8. For a national or basin overview, build the pipeline and connection-point registers with
    `overview.load_cached_layers`, `pipeline_register`, `node_register` and `connect_pipelines`; list unconnected
    endpoints as gaps.

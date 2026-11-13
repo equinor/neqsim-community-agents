@@ -116,6 +116,10 @@ For comparing two or three concepts that are already chosen, use
    `tie-in-screening-agent`, or `subsea-layout-screening-agent` when a value needs
    more than a single skill call. Use `ageing-life-extension-screening` to cap the
    field life of any reused host.
+   For Brazilian deepwater pre-salt concepts, build the options as single vertical wells in loops or
+   daisy chains, not template or drill-centre clusters: D&W limits wells to about 30 deg and about
+   500 m step-out (`neqsim-brazil-presalt-well-reach-and-layout`). A template concept there needs a
+   D&W statement and is otherwise a failed must-pass, not a scored option.
 6. **Rank and test.** Run `weighted_ranking`, `pareto_front`, `weight_robustness`,
    `weight_crossovers`, and `gap_to_cutoff`. Use `uncertainty-quantification`
    when per-concept values carry ranges.

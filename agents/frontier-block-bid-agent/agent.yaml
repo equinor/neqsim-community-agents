@@ -10,6 +10,7 @@ context_skills:
 - neqsim-resource-classification-screening
 - neqsim-reservoir-model-builder
 - neqsim-reference-fluid-synthetic-generation
+- neqsim-brazil-presalt-well-reach-and-layout
 supported_domains:
 - field-development
 - exploration
