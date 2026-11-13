@@ -25,6 +25,7 @@ coordinated_agents:
 - asset-economics-agent
 - subsea-infrastructure-capacity-agent
 - seabed-protection-agent
+- umbilical-design-agent
 ---
 
 # Purpose
@@ -140,6 +141,9 @@ Typical outputs include:
    to scope trenching, burial and rock dump from the same map layers, including
    rock at crossings of existing pipelines, and carry the protected burial state
    into the cooldown screening.
+   Hand the umbilical route length, water depth and the chemical demand to
+   `umbilical-design-agent` so the umbilical is sized and drawn instead of
+   carried as a cost-library length.
 10. **Cost it.** Pass the quantity take-off, including trenching and rock
     tonnes, to `capex-opex-screening` or `asset-economics-agent`.
 11. **Hand over.** Emit the GeoJSON, the map and the line schedule, and map the

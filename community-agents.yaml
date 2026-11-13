@@ -749,6 +749,20 @@ agents:
       - operating-limits
       - standards-compliance
 
+  - name: umbilical-design-agent
+    version: "0.1.0"
+    description: "Sizes, checks and draws a subsea control or service umbilical from route, depth, chemical-injection, hydraulic and power requirements with the NeqSim umbilical physics, and hands a figure set, key numbers and open items to SURF, flow-assurance and cost workflows."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/umbilical-design-agent/AGENT.md"
+    required_skills:
+      - neqsim-umbilical-design
+    supported_domains:
+      - subsea
+      - surf-design
+      - chemical-injection
+      - subsea-controls
+      - power-transmission
+
   - name: sand-erosion-agent
     version: "0.1.0"
     description: "Provides early-stage subsea and topside line sand-erosion screening that checks erosional velocity and remaining wall life against public integrity guidelines."
