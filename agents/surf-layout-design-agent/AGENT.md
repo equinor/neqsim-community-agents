@@ -17,6 +17,7 @@ context_skills:
 - neqsim-capex-opex-screening
 - neqsim-surf-cooldown-screening
 - neqsim-professional-reporting
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent
@@ -186,6 +187,7 @@ Loaded as context when the task calls for them:
 - `step-out-screening` mapped to community catalog ID `neqsim-step-out-screening`
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `surf-cooldown-screening` mapped to community catalog ID `neqsim-surf-cooldown-screening`
+- `neqsim-crs-geodetic-checks`: check the CRS of every map, bathymetry and licence-block layer before the host is placed or a line is routed. Name the datum operation, run `datum_sensitivity` when a source does not state its datum, and say whether route lengths are grid or geodesic.
 
 # Example Usage
 

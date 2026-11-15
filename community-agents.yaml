@@ -1038,6 +1038,7 @@ agents:
       - neqsim-plant-data
       - neqsim-technical-document-reading
     context_skills:
+      - neqsim-dynamic-model-identification
       - neqsim-control-valve-cv-screening
       - neqsim-heat-exchanger-fouling-assessment
       - neqsim-uncertainty-quantification

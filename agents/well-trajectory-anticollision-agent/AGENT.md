@@ -5,6 +5,8 @@ version: 0.1.0
 required_skills:
 - neqsim-well-trajectory-anticollision
 - neqsim-erd-reach-screening
+context_skills:
+- neqsim-crs-geodetic-checks
 ---
 
 # Purpose
@@ -88,6 +90,7 @@ Typical outputs include:
 
 - `neqsim-well-trajectory-anticollision`: 3D path, uncertainty, separation factor, slot and pull-back
 - `neqsim-erd-reach-screening`: torque-and-drag reach for long step-outs
+- `neqsim-crs-geodetic-checks`: put slot, target and offset-well positions in one confirmed CRS with a named datum operation. A datum mix-up (about 200 m on the Norwegian shelf) is larger than any separation factor.
 
 # Example Usage
 

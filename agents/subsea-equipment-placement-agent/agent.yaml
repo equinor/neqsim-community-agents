@@ -16,6 +16,7 @@ context_skills:
 - neqsim-field-layout-import
 - neqsim-jurisdiction-regulatory-basis
 - neqsim-standards-lookup
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - surf-layout-design-agent
 - subsea-layout-screening-agent

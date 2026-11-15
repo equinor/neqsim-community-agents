@@ -10,6 +10,7 @@ context_skills:
 - neqsim-pressure-drop-screening
 - neqsim-pipe-wall-thickness-screening
 - neqsim-hydrate-screening
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - tie-in-screening-agent
 - pipe-route-screening-agent

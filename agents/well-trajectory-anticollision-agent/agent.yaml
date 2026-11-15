@@ -4,6 +4,8 @@ description: Plans a screening-level 3D well path from a slot or sidetrack tie-i
 required_skills:
 - neqsim-well-trajectory-anticollision
 - neqsim-erd-reach-screening
+context_skills:
+- neqsim-crs-geodetic-checks
 supported_domains:
 - well-planning
 - directional-drilling

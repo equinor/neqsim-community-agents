@@ -1,6 +1,8 @@
 ---
 name: pipe-route-screening-agent
 description: Coordinates early-stage pipe-route screening that builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin against public guidelines.
+context_skills:
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - flow-assurance-engineer-agent
 - subsea-layout-screening-agent
@@ -69,6 +71,7 @@ Typical outputs include:
 - `pressure-drop-screening` mapped to community catalog ID `neqsim-pressure-drop-screening`
 - `line-velocity-check` mapped to community catalog ID `neqsim-line-velocity-check`
 - `hydrate-margin-check` mapped to community catalog ID `neqsim-hydrate-margin-check`
+- `neqsim-crs-geodetic-checks`: check the CRS and datum of the route points, and report grid against geodesic length before the length enters the pressure-drop calculation.
 
 # Example Usage
 

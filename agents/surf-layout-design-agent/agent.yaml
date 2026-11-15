@@ -16,6 +16,7 @@ context_skills:
 - neqsim-capex-opex-screening
 - neqsim-surf-cooldown-screening
 - neqsim-professional-reporting
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent

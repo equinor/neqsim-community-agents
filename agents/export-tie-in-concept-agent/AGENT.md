@@ -11,6 +11,7 @@ context_skills:
 - neqsim-pressure-drop-screening
 - neqsim-pipe-wall-thickness-screening
 - neqsim-hydrate-screening
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - tie-in-screening-agent
 - pipe-route-screening-agent
@@ -64,6 +65,7 @@ data gaps, open options, and a recommendation for the NeqSim pipeline study that
 # Required Skills
 
 - `neqsim-tie-in-pipeline-concept`, `neqsim-tie-in-pid-sketch`, `neqsim-ncs-infrastructure-network`.
+- `neqsim-crs-geodetic-checks`: check landing-point and route coordinates for CRS, datum and swapped axes, and state grid or geodesic length.
 
 # Example Usage
 

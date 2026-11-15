@@ -17,6 +17,7 @@ context_skills:
 - neqsim-field-layout-import
 - neqsim-jurisdiction-regulatory-basis
 - neqsim-standards-lookup
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - surf-layout-design-agent
 - subsea-layout-screening-agent
@@ -51,6 +52,7 @@ Do not use it for detailed routing, geohazard interpretation, foundation or stru
 5. **Screen the routes** from the finalists (`screen_route`): crossings (count, angle, position), parallel clearance, zone entry, slope, straight end lengths; add the elevation profile with `neqsim-pipe-route-profile`.
 6. **Run the siting checklist** in the skill (reach, host and zones, infrastructure, seabed, third-party activity, installation, operations, interfaces) and mark each row OK, ACTION or GAP.
 7. **Hand off** the decision record: coordinates, check tables, crossings, gaps and specialist actions (survey, geotechnical, geohazard, installation, protection, well planning, hydraulic design).
+- `neqsim-crs-geodetic-checks`: compute clearances, crossings and safety-zone distances only after every input is in one confirmed CRS. When a source datum is unknown, report the datum-ambiguity shift against the clearance it affects.
 
 # Outputs
 
