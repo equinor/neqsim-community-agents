@@ -9,6 +9,7 @@ required_skills:
 context_skills:
 - neqsim-agentic-process-optimization
 - neqsim-optimization-and-doe
+- neqsim-dynamic-model-identification
 coordinated_agents:
 - debottlenecking-agent
 supported_domains:

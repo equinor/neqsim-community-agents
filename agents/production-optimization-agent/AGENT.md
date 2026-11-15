@@ -10,6 +10,7 @@ required_skills:
 context_skills:
 - neqsim-agentic-process-optimization
 - neqsim-optimization-and-doe
+- neqsim-dynamic-model-identification
 coordinated_agents:
 - debottlenecking-agent
 ---
@@ -68,6 +69,16 @@ NeqSim optimization run for any quantitative decision.
    model. Use `debottlenecking-agent` first when the limiting unit is not yet
    known — optimizing before the bottleneck is identified searches the wrong
    decision space.
+9. When the plant is running and historian data exist, run the advisory loop in
+   `neqsim-dynamic-model-identification` (`dynamic_identification.advisory`):
+   - anchor the model to the measured state;
+   - build per-lever sensitivities and gate each with `physics_gate`;
+   - plan constrained moves with `plan_moves` (no worse than now for limits already exceeded);
+   - estimate unmeasured quality such as RVP with `linear_soft_sensor`;
+   - pace the moves by the identified settling time;
+   - verify each move and update gains only through `gain_update`.
+
+   Re-plan daily, and report the deliverability cap of each lever as the main assumption.
 
 # Required Skills
 
