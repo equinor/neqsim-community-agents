@@ -547,6 +547,8 @@ agents:
       - neqsim-h2s-phase-partitioning
       - neqsim-reservoir-souring-correlation
       - neqsim-production-chemistry
+    context_skills:
+      - neqsim-well-log-reading
     supported_domains:
       - reservoir-engineering
       - production-chemistry
@@ -583,6 +585,16 @@ agents:
       - neqsim-reservoir-depletion-screening
       - neqsim-resource-classification-screening
       - neqsim-fluid-quality-check
+    context_skills:
+      - neqsim-pseudocomponent-split-characterization
+      - neqsim-opm-open-reservoir-decks
+      - neqsim-near-well-and-injectivity
+      - neqsim-production-network-routing
+      - neqsim-asset-value-npv-screening
+      - neqsim-reservoir-3d-visualisation
+      - neqsim-well-log-reading
+      - neqsim-seismic-segy-reading
+      - neqsim-seismic-structure-to-reservoir
     supported_domains:
       - field-development
       - reservoir-engineering
@@ -908,6 +920,7 @@ agents:
       - neqsim-near-well-and-injectivity
       - neqsim-erd-reach-screening
       - neqsim-well-trajectory-anticollision
+      - neqsim-well-log-reading
       - neqsim-agent-handoff
       - neqsim-flow-assurance
       - neqsim-api-patterns

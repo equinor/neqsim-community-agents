@@ -9,10 +9,15 @@ All contributions must be suitable for a public open-source repository.
 ## Where Does This Belong?
 
 Before adding an agent here, confirm this is the right repository. See the
-[Where Does This Go? placement guide](https://github.com/equinor/neqsim-community-skills/blob/main/docs/where-does-this-go.md):
-community agents **orchestrate** community screening skills. They contain no
-engineering method themselves, claim only screening-level results, and reference
-validated NeqSim classes rather than reimplementing them.
+[Where Does This Go? placement guide](https://github.com/equinor/neqsim-community-skills/blob/main/docs/where-does-this-go.md).
+The rules are mandatory:
+
+- Equinor- or company-specific agents, internal systems, shares and policy go in the
+  **enterprise** repos. Agents here stay vendor-neutral.
+- Agents that are not NeqSim Java functionality go **here**, never in core neqsim.
+- Community agents **orchestrate** community skills. They contain no
+  engineering method themselves, claim only screening-level results, and reference
+  validated NeqSim classes rather than reimplementing them.
 
 Company-specific agents, internal workflow policy, private data integration, and confidential examples belong in private enterprise repositories instead. See the main NeqSim [Enterprise Agent and Skill Repositories](https://github.com/equinor/neqsim/blob/master/docs/integration/enterprise_agent_skill_repos.md) guide for the paired enterprise agents/skills setup and Engineering Harness installation workflow.
 

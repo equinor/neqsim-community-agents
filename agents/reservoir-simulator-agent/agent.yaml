@@ -14,6 +14,9 @@ context_skills:
 - neqsim-asset-value-npv-screening
 - neqsim-reservoir-3d-visualisation
 - neqsim-opm-open-reservoir-decks
+- neqsim-well-log-reading
+- neqsim-seismic-segy-reading
+- neqsim-seismic-structure-to-reservoir
 supported_domains:
 - field-development
 - reservoir-engineering

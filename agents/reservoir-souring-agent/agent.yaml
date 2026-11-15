@@ -4,6 +4,8 @@ required_skills:
 - neqsim-h2s-phase-partitioning
 - neqsim-reservoir-souring-correlation
 - neqsim-production-chemistry
+context_skills:
+- neqsim-well-log-reading
 supported_domains:
 - reservoir-engineering
 - production-chemistry

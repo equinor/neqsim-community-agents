@@ -11,6 +11,7 @@ context_skills:
 - neqsim-near-well-and-injectivity
 - neqsim-erd-reach-screening
 - neqsim-well-trajectory-anticollision
+- neqsim-well-log-reading
 - neqsim-agent-handoff
 - neqsim-flow-assurance
 - neqsim-api-patterns
@@ -133,7 +134,7 @@ Hand-off schemas: planning basis in; well model out; VFP request to `vfp-lift-cu
 
 - `neqsim-integrated-well-planning`: workflow, schemas, chain, envelope, barriers, drawings, report, capability ledger.
 - `neqsim-well-design-study`: drilling and casing design module (window, seats, kick tolerance, casing and tubing ratings, torque and drag, time and cost).
-- Context skills as relevant: `neqsim-near-well-and-injectivity`, `neqsim-erd-reach-screening`, `neqsim-brazil-presalt-well-reach-and-layout` (Brazilian deepwater pre-salt: near-vertical wells, about 30 deg and about 500 m step-out from D&W, angle built through the salt; take the limits and salt thickness from D&W and do not plan templates or large deviation there), `neqsim-well-trajectory-anticollision`, `neqsim-agent-handoff`, `neqsim-flow-assurance`, `neqsim-api-patterns`.
+- Context skills as relevant: `neqsim-near-well-and-injectivity`, `neqsim-erd-reach-screening`, `neqsim-brazil-presalt-well-reach-and-layout` (Brazilian deepwater pre-salt: near-vertical wells, about 30 deg and about 500 m step-out from D&W, angle built through the salt; take the limits and salt thickness from D&W and do not plan templates or large deviation there), `neqsim-well-trajectory-anticollision`, `neqsim-well-log-reading` (offset-well DLIS/LIS/LAS logs: caliper, density, sonic and gamma ray per interval, and log character at loss or influx depths), `neqsim-agent-handoff`, `neqsim-flow-assurance`, `neqsim-api-patterns`.
 
 # Example Usage
 

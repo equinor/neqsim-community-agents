@@ -11,6 +11,7 @@ context_skills:
 - neqsim-erd-reach-screening
 - neqsim-brazil-presalt-well-reach-and-layout
 - neqsim-well-trajectory-anticollision
+- neqsim-well-log-reading
 - neqsim-agent-handoff
 - neqsim-flow-assurance
 - neqsim-api-patterns

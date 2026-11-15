@@ -17,6 +17,9 @@ context_skills:
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
 - neqsim-reservoir-3d-visualisation
+- neqsim-well-log-reading
+- neqsim-seismic-segy-reading
+- neqsim-seismic-structure-to-reservoir
 coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-to-facility-screening-agent
@@ -165,6 +168,28 @@ Typical outputs include:
    data exists and is catalogued) and an *acquisition programme* (nothing was
    found).
 
+   Log and seismic files supplied by the user count as rungs of this sweep.
+   Read DLIS/LIS/LAS files with `well-log-reading` (curve inventory, depth range
+   in metres, zone statistics per formation for `petrophysics`) and SEG-Y files
+   with `seismic-segy-reading` (survey extent, CRS hints, sections through the
+   wells for `geometry`). For `geometry`, run `seismic-structure-to-reservoir`
+   on the same folders (`<python> -m seismic_structure run <config>`). It
+   discovers interpreted surfaces, or tracks a top from a SEG-Y cube seeded at a
+   well top, converts it to depth on well ties and analyses the closure. Take its
+   `gate_attempts["geometry"]` records and, for status `ok`, its
+   `builder_inputs` (area, closure-equivalent thickness, datum) into step 5. A
+   `no_closure` result is a finding to report; `blocked` lists what is missing.
+   Run each reader's folder command once, with `--out`
+   pointing into the task's analysis folder (source folders are read-only).
+   Map each evidence record to the gate only when the file belongs to the
+   study (its header well or survey is in the study area): status `unverified`
+   is then `used` for the ingredient it informs, status `error` is `blocked`
+   with the reader's error as the reason, and a missing file type is `absent`.
+   A readable file for another well or area (an offset outside the study, a
+   stray file) is not a rung for this study: list it as not relevant and do not
+   let it satisfy an ingredient. Never take a well name, depth
+   reference or CRS that the user or data owner has not confirmed as a fact.
+
 5. **Build the first model with the best source for each ingredient.** Use
    `reservoir-model-builder` with everything the sweep found. Record the
    resulting data tier, completeness score, derivations and warnings. State
@@ -218,6 +243,9 @@ Loaded as context when the task calls for them:
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `near-well-and-injectivity` mapped to community catalog ID `neqsim-near-well-and-injectivity`
 - `reservoir-3d-visualisation` mapped to community catalog ID `neqsim-reservoir-3d-visualisation` (3D figures of an OPM Flow / Eclipse run)
+- `well-log-reading` mapped to community catalog ID `neqsim-well-log-reading` (DLIS/LIS/LAS files: curve inventory, zone porosity/density/GR statistics and depth units before any rock property is taken from a report table)
+- `seismic-segy-reading` mapped to community catalog ID `neqsim-seismic-segy-reading` (SEG-Y volumes: survey extent, CRS hints, inline/crossline and fence sections through wells for structural context)
+- `seismic-structure-to-reservoir` mapped to community catalog ID `neqsim-seismic-structure-to-reservoir` (interpreted or tracked top, depth conversion on well ties, crest/spill/closure, area and gross rock volume per contact, builder inputs, geometry gate records and a layered OPM grid)
 
 # When there is no subsurface data at all
 

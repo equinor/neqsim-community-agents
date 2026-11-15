@@ -7,6 +7,8 @@ required_skills:
 - neqsim-h2s-phase-partitioning
 - neqsim-reservoir-souring-correlation
 - neqsim-production-chemistry
+context_skills:
+- neqsim-well-log-reading
 coordinated_agents:
 - reservoir-history-match-agent
 - produced-water-scale-agent
@@ -65,6 +67,7 @@ materials selection or process design, and a qualified human review is always re
 - `neqsim-h2s-phase-partitioning` for gas/oil/water partitioning and gas-to-wellstream conversion.
 - `neqsim-reservoir-souring-correlation` for seawater fraction, per-well correlations and the mixing-zone bound.
 - `neqsim-production-chemistry` for chemical mitigation and chemistry root cause.
+- Context: `neqsim-well-log-reading` when well logs are supplied, to place H2S observations against formations (zone gamma ray, density and other curve statistics) with the log's depth reference stated.
 
 # Example Usage
 
