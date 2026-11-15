@@ -17,6 +17,7 @@ context_skills:
 - neqsim-well-log-reading
 - neqsim-seismic-segy-reading
 - neqsim-seismic-structure-to-reservoir
+- neqsim-multisegment-well-completion
 supported_domains:
 - field-development
 - reservoir-engineering

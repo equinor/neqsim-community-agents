@@ -12,6 +12,7 @@ context_skills:
 - neqsim-brazil-presalt-well-reach-and-layout
 - neqsim-well-trajectory-anticollision
 - neqsim-well-log-reading
+- neqsim-multisegment-well-completion
 - neqsim-agent-handoff
 - neqsim-flow-assurance
 - neqsim-api-patterns

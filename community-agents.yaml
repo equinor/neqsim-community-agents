@@ -595,6 +595,7 @@ agents:
       - neqsim-well-log-reading
       - neqsim-seismic-segy-reading
       - neqsim-seismic-structure-to-reservoir
+      - neqsim-multisegment-well-completion
     supported_domains:
       - field-development
       - reservoir-engineering
@@ -921,6 +922,7 @@ agents:
       - neqsim-erd-reach-screening
       - neqsim-well-trajectory-anticollision
       - neqsim-well-log-reading
+      - neqsim-multisegment-well-completion
       - neqsim-agent-handoff
       - neqsim-flow-assurance
       - neqsim-api-patterns

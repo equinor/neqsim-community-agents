@@ -20,6 +20,7 @@ context_skills:
 - neqsim-well-log-reading
 - neqsim-seismic-segy-reading
 - neqsim-seismic-structure-to-reservoir
+- neqsim-multisegment-well-completion
 coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-to-facility-screening-agent
@@ -246,6 +247,7 @@ Loaded as context when the task calls for them:
 - `well-log-reading` mapped to community catalog ID `neqsim-well-log-reading` (DLIS/LIS/LAS files: curve inventory, zone porosity/density/GR statistics and depth units before any rock property is taken from a report table)
 - `seismic-segy-reading` mapped to community catalog ID `neqsim-seismic-segy-reading` (SEG-Y volumes: survey extent, CRS hints, inline/crossline and fence sections through wells for structural context)
 - `seismic-structure-to-reservoir` mapped to community catalog ID `neqsim-seismic-structure-to-reservoir` (interpreted or tracked top, depth conversion on well ties, crest/spill/closure, area and gross rock volume per contact, builder inputs, geometry gate records and a layered OPM grid)
+- `multisegment-well-completion` mapped to community catalog ID `neqsim-multisegment-well-completion` (AICD, ICD, valve or DAR completions in the deck: plain WELSEGS/COMPSEGS for standard wells, the completor device layer, device checks with NeqSim phase properties and zonal water and gas change). Compare the device deck with the plain multi-segment deck, not with the standard-well deck, and only with device parameters from the vendor or the inflow-control team.
 
 # When there is no subsurface data at all
 

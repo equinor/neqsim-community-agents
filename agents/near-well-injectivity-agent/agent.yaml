@@ -7,6 +7,7 @@ required_skills:
 context_skills:
 - neqsim-production-optimization
 - neqsim-vfp-lift-curves
+- neqsim-multisegment-well-completion
 - neqsim-subsea-and-wells
 - neqsim-benchmark-reference-data
 - neqsim-input-validation

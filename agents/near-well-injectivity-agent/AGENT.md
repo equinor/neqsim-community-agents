@@ -13,6 +13,7 @@ required_skills:
 context_skills:
 - neqsim-production-optimization
 - neqsim-vfp-lift-curves
+- neqsim-multisegment-well-completion
 - neqsim-subsea-and-wells
 - neqsim-benchmark-reference-data
 - neqsim-input-validation
@@ -80,7 +81,12 @@ initial value is how a waterflood ends up short of injectors five years in.
 
 **7. Hand off, do not duplicate.** Produce the inflow relationship and give it
 to NeqSim. Do not rebuild wellbore hydraulics — that is `PipeBeggsAndBrills`,
-and it is already done.
+and it is already done. When the question is inflow control along the well
+(AICD, ICD, valve or DAR devices against gas or water coning), use
+`neqsim-multisegment-well-completion`: it adds the device layer to the deck with
+completor and screens the devices with the same equations OPM uses. Run the
+device deck against the plain multi-segment deck it writes, not the
+standard-well deck.
 
 **8. Put the lift constraint in the deck as `VFPPROD`, not as a BHP floor.** When
 the tubing or the flowline limits the well, hand the table to
