@@ -34,8 +34,9 @@ Avoid broad claims such as "optimizes production" or "ensures safe operation" un
 
 At minimum, run:
 
-```powershell
-python -m unittest discover -s tests
+```bash
+uv sync --locked
+uv run pytest tests/
 ```
 
 Additional tests can be added for mature agents. Examples include:

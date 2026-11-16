@@ -4,8 +4,9 @@ This directory contains repository-level tests for structure and metadata.
 
 Run with:
 
-```powershell
-python -m unittest discover -s tests
+```bash
+uv sync --locked
+uv run pytest tests/
 ```
 
-The initial tests use only the Python standard library.
+The locked development environment provides the test dependencies.
