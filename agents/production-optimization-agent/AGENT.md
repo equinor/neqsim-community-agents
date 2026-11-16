@@ -1,7 +1,7 @@
 ---
 name: production-optimization-agent
 description: Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines.
-version: 0.1.0
+version: 0.1.1
 required_skills:
 - neqsim-separator-modelling
 - neqsim-compressor-operating-window-check
@@ -11,6 +11,7 @@ context_skills:
 - neqsim-agentic-process-optimization
 - neqsim-optimization-and-doe
 - neqsim-dynamic-model-identification
+- neqsim-well-test-calibration
 coordinated_agents:
 - debottlenecking-agent
 ---
@@ -79,6 +80,13 @@ NeqSim optimization run for any quantitative decision.
    - verify each move and update gains only through `gain_update`.
 
    Re-plan daily, and report the deliverability cap of each lever as the main assumption.
+10. For a per-well choke advisory that must keep improving, use `neqsim-well-test-calibration` so every new well test
+    retunes the well's lift curve (raw separator volumes, stock-tank stage path, U and kH with priors, inflow only from
+    gauge tests, held-out gate), and feed short choke-step responses from the historian to the ensemble calibration as
+    observations. Daily allocated rates alone gave no learning gain over two weeks on a 40-well platform; tests and
+    events did. Before trusting the loop, freeze the model for one week, replay the actual operation and compare the
+    total-oil error with "no change"; value the advice with the frozen model too, not only with the planner's own
+    claim (about 80 % of the claimed gain survived in that test).
 
 # Required Skills
 
