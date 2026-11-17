@@ -26,6 +26,12 @@ jobs:
       - name: Install test dependencies
         run: uv sync --locked
 
+      - name: Run pre-commit hooks (Ruff, Black)
+        run: uv run pre-commit run --all-files
+
+      - name: Ensure pre-commit did not modify files
+        run: git diff --exit-code
+
       - name: Run repository structure tests
         run: uv run pytest tests/
 

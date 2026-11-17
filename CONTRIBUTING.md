@@ -102,11 +102,18 @@ Use Python 3.11 or newer and uv for development. From the repository root:
 
 ```bash
 uv sync --locked
+uv run pre-commit install
+uv run pre-commit run
 uv run pytest tests/
 uv run python scripts/validate_agent_manifests.py
 uv run python scripts/generate_agent_skill_map.py --check
 uv run python scripts/generate_orchestration_map.py --check
 ```
+
+Pre-commit runs Ruff linting and Black formatting on staged Python files; CI
+runs the same hooks on all tracked Python files. Fix findings introduced by
+your changes without weakening rules, adding blanket suppressions, or bypassing
+hooks. Report unrelated existing failures explicitly.
 
 Manage development dependencies with `uv add --group dev <package>` and
 commit the updated `uv.lock`. Agent users do not need uv.

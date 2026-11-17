@@ -7,8 +7,11 @@ dependencies = []
 [dependency-groups]
 dev = [
   "PyYAML>=6.0",
+  "black>=25.1",
   "jsonschema>=4.0",
+  "pre-commit>=4.0",
   "pytest>=8.0",
+  "ruff>=0.5",
 ]
 
 [tool.uv]
