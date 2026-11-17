@@ -12,28 +12,34 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.11", "3.12"]
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python ${{ matrix.python-version }}
+        uses: astral-sh/setup-uv@v10.3.3
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Install test dependencies
-        run: python -m pip install -r requirements-dev.txt
+        run: uv sync --locked
+
+      - name: Run pre-commit hooks (Ruff, Black)
+        run: uv run pre-commit run --all-files
+
+      - name: Ensure pre-commit did not modify files
+        run: git diff --exit-code
 
       - name: Run repository structure tests
-        run: python -m unittest discover -s tests
+        run: uv run pytest tests/
 
       - name: Validate agent manifests
-        run: python scripts/validate_agent_manifests.py
+        run: uv run python scripts/validate_agent_manifests.py
 
       - name: Check agent-skill map is up to date
-        run: python scripts/generate_agent_skill_map.py --check
+        run: uv run python scripts/generate_agent_skill_map.py --check
 
       - name: Check orchestration map is up to date
-        run: python scripts/generate_orchestration_map.py --check
+        run: uv run python scripts/generate_orchestration_map.py --check

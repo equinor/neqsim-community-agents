@@ -12,6 +12,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
@@ -31,7 +32,11 @@ class AgentManifestSchemaTests(unittest.TestCase):
         self.assertTrue((REPO_ROOT / "schemas" / "skills.index.json").exists())
 
     def test_all_required_skills_resolve(self):
-        _errors, warnings = validator.validate_repo(REPO_ROOT)
+        index = json.loads((REPO_ROOT / "schemas" / "skills.index.json").read_text())
+        with patch.object(
+            validator, "discover_known_skills", return_value=set(index["skills"])
+        ):
+            _errors, warnings = validator.validate_repo(REPO_ROOT)
         unresolved = [w for w in warnings if "not found in known skill" in w]
         self.assertEqual(unresolved, [], "unresolved skills:\n" + "\n".join(unresolved))
 

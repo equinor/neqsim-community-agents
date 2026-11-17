@@ -191,13 +191,15 @@ See [docs/governance.md](docs/governance.md) and [docs/safety-guidelines.md](doc
 
 ## Testing
 
-Run the repository structure and metadata tests with:
+For development, use Python 3.11 or newer and uv to run the repository tests:
 
-```powershell
-python -m unittest discover -s tests
+```bash
+uv sync --locked
+uv run pytest tests/
 ```
 
-The initial tests use only the Python standard library. They validate that each agent has the required files, documentation sections, metadata fields, prompt examples, and examples.
+The tests validate agent files, metadata, documentation and examples. Agent
+users do not need uv.
 
 ## License
 
