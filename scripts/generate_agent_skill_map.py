@@ -53,7 +53,7 @@ def load_manifest(path):
 def skill_cell(skills):
     if not skills:
         return "_(none)_"
-    return ", ".join("`{}`".format(s) for s in skills)
+    return ", ".join(f"`{s}`" for s in skills)
 
 
 def build_rows(agents_dir):
@@ -85,8 +85,8 @@ def render(rows, repo_label):
     lines = [
         "---",
         "title: Agent to Skill Map",
-        "description: Auto-generated map of which skills each {} agent declares, "
-        "derived from agents/*/agent.yaml.".format(repo_label),
+        f"description: Auto-generated map of which skills each {repo_label} agent declares, "
+        "derived from agents/*/agent.yaml.",
         "---",
         "",
         "# Agent \u2192 Skill Map",
@@ -131,7 +131,7 @@ def main(argv=None):
     repo_root = args.repo_root.resolve()
     agents_dir = repo_root / "agents"
     if not agents_dir.is_dir():
-        print("ERROR: agents/ directory not found at {}".format(agents_dir))
+        print(f"ERROR: agents/ directory not found at {agents_dir}")
         return 2
 
     repo_label = "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
@@ -145,17 +145,15 @@ def main(argv=None):
         current = out_path.read_text(encoding="utf-8") if out_path.exists() else ""
         if current.replace("\r\n", "\n") != document.replace("\r\n", "\n"):
             print(
-                "ERROR: {} is stale. Run "
-                "`python scripts/generate_agent_skill_map.py`.".format(
-                    out_path.relative_to(repo_root)
-                )
+                f"ERROR: {out_path.relative_to(repo_root)} is stale. Run "
+                "`python scripts/generate_agent_skill_map.py`."
             )
             return 1
-        print("Agent-skill map is up to date ({} agents).".format(len(rows)))
+        print(f"Agent-skill map is up to date ({len(rows)} agents).")
         return 0
 
     out_path.write_text(document, encoding="utf-8")
-    print("Wrote {} ({} agents).".format(out_path.relative_to(repo_root), len(rows)))
+    print(f"Wrote {out_path.relative_to(repo_root)} ({len(rows)} agents).")
     return 0
 
 

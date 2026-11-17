@@ -13,12 +13,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-import yaml
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-import validate_agent_manifests as validator  # noqa: E402
+import validate_agent_manifests as validator
 
 
 class AgentManifestSchemaTests(unittest.TestCase):

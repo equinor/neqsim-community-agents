@@ -32,9 +32,8 @@ for rel in (
 ):
     sys.path.insert(0, str(SKILLS_ROOT / rel))
 
-from production_network_routing import ProductionNetworkModel  # noqa: E402
-from reservoir_depletion_screening import ReservoirDepletionModel  # noqa: E402
-
+from production_network_routing import ProductionNetworkModel
+from reservoir_depletion_screening import ReservoirDepletionModel
 
 # --- Example case ------------------------------------------------------------
 # A small subsea gas field: two wells route through one manifold, then an 8 km

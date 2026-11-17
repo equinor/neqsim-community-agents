@@ -85,9 +85,9 @@ def render(rows, repo_label):
     lines = [
         "---",
         "title: Agent Orchestration Map",
-        "description: Auto-generated map of the {} agent orchestration graph "
+        f"description: Auto-generated map of the {repo_label} agent orchestration graph "
         "(delegation via coordinated_agents and overlay via extends), derived "
-        "from agents/*/agent.yaml.".format(repo_label),
+        "from agents/*/agent.yaml.",
         "---",
         "",
         "# Agent Orchestration Map",
@@ -102,7 +102,7 @@ def render(rows, repo_label):
     ]
     for row in rows:
         coordinated = (
-            ", ".join("`{}`".format(a) for a in row["coordinated"])
+            ", ".join(f"`{a}`" for a in row["coordinated"])
             if row["coordinated"]
             else "\u2014"
         )
@@ -124,9 +124,7 @@ def render(rows, repo_label):
         lines.append("graph LR")
         for src, dst in edges:
             lines.append(
-                "    {}[\"{}\"] --> {}[\"{}\"]".format(
-                    mermaid_id(src), src, mermaid_id(dst), dst
-                )
+                f"    {mermaid_id(src)}[\"{src}\"] --> {mermaid_id(dst)}[\"{dst}\"]"
             )
         lines.append("```")
     else:
@@ -155,7 +153,7 @@ def main(argv=None):
     repo_root = args.repo_root.resolve()
     agents_dir = repo_root / "agents"
     if not agents_dir.is_dir():
-        print("ERROR: agents/ directory not found at {}".format(agents_dir))
+        print(f"ERROR: agents/ directory not found at {agents_dir}")
         return 2
 
     repo_label = "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
@@ -169,17 +167,15 @@ def main(argv=None):
         current = out_path.read_text(encoding="utf-8") if out_path.exists() else ""
         if current.replace("\r\n", "\n") != document.replace("\r\n", "\n"):
             print(
-                "ERROR: {} is stale. Run "
-                "`python scripts/generate_orchestration_map.py`.".format(
-                    out_path.relative_to(repo_root)
-                )
+                f"ERROR: {out_path.relative_to(repo_root)} is stale. Run "
+                "`python scripts/generate_orchestration_map.py`."
             )
             return 1
-        print("Orchestration map is up to date ({} agents).".format(len(rows)))
+        print(f"Orchestration map is up to date ({len(rows)} agents).")
         return 0
 
     out_path.write_text(document, encoding="utf-8")
-    print("Wrote {} ({} agents).".format(out_path.relative_to(repo_root), len(rows)))
+    print(f"Wrote {out_path.relative_to(repo_root)} ({len(rows)} agents).")
     return 0
 
 
