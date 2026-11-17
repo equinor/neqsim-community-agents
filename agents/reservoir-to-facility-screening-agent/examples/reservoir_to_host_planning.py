@@ -30,14 +30,20 @@ import sys
 from pathlib import Path
 
 # --- Make the two community skill packages importable (src/ layout) ----------
-SKILLS_ROOT = (
-    Path(__file__).resolve().parents[4] / "neqsim-community-skills" / "skills"
+sys.path.insert(
+    0,
+    str(
+        Path(__file__).resolve().parents[4]
+        / "neqsim-community-skills/skills/field-development/reservoir-depletion-screening/src"
+    ),
 )
-for rel in (
-    "field-development/reservoir-depletion-screening/src",
-    "subsea/production-network-routing/src",
-):
-    sys.path.insert(0, str(SKILLS_ROOT / rel))
+sys.path.insert(
+    0,
+    str(
+        Path(__file__).resolve().parents[4]
+        / "neqsim-community-skills/skills/subsea/production-network-routing/src"
+    ),
+)
 
 from production_network_routing import ProductionNetworkModel
 from reservoir_depletion_screening import ReservoirDepletionModel
@@ -199,13 +205,15 @@ def main() -> None:
         ax.axvspan(
             years[0], shortfall, color="green", alpha=0.08, label="Feasible window"
         )
-        ax.axvspan(shortfall, years[-1], color="red", alpha=0.08, label="Boosting needed")
+        ax.axvspan(
+            shortfall, years[-1], color="red", alpha=0.08, label="Boosting needed"
+        )
         ax.axvline(shortfall, color="red", ls=":", lw=1.2)
         ax.annotate(
             f"crossover\n~ year {shortfall:.0f}",
             xy=(shortfall, REQUIRED_ARRIVAL_BARA),
             xytext=(shortfall + 0.5, REQUIRED_ARRIVAL_BARA + 60),
-            arrowprops=dict(arrowstyle="->", color="red"),
+            arrowprops={"arrowstyle": "->", "color": "red"},
             fontsize=9,
             color="red",
         )
@@ -260,17 +268,11 @@ def main() -> None:
     ax.set_ylabel("Years host constraint met", color=color_y)
     ax.tick_params(axis="y", labelcolor=color_y)
     ax.grid(True, alpha=0.3)
-    ax.axvline(
-        BASE_OFFTAKE_SM3_PER_DAY / 1e6, color="gray", ls=":", lw=1.2
-    )
+    ax.axvline(BASE_OFFTAKE_SM3_PER_DAY / 1e6, color="gray", ls=":", lw=1.2)
     ax3 = ax.twinx()
     color_p = "#d62728"
-    ax3.plot(
-        sweep_rates, sweep_feasible_production, "s--", color=color_p
-    )
-    ax3.set_ylabel(
-        "Feasible-window production [Gsm3]", color=color_p
-    )
+    ax3.plot(sweep_rates, sweep_feasible_production, "s--", color=color_p)
+    ax3.set_ylabel("Feasible-window production [Gsm3]", color=color_p)
     ax3.tick_params(axis="y", labelcolor=color_p)
     ax.set_title("4. Optimization: offtake rate vs constraint-feasible plateau")
 

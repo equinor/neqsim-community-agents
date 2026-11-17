@@ -23,14 +23,20 @@ import sys
 from pathlib import Path
 
 # --- Make the two community skill packages importable (src/ layout) ----------
-SKILLS_ROOT = (
-    Path(__file__).resolve().parents[4] / "neqsim-community-skills" / "skills"
+sys.path.insert(
+    0,
+    str(
+        Path(__file__).resolve().parents[4]
+        / "neqsim-community-skills/skills/field-development/reservoir-depletion-screening/src"
+    ),
 )
-for rel in (
-    "field-development/reservoir-depletion-screening/src",
-    "subsea/production-network-routing/src",
-):
-    sys.path.insert(0, str(SKILLS_ROOT / rel))
+sys.path.insert(
+    0,
+    str(
+        Path(__file__).resolve().parents[4]
+        / "neqsim-community-skills/skills/subsea/production-network-routing/src"
+    ),
+)
 
 from production_network_routing import ProductionNetworkModel
 from reservoir_depletion_screening import ReservoirDepletionModel
@@ -138,11 +144,7 @@ def main() -> None:
         arrival_str = "n/a" if arrival is None else f"{arrival:8.1f}"
         margin_str = "n/a" if margin is None else f"{margin:8.1f}"
 
-        if (
-            first_shortfall_year is None
-            and margin is not None
-            and margin < 0.0
-        ):
+        if first_shortfall_year is None and margin is not None and margin < 0.0:
             first_shortfall_year = step.year
 
         print(

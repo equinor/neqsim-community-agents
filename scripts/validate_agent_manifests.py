@@ -82,7 +82,11 @@ SKILL_ID_IN_TEXT_RE = re.compile(
 AGENT_ID_IN_TEXT_RE = re.compile(
     r"(?<![a-z0-9-])([a-z0-9]+(?:-[a-z0-9]+)*-agent)(?![a-z0-9-])"
 )
-ORCHESTRATION_TYPES = ("community-coordinator", "enterprise-coordinator", "enterprise-orchestrator")
+ORCHESTRATION_TYPES = (
+    "community-coordinator",
+    "enterprise-coordinator",
+    "enterprise-orchestrator",
+)
 SIBLING_COMMUNITY_ENV = "NEQSIM_COMMUNITY_AGENTS_DIR"
 SIBLING_ENTERPRISE_ENV = "NEQSIM_ENTERPRISE_AGENTS_DIR"
 RUNTIME_INSTRUCTION_GLOBS = ("AGENT.md", "prompts/*.md", "workflows/*.md")
@@ -133,7 +137,9 @@ def check_description_length(manifest_dir, manifest):
     sources = [("agent.yaml", manifest.get("description"))]
     agent_md = manifest_dir / "AGENT.md"
     if agent_md.exists():
-        match = re.match(r"^---\s*\n(.*?)\n---", agent_md.read_text(encoding="utf-8"), re.DOTALL)
+        match = re.match(
+            r"^---\s*\n(.*?)\n---", agent_md.read_text(encoding="utf-8"), re.DOTALL
+        )
         if match:
             try:
                 front = yaml.safe_load(match.group(1)) or {}
@@ -168,10 +174,16 @@ def minimal_structural_check(manifest, schema):
         errors.append("human_review_required must be a boolean")
     extends = manifest.get("extends")
     if extends is not None:
-        if not isinstance(extends, dict) or "agent" not in extends or "repo" not in extends:
+        if (
+            not isinstance(extends, dict)
+            or "agent" not in extends
+            or "repo" not in extends
+        ):
             errors.append("extends must be an object with 'agent' and 'repo'")
         elif extends.get("repo") not in props["extends"]["properties"]["repo"]["enum"]:
-            errors.append("extends.repo '{}' is not a valid catalog".format(extends.get("repo")))
+            errors.append(
+                "extends.repo '{}' is not a valid catalog".format(extends.get("repo"))
+            )
     inbound_handoffs = manifest.get("inbound_handoffs")
     if inbound_handoffs is not None:
         if not isinstance(inbound_handoffs, list):
@@ -192,7 +204,9 @@ def validate_against_schema(manifest, schema):
         validator = jsonschema.Draft7Validator(schema)
         return [
             "{}: {}".format("/".join(str(p) for p in err.path) or "<root>", err.message)
-            for err in sorted(validator.iter_errors(manifest), key=lambda e: list(e.path))
+            for err in sorted(
+                validator.iter_errors(manifest), key=lambda e: list(e.path)
+            )
         ]
     return minimal_structural_check(manifest, schema)
 
@@ -221,10 +235,17 @@ def discover_base_agents(repo_root, repo_kind):
             continue
         for agent_dir in agents_dir.iterdir():
             manifest_path = agent_dir / "agent.yaml"
-            if agent_dir.is_dir() and manifest_path.exists() and agent_dir.name not in bases:
+            if (
+                agent_dir.is_dir()
+                and manifest_path.exists()
+                and agent_dir.name not in bases
+            ):
                 try:
                     bases[agent_dir.name] = load_yaml(manifest_path)
                 except Exception:  # noqa: BLE001 - tolerate malformed sibling files
+                    print(
+                        f"Failed to load manifest for {agent_dir.name}", file=sys.stderr
+                    )
                     continue
 
     # 2. Vendored snapshot index (makes the check self-contained in standalone CI).
@@ -235,7 +256,9 @@ def discover_base_agents(repo_root, repo_kind):
             for name, manifest in index.get("agents", {}).items():
                 bases.setdefault(name, manifest)
         except Exception:  # noqa: BLE001
-            pass
+            print(
+                f"Failed to load base agents index from {index_path}", file=sys.stderr
+            )
 
     return bases
 
@@ -268,7 +291,7 @@ def discover_known_skills(repo_root):
             index = json.loads(index_path.read_text(encoding="utf-8"))
             skills.update(index.get("skills") or [])
         except Exception:  # noqa: BLE001
-            pass
+            print(f"Failed to load skills index from {index_path}", file=sys.stderr)
 
     workspace = repo_root.parent
     patterns = {
@@ -509,11 +532,15 @@ def validate_repo(repo_root):
     if not agents_dir.is_dir():
         return [f"agents/ directory not found at {agents_dir}"], []
 
-    repo_kind = "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
+    repo_kind = (
+        "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
+    )
     bases = discover_base_agents(repo_root, repo_kind)
     known_skills = discover_known_skills(repo_root)
     community_names = (
-        discover_community_agent_names(repo_root) if repo_kind == "enterprise" else set()
+        discover_community_agent_names(repo_root)
+        if repo_kind == "enterprise"
+        else set()
     )
     known_agents = set(bases.keys())
     known_agents.update(m.parent.name for m in agents_dir.glob("*/agent.yaml"))
@@ -540,7 +567,9 @@ def validate_repo(repo_root):
 
         if manifest.get("name") != name:
             all_errors.append(
-                "[{}] name field '{}' does not match folder".format(name, manifest.get("name"))
+                "[{}] name field '{}' does not match folder".format(
+                    name, manifest.get("name")
+                )
             )
 
         if known_skills:
@@ -557,10 +586,16 @@ def validate_repo(repo_root):
                         "catalogs (typo or missing skill?)"
                     )
 
-        for warn in check_agent_md_skills(manifest_path.parent, manifest, bases, known_skills):
+        for warn in check_agent_md_skills(
+            manifest_path.parent, manifest, bases, known_skills
+        ):
             all_warnings.append(f"[{name}] {warn}")
 
-        if repo_kind == "enterprise" and name in community_names and not manifest.get("extends"):
+        if (
+            repo_kind == "enterprise"
+            and name in community_names
+            and not manifest.get("extends")
+        ):
             all_warnings.append(
                 f"[{name}] shares its name with a community agent but does not declare "
                 "`extends`; use an enterprise-* id or declare extends so the overlay "
@@ -577,7 +612,9 @@ def validate_repo(repo_root):
                     "(typo or missing agent?)"
                 )
 
-        inbound_errors, inbound_warnings = check_inbound_handoffs(manifest, known_agents)
+        inbound_errors, inbound_warnings = check_inbound_handoffs(
+            manifest, known_agents
+        )
         all_errors.extend(f"[{name}] {error}" for error in inbound_errors)
         all_warnings.extend(f"[{name}] {warning}" for warning in inbound_warnings)
 
@@ -645,7 +682,9 @@ def main(argv=None):
 
     failed = bool(errors) or (args.strict and bool(warnings))
     if failed:
-        print(f"\nAgent manifest validation FAILED ({len(errors)} errors, {len(warnings)} warnings).")
+        print(
+            f"\nAgent manifest validation FAILED ({len(errors)} errors, {len(warnings)} warnings)."
+        )
         return 1
     print(f"\nAgent manifest validation passed ({len(warnings)} warnings).")
     return 0
