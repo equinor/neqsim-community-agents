@@ -82,7 +82,11 @@ SKILL_ID_IN_TEXT_RE = re.compile(
 AGENT_ID_IN_TEXT_RE = re.compile(
     r"(?<![a-z0-9-])([a-z0-9]+(?:-[a-z0-9]+)*-agent)(?![a-z0-9-])"
 )
-ORCHESTRATION_TYPES = ("community-coordinator", "enterprise-coordinator", "enterprise-orchestrator")
+ORCHESTRATION_TYPES = (
+    "community-coordinator",
+    "enterprise-coordinator",
+    "enterprise-orchestrator",
+)
 SIBLING_COMMUNITY_ENV = "NEQSIM_COMMUNITY_AGENTS_DIR"
 SIBLING_ENTERPRISE_ENV = "NEQSIM_ENTERPRISE_AGENTS_DIR"
 RUNTIME_INSTRUCTION_GLOBS = ("AGENT.md", "prompts/*.md", "workflows/*.md")
@@ -133,7 +137,9 @@ def check_description_length(manifest_dir, manifest):
     sources = [("agent.yaml", manifest.get("description"))]
     agent_md = manifest_dir / "AGENT.md"
     if agent_md.exists():
-        match = re.match(r"^---\s*\n(.*?)\n---", agent_md.read_text(encoding="utf-8"), re.S)
+        match = re.match(
+            r"^---\s*\n(.*?)\n---", agent_md.read_text(encoding="utf-8"), re.DOTALL
+        )
         if match:
             try:
                 front = yaml.safe_load(match.group(1)) or {}
@@ -145,9 +151,8 @@ def check_description_length(manifest_dir, manifest):
     for label, description in sources:
         if isinstance(description, str) and len(description) > MAX_CATALOG_DESCRIPTION:
             errors.append(
-                "{} description is {} chars; keep it <= {} (resent on every chat request) "
-                "and move detail into the AGENT.md body".format(
-                    label, len(description), MAX_CATALOG_DESCRIPTION)
+                f"{label} description is {len(description)} chars; keep it <= {MAX_CATALOG_DESCRIPTION} (resent on every chat request) "
+                "and move detail into the AGENT.md body"
             )
     return errors
 
@@ -157,22 +162,28 @@ def minimal_structural_check(manifest, schema):
     errors = []
     for key in schema.get("required", []):
         if key not in manifest:
-            errors.append("missing required field '{}'".format(key))
+            errors.append(f"missing required field '{key}'")
     props = schema.get("properties", {})
     if isinstance(manifest.get("required_skills"), list):
         for skill in manifest["required_skills"]:
             if not isinstance(skill, str) or not SKILL_ID_RE.match(skill):
-                errors.append("required_skills entry '{}' is not a canonical id".format(skill))
+                errors.append(f"required_skills entry '{skill}' is not a canonical id")
     if "human_review_required" in manifest and not isinstance(
         manifest["human_review_required"], bool
     ):
         errors.append("human_review_required must be a boolean")
     extends = manifest.get("extends")
     if extends is not None:
-        if not isinstance(extends, dict) or "agent" not in extends or "repo" not in extends:
+        if (
+            not isinstance(extends, dict)
+            or "agent" not in extends
+            or "repo" not in extends
+        ):
             errors.append("extends must be an object with 'agent' and 'repo'")
         elif extends.get("repo") not in props["extends"]["properties"]["repo"]["enum"]:
-            errors.append("extends.repo '{}' is not a valid catalog".format(extends.get("repo")))
+            errors.append(
+                "extends.repo '{}' is not a valid catalog".format(extends.get("repo"))
+            )
     inbound_handoffs = manifest.get("inbound_handoffs")
     if inbound_handoffs is not None:
         if not isinstance(inbound_handoffs, list):
@@ -193,7 +204,9 @@ def validate_against_schema(manifest, schema):
         validator = jsonschema.Draft7Validator(schema)
         return [
             "{}: {}".format("/".join(str(p) for p in err.path) or "<root>", err.message)
-            for err in sorted(validator.iter_errors(manifest), key=lambda e: list(e.path))
+            for err in sorted(
+                validator.iter_errors(manifest), key=lambda e: list(e.path)
+            )
         ]
     return minimal_structural_check(manifest, schema)
 
@@ -222,10 +235,17 @@ def discover_base_agents(repo_root, repo_kind):
             continue
         for agent_dir in agents_dir.iterdir():
             manifest_path = agent_dir / "agent.yaml"
-            if agent_dir.is_dir() and manifest_path.exists() and agent_dir.name not in bases:
+            if (
+                agent_dir.is_dir()
+                and manifest_path.exists()
+                and agent_dir.name not in bases
+            ):
                 try:
                     bases[agent_dir.name] = load_yaml(manifest_path)
                 except Exception:  # noqa: BLE001 - tolerate malformed sibling files
+                    print(
+                        f"Failed to load manifest for {agent_dir.name}", file=sys.stderr
+                    )
                     continue
 
     # 2. Vendored snapshot index (makes the check self-contained in standalone CI).
@@ -236,7 +256,9 @@ def discover_base_agents(repo_root, repo_kind):
             for name, manifest in index.get("agents", {}).items():
                 bases.setdefault(name, manifest)
         except Exception:  # noqa: BLE001
-            pass
+            print(
+                f"Failed to load base agents index from {index_path}", file=sys.stderr
+            )
 
     return bases
 
@@ -269,7 +291,7 @@ def discover_known_skills(repo_root):
             index = json.loads(index_path.read_text(encoding="utf-8"))
             skills.update(index.get("skills") or [])
         except Exception:  # noqa: BLE001
-            pass
+            print(f"Failed to load skills index from {index_path}", file=sys.stderr)
 
     workspace = repo_root.parent
     patterns = {
@@ -324,10 +346,8 @@ def check_agent_md_skills(manifest_dir, manifest, bases, known_skills):
     for skill in sorted(mentioned - declared):
         if skill in known_skills:
             warnings.append(
-                "AGENT.md names skill '{}' but it is not in required_skills or "
-                "context_skills (declare it so the linkage is machine-checkable)".format(
-                    skill
-                )
+                f"AGENT.md names skill '{skill}' but it is not in required_skills or "
+                "context_skills (declare it so the linkage is machine-checkable)"
             )
     return warnings
 
@@ -364,9 +384,9 @@ def check_agent_md_agents(manifest_dir, manifest, known_agents):
     for agent in sorted(mentioned - declared):
         if agent != own and agent in known_agents:
             warnings.append(
-                "AGENT.md names agent '{}' but no coordinated_agents, inbound_handoffs, "
+                f"AGENT.md names agent '{agent}' but no coordinated_agents, inbound_handoffs, "
                 "or extends relationship declares it (declare the relationship so the "
-                "orchestration graph is machine-checkable)".format(agent)
+                "orchestration graph is machine-checkable)"
             )
     return warnings
 
@@ -391,17 +411,13 @@ def check_python_runtime_instructions(agent_dir):
             setup_tool_match = PYTHON_ENV_SETUP_TOOL_RE.search(line)
             if bare_match:
                 errors.append(
-                    "{}:{} uses bare '{}' launcher; use the parent-selected absolute "
-                    "executable or sys.executable".format(
-                        path.relative_to(agent_dir), line_number, bare_match.group(1)
-                    )
+                    f"{path.relative_to(agent_dir)}:{line_number} uses bare '{bare_match.group(1)}' launcher; use the parent-selected absolute "
+                    "executable or sys.executable"
                 )
             elif conflict_match or setup_tool_match:
                 matched_directive = conflict_match or setup_tool_match
                 errors.append(
-                    "{}:{} conflicts with the shared Python runtime policy: '{}'".format(
-                        path.relative_to(agent_dir), line_number, matched_directive.group(0)
-                    )
+                    f"{path.relative_to(agent_dir)}:{line_number} conflicts with the shared Python runtime policy: '{matched_directive.group(0)}'"
                 )
     return errors
 
@@ -432,11 +448,9 @@ def check_hardcoded_local_paths(agent_dir):
             match = HARDCODED_LOCAL_PATH_RE.search(line)
             if match:
                 errors.append(
-                    "{}:{} hardcodes an author-machine path '{}'; describe the "
+                    f"{path.relative_to(agent_dir)}:{line_number} hardcodes an author-machine path '{match.group(0)}'; describe the "
                     "runtime portably (active venv, sys.executable, or an env "
-                    "var) instead of a literal local path".format(
-                        path.relative_to(agent_dir), line_number, match.group(0)
-                    )
+                    "var) instead of a literal local path"
                 )
     return errors
 
@@ -476,8 +490,8 @@ def check_extends(manifest, bases):
     base = bases.get(base_name)
     if base is None:
         warnings.append(
-            "extends base '{}' could not be resolved (base catalog not checked "
-            "out and no vendored snapshot) - skipping superset check".format(base_name)
+            f"extends base '{base_name}' could not be resolved (base catalog not checked "
+            "out and no vendored snapshot) - skipping superset check"
         )
         return errors, warnings
     base_skills = set(base.get("required_skills") or [])
@@ -485,8 +499,8 @@ def check_extends(manifest, bases):
     missing = sorted(base_skills - own_skills)
     if missing:
         errors.append(
-            "extends '{}' but does not re-declare inherited skills {} "
-            "(an overlay must be a superset of its base)".format(base_name, missing)
+            f"extends '{base_name}' but does not re-declare inherited skills {missing} "
+            "(an overlay must be a superset of its base)"
         )
     return errors, warnings
 
@@ -503,8 +517,8 @@ def check_inbound_handoffs(manifest, known_agents):
             errors.append("inbound_handoffs lists itself")
         elif sender and known_agents and sender not in known_agents:
             warnings.append(
-                "inbound handoff agent '{}' not found in known agent catalogs "
-                "(typo or missing agent?)".format(sender)
+                f"inbound handoff agent '{sender}' not found in known agent catalogs "
+                "(typo or missing agent?)"
             )
     return errors, warnings
 
@@ -512,17 +526,21 @@ def check_inbound_handoffs(manifest, known_agents):
 def validate_repo(repo_root):
     schema, schema_path = load_schema(repo_root)
     if schema is None:
-        return ["schema not found at {}".format(schema_path)], []
+        return [f"schema not found at {schema_path}"], []
 
     agents_dir = repo_root / "agents"
     if not agents_dir.is_dir():
-        return ["agents/ directory not found at {}".format(agents_dir)], []
+        return [f"agents/ directory not found at {agents_dir}"], []
 
-    repo_kind = "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
+    repo_kind = (
+        "enterprise" if (repo_root / "enterprise-agents.yaml").exists() else "community"
+    )
     bases = discover_base_agents(repo_root, repo_kind)
     known_skills = discover_known_skills(repo_root)
     community_names = (
-        discover_community_agent_names(repo_root) if repo_kind == "enterprise" else set()
+        discover_community_agent_names(repo_root)
+        if repo_kind == "enterprise"
+        else set()
     )
     known_agents = set(bases.keys())
     known_agents.update(m.parent.name for m in agents_dir.glob("*/agent.yaml"))
@@ -531,100 +549,108 @@ def validate_repo(repo_root):
     all_errors, all_warnings = [], []
     manifests = sorted(agents_dir.glob("*/agent.yaml"))
     if not manifests:
-        return ["no agent.yaml files found under {}".format(agents_dir)], []
+        return [f"no agent.yaml files found under {agents_dir}"], []
 
     for manifest_path in manifests:
         name = manifest_path.parent.name
         try:
             manifest = load_yaml(manifest_path)
         except Exception as exc:  # noqa: BLE001
-            all_errors.append("[{}] could not parse agent.yaml: {}".format(name, exc))
+            all_errors.append(f"[{name}] could not parse agent.yaml: {exc}")
             continue
         if not isinstance(manifest, dict):
-            all_errors.append("[{}] agent.yaml is not a mapping".format(name))
+            all_errors.append(f"[{name}] agent.yaml is not a mapping")
             continue
 
         for err in validate_against_schema(manifest, schema):
-            all_errors.append("[{}] schema: {}".format(name, err))
+            all_errors.append(f"[{name}] schema: {err}")
 
         if manifest.get("name") != name:
             all_errors.append(
-                "[{}] name field '{}' does not match folder".format(name, manifest.get("name"))
+                "[{}] name field '{}' does not match folder".format(
+                    name, manifest.get("name")
+                )
             )
 
         if known_skills:
             for skill in manifest.get("required_skills") or []:
                 if skill not in known_skills:
                     all_warnings.append(
-                        "[{}] required skill '{}' not found in known skill "
-                        "catalogs (typo or missing skill?)".format(name, skill)
+                        f"[{name}] required skill '{skill}' not found in known skill "
+                        "catalogs (typo or missing skill?)"
                     )
             for skill in manifest.get("context_skills") or []:
                 if skill not in known_skills:
                     all_warnings.append(
-                        "[{}] context skill '{}' not found in known skill "
-                        "catalogs (typo or missing skill?)".format(name, skill)
+                        f"[{name}] context skill '{skill}' not found in known skill "
+                        "catalogs (typo or missing skill?)"
                     )
 
-        for warn in check_agent_md_skills(manifest_path.parent, manifest, bases, known_skills):
-            all_warnings.append("[{}] {}".format(name, warn))
+        for warn in check_agent_md_skills(
+            manifest_path.parent, manifest, bases, known_skills
+        ):
+            all_warnings.append(f"[{name}] {warn}")
 
-        if repo_kind == "enterprise" and name in community_names and not manifest.get("extends"):
+        if (
+            repo_kind == "enterprise"
+            and name in community_names
+            and not manifest.get("extends")
+        ):
             all_warnings.append(
-                "[{}] shares its name with a community agent but does not declare "
+                f"[{name}] shares its name with a community agent but does not declare "
                 "`extends`; use an enterprise-* id or declare extends so the overlay "
-                "linkage is explicit".format(name)
+                "linkage is explicit"
             )
 
         coordinated = manifest.get("coordinated_agents") or []
         for other in coordinated:
             if other == name:
-                all_errors.append("[{}] coordinated_agents lists itself".format(name))
+                all_errors.append(f"[{name}] coordinated_agents lists itself")
             elif known_agents and other not in known_agents:
                 all_warnings.append(
-                    "[{}] coordinated agent '{}' not found in known agent catalogs "
-                    "(typo or missing agent?)".format(name, other)
+                    f"[{name}] coordinated agent '{other}' not found in known agent catalogs "
+                    "(typo or missing agent?)"
                 )
 
-        inbound_errors, inbound_warnings = check_inbound_handoffs(manifest, known_agents)
-        all_errors.extend("[{}] {}".format(name, error) for error in inbound_errors)
-        all_warnings.extend("[{}] {}".format(name, warning) for warning in inbound_warnings)
+        inbound_errors, inbound_warnings = check_inbound_handoffs(
+            manifest, known_agents
+        )
+        all_errors.extend(f"[{name}] {error}" for error in inbound_errors)
+        all_warnings.extend(f"[{name}] {warning}" for warning in inbound_warnings)
 
         agent_type = manifest.get("agent_type")
         if agent_type in ORCHESTRATION_TYPES and not coordinated:
             all_warnings.append(
-                "[{}] agent_type '{}' implies delegation but coordinated_agents is "
-                "empty (declare the delegated agents, or use a leaf agent_type)".format(
-                    name, agent_type
-                )
+                f"[{name}] agent_type '{agent_type}' implies delegation but coordinated_agents is "
+                "empty (declare the delegated agents, or use a leaf agent_type)"
             )
         if agent_type is None:
             all_warnings.append(
-                "[{}] no agent_type declared (add one so the orchestration role is "
-                "explicit; leaf agents use community-agent/enterprise-agent)".format(name)
+                f"[{name}] no agent_type declared (add one so the orchestration role is "
+                "explicit; leaf agents use community-agent/enterprise-agent)"
             )
 
         if manifest.get("referenced_skills") is not None:
             all_warnings.append(
-                "[{}] 'referenced_skills' is deprecated; move these ids into "
-                "'context_skills'".format(name)
+                f"[{name}] 'referenced_skills' is deprecated; move these ids into "
+                "'context_skills'"
             )
 
         for warn in check_agent_md_agents(manifest_path.parent, manifest, known_agents):
-            all_warnings.append("[{}] {}".format(name, warn))
+            all_warnings.append(f"[{name}] {warn}")
 
         for err in check_python_runtime_instructions(manifest_path.parent):
-            all_errors.append("[{}] {}".format(name, err))
+            all_errors.append(f"[{name}] {err}")
 
         for err in check_hardcoded_local_paths(manifest_path.parent):
-            all_errors.append("[{}] {}".format(name, err))
+            all_errors.append(f"[{name}] {err}")
 
         for err in check_description_length(manifest_path.parent, manifest):
-            all_errors.append("[{}] {}".format(name, err))
+            all_errors.append(f"[{name}] {err}")
 
         ext_errors, ext_warnings = check_extends(manifest, bases)
-        all_errors.extend("[{}] {}".format(name, e) for e in ext_errors)
-        all_warnings.extend("[{}] {}".format(name, w) for w in ext_warnings)
+        all_errors.extend(f"[{name}] {e}" for e in ext_errors)
+        all_warnings.extend(f"[{name}] {w}" for w in ext_warnings)
 
     return all_errors, all_warnings
 
@@ -647,19 +673,20 @@ def main(argv=None):
     errors, warnings = validate_repo(args.repo_root.resolve())
 
     for warning in warnings:
-        print("WARNING: {}".format(warning))
+        print(f"WARNING: {warning}")
     for error in errors:
-        print("ERROR: {}".format(error))
+        print(f"ERROR: {error}")
 
     if jsonschema is None:
         print("NOTE: jsonschema not installed - used minimal structural checks only.")
 
     failed = bool(errors) or (args.strict and bool(warnings))
     if failed:
-        print("\nAgent manifest validation FAILED ({} errors, {} warnings).".format(
-            len(errors), len(warnings)))
+        print(
+            f"\nAgent manifest validation FAILED ({len(errors)} errors, {len(warnings)} warnings)."
+        )
         return 1
-    print("\nAgent manifest validation passed ({} warnings).".format(len(warnings)))
+    print(f"\nAgent manifest validation passed ({len(warnings)} warnings).")
     return 0
 
 
