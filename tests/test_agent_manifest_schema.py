@@ -110,6 +110,25 @@ class AgentManifestSchemaTests(unittest.TestCase):
             errors = validator.check_hardcoded_local_paths(agent_dir)
         self.assertEqual(len(errors), 1)
 
+    def test_machine_paths_in_nested_examples_are_rejected(self):
+        for literal in (
+            r"c:\Users\author\neqsim",
+            r"C:\\Users\\author\\neqsim",
+            "/Users/author/neqsim",
+            "/home/author/neqsim",
+        ):
+            with self.subTest(path=literal), tempfile.TemporaryDirectory() as temp_dir:
+                agent_dir = Path(temp_dir)
+                example = agent_dir / "examples" / "nested" / "run.py"
+                example.parent.mkdir(parents=True)
+                example.write_text(
+                    f'ROOT = os.getenv("NEQSIM_PROJECT_ROOT", r"{literal}")\n',
+                    encoding="utf-8",
+                )
+                errors = validator.check_hardcoded_local_paths(agent_dir)
+            self.assertEqual(len(errors), 1)
+            self.assertIn("examples/nested/run.py:1", errors[0])
+
     def test_portable_path_wording_is_accepted(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             agent_dir = Path(temp_dir)

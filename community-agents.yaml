@@ -4,7 +4,7 @@
 # consumed by the main NeqSim ecosystem.
 
 catalog_version: "1.0"
-last_updated: "2026-07-11"
+last_updated: "2026-11-19"
 trust: "community"
 
 agents:
@@ -22,7 +22,7 @@ agents:
       - multimodal-extraction
 
   - name: pvt-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis."
     repo: "equinor/neqsim-community-agents"
     path: "agents/pvt-agent/AGENT.md"
@@ -30,6 +30,8 @@ agents:
       - neqsim-fluid-quality-check
     context_skills:
       - neqsim-benchmark-reference-data
+      - neqsim-thermoml-experimental-data
+      - neqsim-forward-separator-train
     supported_domains:
       - pvt
       - thermodynamics
@@ -77,7 +79,7 @@ agents:
       - screening
 
   - name: export-tie-in-concept-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Screens a new export or tie-in line between two facilities end to end: ranked landing points on neighbouring hosts, seabed profile, pressure drop, thermal decay, wall thickness and size, and conceptual P&ID sketches of both connection ends with open options, before a validated NeqSim pipeline study."
     repo: "equinor/neqsim-community-agents"
     path: "agents/export-tie-in-concept-agent/AGENT.md"
@@ -85,6 +87,13 @@ agents:
       - neqsim-tie-in-pipeline-concept
       - neqsim-tie-in-pid-sketch
       - neqsim-ncs-infrastructure-network
+    context_skills:
+      - neqsim-pipe-route-profile
+      - neqsim-pressure-drop-screening
+      - neqsim-pipe-wall-thickness-screening
+      - neqsim-hydrate-screening
+      - neqsim-crs-geodetic-checks
+      - neqsim-open-marine-constraints
     supported_domains:
       - field-development
       - tie-in-screening
@@ -359,7 +368,7 @@ agents:
       - flow-assurance
 
   - name: subsea-equipment-placement-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Decides where subsea equipment goes and defends the choice by screening and ranking sites for drill centres, templates, manifolds, PLETs and tie-in points, and the connecting routes, against hosts and safety zones, existing lines and crossings, seabed slope and depth, fishing exposure, installation constraints and well reach, with every limit carrying its source and basis."
     repo: "equinor/neqsim-community-agents"
     path: "agents/subsea-equipment-placement-agent/AGENT.md"
@@ -368,6 +377,18 @@ agents:
       - neqsim-subsea-layout-geometry
       - neqsim-pipe-route-profile
       - neqsim-bathymetry-profile-screening
+    context_skills:
+      - neqsim-surf-field-layout-design
+      - neqsim-seabed-protection-screening
+      - neqsim-subsea-slot-tee-reuse-inventory
+      - neqsim-erd-reach-screening
+      - neqsim-step-out-screening
+      - neqsim-brazil-presalt-well-reach-and-layout
+      - neqsim-field-layout-import
+      - neqsim-jurisdiction-regulatory-basis
+      - neqsim-standards-lookup
+      - neqsim-crs-geodetic-checks
+      - neqsim-open-marine-constraints
     supported_domains:
       - subsea-layout
       - surf-design
@@ -375,7 +396,7 @@ agents:
       - field-development
 
   - name: surf-layout-design-agent
-    version: "0.2.0"
+    version: "0.2.1"
     description: "Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, routes and sizes every flowline, riser and umbilical, renders a presentation-grade reservoir-to-host illustration carrying the study's headline numbers, and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows."
     repo: "equinor/neqsim-community-agents"
     path: "agents/surf-layout-design-agent/AGENT.md"
@@ -385,6 +406,17 @@ agents:
       - neqsim-pipe-route-profile
       - neqsim-bathymetry-profile-screening
       - neqsim-line-velocity-check
+    context_skills:
+      - neqsim-sodir-open-data
+      - neqsim-field-layout-import
+      - neqsim-production-network-routing
+      - neqsim-step-out-screening
+      - neqsim-brazil-presalt-well-reach-and-layout
+      - neqsim-capex-opex-screening
+      - neqsim-surf-cooldown-screening
+      - neqsim-professional-reporting
+      - neqsim-crs-geodetic-checks
+      - neqsim-open-marine-constraints
     supported_domains:
       - field-development
       - subsea-layout
@@ -539,8 +571,8 @@ agents:
       - open-data
 
   - name: reservoir-souring-agent
-    version: "0.1.0"
-    description: "Screens reservoir souring and H2S from measured separator-gas H2S: converts gas H2S to wellstream H2S with NeqSim, derives seawater fraction from tracers, fits and updates per-well H2S-versus-seawater-fraction correlations, and checks them against a substrate-limited mixing-zone bound and sour-service pH2S before a validated reservoir or process study."
+    version: "0.1.1"
+    description: "Screens original reservoir H2S and waterflood souring: checks a mineral-buffer baseline where applicable, converts measured separator-gas H2S to wellstream H2S, and fits per-well souring correlations against seawater fraction with substrate bounds and sour-service pH2S checks. Requires qualified review before a reservoir or process decision."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-souring-agent/AGENT.md"
     required_skills:
@@ -549,6 +581,7 @@ agents:
       - neqsim-production-chemistry
     context_skills:
       - neqsim-well-log-reading
+      - neqsim-reservoir-h2s-mineral-buffer
     supported_domains:
       - reservoir-engineering
       - production-chemistry
@@ -574,7 +607,7 @@ agents:
       - fluid-composition
       - process-integration
   - name: reservoir-simulator-agent
-    version: "0.5.0"
+    version: "0.5.1"
     description: "Sets up a screening-level reservoir simulation from whatever data exists - starting from open data such as an NCS field page and refining as appraisal, well-test and PVT data arrive - and hands a provenance-traced specification to the NeqSim reservoir workflow. Also covers gas-condensate vaporised-oil PVT, models sized backwards from a mandated profile, and best-guess structures calibrated to published volumes with an assumption register."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-simulator-agent/AGENT.md"
@@ -636,7 +669,7 @@ agents:
       - survey-data-processing
 
   - name: seabed-protection-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Coordinates early-stage subsea pipeline trenching, burial and rock-dump screening that uses route and map-layer data (seabed substrate, fishing intensity, ice scour, existing pipelines) to size trenching and rock scope, and hands the protected burial state to cooldown and hydrate-margin screening."
     repo: "equinor/neqsim-community-agents"
     path: "agents/seabed-protection-agent/AGENT.md"
@@ -650,6 +683,7 @@ agents:
       - neqsim-bathymetry-profile-screening
       - neqsim-surf-field-layout-design
       - neqsim-subsea-layout-geometry
+      - neqsim-open-marine-constraints
     supported_domains:
       - subsea
       - flow-assurance
@@ -962,7 +996,7 @@ agents:
       - study-coordination
 
   - name: production-optimization-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/production-optimization-agent/AGENT.md"
@@ -1152,7 +1186,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.2"
+    version: "0.1.3"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"
@@ -1232,7 +1266,7 @@ agents:
       - black-oil-pvt
 
   - name: vfp-lift-curve-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models: calibrates the lift model, builds tubing-only, flowline or full-system tables with NeqSim VfpTableBuilder, validates by IPR x VFP and off-grid solves, and exports the deck with provenance. Use for new, regenerated or repaired lift curves (U-shaped BHP, extrapolation, dry-gas jump)."
     author: "neqsim-community"
     repo: "equinor/neqsim-community-agents"
@@ -1241,6 +1275,16 @@ agents:
     required_skills:
       - neqsim-vfp-lift-curves
       - neqsim-api-patterns
+    context_skills:
+      - neqsim-near-well-and-injectivity
+      - neqsim-subsea-and-wells
+      - neqsim-production-optimization
+      - neqsim-integrated-production-and-lifecycle
+      - neqsim-capacity-and-utilization-analysis
+      - neqsim-rotating-equipment-design
+      - neqsim-model-calibration-and-data-reconciliation
+      - neqsim-input-validation
+      - neqsim-well-test-calibration
     supported_domains:
       - wells
       - lift-curves

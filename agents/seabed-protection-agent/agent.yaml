@@ -10,6 +10,7 @@ context_skills:
 - neqsim-bathymetry-profile-screening
 - neqsim-surf-field-layout-design
 - neqsim-subsea-layout-geometry
+- neqsim-open-marine-constraints
 agent_type: community-agent
 coordinated_agents:
 - pipe-route-screening-agent
@@ -41,4 +42,4 @@ outputs:
 - protected_vs_unprotected_cooldown_and_hydrate_margin
 - data_gaps_assumptions_and_validation_checklist
 human_review_required: true
-version: 0.1.0
+version: 0.1.1

@@ -17,6 +17,7 @@ context_skills:
 - neqsim-jurisdiction-regulatory-basis
 - neqsim-standards-lookup
 - neqsim-crs-geodetic-checks
+- neqsim-open-marine-constraints
 coordinated_agents:
 - surf-layout-design-agent
 - subsea-layout-screening-agent
@@ -47,4 +48,4 @@ outputs:
 - geojson_of_screened_sites_and_routes
 - open_gaps_and_specialist_handoffs
 human_review_required: true
-version: 0.1.0
+version: 0.1.1

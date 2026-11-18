@@ -1,7 +1,7 @@
 ---
 name: reservoir-souring-agent
-description: "Screens reservoir souring and H2S from measured separator-gas H2S: converts gas H2S to wellstream H2S with NeqSim, derives seawater fraction from tracers, fits and updates per-well H2S-versus-seawater-fraction correlations, and checks them against a substrate-limited mixing-zone bound and sour-service pH2S before a validated reservoir or process study."
-version: 0.1.0
+description: "Screens original reservoir H2S and waterflood souring: checks a mineral-buffer baseline where applicable, converts measured separator-gas H2S to wellstream H2S, and fits per-well souring correlations against seawater fraction with substrate bounds and sour-service pH2S checks. Requires qualified review before a reservoir or process decision."
+version: 0.1.1
 agent_type: community-coordinator
 required_skills:
 - neqsim-h2s-phase-partitioning
@@ -9,6 +9,7 @@ required_skills:
 - neqsim-production-chemistry
 context_skills:
 - neqsim-well-log-reading
+- neqsim-reservoir-h2s-mineral-buffer
 coordinated_agents:
 - reservoir-history-match-agent
 - produced-water-scale-agent
@@ -31,6 +32,8 @@ materials selection or process design, and a qualified human review is always re
 - A per-well H2S correlation as a function of seawater fraction is wanted for a model setup, and it should update itself.
 - A measured H2S rise needs a plausibility check against sulfate and electron-donor limits, or a mitigation (sulfate removal, nitrate) needs a first estimate.
 - A team needs the H2S split between gas, oil and produced water, or a sour-service pH2S screen.
+- A discovery needs an original H2S estimate, or a measured rise must be
+  distinguished from mineral buffering and depletion rather than assumed to be waterflood souring.
 
 # Inputs
 
@@ -62,12 +65,28 @@ materials selection or process design, and a qualified human review is always re
 8. On each new data batch run the update step with forgetting, review change warnings and keep the previous registry for audit.
 9. Report assumptions, limits and the human review required.
 
+When original H2S or a natural baseline is in scope, use
+`neqsim-reservoir-h2s-mineral-buffer` before fitting the souring increment.
+Require reservoir T/P, methane and CO2, and evidence for pyrite and Fe-carbonate
+in the flow unit. Report `isBufferConsistent()` and its warnings; below about
+70 C or without the required minerals, carry an upper bound or applicability
+gap rather than an accepted baseline. Active thermochemical sulfate reduction
+in carbonate reservoirs is outside this buffer's scope. Convert observations
+and predictions to the same reservoir-fluid or sampled separator-gas basis,
+retain total H2S, and separate the supported baseline from the souring increment.
+Do not silently subtract an uncertain baseline or interpret a negative residual
+as negative souring. For depletion, follow the skill's real-gas composition and
+pressure path, not an ideal-gas pressure exponent. Record uncertainty and
+compare pressure ratios and CO2 changes before attributing a trend to souring.
+
 # Required Skills
 
 - `neqsim-h2s-phase-partitioning` for gas/oil/water partitioning and gas-to-wellstream conversion.
 - `neqsim-reservoir-souring-correlation` for seawater fraction, per-well correlations and the mixing-zone bound.
 - `neqsim-production-chemistry` for chemical mitigation and chemistry root cause.
 - Context: `neqsim-well-log-reading` when well logs are supplied, to place H2S observations against formations (zone gamma ray, density and other curve statistics) with the log's depth reference stated.
+- Context: `neqsim-reservoir-h2s-mineral-buffer` for original H2S and depletion
+  trends; it does not replace injection-water souring or phase partitioning.
 
 # Example Usage
 
@@ -99,6 +118,8 @@ Separator gas H2S for well A-12 rose from 5 to 40 ppmv over 18 months, measured 
 - Seawater fraction uses conservative tracers, with end members and residual reported.
 - Each correlation reports data range, R2, AICc, warnings; no extrapolation beyond range without a flag.
 - Correlation is checked against the mixing-zone bound and sulfate balance.
+- Any mineral baseline has an applicability verdict, uncertainty and the same
+  phase/volume basis as the measurements; total H2S and the souring increment stay separate.
 - Registry updates are reviewed and the previous version is kept.
 - Sour-service pH2S screen is reported with its limits and handed to materials engineering.
 - Qualified human review is completed before any decision.

@@ -1,7 +1,7 @@
 ---
 name: surf-layout-design-agent
 description: Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, routes and sizes every flowline, riser and umbilical, renders a presentation-grade reservoir-to-host illustration carrying the study's headline numbers, and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows.
-version: 0.2.0
+version: 0.2.1
 agent_type: community-coordinator
 required_skills:
 - neqsim-surf-field-layout-design
@@ -14,10 +14,12 @@ context_skills:
 - neqsim-field-layout-import
 - neqsim-production-network-routing
 - neqsim-step-out-screening
+- neqsim-brazil-presalt-well-reach-and-layout
 - neqsim-capex-opex-screening
 - neqsim-surf-cooldown-screening
 - neqsim-professional-reporting
 - neqsim-crs-geodetic-checks
+- neqsim-open-marine-constraints
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent
@@ -139,6 +141,12 @@ Typical outputs include:
    supplies; report the plan when offline. Before placing new templates or lines, ask
    `subsea-infrastructure-capacity-agent` for free slots, spare tees and reusable lines
    and show them (with verification level) in the layout.
+   For fishing, environmental, wind, grid and crossing evidence, use the
+   read-only client in `neqsim-open-marine-constraints` on candidate sites and
+   the routed centrelines. Carry source dates, units, legends and provenance
+   into the layout basis. Treat layer errors or coverage gaps as not screened;
+   split and re-read truncated sections before accepting the layout. Grid
+   proximity is not a capacity or connection approval.
 4. **Take the well count from the reservoir side.** Where a reservoir model
    exists, take the producer and injector counts, the plateau rate and the
    injection rates from `reservoir-simulator-agent` rather than assuming them.
@@ -188,6 +196,8 @@ Loaded as context when the task calls for them:
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `surf-cooldown-screening` mapped to community catalog ID `neqsim-surf-cooldown-screening`
 - `neqsim-crs-geodetic-checks`: check the CRS of every map, bathymetry and licence-block layer before the host is placed or a line is routed. Name the datum operation, run `datum_sensitivity` when a source does not state its datum, and say whether route lengths are grid or geodesic.
+- `neqsim-open-marine-constraints`: open marine exposure and restrictions for
+  layout alternatives; retain survey, geotechnical and permitting gaps.
 
 # Example Usage
 

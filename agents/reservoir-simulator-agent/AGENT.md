@@ -1,7 +1,7 @@
 ---
 name: reservoir-simulator-agent
 description: "Sets up a screening-level reservoir simulation from whatever data exists - starting from open data such as an NCS field page and refining as appraisal, well-test and PVT data arrive - and hands a provenance-traced specification to the NeqSim reservoir workflow. Also covers gas-condensate vaporised-oil PVT, models sized backwards from a mandated profile, and best-guess structures calibrated to published volumes with an assumption register."
-version: 0.5.0
+version: 0.5.1
 agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
@@ -228,6 +228,31 @@ Typical outputs include:
     top items into concrete data requests.
 12. **Document** assumptions, limitations, source attribution and the human
     review requirement.
+
+## Downstream reservoir-case acceptance
+
+When the study includes an OPM Flow hand-off through
+`neqsim-reservoir-model-builder`, require these checks before accepting a
+downstream concept ranking; do not claim a simulator check was run when only
+the specification exists.
+
+- Search injector placement before ruling injection out. Where a reference
+  simulator has published designs, replay them as independent hold-outs with
+  the screening model's calibrated factors frozen.
+- Record time series for facility limits, reservoir pressure and the binding
+  constraint. Attribute added-capacity uplift to capacity and compare with the
+  same capacity added by the alternative concept. Record gas injection totals
+  and pay well/lateral CAPEX at the drilling date when comparing RF and NPV.
+- Scan every batch's PRT logs for simulator shut-ins, record well and report
+  time, and compare cases at matched well status. ACTIONX control gains need a
+  matching shut-wells baseline and a bounded rule period before blowdown.
+- Re-run leading designs over permeability, baffle and streak scenarios; report
+  the worst case and NPV gap. A gain below model error is an unresolved ranking,
+  not a winner.
+- For EOR chemistry, use the skill's residual-oil sensitivity only as a bound
+  until core-flood evidence and cost exist. Train surrogates only on feasible
+  runs without unintended simulator shut-ins and verify every proposed
+  candidate in the simulator.
 
 # Required Skills
 

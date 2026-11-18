@@ -1,6 +1,6 @@
 name: vfp-lift-curve-agent
 description: "Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models: calibrates the lift model, builds tubing-only, flowline or full-system tables with NeqSim VfpTableBuilder, validates by IPR x VFP and off-grid solves, and exports the deck with provenance. Use for new, regenerated or repaired lift curves (U-shaped BHP, extrapolation, dry-gas jump)."
-version: 0.1.0
+version: 0.1.1
 agent_type: community-agent
 required_skills:
 - neqsim-vfp-lift-curves
@@ -14,6 +14,7 @@ context_skills:
 - neqsim-rotating-equipment-design
 - neqsim-model-calibration-and-data-reconciliation
 - neqsim-input-validation
+- neqsim-well-test-calibration
 coordinated_agents:
 - near-well-injectivity-agent
 - reservoir-simulator-agent

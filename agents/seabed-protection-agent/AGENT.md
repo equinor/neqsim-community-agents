@@ -7,7 +7,7 @@ coordinated_agents:
 - surf-layout-design-agent
 - subsea-cooldown-agent
 - flow-assurance-engineer-agent
-version: 0.1.0
+version: 0.1.1
 required_skills:
 - neqsim-seabed-protection-screening
 - neqsim-pipeline-survey-processing
@@ -18,6 +18,7 @@ context_skills:
 - neqsim-bathymetry-profile-screening
 - neqsim-surf-field-layout-design
 - neqsim-subsea-layout-geometry
+- neqsim-open-marine-constraints
 ---
 
 # Purpose
@@ -69,7 +70,7 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the screening objective, the pipe diameter and coating, and the section in scope.
-2. Use `seabed-protection-screening` to plan the read-only map requests for the route area, then load the layers that are public, synthetic or approved; for internal map services use the enterprise agents to supply the same GeoJSON.
+2. Use `seabed-protection-screening` to plan the read-only map requests for the route area, then load public, synthetic or approved layers. When open fishing, environmental or crossing layers are needed, use `neqsim-open-marine-constraints` on the planned WGS84 centreline. Check per-layer `errors`, coverage and `truncated` before interpreting exposure; split and re-read truncated sections. Keep layer dates, units, legends and provenance with the results. An unavailable layer is not clear seabed. For internal services use the enterprise agents to supply the same GeoJSON.
 3. Build the route and sample the layers; check segment boundaries against the layer edges at the station spacing used.
 4. Pull surveyed cover and free-span candidates from `pipeline-survey-processing` when an as-built survey exists, and state the allowable span from the span assessment.
 5. Supply rock-only requirements from their own assessments; do not infer an upheaval force from burial depth.
@@ -92,6 +93,9 @@ Context skills, used when relevant:
 - `bathymetry-profile-screening` mapped to `neqsim-bathymetry-profile-screening`, for water depth and slope along the route
 - `surf-field-layout-design` mapped to `neqsim-surf-field-layout-design`, when the route comes from a field layout
 - `subsea-layout-geometry` mapped to `neqsim-subsea-layout-geometry`, to place the structures at the route ends
+- `neqsim-open-marine-constraints`, for open fishing effort, vulnerable/protected
+  areas and existing-line crossings; pass sourced exposure to the protection
+  skill, not directly to a design cover rule.
 
 # Example Usage
 
@@ -102,7 +106,9 @@ Use public synthetic layers for a 14 km, 16 inch flowline. Sample seabed substra
 # Assumptions
 
 - Inputs are public, synthetic, or approved for open-source use.
-- Map layers are supplied by the caller; the screening performs no network access and only plans read-only requests.
+- Map layers are supplied by the caller or read through the optional open-data
+  skill; the protection calculation itself is offline. Missing substrate,
+  geohazard or soil-strength evidence remains an explicit gap.
 - Trencher capability, trenching and rock rates, cover per fishing intensity and rock geometry are placeholders until replaced by the project basis.
 - Vessel density is a proxy for trawling and anchoring exposure, not a trawl frequency.
 - A surface substrate class is not a strength profile or a trenchability statement.
@@ -123,6 +129,9 @@ Use public synthetic layers for a 14 km, 16 inch flowline. Sample seabed substra
 - Screening objective, pipe diameter and coating are documented.
 - Every assumption is accepted against, or replaced by, the project basis.
 - Fishing-intensity classes trace to a trawl assessment rather than vessel density alone.
+- Open-layer errors and truncation are resolved or disclosed; MW fishing hours
+  are not treated as hours or trawl frequency, and a mapped protected area is
+  not assumed to be a legal no-rock zone without its activity-specific basis.
 - Soil classes and strengths trace to geotechnical data, and placeholder-strength data gaps are closed or carried into the report.
 - Segment boundaries are checked against the layer edges.
 - Crossings are reconciled with the crossing register, including cables.

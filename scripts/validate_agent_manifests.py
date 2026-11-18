@@ -423,21 +423,29 @@ def check_python_runtime_instructions(agent_dir):
 
 
 HARDCODED_LOCAL_PATH_RE = re.compile(
-    r"[A-Za-z]:[\\/](?:Users|home|appl)[\\/]", re.IGNORECASE
+    r"[A-Za-z]:[\\/]+(?:Users|home|appl)[\\/]+"
+    r"|(?<![A-Za-z0-9:/])/(?:Users|home)/[^\s/<>\"']+",
+    re.IGNORECASE,
 )
 
 
 def check_hardcoded_local_paths(agent_dir):
     """Return errors for absolute local machine paths baked into shipped agent text.
 
-    AGENT.md/prompts/workflows are copied verbatim into every user's install
+    Instructions and examples are copied verbatim into every user's install
     directory by ``neqsim agent install``, so an absolute path such as
     ``C:\\Users\\<name>\\...`` or ``C:\\appl\\...`` that only exists on the
     author's machine breaks the agent for everyone else.
     """
     errors = []
     paths = []
-    for pattern in RUNTIME_INSTRUCTION_GLOBS:
+    for pattern in RUNTIME_INSTRUCTION_GLOBS + (
+        "README.md",
+        "examples/**/*.md",
+        "examples/**/*.py",
+        "examples/**/*.ps1",
+        "examples/**/*.sh",
+    ):
         paths.extend(agent_dir.glob(pattern))
     for path in sorted(set(paths)):
         try:

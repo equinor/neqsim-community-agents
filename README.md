@@ -44,6 +44,21 @@ Machine-readable agent metadata uses canonical community skill IDs such as
 `agent.yaml` files should use the canonical ID so runtimes do not need implicit
 alias rules.
 
+Recent community-skill integration uses optional context skills, so existing
+screening workflows keep their required prerequisites:
+
+| Capability | Agent entry points |
+| --- | --- |
+| Open fishing, environmental, wind, grid and crossing constraints | [Seabed protection](agents/seabed-protection-agent/AGENT.md), [equipment placement](agents/subsea-equipment-placement-agent/AGENT.md), [SURF layout](agents/surf-layout-design-agent/AGENT.md), [export tie-in](agents/export-tie-in-concept-agent/AGENT.md) |
+| Original mineral-buffer H2S versus waterflood souring | [Reservoir souring](agents/reservoir-souring-agent/AGENT.md) |
+| Forward-only separator tests and shared stage P/T fitting | [PVT](agents/pvt-agent/AGENT.md) |
+| Raw well-test calibration, held-out acceptance and consistent volume bases | [VFP lift curves](agents/vfp-lift-curve-agent/AGENT.md), [production optimization](agents/production-optimization-agent/AGENT.md) |
+
+The [reservoir simulator workflow](agents/reservoir-simulator-agent/AGENT.md)
+also carries the updated downstream case-acceptance gates for facility limits,
+shut wells, scenario robustness and simulator-verified surrogate proposals.
+See the generated [agent-to-skill map](docs/AGENT_SKILL_MAP.md) for all mappings.
+
 Current skill mappings used by the example agents:
 
 | Legacy shorthand | Community skill catalog ID |

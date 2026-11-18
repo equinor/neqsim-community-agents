@@ -1,7 +1,7 @@
 ---
 name: production-optimization-agent
 description: Performs early-stage production-optimization screening that searches operating setpoints (separation pressures, compressor discharge, routing) for higher throughput or lower compression power while respecting public capacity and operating-window guidelines.
-version: 0.1.1
+version: 0.1.2
 required_skills:
 - neqsim-separator-modelling
 - neqsim-compressor-operating-window-check
@@ -87,6 +87,15 @@ NeqSim optimization run for any quantitative decision.
     events did. Before trusting the loop, freeze the model for one week, replay the actual operation and compare the
     total-oil error with "no change"; value the advice with the frozen model too, not only with the planner's own
     claim (about 80 % of the claimed gain survived in that test).
+    Keep liquid volumes on a consistent mass/density basis with multiphase
+    checks; do not mix raw `getVolume()` with volume-translated density or count
+    free water as oil. Convert the calibration skill's barg inputs explicitly
+    to the process model's pressure basis. Before tuning, require separator-gas
+    agreement within 2 percent and stock-tank oil/gas agreement within 10 percent
+    of the reported test, or investigate the fluid/meter basis instead. Report
+    held-out acceptance and rejection reasons, retain the prior on rejection,
+    and deduplicate tests by (test number, wellbore). These are advisory model
+    updates, never autonomous plant setpoint changes.
 
 # Required Skills
 

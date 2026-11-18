@@ -1,7 +1,7 @@
 ---
 name: export-tie-in-concept-agent
 description: "Screens a new export or tie-in line between two facilities end to end: ranked landing points on neighbouring hosts, seabed profile, pressure drop, thermal decay, wall thickness and size, and conceptual P&ID sketches of both connection ends with open options, before a validated NeqSim pipeline study."
-version: 0.1.0
+version: 0.1.1
 required_skills:
 - neqsim-tie-in-pipeline-concept
 - neqsim-tie-in-pid-sketch
@@ -12,6 +12,7 @@ context_skills:
 - neqsim-pipe-wall-thickness-screening
 - neqsim-hydrate-screening
 - neqsim-crs-geodetic-checks
+- neqsim-open-marine-constraints
 coordinated_agents:
 - tie-in-screening-agent
 - pipe-route-screening-agent
@@ -56,6 +57,12 @@ data gaps, open options, and a recommendation for the NeqSim pipeline study that
    `size_pipeline`, and check end-point depths against the facility water depths.
 4. Cross-check the recommended size in NeqSim `PipeBeggsAndBrills` with the dry oil. Use `pipe-route-screening-agent`
    for a routed corridor when a straight line is not acceptable.
+   Screen candidate centrelines with `neqsim-open-marine-constraints` for
+   fishing, environmental restrictions, wind areas and existing-line crossings.
+   Resolve coverage, per-layer `errors` and `truncated` before comparing routes;
+   split truncated sections and re-read. Carry dates, units, legends and
+   provenance into the ranking. Open map evidence is neither survey clearance
+   nor permitting approval; missing layers remain open gaps.
 5. `neqsim-tie-in-pid-sketch`: sketch both ends, run `validate()`, and list the options as questions.
 6. Produce a map (coast, hosts, existing lines, new line), the profile figure and the sketches. Check every figure
    by eye before it goes into a report.

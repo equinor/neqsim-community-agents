@@ -9,11 +9,11 @@ required_skills:
 - neqsim-fluid-quality-check
 context_skills:
 - neqsim-pseudocomponent-split-characterization
+- neqsim-opm-open-reservoir-decks
 - neqsim-near-well-and-injectivity
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
 - neqsim-reservoir-3d-visualisation
-- neqsim-opm-open-reservoir-decks
 - neqsim-well-log-reading
 - neqsim-seismic-segy-reading
 - neqsim-seismic-structure-to-reservoir
@@ -55,4 +55,4 @@ coordinated_agents:
 - asset-economics-agent
 - near-well-injectivity-agent
 human_review_required: true
-version: 0.5.0
+version: 0.5.1

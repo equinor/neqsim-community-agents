@@ -31,4 +31,4 @@ outputs:
 - assumptions-and-limitations
 - neqsim-optimization-recommendation
 human_review_required: true
-version: 0.1.1
+version: 0.1.2

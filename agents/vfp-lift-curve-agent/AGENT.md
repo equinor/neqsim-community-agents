@@ -1,7 +1,7 @@
 ---
 name: vfp-lift-curve-agent
 description: "Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models: calibrates the lift model, builds tubing-only, flowline or full-system tables with NeqSim VfpTableBuilder, validates by IPR x VFP and off-grid solves, and exports the deck with provenance. Use for new, regenerated or repaired lift curves (U-shaped BHP, extrapolation, dry-gas jump)."
-version: 0.1.0
+version: 0.1.1
 agent_type: community-agent
 required_skills:
 - neqsim-vfp-lift-curves
@@ -15,6 +15,7 @@ context_skills:
 - neqsim-rotating-equipment-design
 - neqsim-model-calibration-and-data-reconciliation
 - neqsim-input-validation
+- neqsim-well-test-calibration
 coordinated_agents:
 - near-well-injectivity-agent
 - reservoir-simulator-agent
@@ -72,6 +73,19 @@ the agent does not replace specialist review, simulator verification or project 
 4. **Calibrate.** Fit one parameter per well (roughness or a friction multiplier) on gauge rows; use Gray for gas
    wells; keep a hold-out set. Calibrate flow and density dependent topside elements as `K * mdot^2 / rho` plus one
    small residual from historian dP.
+   For production wells with raw test-separator meters, use
+   `neqsim-well-test-calibration` before building the table: screen test quality,
+   recombine actual gas/oil/water volumes and follow the real stage path to
+   stock tank. Explicitly convert its barg inputs to the lift model's pressure
+   basis. Use mass/density for liquid volumes consistently, with multiphase
+   checks so free water is not counted as oil. Check separator gas against the
+   flow computer and stock-tank rates against the reported test before tuning.
+   In this route fit U and kH with priors, report identifiability and the held-out
+   acceptance verdict, and retain the prior with the rejection reason when a
+   fit fails. Update inflow only from measured downhole-gauge tests, never from
+   VLP-inferred BHP. Do not layer an unconstrained friction fit onto this
+   calibration. Use only accepted settings (or explicitly retained priors) for
+   the table; repeat the downstream IPR x VFP checks after each update.
 5. **Design axes.** Rate to 1.3x the highest reachable rate, THP down to late-life pressure, 3-4 ratio points in the
    first decade, ALQ singleton unless gas lift is modelled.
 6. **Build.** Call `VfpTableBuilder` with `TubingVlpProvider` (tubing) or `ForwardVlpProvider` around a pipe, valve
@@ -86,6 +100,9 @@ the agent does not replace specialist review, simulator verification or project 
 - `neqsim-vfp-lift-curves` (core NeqSim skill): builder API, axis design, correlation choice, rate caps, units and
   deck conventions, validation and traps.
 - `neqsim-api-patterns`: building the NeqSim fluids and models the providers wrap.
+
+Context: `neqsim-well-test-calibration` for test-based producer calibration;
+raw meter data and gauge support determine which parameters may be updated.
 
 # Example Usage
 

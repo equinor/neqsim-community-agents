@@ -11,6 +11,7 @@ context_skills:
 - neqsim-pipe-wall-thickness-screening
 - neqsim-hydrate-screening
 - neqsim-crs-geodetic-checks
+- neqsim-open-marine-constraints
 coordinated_agents:
 - tie-in-screening-agent
 - pipe-route-screening-agent
@@ -36,4 +37,4 @@ outputs:
 - assumptions-data-gaps-and-open-options
 - neqsim-pipeline-study-recommendation
 human_review_required: true
-version: 0.1.0
+version: 0.1.1
