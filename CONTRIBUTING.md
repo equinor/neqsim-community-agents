@@ -118,6 +118,14 @@ hooks. Report unrelated existing failures explicitly.
 Manage development dependencies with `uv add --group dev <package>` and
 commit the updated `uv.lock`. Agent users do not need uv.
 
+Python 3.10 remains the end-user runtime minimum. The separate runtime CI job
+installs only the test dependencies and the two public skill packages needed
+by the executable reservoir-to-host examples, then runs `tests/`,
+`runtime_tests/` and the manifest validator on Python 3.10. It does not install
+the Python 3.11+ developer environment or require plotting dependencies.
+Keep the developer checks and Ruff's `py310` target unchanged. Pending
+single-rule Ruff fixes remain separate from this runtime coverage.
+
 ## Quiet by default (no pop-ups, no installs, no surprise sign-ins)
 
 Agents and skills run from hooks, MCP servers and chat tool calls with no visible console. Anything that opens a window or asks the user to act breaks the flow, so every new or changed skill and agent must follow these rules:
