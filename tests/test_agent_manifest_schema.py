@@ -14,10 +14,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO_ROOT / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 import validate_agent_manifests as validator
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class AgentManifestSchemaTests(unittest.TestCase):
