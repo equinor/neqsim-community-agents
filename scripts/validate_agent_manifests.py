@@ -411,13 +411,13 @@ def check_python_runtime_instructions(agent_dir):
             setup_tool_match = PYTHON_ENV_SETUP_TOOL_RE.search(line)
             if bare_match:
                 errors.append(
-                    f"{path.relative_to(agent_dir)}:{line_number} uses bare '{bare_match.group(1)}' launcher; use the parent-selected absolute "
+                    f"{path.relative_to(agent_dir).as_posix()}:{line_number} uses bare '{bare_match.group(1)}' launcher; use the parent-selected absolute "
                     "executable or sys.executable"
                 )
             elif conflict_match or setup_tool_match:
                 matched_directive = conflict_match or setup_tool_match
                 errors.append(
-                    f"{path.relative_to(agent_dir)}:{line_number} conflicts with the shared Python runtime policy: '{matched_directive.group(0)}'"
+                    f"{path.relative_to(agent_dir).as_posix()}:{line_number} conflicts with the shared Python runtime policy: '{matched_directive.group(0)}'"
                 )
     return errors
 
@@ -456,7 +456,7 @@ def check_hardcoded_local_paths(agent_dir):
             match = HARDCODED_LOCAL_PATH_RE.search(line)
             if match:
                 errors.append(
-                    f"{path.relative_to(agent_dir)}:{line_number} hardcodes an author-machine path '{match.group(0)}'; describe the "
+                    f"{path.relative_to(agent_dir).as_posix()}:{line_number} hardcodes an author-machine path '{match.group(0)}'; describe the "
                     "runtime portably (active venv, sys.executable, or an env "
                     "var) instead of a literal local path"
                 )
