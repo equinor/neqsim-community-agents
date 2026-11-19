@@ -118,12 +118,12 @@ hooks. Report unrelated existing failures explicitly.
 Manage development dependencies with `uv add --group dev <package>` and
 commit the updated `uv.lock`. Agent users do not need uv.
 
-Python 3.10 remains the end-user runtime minimum. The separate runtime CI job
+Python 3.11 is the end-user runtime minimum. The separate runtime CI job
 installs only the test dependencies and the two public skill packages needed
 by the executable reservoir-to-host examples, then runs `tests/`,
-`runtime_tests/` and the manifest validator on Python 3.10. It does not install
-the Python 3.11+ developer environment or require plotting dependencies.
-Keep the developer checks and Ruff's `py310` target unchanged. Pending
+`runtime_tests/` and the manifest validator on Python 3.11. It does not install
+the full developer environment or require plotting dependencies.
+Keep the developer checks and Ruff's `py311` target aligned with this minimum. Pending
 single-rule Ruff fixes remain separate from this runtime coverage.
 
 ## Quiet by default (no pop-ups, no installs, no surprise sign-ins)
