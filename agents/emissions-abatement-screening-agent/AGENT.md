@@ -53,13 +53,17 @@ Typical inputs include:
 
 - A facility/process energy-use basis (fuel gas burnt, turbine/engine/boiler duty)
   or an existing emissions estimate (CO2e per year, NOx per year)
+- The reporting period, facility boundary, included scopes, production basis,
+  emission species, GWP assessment/version/time horizon, and source/year for
+  each emission factor
 - The abatement measure(s) to screen, each with CAPEX, any added energy cost (for
   example imported power for electrification), and the avoided fuel gas or avoided
   CO2/NOx per year
 - The carbon-cost year (default: latest published) and whether to use the
-  combined tax+ETS effective cost or the tax and ETS components separately
+  combined tax+ETS effective cost or the tax and ETS components separately, with
+  eligibility and native units for each charge
 - Economic assumptions: gas price for valuing avoided fuel, evaluation horizon,
-  and discount rate
+  annual rate/price assumptions, and discount rate
 - The screening objective and decision criteria
 
 # Outputs
@@ -73,7 +77,8 @@ Typical outputs include:
   combined effective cost, NOx Fund rate), each with source attribution
 - Per-measure avoided carbon cost, avoided fuel value, added energy cost, net
   annual saving, simple payback, discounted NPV, breakeven CO2 price, and a verdict
-- A ranking of the screened abatement measures
+- A ranking of the screened abatement measures with the ranking objective stated
+  and economic versus emissions results kept distinguishable
 - The published CO2-by-source split and power-from-shore context for orientation
 - Recommended validated NeqSim energy and economics workflows
 - Assumptions, limitations, source attribution, and a human review checklist
@@ -88,14 +93,16 @@ Typical outputs include:
    Norwegian carbon-cost rates for the year, keeping the source URL and reference
    year with every figure.
 4. For each candidate measure, use `norwegian-continental-shelf-data`
-   (`abatement_screening`) to combine the avoided carbon cost (CO2 tax + EU ETS,
-   plus NOx Fund) and the avoided fuel value against the measure CAPEX and any
-   added energy cost, and report net annual saving, simple payback, NPV, and the
-   breakeven CO2 price.
+   (`abatement_screening`) to value eligible avoided emissions charges on each
+   charge's own species and quantity basis, and NOx Fund contributions
+   separately, plus avoided fuel value, against the measure CAPEX and any added
+   energy cost. Report net annual saving, simple payback, NPV, and breakeven CO2
+   price with their calculation bases.
 5. Optionally use `asset-value-npv-screening` to place the abatement cash flow in
    a wider project NPV/IRR/payback context.
-6. Rank the measures and identify the most attractive, keeping facts,
-   assumptions, and recommendations separate.
+6. Rank the measures against the stated objective. If NPV, payback, emissions
+   reduction, or another criterion produce different rankings, show the trade-off
+   instead of presenting one measure as unconditionally best.
 7. Summarize the major uncertainties and required studies and name the validated
    NeqSim energy and economics path.
 8. Document assumptions, limitations, and human review requirements.
@@ -119,7 +126,19 @@ Using only public data, screen an emission-reduction business case for an NCS ga
 - The carbon-cost basis carries a small set of published annual rates; verify the
   current rate against the source before use.
 - CO2 avoided may be derived from avoided fuel gas using the public gas
-  combustion factor (2.34 kg CO2/Sm3) when an explicit CO2 figure is not supplied.
+  combustion factor (2.34 kg CO2/Sm3) only when that factor matches the fuel and
+  source basis, and an explicit CO2 figure is not supplied.
+- Apply each rate only to the emissions, fuel, installation, and period that are
+  eligible under its published basis. Preserve the rate's native unit, currency,
+  year, and source.
+- Convert monetary costs to a common reporting currency using an explicit FX
+  rate and date before summing or comparing them.
+- Keep CO2 tax, EU ETS, and NOx Fund calculations separate. Do not add component
+  charges to a combined effective rate, apply carbon charges to NOx, or treat a
+  NOx Fund contribution as a CO2 price.
+- If an annual rate, fuel price, emissions reduction, or energy penalty is held
+  constant over the evaluation horizon, label it as an assumption; otherwise
+  calculate year-by-year cash flows using the stated schedule.
 - Energy/emissions and asset-value results use screening correlations, not audited
   energy, emissions, or commercial models.
 - The abatement screening is a single-measure cash-flow calculation, not a
@@ -143,8 +162,13 @@ Using only public data, screen an emission-reduction business case for an NCS ga
 - Abatement objective, facility/process scope, and carbon-cost year are documented.
 - Every reused carbon-cost and emissions figure carries its source and reference year.
 - The gas combustion factor and any derived CO2 avoided are stated explicitly.
+- Any currency conversion states the FX rate, date, and reporting currency.
+- CO2/CO2e, NOx, their eligible quantities, and the applicable charges are kept
+  separate; no component/combined-rate double counting occurs.
 - Avoided fuel value, added energy cost, horizon, and discount rate are recorded.
 - Per-measure NPV, payback, and breakeven CO2 price are reported with the verdict.
+- The ranking objective and any disagreement between NPV, payback, and emissions
+  reduction are shown.
 - Screening limitations (no validated energy model, no MACC curve) are documented.
 - Required follow-up studies are listed and the validated NeqSim path is named.
 - Qualified human review is completed before any decision.

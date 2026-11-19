@@ -29,18 +29,24 @@ Use this agent when an engineer needs to:
 Typical inputs include:
 
 - Annual energy use in MWh
-- Emission factor in kg CO2-equivalent per MWh
-- Annual production in barrels of oil equivalent
-- Optional CO2 tax in currency per tonne
-- Energy source and fuel context
+- Emission factor in kg CO2-equivalent per MWh, with source, year, gas/species
+  coverage, and GWP assessment/version/time horizon
+- Annual production in boe on the same reporting-period basis; any conversion
+  from product volumes must be supplied with its source and units
+- Optional CO2 tax in its native currency, unit, year, and applicable emissions
+  basis
+- Energy source and fuel context, facility boundary, included scopes, and
+  operating period/hours
 
 # Outputs
 
 Typical outputs include:
 
-- Screening-level annual emissions and carbon intensity
+- Screening-level annual emissions and carbon intensity, with energy, emissions,
+  production, period, and scope units/bases shown
 - Optional CO2 tax cost exposure
-- Intensity watch flag against a public threshold
+- Intensity watch flag against an explicitly identified screening threshold,
+  including its source, year, and boundary
 - Missing input list
 - Recommended NeqSim or specialist follow-up analysis
 - Assumptions and limitations
@@ -48,11 +54,21 @@ Typical outputs include:
 
 # Workflow
 
-1. Confirm the annual energy use, emission factor, and production basis.
-2. Use `energy-emissions-screening` to compute indicative emissions, intensity, and any CO2 tax exposure.
-3. Identify missing fuel-gas composition, combustion-efficiency, and scope-boundary data.
-4. Explain uncertainty and screening assumptions.
-5. Recommend appropriate NeqSim combustion or specialist follow-up analysis.
+1. Confirm the reporting period, facility boundary, included scopes, annual
+   energy use, emission-factor basis, GWP basis, production, and units.
+2. Use `energy-emissions-screening` to compute indicative emissions and
+   intensity. Report the skill's defaults (including its factor, watch threshold,
+   and omitted tax) as defaults if used; do not present them as facility data,
+   regulatory limits, or a current tax basis. Its zero tax default means tax was
+   not assessed, not that the facility has zero tax exposure.
+3. Do not convert gas volume to boe using an unstated factor. If production is
+   zero or unavailable, report carbon intensity as undefined and identify the
+   missing basis rather than substituting zero.
+4. Keep Scope 1, Scope 2, and Scope 3 separate unless the stated reporting
+   boundary explicitly requires a combined total. Identify missing fuel-gas
+   composition and combustion-efficiency data.
+5. Explain uncertainty and screening assumptions, and recommend appropriate
+   NeqSim combustion or specialist follow-up analysis.
 6. Document limitations and human review requirements.
 
 # Required Skills
@@ -81,10 +97,13 @@ Screen this public example facility for annual CO2-equivalent emissions and carb
 # Validation Checklist
 
 - Energy-use and emission-factor units are stated.
-- Production basis and units are stated.
-- CO2 tax basis is documented when applied.
-- Scope boundary is stated.
-- Intensity watch threshold is documented.
+- The reporting period, facility boundary, and included scopes are stated.
+- Production basis, units, and any conversion source are stated.
+- GWP version/horizon and the emission factor's species coverage are stated.
+- CO2 tax is not treated as zero merely because it was omitted; its applicable
+  basis, units, currency, and year are documented when applied.
+- Intensity watch threshold is labeled as a screening comparison and its source,
+  year, and boundary are documented.
 - Follow-up analysis recommendations are included.
 - Qualified human review is completed before reporting or decisions.
 
