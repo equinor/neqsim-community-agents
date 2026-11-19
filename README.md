@@ -206,7 +206,7 @@ See [docs/governance.md](docs/governance.md) and [docs/safety-guidelines.md](doc
 
 ## Testing
 
-For development, use Python 3.11 or newer and uv to run the repository tests:
+For development, use Python 3.10 or newer and uv to run the repository tests:
 
 ```bash
 uv sync --locked

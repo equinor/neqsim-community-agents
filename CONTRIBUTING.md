@@ -98,7 +98,7 @@ Minimum expectations for new agents:
 - Example outputs or reports are reproducible from public inputs
 - Assumptions, limitations, and human review requirements are documented
 
-Use Python 3.11 or newer and uv for development. From the repository root:
+Use Python 3.10 or newer and uv for development. From the repository root:
 
 ```bash
 uv sync --locked
@@ -122,9 +122,27 @@ Python 3.10 remains the end-user runtime minimum. The separate runtime CI job
 installs only the test dependencies and the two public skill packages needed
 by the executable reservoir-to-host examples, then runs `tests/`,
 `runtime_tests/` and the manifest validator on Python 3.10. It does not install
-the Python 3.11+ developer environment or require plotting dependencies.
+the full developer environment or require plotting dependencies.
 Keep the developer checks and Ruff's `py310` target unchanged. Pending
 single-rule Ruff fixes remain separate from this runtime coverage.
+
+### Devtools 0.3.0 readiness
+
+The `neqsim-dev-setup` 0.3.0 release is defined by merged
+[equinor/neqsim#5155](https://github.com/equinor/neqsim/pull/5155).
+This agent catalog has no direct toolkit dependency. Development and CI
+support Python 3.10+, with newer-version coverage retained. The lockfile
+includes the 3.10 developer environment; lightweight end-user runtime
+coverage remains separate. Do not bump agent versions solely for the toolkit
+release.
+
+Before a plugin release, run the repository checks above and the existing
+Python 3.10 runtime/example CI job. Resolve declared skills against the
+committed skill index, not just locally installed sibling packages. Toolkit
+installation, shared-environment dependency checks, and the generated plugin
+rebuild belong to the
+[marketplace's 0.3.0 release gate](https://github.com/equinor/neqsim-copilot-plugin/blob/main/docs/maintaining.md#51-devtools-030-release-gate).
+Do not treat passing catalog tests as verification of the new toolkit.
 
 ## Quiet by default (no pop-ups, no installs, no surprise sign-ins)
 
