@@ -158,6 +158,7 @@ question they answer.
 | Agent | What it does |
 |-------|--------------|
 | `process-safety-agent` | Fire-case relief loads, emergency depressurization, vacuum collapse, flare radiation, PSV orifice, and safety-function coverage screening. |
+| `flare-helideck-dispersion-agent` | Draft coordinator for screening unignited flare-tip gas reaching a helideck and its flight paths: frozen basis, wind statistics, release rates, conditional exceedance of 10 and 20 % LFL, independent review, figures with `results.json`, and a CFD hand-off. |
 
 ### 2.11 Utilities
 
