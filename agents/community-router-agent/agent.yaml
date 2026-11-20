@@ -53,6 +53,7 @@ coordinated_agents:
 - reciprocating-compressor-agent
 - reservoir-forecasting-agent
 - reservoir-history-match-agent
+- reservoir-h2s-agent
 - reservoir-souring-agent
 - reservoir-mercury-agent
 - reservoir-simulator-agent

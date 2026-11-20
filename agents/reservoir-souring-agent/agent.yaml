@@ -36,5 +36,6 @@ agent_type: community-coordinator
 coordinated_agents:
 - reservoir-history-match-agent
 - produced-water-scale-agent
+- reservoir-h2s-agent
 human_review_required: true
-version: 0.1.1
+version: 0.1.2

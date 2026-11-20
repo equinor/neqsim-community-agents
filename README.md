@@ -51,6 +51,7 @@ screening workflows keep their required prerequisites:
 | --- | --- |
 | Open fishing, environmental, wind, grid and crossing constraints | [Seabed protection](agents/seabed-protection-agent/AGENT.md), [equipment placement](agents/subsea-equipment-placement-agent/AGENT.md), [SURF layout](agents/surf-layout-design-agent/AGENT.md), [export tie-in](agents/export-tie-in-concept-agent/AGENT.md) |
 | Original mineral-buffer H2S versus waterflood souring | [Reservoir souring](agents/reservoir-souring-agent/AGENT.md) |
+| H2S expected in the gas of a prospect or discovery before production, with range and sour-service screen | [Reservoir H2S](agents/reservoir-h2s-agent/AGENT.md) |
 | Mercury expected in the gas of a prospect or discovery, with range and mineral limits | [Reservoir mercury](agents/reservoir-mercury-agent/AGENT.md) |
 | Forward-only separator tests and shared stage P/T fitting | [PVT](agents/pvt-agent/AGENT.md) |
 | Raw well-test calibration, held-out acceptance and consistent volume bases | [VFP lift curves](agents/vfp-lift-curve-agent/AGENT.md), [production optimization](agents/production-optimization-agent/AGENT.md) |

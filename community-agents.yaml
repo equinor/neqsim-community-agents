@@ -570,8 +570,25 @@ agents:
       - production-forecasting
       - open-data
 
+  - name: reservoir-h2s-agent
+    version: "0.1.0"
+    description: "Estimates H2S in the test gas of a reservoir, prospect or discovery before production, with an explicit uncertainty: NeqSim pyrite and Fe-carbonate buffer, calibration on measured wells per depositional setting, an uncertainty budget for temperature, CO2 and pressure, sour-service and gas-limit screening and a report with P10/P50/P90. Requires qualified review before a material or design decision."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-h2s-agent/AGENT.md"
+    required_skills:
+      - neqsim-reservoir-h2s-estimation
+    context_skills:
+      - neqsim-reservoir-h2s-mineral-buffer
+      - neqsim-h2s-phase-partitioning
+      - neqsim-norwegian-continental-shelf-data
+    supported_domains:
+      - reservoir-engineering
+      - production-chemistry
+      - sour-service
+      - gas-processing
+      - field-development
   - name: reservoir-souring-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Screens original reservoir H2S and waterflood souring: checks a mineral-buffer baseline where applicable, converts measured separator-gas H2S to wellstream H2S, and fits per-well souring correlations against seawater fraction with substrate bounds and sour-service pH2S checks. Requires qualified review before a reservoir or process decision."
     repo: "equinor/neqsim-community-agents"
     path: "agents/reservoir-souring-agent/AGENT.md"

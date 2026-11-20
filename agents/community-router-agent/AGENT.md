@@ -50,6 +50,7 @@ coordinated_agents:
 - reciprocating-compressor-agent
 - reservoir-forecasting-agent
 - reservoir-history-match-agent
+- reservoir-h2s-agent
 - reservoir-souring-agent
 - reservoir-mercury-agent
 - reservoir-simulator-agent
@@ -176,6 +177,7 @@ already obvious.
 | Follow a field with a multi-tank reservoir model: history match, produced composition, forecast under wellhead-pressure limits | `reservoir-history-match-agent` |
 | Reservoir souring: H2S in separator gas to wellstream H2S, H2S versus seawater fraction per well, mixing-zone plausibility, sour-service pH2S | `reservoir-souring-agent` |
 | Original reservoir H2S, mineral-buffer baseline or natural H2S changes during depletion versus waterflood souring | `reservoir-souring-agent` (mineral applicability and common measurement basis required) |
+| H2S expected in the test gas of a prospect or discovery before production, with P10/P50/P90, uncertainty budget, sour-service screen and report; plausibility of a drill stem test reading | `reservoir-h2s-agent` |
 | Mercury expected in the gas of a reservoir, prospect or discovery; worst case from mineral equilibrium; plausibility of a measured mercury value | `reservoir-mercury-agent` |
 | Who owns a field, discovery or licence; partners, equity, operator, net-equity inputs | `ncs-ownership-equity-agent` |
 | Weather, wind or sea-state data for an installation | `installation-weather-agent` |

@@ -76,6 +76,7 @@ question they answer.
 |-------|--------------|
 | `reservoir-simulator-agent` *(coordinator)* | Sets up a screening-level reservoir model from whatever data exists — starting from open public data such as an NCS field page — and refines it as appraisal, well-test, and PVT data arrive. |
 | `reservoir-forecasting-agent` *(coordinator)* | Fits an Arps decline curve to a produced-rate series and cross-checks it against depletion screening and resource maturity to project a forward profile, remaining volume, and EUR. |
+| `reservoir-h2s-agent` *(coordinator)* | Estimates H2S in the test gas of a prospect or discovery before production with P10/P50/P90 from the NeqSim mineral buffer calibrated on measured wells, with an uncertainty budget and a sour-service screen, and writes the report. |
 | `reservoir-souring-agent` *(coordinator)* | Converts measured separator-gas H2S to wellstream H2S with NeqSim, derives seawater fraction, fits and updates per-well H2S-versus-seawater-fraction correlations and checks them against a mixing-zone bound. |
 | `reservoir-mercury-agent` *(coordinator)* | Estimates elemental mercury in the gas of a prospect or discovery with P10/P50/P90 from tested wells, analogue tests and NeqSim mineral limits, and writes the report. |
 | `ncs-production-analysis-agent` *(coordinator)* | Frames production, resource-accounting, and field-inventory studies from a source-attributed Norwegian Continental Shelf reference-facts database. |

@@ -1,0 +1,37 @@
+name: reservoir-h2s-agent
+description: "Estimates H2S in the test gas of a reservoir, prospect or discovery before production, with an explicit uncertainty: NeqSim pyrite and Fe-carbonate buffer, calibration on measured wells per depositional setting, an uncertainty budget for temperature, CO2 and pressure, sour-service and gas-limit screening and a report with P10/P50/P90. Requires qualified review before a material or design decision."
+required_skills:
+- neqsim-reservoir-h2s-estimation
+context_skills:
+- neqsim-reservoir-h2s-mineral-buffer
+- neqsim-h2s-phase-partitioning
+- neqsim-norwegian-continental-shelf-data
+supported_domains:
+- reservoir-engineering
+- production-chemistry
+- sour-service
+- gas-processing
+- field-development
+inputs:
+- prospect_or_discovery_name_and_position
+- reservoir_temperature_or_depth
+- reservoir_pressure_co2_content_and_fluid_type
+- reservoir_formation_or_depositional_setting
+- h2s_readings_in_test_gas_of_the_discovery_if_any
+- calibration_registry_and_well_table
+- gas_limit_of_the_receiving_system_if_known
+outputs:
+- best_estimate_with_p10_p50_p90_and_range_for_design
+- exceedance_probabilities
+- uncertainty_budget_temperature_co2_pressure_and_well_scatter
+- sour_service_partial_pressure_screen
+- gas_limit_screen_on_test_separator_gas
+- analogue_wells_accuracy_statements_and_data_gaps
+- report_markdown_word_and_result_record
+- validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- reservoir-souring-agent
+- gas-treatment-agent
+human_review_required: true
+version: 0.1.0
