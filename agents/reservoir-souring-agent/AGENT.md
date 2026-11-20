@@ -1,7 +1,7 @@
 ---
 name: reservoir-souring-agent
 description: "Screens original reservoir H2S and waterflood souring: checks a mineral-buffer baseline where applicable, converts measured separator-gas H2S to wellstream H2S, and fits per-well souring correlations against seawater fraction with substrate bounds and sour-service pH2S checks. Requires qualified review before a reservoir or process decision."
-version: 0.1.1
+version: 0.1.2
 agent_type: community-coordinator
 required_skills:
 - neqsim-h2s-phase-partitioning
@@ -13,6 +13,7 @@ context_skills:
 coordinated_agents:
 - reservoir-history-match-agent
 - produced-water-scale-agent
+- reservoir-h2s-agent
 ---
 
 # Purpose
@@ -130,6 +131,8 @@ Separator gas H2S for well A-12 rose from 5 to 40 ppmv over 18 months, measured 
 - `neqsim.process.processTools.simplereservoir.SimpleReservoir` for reservoir-side screening.
 - The NeqSim MCP tools for flash and process runs; Python access through the `neqsim` package.
 - Companion agents: `reservoir-history-match-agent`, `produced-water-scale-agent`.
+- For a best estimate of H2S in a prospect or discovery before production, with P10/P50/P90 and a report, use
+  `reservoir-h2s-agent`.
 
 # References
 

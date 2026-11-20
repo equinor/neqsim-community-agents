@@ -457,6 +457,7 @@
     "neqsim-reservoir-3d-visualisation",
     "neqsim-reservoir-depletion-screening",
     "neqsim-reservoir-facility-value-chain",
+    "neqsim-reservoir-h2s-estimation",
     "neqsim-reservoir-h2s-mineral-buffer",
     "neqsim-reservoir-history-match-forecast",
     "neqsim-reservoir-material-balance",
