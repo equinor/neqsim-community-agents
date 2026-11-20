@@ -54,6 +54,7 @@ coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-history-match-agent
 - reservoir-souring-agent
+- reservoir-mercury-agent
 - reservoir-simulator-agent
 - reservoir-to-facility-screening-agent
 - resource-classification-agent

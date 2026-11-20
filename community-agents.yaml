@@ -589,6 +589,23 @@ agents:
       - sour-service
       - waterflood
 
+  - name: reservoir-mercury-agent
+    version: "0.1.0"
+    description: "Estimates elemental mercury in the gas of a reservoir, prospect or discovery with an explicit uncertainty: statistical estimate from tested wells, analogue tests, NeqSim mineral limits (cinnabar, liquid mercury) and a report with P10/P50/P90, reasoning and data gaps. Requires qualified review before a design or gas-route decision."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/reservoir-mercury-agent/AGENT.md"
+    required_skills:
+      - neqsim-reservoir-mercury-estimation
+    context_skills:
+      - neqsim-reservoir-h2s-mineral-buffer
+      - neqsim-mercury-distribution-study
+      - neqsim-norwegian-continental-shelf-data
+    supported_domains:
+      - reservoir-engineering
+      - production-chemistry
+      - flow-assurance
+      - gas-processing
+      - field-development
   - name: reservoir-history-match-agent
     version: "0.2.0"
     description: "Coordinates history matching and forecasting for multi-formation reservoirs: selects a conventional gas/oil material-balance or compositional gas-condensate route, reconciles pressure, allocated production and PVT, estimates in-place volumes, tests drive mechanisms and identifiability, and hands validated wellstreams to process models. USE WHEN: an MBAL history match, formation volume reconciliation, aquifer-support evaluation or reservoir-driven process forecast is needed."
