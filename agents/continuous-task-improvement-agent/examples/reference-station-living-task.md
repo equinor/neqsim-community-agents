@@ -10,6 +10,10 @@ Public synthetic data only.
    neqsim task-reference-case C:/tmp/living
    ```
 
+   Without a folder the case is created in the task root used for all tasks
+   (`neqsim --show-task-root`); the commands below then accept the bare name
+   `reference_compressor_station` instead of the full path.
+
 2. Backtest one year of daily cycles:
 
    ```bash

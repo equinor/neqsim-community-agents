@@ -20,7 +20,11 @@ Draft (version 0.1.0). Runs without enterprise access; human review required.
 ## Try it
 
 ```bash
-neqsim task-reference-case C:/tmp/living
-neqsim task-backtest C:/tmp/living/reference_compressor_station --start 2025-10-02 --end 2026-09-30
-neqsim task-solve C:/tmp/living/reference_compressor_station --no-agent
+neqsim task-reference-case                      # created in the task root (neqsim --show-task-root)
+neqsim task-backtest reference_compressor_station --start 2025-10-02 --end 2026-09-30
+neqsim task-solve reference_compressor_station --no-agent
 ```
+
+A folder name inside the task root is enough for every `task-*` command. To keep
+the experiment elsewhere, pass a folder: `neqsim task-reference-case C:/tmp/living`
+and then use the full path `C:/tmp/living/reference_compressor_station`.
