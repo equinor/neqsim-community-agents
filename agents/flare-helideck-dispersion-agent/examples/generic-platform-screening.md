@@ -28,6 +28,16 @@ A hypothetical platform has a flare tip at 124 m ASL and a helideck at 76 m ASL,
 - Tilt scan, tornado and Monte Carlo spread (seed recorded)
 - Review log, assumptions, data gaps, human review checklist
 
+## Variant: other receptors
+
+The same steps apply to any place on a facility. In the skill's `examples/facility_example.json` a flare tip and a cold vent are screened against a combustion-air intake, a muster area, an escape route and a crane cab:
+
+```bash
+<python> -m flare_helideck_dispersion facility examples/facility_example.json --figures
+```
+
+The study ranks the case-receptor pairs by the share of wind hours above 20 % LFL given a release, reports the worst condition of each receptor, and lists CFD conditions. The helideck, any flight path and the into-wind path can be added to the same run with the `helideck` key.
+
 ## Required Follow-Up
 
 - The agent does not perform a quantitative risk assessment or CFD.

@@ -42,7 +42,7 @@ class FlareHelideckDispersionAgentTests(unittest.TestCase):
         )
 
     def test_manifest_basics(self):
-        self.assertEqual(self.manifest["version"], "0.1.0")
+        self.assertEqual(self.manifest["version"], "0.2.0")
         self.assertEqual(self.manifest["status"], "draft")
         self.assertIs(self.manifest["human_review_required"], True)
         self.assertEqual(self.manifest["agent_type"], "community-coordinator")
@@ -109,6 +109,19 @@ class FlareHelideckDispersionAgentTests(unittest.TestCase):
             "wake",
         ):
             self.assertIn(item, text)
+
+    def test_covers_any_facility_receptor(self):
+        text = self.agent_md.lower()
+        for phrase in (
+            "air intake",
+            "muster area",
+            "escape route",
+            "cold vent",
+            "facility config.json --figures",
+            "receptor",
+        ):
+            self.assertIn(phrase, text)
+        self.assertIn("air-intake-exposure", self.manifest["supported_domains"])
 
     def test_no_vendor_or_site_identifiers(self):
         hits = []

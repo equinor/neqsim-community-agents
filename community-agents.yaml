@@ -1348,8 +1348,8 @@ agents:
       - brazil
 
   - name: flare-helideck-dispersion-agent
-    version: "0.1.0"
-    description: "Coordinates a screening study of unignited flare-tip gas reaching a helideck and its flight paths - frozen basis, wind statistics, API 520 rated and blowdown release rates, wind-weighted conditional exceedance of 10 and 20 % LFL, independent model review, figures with results.json, and a CFD hand-off - conditional on a release and never an annual frequency."
+    version: "0.2.0"
+    description: "Coordinates a screening study of unignited release gas (flare tip, cold vent, PSV tail pipe) reaching any place on a facility - helideck and flight paths, air intakes, accommodation, muster areas, escape routes, crane cabs, ignition sources - with wind statistics, API 520 and blowdown release rates, conditional exceedance of 10 and 20 % LFL, independent review, figures, results.json and a CFD hand-off - conditional on a release, never an annual frequency."
     author: "neqsim-community"
     repo: "equinor/neqsim-community-agents"
     path: "agents/flare-helideck-dispersion-agent/AGENT.md"
@@ -1374,7 +1374,10 @@ agents:
     supported_domains:
       - process-safety
       - flare-dispersion
+      - vent-dispersion
       - helideck-safety
+      - air-intake-exposure
+      - muster-and-escape-route-exposure
       - unignited-gas-release
       - psv-release-rates
       - cfd-handoff
