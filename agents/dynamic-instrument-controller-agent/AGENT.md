@@ -4,6 +4,8 @@ description: Adds NeqSim measurement devices and PID-style controllers for dynam
 version: 0.1.0
 required_skills:
 - neqsim-dynamic-instrument-controller-setup
+context_skills:
+- neqsim-dynamic-model-identification
 ---
 
 # Purpose
@@ -62,6 +64,7 @@ Typical outputs include:
 # Required Skills
 
 - `dynamic-instrument-controller-setup` mapped to community catalog ID `neqsim-dynamic-instrument-controller-setup`
+- `neqsim-dynamic-model-identification`: identified process gain, time constant and delay from plant data as the tuning basis instead of assumed values, when a historian window with excitation exists. Check the identified gain against the NeqSim flowsheet's `steady_gains` before tuning; a mismatch in sign or size points to tag, unit or flow-basis errors first.
 
 # Example Usage
 

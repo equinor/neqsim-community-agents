@@ -1,6 +1,8 @@
 ---
 name: gas-turbine-screening-agent
 description: Screens gas-turbine driver site-rating, heat rate, and exhaust conditions using public, educational methods.
+coordinated_agents:
+- installation-weather-agent
 version: 0.1.0
 required_skills:
 - neqsim-gas-turbine-performance-screening
@@ -95,6 +97,9 @@ The screening produced by this agent maps to validated, rigorous NeqSim Java fun
 - `neqsim.process.equipment.powergeneration.HRSG` and `neqsim.process.equipment.powergeneration.CombinedCycleSystem` — waste-heat recovery and combined-cycle analysis.
 
 In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
+
+For the site ambient temperature and elevation inputs, `installation-weather-agent` can supply
+live, forecast, or historical values for the installation instead of an assumed value.
 
 # References
 

@@ -1,7 +1,7 @@
 ---
 name: surf-layout-design-agent
 description: Designs a screening subsea (SURF) field layout and places the host from open map, bathymetry and licence-block data, routes and sizes every flowline, riser and umbilical, renders a presentation-grade reservoir-to-host illustration carrying the study's headline numbers, and hands a georeferenced layout to flow assurance, cost estimation and NeqSim production-network workflows.
-version: 0.2.0
+version: 0.2.1
 agent_type: community-coordinator
 required_skills:
 - neqsim-surf-field-layout-design
@@ -10,18 +10,25 @@ required_skills:
 - neqsim-bathymetry-profile-screening
 - neqsim-line-velocity-check
 context_skills:
+- neqsim-sodir-open-data
 - neqsim-field-layout-import
 - neqsim-production-network-routing
 - neqsim-step-out-screening
+- neqsim-brazil-presalt-well-reach-and-layout
 - neqsim-capex-opex-screening
 - neqsim-surf-cooldown-screening
 - neqsim-professional-reporting
+- neqsim-crs-geodetic-checks
+- neqsim-open-marine-constraints
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent
 - pipe-route-screening-agent
 - flow-assurance-engineer-agent
 - asset-economics-agent
+- subsea-infrastructure-capacity-agent
+- seabed-protection-agent
+- umbilical-design-agent
 ---
 
 # Purpose
@@ -63,6 +70,30 @@ Use this agent when an engineer or analyst needs to:
 
 Do not use this agent for detailed SURF engineering, installation planning, or
 any decision that requires a qualified subsea design study.
+
+# Sodir Open Data
+
+On the Norwegian shelf use `neqsim-sodir-open-data` for blocks (1001), facilities (6000), main pipelines
+(6100), wellbores (5000), field and discovery outlines and licence areas. Request `out_sr=4326`: the
+DataService geometry is ED50.
+
+# Brazil Deepwater Pre-Salt
+
+For a Brazilian deepwater pre-salt field (Santos or Campos), load `neqsim-brazil-presalt-well-reach-and-layout`
+before designing anything. Do not use the generic template and drill-centre default there.
+
+- D&W premise: wells cannot be drilled with significant angle (max about 30 deg), and the step-out from
+  surface location to reservoir target has typically been at most about 500 m in these fields. Angle is
+  preferably built through the salt, so salt thickness decides the reach. Ask for the D&W limits and the
+  salt thickness; use the defaults only as declared assumptions.
+- Layout: one vertical well per structure (`slots_per_template=1`), with the wells connected by
+  production loops (`dual_loop`) or daisy chains (`daisy_chain`). Place each well over its reservoir
+  target within the step-out limit; do not snap wells to a regular drill-centre grid.
+- Check the surface-to-target step-out of every well. `summary["max_step_out_km"]` is host to farthest
+  node, not a drilling reach, and `build_well_paths` models horizontal wells, so neither is a drillability
+  check here.
+- Count single trees and loop or daisy-chain flowlines in the take-off, not template slots or manifolds.
+- Outside Brazilian deepwater pre-salt this section does not apply.
 
 # Inputs
 
@@ -107,14 +138,24 @@ Typical outputs include:
 3. **Plan the open data.** Use `surf-field-layout-design` to plan the bathymetry,
    licence-block and infrastructure requests, and record the attribution each
    source requires. Execute them only with a read-only fetch adapter the user
-   supplies; report the plan when offline.
+   supplies; report the plan when offline. Before placing new templates or lines, ask
+   `subsea-infrastructure-capacity-agent` for free slots, spare tees and reusable lines
+   and show them (with verification level) in the layout.
+   For fishing, environmental, wind, grid and crossing evidence, use the
+   read-only client in `neqsim-open-marine-constraints` on candidate sites and
+   the routed centrelines. Carry source dates, units, legends and provenance
+   into the layout basis. Treat layer errors or coverage gaps as not screened;
+   split and re-read truncated sections before accepting the layout. Grid
+   proximity is not a capacity or connection approval.
 4. **Take the well count from the reservoir side.** Where a reservoir model
    exists, take the producer and injector counts, the plateau rate and the
    injection rates from `reservoir-simulator-agent` rather than assuming them.
    Convert every standard rate to an actual volumetric rate before sizing.
 5. **Design the layout.** Run `surf-field-layout-design` to place the drill
    centres, wells, trees, templates, PLEMs, riser base and host, and to route and
-   size every line. Record the warnings.
+   size every line. Record the warnings. For Brazilian deepwater pre-salt, apply
+   `neqsim-brazil-presalt-well-reach-and-layout` first: single vertical wells in loops or daisy
+   chains, each within the D&W step-out limit of its target.
 6. **Put the routes on a real seabed.** Replace the flat default with the open
    bathymetry grid through `bathymetry-profile-screening` and
    `pipe-route-profile`, and re-check the route and riser lengths.
@@ -125,9 +166,15 @@ Typical outputs include:
    flag any line above the target velocity or the erosional limit.
 9. **Screen the thermal side.** Where a cooldown or hydrate requirement drives
    the insulation, hand the flowline lengths to `surf-cooldown-screening` and to
-   `flow-assurance-engineer-agent`.
-10. **Cost it.** Pass the quantity take-off to `capex-opex-screening` or
-    `asset-economics-agent`.
+   `flow-assurance-engineer-agent`. Hand the routes to `seabed-protection-agent`
+   to scope trenching, burial and rock dump from the same map layers, including
+   rock at crossings of existing pipelines, and carry the protected burial state
+   into the cooldown screening.
+   Hand the umbilical route length, water depth and the chemical demand to
+   `umbilical-design-agent` so the umbilical is sized and drawn instead of
+   carried as a cost-library length.
+10. **Cost it.** Pass the quantity take-off, including trenching and rock
+    tonnes, to `capex-opex-screening` or `asset-economics-agent`.
 11. **Hand over.** Emit the GeoJSON, the map and the line schedule, and map the
     drill centres and wells onto a NeqSim production-network model.
 12. **Document** assumptions, limitations, source attribution and the human
@@ -148,6 +195,9 @@ Loaded as context when the task calls for them:
 - `step-out-screening` mapped to community catalog ID `neqsim-step-out-screening`
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `surf-cooldown-screening` mapped to community catalog ID `neqsim-surf-cooldown-screening`
+- `neqsim-crs-geodetic-checks`: check the CRS of every map, bathymetry and licence-block layer before the host is placed or a line is routed. Name the datum operation, run `datum_sensitivity` when a source does not state its datum, and say whether route lengths are grid or geodesic.
+- `neqsim-open-marine-constraints`: open marine exposure and restrictions for
+  layout alternatives; retain survey, geotechnical and permitting gaps.
 
 # Example Usage
 
@@ -202,6 +252,8 @@ Plan the open bathymetry and Sodir FactMaps requests I would need to replace the
 - Well counts and design rates come from the reservoir side, and every standard
   rate has been converted to an actual volumetric rate.
 - The drill-centre count follows from the slots per template.
+- For Brazilian deepwater pre-salt: no multi-slot templates unless D&W allows them, every well is within
+  the step-out and inclination limit of its target, and the limits and salt thickness are sourced.
 - The flowline architecture matches the pigging and shutdown philosophy.
 - Every line size sits inside the velocity target and the erosional limit, or the
   deviation is explained.

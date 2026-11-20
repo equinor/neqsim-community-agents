@@ -1,0 +1,34 @@
+name: well-design-study-agent
+agent_type: community-agent
+status: deprecated
+description: "DEPRECATED - superseded by well-planning-engineer (integrated well planning). Still available for a drilling-focused screening study: offset-well evidence, pressure window, casing seats, kick tolerance, casing and tubing design, torque and drag, time and cost P10/P50/P90, well-plan graphics and report from public educational methods."
+required_skills:
+- neqsim-well-design-study
+- neqsim-erd-reach-screening
+context_skills:
+- neqsim-well-trajectory-anticollision
+coordinated_agents:
+- well-planning-engineer
+supported_domains:
+- well-design
+- casing-design
+- kick-tolerance
+- offset-wells
+- field-development
+inputs:
+- well_purpose_depth_reference_target_depth
+- prospect_pressure_temperature_fluid_ranges
+- planned_casing_programme_or_request_to_propose
+- offset_evidence_tables
+- rig_and_material_cost_assumptions
+outputs:
+- offset_evidence_tables
+- pressure_window_and_casing_schematic
+- kick_tolerance_and_casing_design_factors
+- time_and_cost_p10_p50_p90
+- validation_checks_standards_register
+- assumption_and_data_gap_registers
+- word_report
+- well_plan_report_with_graphics
+human_review_required: true
+version: 0.2.1

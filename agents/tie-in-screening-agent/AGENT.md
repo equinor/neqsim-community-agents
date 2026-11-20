@@ -7,6 +7,9 @@ required_skills:
 - neqsim-hydrate-screening
 - neqsim-separator-modelling
 - neqsim-resource-classification-screening
+- neqsim-ageing-life-extension-screening
+coordinated_agents:
+- subsea-infrastructure-capacity-agent
 ---
 
 # Purpose
@@ -56,6 +59,8 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the screening objective and available public input data.
+1a. Use `ageing-life-extension-screening` to establish the technical life basis of the host (design life, economic cut-off, programme validity, cessation year, life-limiting populations such as risers, pipelines, moorings, obsolescence) and the usable host tail from the tie-in start year. List the limiter checks (riser life, pipeline design-life expiry, compression headroom) that must pass before a tie-in is assumed, and flag missing items as data gaps. Report the lifetime action (replace, refurbish, life-extend, monitor) for every host or reused item that expires inside the tie-in horizon.
+1b. Ask `subsea-infrastructure-capacity-agent` which existing slots, tees, hubs and spare or reusable lines (including gas-lift, injection and MEG lines) could take the tie-in, with status, remaining life and verification level, and compare with a new-build tie-back before assuming one.
 2. Use `fluid-quality-check` to review composition quality and missing data.
 3. Use `hydrate-screening` to flag preliminary hydrate risk considerations.
 4. Use `separator-modelling` to identify high-level separator screening considerations.
@@ -70,6 +75,7 @@ Typical outputs include:
 - `hydrate-screening` mapped to community catalog ID `neqsim-hydrate-screening`
 - `separator-modelling` mapped to community catalog ID `neqsim-separator-modelling`
 - `resource-classification-screening` mapped to community catalog ID `neqsim-resource-classification-screening`
+- `ageing-life-extension-screening` mapped to community catalog ID `neqsim-ageing-life-extension-screening`
 
 # Example Usage
 
@@ -94,6 +100,7 @@ Use public synthetic data to screen a potential subsea tie-in to an existing hos
 # Validation Checklist
 
 - Screening objective is documented.
+- Host technical life basis, usable host tail, and the sources not read are stated.
 - Fluid data quality is reviewed.
 - Pressure, temperature, water, and flow assumptions are stated.
 - Hydrate and separator screening limitations are documented.

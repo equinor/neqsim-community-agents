@@ -76,9 +76,13 @@ question they answer.
 |-------|--------------|
 | `reservoir-simulator-agent` *(coordinator)* | Sets up a screening-level reservoir model from whatever data exists — starting from open public data such as an NCS field page — and refines it as appraisal, well-test, and PVT data arrive. |
 | `reservoir-forecasting-agent` *(coordinator)* | Fits an Arps decline curve to a produced-rate series and cross-checks it against depletion screening and resource maturity to project a forward profile, remaining volume, and EUR. |
+| `reservoir-h2s-agent` *(coordinator)* | Estimates H2S in the test gas of a prospect or discovery before production with P10/P50/P90 from the NeqSim mineral buffer calibrated on measured wells, with an uncertainty budget and a sour-service screen, and writes the report. |
+| `reservoir-souring-agent` *(coordinator)* | Converts measured separator-gas H2S to wellstream H2S with NeqSim, derives seawater fraction, fits and updates per-well H2S-versus-seawater-fraction correlations and checks them against a mixing-zone bound. |
+| `reservoir-mercury-agent` *(coordinator)* | Estimates elemental mercury in the gas of a prospect or discovery with P10/P50/P90 from tested wells, analogue tests and NeqSim mineral limits, and writes the report. |
 | `ncs-production-analysis-agent` *(coordinator)* | Frames production, resource-accounting, and field-inventory studies from a source-attributed Norwegian Continental Shelf reference-facts database. |
 | `resource-classification-agent` | Classifies resources on the public SODIR RC0–RC9 maturity ladder and the SPE-PRMS category axis, without confusing maturity with quantity uncertainty. |
 | `near-well-injectivity-agent` | Derives productivity and injectivity indices from the rock instead of assuming them, using OPM Flow with pyscal and resdata, and hands a defensible inflow relationship to wellbore and process models. |
+| `vfp-lift-curve-agent` | Builds deliverable VFPPROD and VFPINJ lift curve tables for Eclipse and OPM Flow from calibrated well, flowline and topside models with NeqSim `VfpTableBuilder`, validated against the IPR and off-grid solves. |
 | `reservoir-to-facility-screening-agent` *(coordinator)* | Chains reservoir depletion versus time, well inflow, manifold routing, and flowline/riser pressure drop into a platform arrival-pressure roll-up with time development. |
 
 ### 2.3 Wells and artificial lift
@@ -108,6 +112,8 @@ question they answer.
 | `subsea-layout-screening-agent` *(coordinator)* | Turns a supplied subsea map into a well and tie-back inventory with step-out distances, route profiles, and seabed slope flags. |
 | `surf-layout-design-agent` *(coordinator)* | Designs a screening SURF layout and places the host from open map, bathymetry, and licence-block data, then routes and sizes every flowline, riser, and umbilical. |
 | `pipeline-survey-profile-agent` | Cleans as-built survey data into a pipeline profile, flags erroneous points, screens free-span and cover candidates, and compares repeat surveys. |
+| `brazil-offshore-infrastructure-agent` *(coordinator)* | Locates Brazilian fields, wells, FPSOs (placed from their wells), gas pipelines and processing plants from ANP open data, measures distances and ranks tie-in hosts against a stand-alone development. |
+| `brazil-well-production-agent` *(coordinator)* | Reads ANP well-level production data into verified series (pre-salt/offshore merge, split wells, publication lag), screens decline, GOR and water cut, prepares a declared fluid basis and lists what public data can and cannot support for a reservoir or well-flow model. |
 | `tie-in-screening-agent` | Early-stage screening of tie-in opportunities with fluid, flow-assurance, and process checks. |
 
 ### 2.6 Process engineering and screening
@@ -152,6 +158,7 @@ question they answer.
 | Agent | What it does |
 |-------|--------------|
 | `process-safety-agent` | Fire-case relief loads, emergency depressurization, vacuum collapse, flare radiation, PSV orifice, and safety-function coverage screening. |
+| `flare-helideck-dispersion-agent` | Draft coordinator for screening unignited flare-tip gas reaching a helideck and its flight paths: frozen basis, wind statistics, release rates, conditional exceedance of 10 and 20 % LFL, independent review, figures with `results.json`, and a CFD hand-off. |
 
 ### 2.11 Utilities
 
@@ -166,7 +173,9 @@ question they answer.
 | `energy-emissions-agent` | Preliminary energy-use and CO2-equivalent emissions screening for a facility or process. |
 | `emissions-abatement-screening-agent` *(coordinator)* | Ranks emission-reduction measures — power-from-shore, waste-heat recovery, flaring reduction — using the public Norwegian carbon-cost basis (CO2 tax, EU ETS, NOx Fund) and NPV screening. |
 | `asset-economics-agent` *(coordinator)* | Chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted NPV into one concept-economics view with carbon intensity and CO2-tax exposure. |
+| `concept-longlist-shortlist-agent` | Generates and screens a development-concept long list, scores it on a common basis, tests weight robustness and crossovers, and hands a short list with a reference case to concept selection. |
 | `concept-selection-agent` | Chains resource classification, CAPEX/OPEX, NPV, energy/emissions, and step-out screening into a comparable concept summary. |
+| `frontier-block-bid-agent` *(coordinator)* | Screens an exploration-block PSC bid: declared resource and fluid basis, near-field tie-back versus stand-alone, EMV and the break-even offered profit-oil share. |
 | `field-development-economics-agent` *(coordinator)* | End-to-end reservoir-to-market screening: reservoir fluid and depletion, subsea hydrate margins, topside separation duty, gas-export line, and an asset-economics roll-up. |
 
 ### 2.13 Numerical coupling (CFD and FEM)
@@ -218,6 +227,9 @@ reservoir-forecasting-agent        decline fit → production profile, EUR
         │
         ▼
 reservoir-to-facility-screening-agent   depletion → inflow → routing → arrival pressure
+        │
+        ▼
+concept-longlist-shortlist-agent   long list → screened short list + reference case
         │
         ▼
 concept-selection-agent            comparable concept summary
@@ -331,7 +343,7 @@ compressor-antisurge-agent             anti-surge recycle control and speed runb
 |------------|------|
 | [equinor/neqsim](https://github.com/equinor/neqsim) | The simulation engine plus the core agents that drive it directly (`@process.model`, `@thermo.fluid`, `@solve.task`, …). See `docs/integration/agents_and_workflows_overview.md` there. |
 | **neqsim-community-agents** (this repository) | Public screening agents built on public, educational methods. |
-| [equinor/neqsim-enterprise-agents](https://github.com/equinor/neqsim-enterprise-agents) | Private, governed agents that add company data sources and company policy on top of these community methods. |
+| Your private enterprise agents repository | Private, governed agents that add your company data sources and policy on top of these community methods (see the Enterprise Agent and Skill Repositories guide in `equinor/neqsim`). |
 
 Enterprise agents deliberately reuse community methods rather than
 re-implementing them: an enterprise hydrate-margin agent applies a company

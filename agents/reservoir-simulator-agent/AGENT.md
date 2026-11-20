@@ -1,20 +1,26 @@
 ---
 name: reservoir-simulator-agent
-description: Sets up a screening-level reservoir simulation model for a field from whatever data is available, starting from open public data such as an NCS field page and refining the model as appraisal, well-test and PVT data arrive, then hands a provenance-traced specification to the validated NeqSim reservoir workflow. Also covers gas-condensate models needing vaporised-oil PVT, models that must be sized backwards from a mandated production profile, and the no-subsurface-data case where a best-guess structural model is assumed from the play, calibrated against published volumes, and issued with a full assumption register.
-version: 0.5.0
+description: "Sets up a screening-level reservoir simulation from whatever data exists - starting from open data such as an NCS field page and refining as appraisal, well-test and PVT data arrive - and hands a provenance-traced specification to the NeqSim reservoir workflow. Also covers gas-condensate vaporised-oil PVT, models sized backwards from a mandated profile, and best-guess structures calibrated to published volumes with an assumption register."
+version: 0.5.1
 agent_type: community-coordinator
 required_skills:
 - neqsim-reservoir-model-builder
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
 - neqsim-reservoir-depletion-screening
 - neqsim-resource-classification-screening
 - neqsim-fluid-quality-check
 context_skills:
 - neqsim-pseudocomponent-split-characterization
+- neqsim-opm-open-reservoir-decks
+- neqsim-near-well-and-injectivity
 - neqsim-production-network-routing
 - neqsim-asset-value-npv-screening
-- neqsim-near-well-and-injectivity
 - neqsim-reservoir-3d-visualisation
+- neqsim-well-log-reading
+- neqsim-seismic-segy-reading
+- neqsim-seismic-structure-to-reservoir
+- neqsim-multisegment-well-completion
 coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-to-facility-screening-agent
@@ -79,6 +85,14 @@ Use this agent when an engineer or analyst needs to:
 Do not use this agent for grid-based reservoir simulation, formal reserves
 booking, or any decision that requires a qualified reservoir-engineering study.
 
+# Sodir Open Data
+
+Run the data-first search with `neqsim-sodir-open-data` before assuming anything on the shelf: offset
+`wellbore` rows (5000) near the target, then `wellbore_formation_top`, `wellbore_dst`, `wellbore_core`,
+`wellbore_oil_sample`, plus `field_reserves`, `discovery_reserves`, `profiles` and `field_description`.
+`use_case("pvt_and_reservoir_data")` lists keys and traps. Cite each read; open data gives priors and
+bounds, so list the missing PVT, SCAL and static model in `data_gaps`.
+
 # Inputs
 
 Typical inputs include:
@@ -106,6 +120,10 @@ Typical outputs include:
 - Volumetrics: hydrocarbon pore volume, in-place and recoverable volumes at
   standard conditions, and the corresponding in-situ reservoir volumes.
 - The inferred drive mechanism and the recovery factor with its basis.
+- For OPM Flow black-oil results, separate total stock-tank recovery from
+  source-origin recovery. A source-specific conversion must be validated across
+  the compared strategies and the same PVT basis; if its uncertainty overlaps
+  the strategy difference, report the ranking as unresolved.
 - A data tier and a weighted completeness score.
 - The written-out arithmetic behind every derived number.
 - Physics and consistency warnings: cold or shallow reservoir, over- or
@@ -151,6 +169,28 @@ Typical outputs include:
    data exists and is catalogued) and an *acquisition programme* (nothing was
    found).
 
+   Log and seismic files supplied by the user count as rungs of this sweep.
+   Read DLIS/LIS/LAS files with `well-log-reading` (curve inventory, depth range
+   in metres, zone statistics per formation for `petrophysics`) and SEG-Y files
+   with `seismic-segy-reading` (survey extent, CRS hints, sections through the
+   wells for `geometry`). For `geometry`, run `seismic-structure-to-reservoir`
+   on the same folders (`<python> -m seismic_structure run <config>`). It
+   discovers interpreted surfaces, or tracks a top from a SEG-Y cube seeded at a
+   well top, converts it to depth on well ties and analyses the closure. Take its
+   `gate_attempts["geometry"]` records and, for status `ok`, its
+   `builder_inputs` (area, closure-equivalent thickness, datum) into step 5. A
+   `no_closure` result is a finding to report; `blocked` lists what is missing.
+   Run each reader's folder command once, with `--out`
+   pointing into the task's analysis folder (source folders are read-only).
+   Map each evidence record to the gate only when the file belongs to the
+   study (its header well or survey is in the study area): status `unverified`
+   is then `used` for the ingredient it informs, status `error` is `blocked`
+   with the reader's error as the reason, and a missing file type is `absent`.
+   A readable file for another well or area (an offset outside the study, a
+   stray file) is not a rung for this study: list it as not relevant and do not
+   let it satisfy an ingredient. Never take a well name, depth
+   reference or CRS that the user or data owner has not confirmed as a fact.
+
 5. **Build the first model with the best source for each ingredient.** Use
    `reservoir-model-builder` with everything the sweep found. Record the
    resulting data tier, completeness score, derivations and warnings. State
@@ -189,6 +229,31 @@ Typical outputs include:
 12. **Document** assumptions, limitations, source attribution and the human
     review requirement.
 
+## Downstream reservoir-case acceptance
+
+When the study includes an OPM Flow hand-off through
+`neqsim-reservoir-model-builder`, require these checks before accepting a
+downstream concept ranking; do not claim a simulator check was run when only
+the specification exists.
+
+- Search injector placement before ruling injection out. Where a reference
+  simulator has published designs, replay them as independent hold-outs with
+  the screening model's calibrated factors frozen.
+- Record time series for facility limits, reservoir pressure and the binding
+  constraint. Attribute added-capacity uplift to capacity and compare with the
+  same capacity added by the alternative concept. Record gas injection totals
+  and pay well/lateral CAPEX at the drilling date when comparing RF and NPV.
+- Scan every batch's PRT logs for simulator shut-ins, record well and report
+  time, and compare cases at matched well status. ACTIONX control gains need a
+  matching shut-wells baseline and a bounded rule period before blowdown.
+- Re-run leading designs over permeability, baffle and streak scenarios; report
+  the worst case and NPV gap. A gain below model error is an unresolved ranking,
+  not a winner.
+- For EOR chemistry, use the skill's residual-oil sensitivity only as a bound
+  until core-flood evidence and cost exist. Train surrogates only on feasible
+  runs without unintended simulator shut-ins and verify every proposed
+  candidate in the simulator.
+
 # Required Skills
 
 - `reservoir-model-builder` mapped to community catalog ID `neqsim-reservoir-model-builder`
@@ -204,6 +269,10 @@ Loaded as context when the task calls for them:
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `near-well-and-injectivity` mapped to community catalog ID `neqsim-near-well-and-injectivity`
 - `reservoir-3d-visualisation` mapped to community catalog ID `neqsim-reservoir-3d-visualisation` (3D figures of an OPM Flow / Eclipse run)
+- `well-log-reading` mapped to community catalog ID `neqsim-well-log-reading` (DLIS/LIS/LAS files: curve inventory, zone porosity/density/GR statistics and depth units before any rock property is taken from a report table)
+- `seismic-segy-reading` mapped to community catalog ID `neqsim-seismic-segy-reading` (SEG-Y volumes: survey extent, CRS hints, inline/crossline and fence sections through wells for structural context)
+- `seismic-structure-to-reservoir` mapped to community catalog ID `neqsim-seismic-structure-to-reservoir` (interpreted or tracked top, depth conversion on well ties, crest/spill/closure, area and gross rock volume per contact, builder inputs, geometry gate records and a layered OPM grid)
+- `multisegment-well-completion` mapped to community catalog ID `neqsim-multisegment-well-completion` (AICD, ICD, valve or DAR completions in the deck: plain WELSEGS/COMPSEGS for standard wells, the completor device layer, device checks with NeqSim phase properties and zonal water and gas change). Compare the device deck with the plain multi-segment deck, not with the standard-well deck, and only with device parameters from the vendor or the inflow-control team.
 
 # When there is no subsurface data at all
 

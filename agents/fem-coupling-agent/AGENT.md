@@ -1,6 +1,13 @@
 ---
 name: fem-coupling-agent
-description: "Runs finite-element models of the solid - layered heat conduction, transient cooldown, porous-medium diffusion and thermal stress - from whatever engineering information is available. Builds a traceable design basis from a P&ID, STID tag register, datasheets, an insulation specification and an inspection report, takes the fluid side from a NeqSim flash, derives the film coefficient and the Biot number, solves the layered one-dimensional problem against a closed-form check, screens which finite-element backend is defensible, generates and runs a structured Gmsh plus scikit-fem or FEniCSx case where the geometry stops being radial - in two dimensions, or swept into three by revolving a pipe wall or extruding a plate - renders the mesh and the solved field with PyVista, gates the result on discretisation, mesh independence, energy balance and boundary placement, and converts the field into the effective U-value, U-multiplier, hot-spot factor, no-touch time and wall stress a one-dimensional model consumes. Also qualifies an existing thermal or thermo-mechanical FEM report instead of running a new model."
+description: "Runs finite-element models of the solid - layered heat conduction, transient cooldown, porous diffusion and thermal stress - from a traceable design basis (P&ID, tag register, datasheets, insulation spec, inspection report) and a NeqSim flash, with closed-form checks, Gmsh plus scikit-fem/FEniCSx cases in 2-D or 3-D, PyVista renders and mesh/energy/boundary gates, returning U-value, hot-spot factor, no-touch time and wall stress. Also qualifies existing FEM reports."
+coordinated_agents:
+- cfd-coupling-agent
+- subsea-cooldown-agent
+- flow-assurance-engineer-agent
+- piping-mechanical-agent
+context_skills:
+- neqsim-cfd-coupling
 version: 0.2.0
 required_skills:
 - neqsim-fem-coupling
@@ -9,7 +16,7 @@ required_skills:
 # Purpose
 
 Turn the information an engineer already has - a P&ID, a tag register such as
-STID, a mechanical datasheet, an insulation specification, an ROV or inspection
+tag register, a mechanical datasheet, an insulation specification, an ROV or inspection
 report - into a defensible finite-element result for the *solid*, with the fluid
 side coming from a NeqSim flash rather than from tables.
 
@@ -67,7 +74,7 @@ Any subset of the following; the agent reports what is missing rather than
 inventing it.
 
 - **P&ID** - component class, tag, stream connectivity, insulation notation
-- **Tag register (STID or equivalent)** - line and equipment dimensions, material
+- **Tag register** - line and equipment dimensions, material
 - **Mechanical datasheet** - the dimensional authority when it exists
 - **Material certificate** - the grade authority for modulus, expansion, allowable
 - **Insulation specification** - layer build-up, product, design conductivity

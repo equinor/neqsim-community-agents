@@ -1,0 +1,42 @@
+name: frontier-block-bid-agent
+description: Coordinates public, screening-level evaluation of a bid on an exploration block under a production sharing contract - resource and fluid basis, infrastructure and host screening, near-field tie-back versus stand-alone, the Brazilian Annex XX profit-oil table, and PSC bid economics with break-even share, chance of discovery and volume - before a validated NeqSim study.
+required_skills:
+- neqsim-psc-bid-economics-screening
+- neqsim-anp-open-data
+- neqsim-brazil-presalt-analogue-basis
+- neqsim-brazil-offshore-infrastructure-market
+- neqsim-asset-value-npv-screening
+context_skills:
+- neqsim-resource-classification-screening
+- neqsim-reservoir-model-builder
+- neqsim-reference-fluid-synthetic-generation
+- neqsim-brazil-presalt-well-reach-and-layout
+supported_domains:
+- field-development
+- exploration
+- economics
+- brazil
+inputs:
+- block_and_open_data_facts
+- concept_options_and_development_profiles
+- chance_of_discovery_and_volume_cases
+- bid_terms_and_working_interest
+- price_and_discount_rate
+outputs:
+- declared_resource_and_fluid_basis
+- per_concept_emv_and_break_even_share
+- effective_union_share_and_break_even_chance_and_volume
+- infrastructure_market_and_host_screen
+- near_field_synergy_value
+- sensitivities
+- assumptions_data_gaps_and_limitations
+agent_type: community-coordinator
+coordinated_agents:
+- concept-selection-agent
+- fluid-characterization-agent
+- reservoir-simulator-agent
+- tie-in-screening-agent
+- brazil-offshore-infrastructure-agent
+- resource-classification-agent
+human_review_required: true
+version: 0.2.0

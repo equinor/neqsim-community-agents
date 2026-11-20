@@ -14,6 +14,7 @@ coordinated_agents:
 - pipe-route-screening-agent
 - subsea-layout-screening-agent
 - flow-assurance-engineer-agent
+- seabed-protection-agent
 supported_domains:
 - subsea
 - pipeline-integrity

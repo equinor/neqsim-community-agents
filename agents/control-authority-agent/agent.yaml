@@ -9,6 +9,7 @@ context_skills:
 - neqsim-control-valve-cv-screening
 - neqsim-heat-exchanger-fouling-assessment
 - neqsim-uncertainty-quantification
+- neqsim-dynamic-model-identification
 coordinated_agents:
 - heat-exchanger-condition-agent
 - debottlenecking-agent

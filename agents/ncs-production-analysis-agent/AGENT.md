@@ -1,10 +1,15 @@
 ---
 name: ncs-production-analysis-agent
 description: Coordinates public Norwegian Continental Shelf (NCS) production analysis by combining a source-attributed NCS reference-facts database with reservoir-depletion, asset-value, and energy-emissions screening to frame production, resource-accounting, and field-inventory studies before a validated NeqSim reservoir/economics workflow.
+context_skills:
+- neqsim-ncs-infrastructure-network
+- neqsim-ncs-value-chain-optimization
 version: 0.1.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
+- neqsim-near-field-discoveries
 - neqsim-reservoir-depletion-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
@@ -12,6 +17,7 @@ coordinated_agents:
 - reservoir-to-facility-screening-agent
 - concept-selection-agent
 - asset-economics-agent
+- ncs-value-chain-agent
 ---
 
 # Purpose
@@ -46,6 +52,15 @@ Use this agent when an engineer or analyst needs to:
 - Frame a screening production-to-value story: reservoir decline -> NPV ->
   energy and emissions
 - Identify the validated NeqSim reservoir and economics workflows to use next
+- Establish the near-field discovery picture around a target (status, volumes, concept text, nearest hosts) with a map
+
+# Sodir Open Data
+
+Load `neqsim-sodir-open-data` before reading any Norwegian Offshore Directorate fact. Use its
+`use_case("production_history")` and `use_case("reserves_and_resources")` recipes: `profiles` (7300) or the
+FactPages `field_production_monthly` view for rates, `field_reserves` (latest `fldVersion`) and
+`discovery_reserves` for volumes and resource class. Join on `*Npdid*` keys, record `provenance()` and cite
+Sodir (NLOD 2.0) with the retrieval date.
 
 # Inputs
 
@@ -70,6 +85,7 @@ Typical outputs include:
 - An annual production series with trend, CAGR, and oil/gas/NGL/condensate share
 - An optional screening reservoir-depletion profile versus time
 - An optional asset-value (NPV/IRR/payback) and energy/emissions screening
+- For a target position: the near-field discovery inventory (stage, operator, Sodir recoverable volumes and resource class, concept hints, nearest hosts, joint-development clusters) as CSV, GeoJSON and a map
 - Recommended validated NeqSim reservoir and economics workflows
 - Assumptions, limitations, source attribution, and a human review checklist
 
@@ -85,6 +101,11 @@ Typical outputs include:
    reserves-to-production horizon; for time series, compute trend and product
    share; for per-field reserves, rank fields by remaining oil equivalent and
    aggregate remaining reserves by sea area.
+   For a field-development or tie-back question about one target, use
+   `near-field-discoveries` (`fetch_ncs_near_field`, `near_field`, `plot_near_field`) to list
+   the discoveries, fields and hosts within a radius with status, operator, recoverable
+   volumes, resource class and the Sodir concept text, and to draw them on a map; sum
+   volumes only where Sodir publishes them.
 4. For a forward screening, use `reservoir-depletion-screening` to build a
    reservoir pressure and production profile versus time from a recoverable
    volume and offtake rate.
@@ -100,6 +121,7 @@ Typical outputs include:
 
 - `norwegian-continental-shelf-data` mapped to community catalog ID `neqsim-norwegian-continental-shelf-data`
 - `reservoir-depletion-screening` mapped to community catalog ID `neqsim-reservoir-depletion-screening`
+- `near-field-discoveries` mapped to community catalog ID `neqsim-near-field-discoveries`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
 
@@ -160,6 +182,12 @@ In Python these classes are reachable through the `neqsim` package (for example
 `from neqsim.process.processTools import simplereservoir`). This agent is a
 companion to the `reservoir-to-facility-screening-agent`, the
 `concept-selection-agent`, and the `asset-economics-agent`.
+
+For whole-shelf questions - how fields share pipelines, plants and terminals,
+where capacity binds, what an outage strands, and how to optimise production and
+value across the NCS - hand off to the `ncs-value-chain-agent`, which uses the
+`neqsim-ncs-infrastructure-network` and `neqsim-ncs-value-chain-optimization`
+skills on the same Sodir data.
 
 # References
 

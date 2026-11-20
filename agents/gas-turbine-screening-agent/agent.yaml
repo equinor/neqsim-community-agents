@@ -3,6 +3,8 @@ agent_type: community-agent
 description: Screens gas-turbine driver site-rating, heat rate, and exhaust conditions using public, educational methods.
 required_skills:
 - neqsim-gas-turbine-performance-screening
+coordinated_agents:
+- installation-weather-agent
 supported_domains:
 - process-engineering
 - power-generation

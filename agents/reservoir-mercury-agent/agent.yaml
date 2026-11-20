@@ -1,0 +1,35 @@
+name: reservoir-mercury-agent
+description: "Estimates elemental mercury in the gas of a reservoir, prospect or discovery with an explicit uncertainty: statistical estimate from tested wells, analogue tests, NeqSim mineral limits (cinnabar, liquid mercury) and a report with P10/P50/P90, reasoning and data gaps. Requires qualified review before a design or gas-route decision."
+required_skills:
+- neqsim-reservoir-mercury-estimation
+context_skills:
+- neqsim-reservoir-h2s-mineral-buffer
+- neqsim-mercury-distribution-study
+- neqsim-norwegian-continental-shelf-data
+supported_domains:
+- reservoir-engineering
+- production-chemistry
+- flow-assurance
+- gas-processing
+- field-development
+inputs:
+- prospect_or_discovery_name_and_position
+- reservoir_formation_or_epoch
+- reservoir_temperature_pressure_fluid_type_and_co2
+- gas_mercury_readings_in_the_discovery_if_any
+- calibration_registry_and_test_table
+- gas_export_route_if_known
+outputs:
+- best_estimate_with_p10_p50_p90_and_range_for_design
+- exceedance_probabilities
+- predictor_contributions_and_analogue_tests
+- mineral_equilibrium_limits_in_separator_gas
+- accuracy_statements_and_data_gaps
+- report_markdown_word_and_result_record
+- validation_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- gas-treatment-agent
+- reservoir-souring-agent
+human_review_required: true
+version: 0.1.0

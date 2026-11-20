@@ -1,0 +1,44 @@
+name: brazil-well-production-agent
+description: Reads public ANP well-level production data for Brazilian wells and fields - monthly rates, volumes and injection, zone production, well status, API gravity and gas composition - into verified unit-explicit series, then runs decline, GOR and water-cut screening, field aggregation and a declared fluid basis, and states what the public data can and cannot support before a calibrated NeqSim reservoir, well-flow or process model.
+required_skills:
+- neqsim-anp-well-production-history
+- neqsim-anp-open-data
+- neqsim-norwegian-continental-shelf-data
+- neqsim-reservoir-depletion-screening
+context_skills:
+- neqsim-brazil-presalt-analogue-basis
+- neqsim-fluid-quality-check
+- neqsim-reservoir-material-balance
+- neqsim-pseudocomponent-split-characterization
+supported_domains:
+- field-development
+- reservoir-engineering
+- production-analysis
+- open-data
+- brazil
+inputs:
+- well_field_installation_or_basin
+- period_of_interest
+- anp_files_or_download_permission
+- economic_limit_rate_and_horizon
+- operator_pressure_pvt_and_geometry_if_available
+outputs:
+- source_log_with_url_time_and_sha256
+- verified_production_series_with_units
+- gor_and_water_cut_trends
+- completeness_lag_and_data_flag_report
+- decline_fit_and_screening_forecast
+- declared_fluid_basis_with_warnings
+- model_readiness_table_public_and_missing_inputs
+- assumptions_data_gaps_and_limitations
+agent_type: community-coordinator
+coordinated_agents:
+- reservoir-forecasting-agent
+- reservoir-history-match-agent
+- fluid-characterization-agent
+- e300-fluid-agent
+- near-well-injectivity-agent
+- brazil-offshore-infrastructure-agent
+- gas-lift-allocation-agent
+human_review_required: true
+version: 0.1.0

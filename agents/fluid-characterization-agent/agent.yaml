@@ -6,6 +6,8 @@ required_skills:
 - neqsim-pseudocomponent-split-characterization
 - neqsim-reference-fluid-synthetic-generation
 - neqsim-pvt-regression-characterization-factor
+context_skills:
+- neqsim-sodir-open-data
 supported_domains:
 - pvt
 - fluid-characterization

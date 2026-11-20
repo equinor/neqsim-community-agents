@@ -7,6 +7,8 @@ required_skills:
 - neqsim-pseudocomponent-split-characterization
 - neqsim-reference-fluid-synthetic-generation
 - neqsim-pvt-regression-characterization-factor
+context_skills:
+- neqsim-sodir-open-data
 ---
 
 # Purpose
@@ -66,6 +68,13 @@ Use this agent when an engineer needs to:
   molar-rate allocation.
 - Prepare a characterized fluid for downstream NeqSim process modelling.
 
+# Sodir Open Data
+
+When the field or discovery is on the Norwegian shelf, check `neqsim-sodir-open-data` for measured anchors
+before using analogues: DST bottom-hole pressure and temperature, GOR and oil/gas densities
+(`wellbore_dst`), `wellbore_oil_sample` (what was sampled), `wlbBottomHoleTemperature` (0 = not reported)
+and formation depths. Feed them as measured values and label them as open-data priors, not a PVT study.
+
 # Inputs
 
 - Reference fluid composition (light components plus plus-fraction data).
@@ -85,6 +94,15 @@ Use this agent when an engineer needs to:
 - Assumptions, limitations, and a human-review checklist.
 
 # Workflow
+
+0. **Precharacterized library first.** If the user or the environment provides a
+   precharacterized fluid library for the well/field (for example a table of per-sample
+   compositions with fitted universal P/A split factors `S1`/`Sn`), look the
+   well/field up there and use a sample-level hit as the characterized fluid — do
+   not re-characterize it. Report the match level, sample and confidence. Do the
+   full characterization below only when the library has no usable match or none
+   is available. Never reuse another well's fluid for a well that is not in the
+   library.
 
 1. Confirm the objective, the reference fluid, and the available measurements.
 2. Use `fluid-quality-check` to review composition completeness and consistency.

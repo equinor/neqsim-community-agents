@@ -1,7 +1,7 @@
 ---
 name: olga-simulation-agent
 description: Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch with the right flags, decodes the exit status, reads the trend and profile results, and hands the transient boundary conditions to the validated NeqSim workflow.
-version: 0.1.0
+version: 0.2.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-olga-multiphase-simulator
@@ -81,6 +81,10 @@ This agent then remains the bounded OLGA execution and post-processing specialis
 - A rule-check verdict before any long run.
 - The PVT table provenance: origin, fluid label, P/T grid, and how it was
   validated.
+- For a NeqSim-generated table: the table configuration (grid construction,
+  produced water, salinity, water property model), the quality report verdict and
+  the Markdown table report written by `writeTableReport`, with the `.tab` and the
+  QC CSV stored in the task folder.
 - The hydrate basis: whether a `HYDRATECURVE` was exported and referenced, its
   pressure range and point count, or an explicit statement that OLGA's
   Hammerschmidt fallback was used.
@@ -119,6 +123,17 @@ This agent then remains the bounded OLGA execution and post-processing specialis
    uses a Hammerschmidt correlation, so the study's two halves would disagree
    about where the hydrate boundary is. Report `DTHYD` with its sign convention
    stated — positive is *inside* the hydrate region, not margin.
+   When the table is generated here, configure it for the study before `run()`:
+   explicit or envelope-refined axes covering the whole excursion
+   (`setEnvelopeRefinement(true, 5.0)`, >= 50 points per axis), the standard state
+   on the grid (`setInsertStandardConditions(true)`), produced water on a
+   water-free feed (`setProducedWater(value, "watercut" | "mol/mol" | "mol%" |
+   "wt%")`), salinity (`setWaterSalinity`), and IAPWS aqueous properties
+   (`setUseReferenceWaterProperties(true)`). Gate on
+   `getQualityReport().isLoadable()`, explain any extrapolated monotonicity
+   violation, and write the table report (`writeTableReport`) and QC CSV next to
+   the `.tab`. Use `getTableFluid()` for the hydrate curve and the source phase
+   split so every part of the case sees one fluid.
 6. **Verify the injected phase split.** After the run, read the
    `MASS SOURCE INFORMATION:` block in the `.out` file and reconcile the
    GAS / OIL / WATER rates in kg/s against a NeqSim flash at the source
@@ -175,7 +190,8 @@ This agent then remains the bounded OLGA execution and post-processing specialis
     topside model, and the cooldown or hydrate-margin question to
     `subsea-cooldown-agent` where relevant.
 16. **Document.** Record the engine version, command line, exit status, case
-    file, output files, PVT table provenance, the reconciled source phase split,
+    file, output files, PVT table provenance and its table report, the
+    reconciled source phase split,
     assumptions and limitations, and state that a qualified flow-assurance
     engineer must review the interpretation.
 

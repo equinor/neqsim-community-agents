@@ -1,0 +1,33 @@
+name: well-trajectory-anticollision-agent
+agent_type: community-agent
+description: Plans a screening-level 3D well path from a slot or sidetrack tie-in and checks it against offset wellbores with the ISCWSA separation-factor rule, reporting the governing offset, parent exit, slot status and target pull-back, using public educational methods.
+required_skills:
+- neqsim-well-trajectory-anticollision
+- neqsim-erd-reach-screening
+context_skills:
+- neqsim-crs-geodetic-checks
+supported_domains:
+- well-planning
+- directional-drilling
+- anti-collision
+- field-development
+inputs:
+- slot_coordinates_or_parent_survey
+- target_coordinates_crs_datum
+- dls_and_kickoff_constraints
+- offset_surveys_with_covariance
+- template_wellbore_headers
+- separation_factor_rule
+- rig_reach_history
+outputs:
+- slot_occupancy_verdict
+- planned_survey_listing
+- plan_summary
+- separation_factor_table
+- parent_exit_depth
+- target_pull_back_sweep
+- tie_in_dls_sensitivity
+- erd_reach_indication
+- validation_checklist
+human_review_required: true
+version: 0.1.0

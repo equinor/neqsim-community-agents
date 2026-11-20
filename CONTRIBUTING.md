@@ -9,10 +9,15 @@ All contributions must be suitable for a public open-source repository.
 ## Where Does This Belong?
 
 Before adding an agent here, confirm this is the right repository. See the
-[Where Does This Go? placement guide](https://github.com/equinor/neqsim-community-skills/blob/main/docs/where-does-this-go.md):
-community agents **orchestrate** community screening skills. They contain no
-engineering method themselves, claim only screening-level results, and reference
-validated NeqSim classes rather than reimplementing them.
+[Where Does This Go? placement guide](https://github.com/equinor/neqsim-community-skills/blob/main/docs/where-does-this-go.md).
+The rules are mandatory:
+
+- Equinor- or company-specific agents, internal systems, shares and policy go in the
+  **enterprise** repos. Agents here stay vendor-neutral.
+- Agents that are not NeqSim Java functionality go **here**, never in core neqsim.
+- Community agents **orchestrate** community skills. They contain no
+  engineering method themselves, claim only screening-level results, and reference
+  validated NeqSim classes rather than reimplementing them.
 
 Company-specific agents, internal workflow policy, private data integration, and confidential examples belong in private enterprise repositories instead. See the main NeqSim [Enterprise Agent and Skill Repositories](https://github.com/equinor/neqsim/blob/master/docs/integration/enterprise_agent_skill_repos.md) guide for the paired enterprise agents/skills setup and Engineering Harness installation workflow.
 
@@ -93,11 +98,43 @@ Minimum expectations for new agents:
 - Example outputs or reports are reproducible from public inputs
 - Assumptions, limitations, and human review requirements are documented
 
-Run the current tests with:
+Use Python 3.11 or newer and uv for development. From the repository root:
 
-```powershell
-python -m unittest discover -s tests
+```bash
+uv sync --locked
+uv run pre-commit install
+uv run pre-commit run
+uv run pytest tests/
+uv run python scripts/validate_agent_manifests.py
+uv run python scripts/generate_agent_skill_map.py --check
+uv run python scripts/generate_orchestration_map.py --check
 ```
+
+Pre-commit runs Ruff linting and Black formatting on staged Python files; CI
+runs the same hooks on all tracked Python files. Fix findings introduced by
+your changes without weakening rules, adding blanket suppressions, or bypassing
+hooks. Report unrelated existing failures explicitly.
+
+Manage development dependencies with `uv add --group dev <package>` and
+commit the updated `uv.lock`. Agent users do not need uv.
+
+Python 3.11 is the end-user runtime minimum. The separate runtime CI job
+installs only the test dependencies and the two public skill packages needed
+by the executable reservoir-to-host examples, then runs `tests/`,
+`runtime_tests/` and the manifest validator on Python 3.11. It does not install
+the full developer environment or require plotting dependencies.
+Keep the developer checks and Ruff's `py311` target aligned with this minimum. Pending
+single-rule Ruff fixes remain separate from this runtime coverage.
+
+## Quiet by default (no pop-ups, no installs, no surprise sign-ins)
+
+Agents and skills run from hooks, MCP servers and chat tool calls with no visible console. Anything that opens a window or asks the user to act breaks the flow, so every new or changed skill and agent must follow these rules:
+
+- **Hidden child processes.** Every `subprocess.run/Popen/check_output/call` in skill code passes `creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)`. Never use `os.system`, `os.startfile` or `shell=True` to start tools. The repository test `test_quiet_processes.py` fails the build otherwise; annotate a deliberate user-requested exception with `# quiet-ok: <reason>`.
+- **No installs at run time.** Declare dependencies in the skill's `pyproject.toml`; the plugin installs them once, in the background. Skill code and agent instructions must not run `pip install`, `npm install` or download tools mid-task. If a package is missing, report the blocker and the remedy.
+- **Silent authentication first.** Get tokens through `enterprise-sso-auth` (cached tokens, `az account get-access-token`, session warm-up via `session_warmup.json`). Register new APIs in its service registry so they are warmed at session start. Never call `az login`, device-code flows, browser sign-in or credential prompts from skill code or agent steps unless every silent route has failed, and then ask once with the exact remedy.
+- **Background by default.** Long installs, downloads and warm-ups run detached with output in a log file, never in the foreground chat. Agent instructions must tell the model to continue with other work rather than wait on them.
+- **GUI automation is the exception.** Computer-use skills may start a visible application only when the user's task needs it; say so in the skill's Limitations section.
 
 ## Review Checklist
 

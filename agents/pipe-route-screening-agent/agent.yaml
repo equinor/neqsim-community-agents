@@ -6,9 +6,13 @@ required_skills:
 - neqsim-pressure-drop-screening
 - neqsim-line-velocity-check
 - neqsim-hydrate-margin-check
+context_skills:
+- neqsim-crs-geodetic-checks
 coordinated_agents:
 - flow-assurance-engineer-agent
 - subsea-layout-screening-agent
+- subsea-infrastructure-capacity-agent
+- seabed-protection-agent
 supported_domains:
 - flow-assurance
 - process-engineering

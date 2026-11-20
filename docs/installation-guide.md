@@ -171,9 +171,8 @@ git clone https://github.com/equinor/neqsim-community-skills.git
 
 ![VS Code Explorer showing a multi-root workspace with the NeqSim repositories and a separate task folder](figures/fig01_vscode_workspace.png)
 
-*Figure — one workspace, the repos plus your task folder. (The screenshot also
-shows the two Equinor-internal repos; on the public side you have the three
-above.)*
+*Figure — one workspace, the repos plus your task folder. (Companies can add their
+own private enterprise repositories to the same workspace.)*
 
 Or write the workspace file yourself and open it:
 

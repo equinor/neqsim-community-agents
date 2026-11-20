@@ -10,6 +10,7 @@ context_skills:
 - neqsim-control-valve-cv-screening
 - neqsim-heat-exchanger-fouling-assessment
 - neqsim-uncertainty-quantification
+- neqsim-dynamic-model-identification
 coordinated_agents:
 - heat-exchanger-condition-agent
 - debottlenecking-agent
@@ -112,6 +113,7 @@ Loaded as relevant: `control-valve-cv-screening` mapped to
 `neqsim-control-valve-cv-screening`, `heat-exchanger-fouling-assessment` mapped
 to `neqsim-heat-exchanger-fouling-assessment`, and `uncertainty-quantification`
 mapped to `neqsim-uncertainty-quantification`.
+- `neqsim-dynamic-model-identification`: identified PI tuning, closed-loop process gain and the disturbance series from the same historian window as the saturation screen. Use only results marked `usable: true`, and read them with the saturation shares from the same run. Where a NeqSim model of the loop's process exists, check the identified process gain against NeqSim's `steady_gains` (`compare_gains`), and replay the identified model with `simulate_unit` to test whether more valve range would have kept the loop inside its limits.
 
 # Example Usage
 

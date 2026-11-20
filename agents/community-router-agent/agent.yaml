@@ -1,14 +1,18 @@
 name: community-router-agent
 agent_type: community-coordinator
 description: Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself.
-version: 0.1.0
+version: 0.1.3
 required_skills: []
 coordinated_agents:
 - artificial-lift-agent
 - asset-economics-agent
+- brazil-offshore-infrastructure-agent
+- brazil-well-production-agent
 - cfd-coupling-agent
 - compressor-antisurge-agent
+- concept-longlist-shortlist-agent
 - concept-selection-agent
+- continuous-task-improvement-agent
 - control-authority-agent
 - debottlenecking-agent
 - dynamic-instrument-controller-agent
@@ -22,13 +26,17 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - flow-assurance-study-agent
 - fluid-characterization-agent
+- frontier-block-bid-agent
 - gas-export-pipeline-agent
 - gas-lift-allocation-agent
 - gas-treatment-agent
 - gas-turbine-screening-agent
 - heat-exchanger-condition-agent
 - hydrate-screening-agent
+- installation-weather-agent
+- ncs-ownership-equity-agent
 - ncs-production-analysis-agent
+- ncs-value-chain-agent
 - near-well-injectivity-agent
 - noise-assessment-agent
 - olga-simulation-agent
@@ -44,17 +52,28 @@ coordinated_agents:
 - pvt-agent
 - reciprocating-compressor-agent
 - reservoir-forecasting-agent
+- reservoir-history-match-agent
+- reservoir-h2s-agent
+- reservoir-souring-agent
+- reservoir-mercury-agent
 - reservoir-simulator-agent
 - reservoir-to-facility-screening-agent
 - resource-classification-agent
 - sand-erosion-agent
+- seabed-protection-agent
 - subsea-cooldown-agent
+- subsea-equipment-placement-agent
 - subsea-layout-screening-agent
 - surf-layout-design-agent
+- umbilical-design-agent
 - technical-document-intelligence-agent
 - teg-dehydration-agent
 - tie-in-screening-agent
+- export-tie-in-concept-agent
+- subsea-infrastructure-capacity-agent
 - utilities-screening-agent
+- vfp-lift-curve-agent
+- well-trajectory-anticollision-agent
 supported_domains:
 - request classification
 - community agent routing

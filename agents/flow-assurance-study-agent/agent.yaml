@@ -14,6 +14,7 @@ coordinated_agents:
 - flow-assurance-engineer-agent
 - olga-simulation-agent
 - subsea-cooldown-agent
+- seabed-protection-agent
 - piping-integrity-agent
 - sand-erosion-agent
 supported_domains:

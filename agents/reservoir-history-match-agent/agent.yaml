@@ -1,0 +1,47 @@
+name: reservoir-history-match-agent
+description: "Coordinates history matching and forecasting for multi-formation reservoirs: selects a conventional gas/oil material-balance or compositional gas-condensate route, reconciles pressure, allocated production and PVT, estimates in-place volumes, tests drive mechanisms and identifiability, and hands validated wellstreams to process models. USE WHEN: an MBAL history match, formation volume reconciliation, aquifer-support evaluation or reservoir-driven process forecast is needed."
+required_skills:
+- neqsim-reservoir-material-balance
+- neqsim-reservoir-history-match-forecast
+- neqsim-pseudocomponent-split-characterization
+- neqsim-pvt-regression-characterization-factor
+- neqsim-reservoir-depletion-screening
+context_skills:
+- neqsim-reservoir-model-builder
+- neqsim-reference-fluid-synthetic-generation
+- neqsim-near-well-and-injectivity
+- neqsim-production-network-routing
+- neqsim-fluid-quality-check
+supported_domains:
+- reservoir-engineering
+- history-matching
+- production-forecasting
+- fluid-composition
+- process-integration
+inputs:
+- well_and_field_production_history
+- formation_level_production_allocation_and_injection
+- static_pressure_with_test_type_depth_unit_datum_and_provenance
+- well_to_formation_and_compartment_map
+- tuned_reservoir_fluid_per_formation
+- prior_in_place_estimates_and_volumetric_basis
+- forecast_scenarios_and_wellhead_pressure_limits
+- process_model_or_simulator_callable
+outputs:
+- tank_layout_and_assumption_register
+- formation_wise_in_place_volumes_compared_with_prior_estimates
+- fit_diagnostics_residuals_identifiability_and_sensitivity
+- well_deliverability_table
+- produced_composition_versus_date
+- history_and_forecast_tables_per_tank_and_well
+- wellstream_tables_for_process_models
+- process_kpi_series_history_and_future
+- data_gaps_and_review_checklist
+agent_type: community-coordinator
+coordinated_agents:
+- reservoir-simulator-agent
+- fluid-characterization-agent
+- reservoir-forecasting-agent
+- reservoir-to-facility-screening-agent
+human_review_required: true
+version: 0.2.0

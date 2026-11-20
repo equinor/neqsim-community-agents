@@ -7,6 +7,9 @@ required_skills:
 - neqsim-compressor-operating-window-check
 - neqsim-line-velocity-check
 - neqsim-pressure-drop-screening
+context_skills:
+- neqsim-ageing-life-extension-screening
+- neqsim-capacity-increase-screening
 coordinated_agents:
 - production-optimization-agent
 ---
@@ -49,6 +52,7 @@ quantitative decision.
 # Workflow
 
 1. Restate the train, target throughput, and any design limits.
+1a. When capital is proposed on a unit, use the context skill `ageing-life-extension-screening` to check the unit's technical life against the payback period (design life, programme validity, life-limiting populations) and flag any unit whose end of life precedes payback.
 2. Use `separator-modelling` to screen separator gas/liquid capacity utilization.
 3. Use `compressor-operating-window-check` to screen compressor window margin.
 4. Use `line-velocity-check` to screen main-line velocities against guidelines.
@@ -68,6 +72,12 @@ quantitative decision.
 - `pressure-drop-screening` mapped to community catalog ID
   `neqsim-pressure-drop-screening`.
 - `separator-modelling` mapped to community catalog ID `neqsim-separator-modelling`.
+
+# Context Skills
+
+- `ageing-life-extension-screening` mapped to community catalog ID
+  `neqsim-ageing-life-extension-screening` — technical life basis and
+  life-limiting populations when a debottlenecking recommendation implies capital.
 
 # Example Usage
 
@@ -96,6 +106,7 @@ limitations, and human review requirements.
 # Validation Checklist
 
 - [ ] Target throughput and design limits are stated.
+- [ ] Any capital recommendation is checked against the unit's technical life versus payback.
 - [ ] Composition sums to 1.0 and uses valid component names.
 - [ ] Each unit is screened against its relevant guideline.
 - [ ] Units are ranked and the bottleneck is identified with rationale.
@@ -112,6 +123,10 @@ breakdown on `neqsim.process.processmodel.ProcessSystem` / `ProcessModel`, and
 `ProcessAutomation.evaluate(...)` for gated rate-increase trials. The required
 screening skills ultimately drive these `ProcessSystem` workflows. This agent only
 screens and ranks; it does not itself run these calculations.
+
+When the question moves from "where is the bottleneck" to "which ideas across wells,
+subsea and topside lift it, and which to mature", hand over to the core agent
+`capacity-increase-screening` (skill `neqsim-capacity-increase-screening`).
 
 # References
 

@@ -4,7 +4,7 @@ Runs single-phase and multiphase CFD from whatever engineering information is
 available, with the fluid taken from a NeqSim flash.
 
 ```
-P&ID / STID / datasheets / plant data
+P&ID / tag register / datasheets / plant data
         |
         v
   design basis  ->  missing fields and conflicts reported, not guessed
@@ -42,7 +42,7 @@ that report and extracts factors from it instead of running a new case.
 
 ## Typical requests
 
-- "Compute the wall shear in line 20-P-001 from the P&ID and the STID dimensions."
+- "Compute the wall shear in line 20-P-001 from the P&ID and the tag register dimensions."
 - "Is this two-phase line stratified, and how much liquid collects in the low point?"
 - "We have a vendor CFD report for the inlet device - can we use its peak velocity?"
 - "Size the near-wall mesh for a y+ of 50 on this gas stream."

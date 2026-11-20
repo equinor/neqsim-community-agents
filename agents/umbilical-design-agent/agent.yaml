@@ -1,0 +1,37 @@
+name: umbilical-design-agent
+agent_type: community-agent
+description: Sizes, checks and draws a subsea control or service umbilical from route, depth, chemical-injection, hydraulic and power requirements with the NeqSim umbilical physics, and hands a figure set, key numbers and open items to SURF, flow-assurance and cost workflows.
+required_skills:
+- neqsim-umbilical-design
+context_skills:
+- neqsim-surf-field-layout-design
+- neqsim-pressure-drop-screening
+coordinated_agents:
+- surf-layout-design-agent
+- flow-assurance-engineer-agent
+- seabed-protection-agent
+- subsea-infrastructure-capacity-agent
+- asset-economics-agent
+supported_domains:
+- subsea
+- surf-design
+- chemical-injection
+- subsea-controls
+- power-transmission
+inputs:
+- route_length_and_water_depth
+- hydraulic_and_chemical_lines
+- chemical_demand_from_flow_assurance
+- power_load_voltage_and_conductor
+- fibre_count_and_spare_policy
+- basis_version_and_input_evidence_status
+outputs:
+- design_checks
+- element_schedule_diameter_and_weights
+- line_friction_drop_and_response_time
+- power_cable_voltage_drop_loss_and_charging_current
+- figure_set_and_one_page_summary
+- handoff_key_numbers_and_open_items
+- assumptions_and_validation_checklist
+human_review_required: true
+version: 0.1.0

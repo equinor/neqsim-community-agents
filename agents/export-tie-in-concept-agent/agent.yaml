@@ -1,0 +1,40 @@
+name: export-tie-in-concept-agent
+agent_type: community-agent
+description: "Screens a new export or tie-in line between two facilities end to end: ranked landing points on neighbouring hosts, seabed profile, pressure drop, thermal decay, wall thickness and size, and conceptual P&ID sketches of both connection ends with open options, before a validated NeqSim pipeline study."
+required_skills:
+- neqsim-tie-in-pipeline-concept
+- neqsim-tie-in-pid-sketch
+- neqsim-ncs-infrastructure-network
+context_skills:
+- neqsim-pipe-route-profile
+- neqsim-pressure-drop-screening
+- neqsim-pipe-wall-thickness-screening
+- neqsim-hydrate-screening
+- neqsim-crs-geodetic-checks
+- neqsim-open-marine-constraints
+coordinated_agents:
+- tie-in-screening-agent
+- pipe-route-screening-agent
+- ncs-value-chain-agent
+- subsea-infrastructure-capacity-agent
+supported_domains:
+- field-development
+- tie-in-screening
+- pipeline-concept
+- export-route-screening
+inputs:
+- source-facility
+- candidate-landing-hosts-or-region
+- stabilised-oil-properties
+- rate-cases-and-sources
+- arrival-pressure-and-design-pressure
+- optional-existing-p-and-id-information
+outputs:
+- ranked-landing-points-with-rationale
+- seabed-profile-and-statistics
+- recommended-size-wall-thickness-and-inlet-pressure
+- tie-in-p-and-id-sketches-for-both-ends
+- assumptions-data-gaps-and-open-options
+- neqsim-pipeline-study-recommendation
+human_review_required: true
+version: 0.1.1

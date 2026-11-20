@@ -1,11 +1,13 @@
 ---
 name: pvt-agent
 description: Assists with fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis.
-version: 0.1.0
+version: 0.1.1
 required_skills:
 - neqsim-fluid-quality-check
 context_skills:
 - neqsim-benchmark-reference-data
+- neqsim-thermoml-experimental-data
+- neqsim-forward-separator-train
 ---
 
 # Purpose
@@ -56,6 +58,15 @@ Typical outputs include:
 7. Document assumptions, limitations, and required validation.
 8. Ask for qualified human review before conclusions are used for design or operations.
 
+For GOR, Bo, stock-tank oil density/API or stage gas rates from a supplied fluid,
+use `neqsim-forward-separator-train`. Obtain feed and stage P/T explicitly;
+placeholder defaults are not a design basis. Confirm a forward-only train with
+no recycle, and preserve the supplied E300 EOS parameters. Report mass-balance
+relative error below 1e-6, standard conditions and whether a two-phase feed makes
+Bo a mixed-stream value. Flag aqueous liquid in the oil result. For a fit across
+fluids, use one shared stage P/T set and report per-fluid errors, parameter
+uncertainty and identifiability; fitted stage conditions are not measurements.
+
 # Required Skills
 
 - `fluid-quality-check` mapped to community catalog ID `neqsim-fluid-quality-check`
@@ -63,6 +74,9 @@ Typical outputs include:
 # Context Skills
 
 - `neqsim-benchmark-reference-data` — independent reference values and PASS/WARN/FAIL grading when a property result must be validated before it is quoted. Run it after the composition passes `fluid-quality-check`.
+- `neqsim-forward-separator-train` — forward separator tests and a shared
+  surface-process fit; use a recycle-capable process model instead when gas
+  returns to an earlier stage.
 
 # Example Usage
 

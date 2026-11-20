@@ -1,6 +1,8 @@
 ---
 name: energy-emissions-agent
 description: Performs preliminary energy-use and CO2-equivalent emissions screening for a facility or process and recommends further analysis.
+context_skills:
+- neqsim-co2-emissions-screening
 version: 0.1.0
 required_skills:
 - neqsim-energy-emissions-screening

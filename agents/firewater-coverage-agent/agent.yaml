@@ -12,6 +12,7 @@ context_skills:
 coordinated_agents:
 - process-safety-agent
 - piping-integrity-agent
+- installation-weather-agent
 inbound_handoffs:
 - agent: community-router-agent
   schema: firewater_coverage_request.v1

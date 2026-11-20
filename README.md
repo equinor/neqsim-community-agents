@@ -44,6 +44,23 @@ Machine-readable agent metadata uses canonical community skill IDs such as
 `agent.yaml` files should use the canonical ID so runtimes do not need implicit
 alias rules.
 
+Recent community-skill integration uses optional context skills, so existing
+screening workflows keep their required prerequisites:
+
+| Capability | Agent entry points |
+| --- | --- |
+| Open fishing, environmental, wind, grid and crossing constraints | [Seabed protection](agents/seabed-protection-agent/AGENT.md), [equipment placement](agents/subsea-equipment-placement-agent/AGENT.md), [SURF layout](agents/surf-layout-design-agent/AGENT.md), [export tie-in](agents/export-tie-in-concept-agent/AGENT.md) |
+| Original mineral-buffer H2S versus waterflood souring | [Reservoir souring](agents/reservoir-souring-agent/AGENT.md) |
+| H2S expected in the gas of a prospect or discovery before production, with range and sour-service screen | [Reservoir H2S](agents/reservoir-h2s-agent/AGENT.md) |
+| Mercury expected in the gas of a prospect or discovery, with range and mineral limits | [Reservoir mercury](agents/reservoir-mercury-agent/AGENT.md) |
+| Forward-only separator tests and shared stage P/T fitting | [PVT](agents/pvt-agent/AGENT.md) |
+| Raw well-test calibration, held-out acceptance and consistent volume bases | [VFP lift curves](agents/vfp-lift-curve-agent/AGENT.md), [production optimization](agents/production-optimization-agent/AGENT.md) |
+
+The [reservoir simulator workflow](agents/reservoir-simulator-agent/AGENT.md)
+also carries the updated downstream case-acceptance gates for facility limits,
+shut wells, scenario robustness and simulator-verified surrogate proposals.
+See the generated [agent-to-skill map](docs/AGENT_SKILL_MAP.md) for all mappings.
+
 Current skill mappings used by the example agents:
 
 | Legacy shorthand | Community skill catalog ID |
@@ -149,6 +166,7 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 | [Tie-In Screening Agent](agents/tie-in-screening-agent/README.md) | Early-stage screening of tie-in opportunities | `neqsim-fluid-quality-check`, `neqsim-hydrate-screening`, `neqsim-separator-modelling` |
 | [Process Screening Agent](agents/process-screening-agent/README.md) | High-level process engineering screening studies | `neqsim-separator-modelling` |
 | [Process Safety Agent](agents/process-safety-agent/README.md) | Early-stage fire-case relief load and depressurization screening | `neqsim-relief-load-screening`, `neqsim-depressurization-screening` |
+| [Flare-Helideck Dispersion Agent](agents/flare-helideck-dispersion-agent/README.md) | Draft coordinator: unignited flare gas to a helideck and flight paths, conditional exceedance, review, figures and CFD hand-off | `neqsim-flare-helideck-dispersion`, `neqsim-weather-data`, `neqsim-psv-orifice-screening` |
 | [Process Engineer Agent](agents/process-engineer-agent/README.md) | Early-stage screening of unit operations against line-velocity and compressor operating-window guidelines | `neqsim-line-velocity-check`, `neqsim-compressor-operating-window-check` |
 | [Noise Assessment Agent](agents/noise-assessment-agent/README.md) | Standards-based gas-valve noise assessment from current measurements or process data, with detailed IEC prediction and separate AIV routing | `neqsim-noise-screening`, `neqsim-acoustic-induced-vibration-screening` |
 | [Dynamic Process Preparation Agent](agents/dynamic-process-preparation-agent/README.md) | Prepares NeqSim process systems and process models for dynamic calculations | `neqsim-dynamic-process-preparation` |
@@ -168,7 +186,7 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 
 ## How To Contribute
 
-Not sure which repository a contribution belongs in? See the shared [Contribution Router](https://github.com/equinor/idea-sharing-AI-agents/blob/main/CONTRIBUTION-ROUTER.md).
+Not sure which repository a contribution belongs in? See the NeqSim [Enterprise Agent and Skill Repositories guide](https://github.com/equinor/neqsim/blob/master/docs/integration/enterprise_agent_skill_repos.md).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution requirements, required files, documentation expectations, testing expectations, review checklist, and open-source requirements.
 
@@ -191,13 +209,15 @@ See [docs/governance.md](docs/governance.md) and [docs/safety-guidelines.md](doc
 
 ## Testing
 
-Run the repository structure and metadata tests with:
+For development, use Python 3.11 or newer and uv to run the repository tests:
 
-```powershell
-python -m unittest discover -s tests
+```bash
+uv sync --locked
+uv run pytest tests/
 ```
 
-The initial tests use only the Python standard library. They validate that each agent has the required files, documentation sections, metadata fields, prompt examples, and examples.
+The tests validate agent files, metadata, documentation and examples. Agent
+users do not need uv.
 
 ## License
 

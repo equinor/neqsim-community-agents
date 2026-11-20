@@ -1,11 +1,14 @@
 ---
 name: asset-economics-agent
 description: Coordinates early-stage asset economics screening that chains a CAPEX/OPEX cost picture, a field-life energy and emissions roll-up, and a discounted asset-value (NPV) screening into a single concept-economics view with carbon intensity and CO2-tax exposure.
+coordinated_agents:
+- reservoir-to-facility-screening-agent
 version: 0.1.0
 required_skills:
 - neqsim-capex-opex-screening
 - neqsim-energy-emissions-screening
 - neqsim-asset-value-npv-screening
+- neqsim-ageing-life-extension-screening
 context_skills:
 - neqsim-uncertainty-quantification
 ---
@@ -61,6 +64,7 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the screening objective and the available public cost, energy, and cash-flow data.
+1a. Use `ageing-life-extension-screening` to establish the technical life basis (design life, economic cut-off, programme validity, cessation year, life-limiting populations). Take the cash-flow and emissions horizon from it, show a truncated-life sensitivity, and flag missing items as data gaps.
 2. Use `capex-opex-screening` to build a screening CAPEX/OPEX cost picture.
 3. Use `energy-emissions-screening` to roll up field-life energy into CO2e, carbon intensity, and CO2-tax cost.
 4. Use `asset-value-npv-screening` to discount the net cash-flow profile into an NPV with payback, including the CO2-tax cost as an annual cost where relevant.
@@ -75,6 +79,7 @@ Typical outputs include:
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
+- `ageing-life-extension-screening` mapped to community catalog ID `neqsim-ageing-life-extension-screening`
 
 # Context Skills
 
@@ -106,6 +111,7 @@ Use public synthetic data to screen the economics of a gas-field concept. Build 
 # Validation Checklist
 
 - Screening objective and decision criteria are documented.
+- The cash-flow horizon matches the technical life basis (sources and limiters stated).
 - CAPEX/OPEX drivers and the installation/contingency basis are stated.
 - Energy profile, emission factor, and production profile are stated and consistent.
 - Discount rate and net cash-flow basis are documented.

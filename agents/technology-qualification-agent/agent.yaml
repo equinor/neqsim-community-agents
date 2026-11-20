@@ -1,0 +1,34 @@
+name: technology-qualification-agent
+agent_type: community-agent
+description: Evaluates any new or step-out technology a project may need - builds the qualification basis, decomposes the technology, categorises novelty and TRL, defines step-out, ranks failure modes (FMIRR), outlines qualification activities and writes a full technology assessment report (Markdown and Word) as a study deliverable.
+required_skills:
+- neqsim-technology-assessment
+- neqsim-technology-fmirr
+- neqsim-technology-assessment-report
+coordinated_agents:
+- technical-document-intelligence-agent
+supported_domains:
+- technology-qualification
+- technology-assessment
+- field-development
+- project-studies
+- reliability
+inputs:
+- technology-name-and-description
+- qualification-basis
+- project-context-and-business-case-dependence
+- documents-and-evidence
+- experience-base-and-operating-envelope
+- existing-assessment-or-fmirr
+- report-metadata
+outputs:
+- technology-qualification-basis
+- decomposition-with-novelty-category-and-trl
+- step-out-table
+- benefits-risks-and-standardisation
+- fmirr-register
+- preliminary-qualification-outline
+- technology-assessment-report
+- open-points-and-data-gaps
+human_review_required: true
+version: 0.1.0

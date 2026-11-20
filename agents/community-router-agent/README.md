@@ -27,7 +27,7 @@ neqsim agent install --all --source community --vscode --force
 ## What it does not do
 
 - No engineering calculation, no data retrieval, no numeric result.
-- Routes only within the **community** catalog. Enterprise (Equinor-internal)
+- Routes only within the **community** catalog. Enterprise (company-private)
   agents and the core NeqSim task-solving agents are named as prerequisites, not
   routed to.
 - Routing is a suggestion; it does not replace engineering judgement.

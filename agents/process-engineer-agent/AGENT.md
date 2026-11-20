@@ -1,6 +1,11 @@
 ---
 name: process-engineer-agent
 description: Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines.
+context_skills:
+- neqsim-control-valve-cv-screening
+- neqsim-design-basis-screening
+- neqsim-gas-scrubber-sizing-screening
+- neqsim-pump-hydraulics-screening
 version: 0.1.0
 required_skills:
 - neqsim-line-velocity-check

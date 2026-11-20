@@ -2,6 +2,8 @@ name: ncs-production-analysis-agent
 description: Coordinates public Norwegian Continental Shelf (NCS) production analysis by combining a source-attributed NCS reference-facts database with reservoir-depletion, asset-value, and energy-emissions screening to frame production, resource-accounting, and field-inventory studies before a validated NeqSim reservoir/economics workflow.
 required_skills:
 - neqsim-norwegian-continental-shelf-data
+- neqsim-sodir-open-data
+- neqsim-near-field-discoveries
 - neqsim-reservoir-depletion-screening
 - neqsim-asset-value-npv-screening
 - neqsim-energy-emissions-screening
@@ -14,6 +16,7 @@ supported_domains:
 inputs:
 - ncs_facts_or_inventory_question
 - field_inventory_filters
+- target_position_and_radius_for_near_field_inventory
 - official_yearly_production_csv_export
 - reservoir_fluid_type_and_recoverable_volume
 - initial_and_abandonment_pressure
@@ -24,6 +27,7 @@ outputs:
 - source_attributed_national_kpis
 - resource_accounting_split_and_rp_horizon
 - field_inventory_counts_and_aggregations
+- near_field_discovery_inventory_stage_summary_and_map
 - per_field_reserves_ranked_and_by_area
 - annual_production_trend_and_product_share
 - screening_reservoir_depletion_profile
@@ -36,5 +40,9 @@ coordinated_agents:
 - reservoir-to-facility-screening-agent
 - concept-selection-agent
 - asset-economics-agent
+- ncs-value-chain-agent
+context_skills:
+- neqsim-ncs-infrastructure-network
+- neqsim-ncs-value-chain-optimization
 human_review_required: true
 version: 0.1.0

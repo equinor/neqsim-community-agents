@@ -17,6 +17,7 @@ supported_domains:
 - simulator-integration
 inputs:
 - olga_case_file_and_data_files
+- fluid_and_pvt_table_settings_grid_produced_water_salinity_water_model
 - engineering_question_and_acceptance_criteria
 - case_parameter_overrides_for_sweeps
 - olga_version_thread_count_and_timeout
@@ -25,6 +26,7 @@ outputs:
 - olga_installation_and_version_used
 - rule_check_verdict
 - pvt_table_provenance_and_validation
+- pvt_table_configuration_quality_report_and_markdown_report
 - source_phase_split_reconciliation
 - batch_run_record_with_exit_status
 - trend_series_with_declared_units
@@ -40,4 +42,4 @@ coordinated_agents:
 - subsea-cooldown-agent
 - pvt-agent
 human_review_required: true
-version: 0.1.0
+version: 0.2.0

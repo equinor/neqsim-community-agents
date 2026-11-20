@@ -5,6 +5,7 @@ required_skills:
 - neqsim-capex-opex-screening
 - neqsim-energy-emissions-screening
 - neqsim-asset-value-npv-screening
+- neqsim-ageing-life-extension-screening
 context_skills:
 - neqsim-uncertainty-quantification
 coordinated_agents:

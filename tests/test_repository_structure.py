@@ -1,9 +1,8 @@
-from pathlib import Path
 import re
 import unittest
+from pathlib import Path
 
 import yaml
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 AGENTS_DIR = REPO_ROOT / "agents"
@@ -48,6 +47,10 @@ REQUIRED_YAML_KEYS = [
 ]
 
 EXPECTED_AGENTS = {
+    "vfp-lift-curve-agent": [
+        "neqsim-vfp-lift-curves",
+        "neqsim-api-patterns",
+    ],
     "technical-document-intelligence-agent": [
         "neqsim-document-intelligence-extraction",
     ],
@@ -118,8 +121,24 @@ EXPECTED_AGENTS = {
         "neqsim-energy-emissions-screening",
         "neqsim-step-out-screening",
     ],
+    "concept-longlist-shortlist-agent": [
+        "neqsim-concept-longlist-shortlist-screening",
+        "neqsim-capex-opex-screening",
+        "neqsim-asset-value-npv-screening",
+        "neqsim-energy-emissions-screening",
+        "neqsim-step-out-screening",
+    ],
     "resource-classification-agent": [
         "neqsim-resource-classification-screening",
+    ],
+    "technology-qualification-agent": [
+        "neqsim-technology-assessment",
+        "neqsim-technology-fmirr",
+        "neqsim-technology-assessment-report",
+    ],
+    "well-planning-engineer": [
+        "neqsim-integrated-well-planning",
+        "neqsim-well-design-study",
     ],
 }
 
@@ -135,7 +154,12 @@ def read_yaml(path):
 def top_level_yaml_keys(text):
     keys = set()
     for line in text.splitlines():
-        if line and not line.startswith(" ") and not line.startswith("#") and ":" in line:
+        if (
+            line
+            and not line.startswith(" ")
+            and not line.startswith("#")
+            and ":" in line
+        ):
             keys.add(line.split(":", 1)[0].strip())
     return keys
 
@@ -155,7 +179,7 @@ def required_skills_from_yaml_text(text):
             continue
         if in_required_skills:
             if stripped.startswith("- "):
-                skills.append(stripped[2:].strip().strip('"\''))
+                skills.append(stripped[2:].strip().strip("\"'"))
                 continue
             if stripped:
                 break
@@ -164,7 +188,7 @@ def required_skills_from_yaml_text(text):
 
 def scalar_from_yaml_text(text, key):
     match = re.search(r"^\s*" + re.escape(key) + r":\s*(.+)$", text, re.MULTILINE)
-    return match.group(1).strip().strip('"\'') if match else None
+    return match.group(1).strip().strip("\"'") if match else None
 
 
 def catalog_agent_blocks(text):

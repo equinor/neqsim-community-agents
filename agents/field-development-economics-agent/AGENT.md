@@ -1,6 +1,10 @@
 ---
 name: field-development-economics-agent
 description: Coordinates an end-to-end reservoir-to-market field-development screening that chains reservoir fluid and depletion screening, subsea hydrate flow-assurance margins, topside separation duty, gas-export line screening, and an asset-economics roll-up (CAPEX/OPEX, energy and emissions, and a discounted NPV) into one concept-level value-chain view.
+coordinated_agents:
+- asset-economics-agent
+- reservoir-to-facility-screening-agent
+- ncs-ownership-equity-agent
 version: 0.1.0
 required_skills:
 - neqsim-fluid-quality-check
@@ -11,9 +15,11 @@ required_skills:
 - neqsim-capex-opex-screening
 - neqsim-energy-emissions-screening
 - neqsim-asset-value-npv-screening
+- neqsim-ageing-life-extension-screening
 context_skills:
 - neqsim-uncertainty-quantification
 - neqsim-benchmark-reference-data
+- neqsim-ncs-ownership-equity
 ---
 
 # Purpose
@@ -80,6 +86,7 @@ Typical outputs include:
 # Workflow
 
 1. Confirm the screening objective, the value-chain scope, and the available public data.
+1a. Use `ageing-life-extension-screening` to establish the technical life basis of the host and reused infrastructure (design life, economic cut-off, programme validity, cessation year, life-limiting populations). Use the usable tail as the field-life horizon for the economics and emissions roll-up and show a truncated-life sensitivity; flag missing items as data gaps.
 2. Use `fluid-quality-check` to screen the reservoir fluid composition.
 3. Use `reservoir-depletion-screening` to establish the pressure and offtake profile basis.
 4. Use `hydrate-margin-check` to screen subsea SURF hydrate margins.
@@ -105,11 +112,13 @@ Typical outputs include:
 - `capex-opex-screening` mapped to community catalog ID `neqsim-capex-opex-screening`
 - `energy-emissions-screening` mapped to community catalog ID `neqsim-energy-emissions-screening`
 - `asset-value-npv-screening` mapped to community catalog ID `neqsim-asset-value-npv-screening`
+- `ageing-life-extension-screening` mapped to community catalog ID `neqsim-ageing-life-extension-screening`
 
 # Context Skills
 
 - `neqsim-benchmark-reference-data` — independent reference values and PASS/WARN/FAIL grading for any technical result that will be quoted.
 - `neqsim-uncertainty-quantification` — Monte Carlo P10/P50/P90, tornado sensitivity, and probability of a negative NPV over the resource, cost, and price ranges.
+- `neqsim-ncs-ownership-equity` — partners and working interests of an NCS field, discovery or licence from Sodir, to turn the gross cash flow into a net-to-company view (see `ncs-ownership-equity-agent`).
 
 # Example Usage
 
@@ -138,6 +147,7 @@ Use public synthetic data to screen a gas-condensate development from reservoir 
 # Validation Checklist
 
 - Screening objective, value-chain scope, and decision criteria are documented.
+- Field-life horizon is consistent with the technical life basis (sources, limiters, and truncated-life sensitivity stated).
 - Reservoir fluid and depletion-profile basis are stated.
 - Subsea hydrate and topside separation screening assumptions are stated.
 - Gas-export line and arrival-pressure basis are documented.

@@ -9,6 +9,8 @@ required_skills:
 context_skills:
 - neqsim-agentic-process-optimization
 - neqsim-optimization-and-doe
+- neqsim-dynamic-model-identification
+- neqsim-well-test-calibration
 coordinated_agents:
 - debottlenecking-agent
 supported_domains:
@@ -29,4 +31,4 @@ outputs:
 - assumptions-and-limitations
 - neqsim-optimization-recommendation
 human_review_required: true
-version: 0.1.0
+version: 0.1.2
