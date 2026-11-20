@@ -51,6 +51,7 @@ coordinated_agents:
 - reservoir-forecasting-agent
 - reservoir-history-match-agent
 - reservoir-souring-agent
+- reservoir-mercury-agent
 - reservoir-simulator-agent
 - reservoir-to-facility-screening-agent
 - resource-classification-agent
@@ -175,6 +176,7 @@ already obvious.
 | Follow a field with a multi-tank reservoir model: history match, produced composition, forecast under wellhead-pressure limits | `reservoir-history-match-agent` |
 | Reservoir souring: H2S in separator gas to wellstream H2S, H2S versus seawater fraction per well, mixing-zone plausibility, sour-service pH2S | `reservoir-souring-agent` |
 | Original reservoir H2S, mineral-buffer baseline or natural H2S changes during depletion versus waterflood souring | `reservoir-souring-agent` (mineral applicability and common measurement basis required) |
+| Mercury expected in the gas of a reservoir, prospect or discovery; worst case from mineral equilibrium; plausibility of a measured mercury value | `reservoir-mercury-agent` |
 | Who owns a field, discovery or licence; partners, equity, operator, net-equity inputs | `ncs-ownership-equity-agent` |
 | Weather, wind or sea-state data for an installation | `installation-weather-agent` |
 | Keep a solved task improving: monitor cycles, backtest, goal-driven re-solve, ledger, baseline promotion (a "living task") | `continuous-task-improvement-agent` |
