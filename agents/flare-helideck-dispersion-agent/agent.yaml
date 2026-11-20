@@ -1,0 +1,50 @@
+name: flare-helideck-dispersion-agent
+agent_type: community-coordinator
+status: draft
+description: Coordinates a screening study of unignited flare-tip gas reaching a helideck and its flight paths - frozen basis, wind statistics, API 520 rated and blowdown release rates, wind-weighted conditional exceedance of 10 and 20 % LFL, independent model review, figures with results.json, and a CFD hand-off - conditional on a release and never an annual frequency.
+required_skills:
+- neqsim-flare-helideck-dispersion
+- neqsim-weather-data
+- neqsim-psv-orifice-screening
+context_skills:
+- neqsim-relief-load-screening
+- neqsim-depressurization-screening
+- neqsim-gas-dispersion-distance-screening
+- neqsim-standards-lookup
+- neqsim-uncertainty-quantification
+- neqsim-professional-reporting
+- neqsim-cfd-coupling
+coordinated_agents:
+- installation-weather-agent
+- process-safety-agent
+- cfd-coupling-agent
+supported_domains:
+- process-safety
+- flare-dispersion
+- helideck-safety
+- unignited-gas-release
+- psv-release-rates
+- cfd-handoff
+inputs:
+- platform_geometry_tip_helideck_and_obstacle_free_sector
+- flight_path_definition_or_declared_assumption
+- acceptance_criteria_with_source
+- wind_record_or_joint_direction_speed_table
+- psv_orifice_and_set_pressure_or_rated_mass_flow
+- blowdown_peak_flow_composition_and_temperature
+- flare_tip_diameter_and_inclination
+- flameout_frequency_and_release_duration_optional
+- overlay_image_anchor_and_scale_optional
+outputs:
+- frozen_basis_table_with_sources_and_review_flags
+- wind_statistics_and_joint_table
+- release_rate_table_with_basis
+- peak_percent_lfl_at_helideck_into_wind_path_and_any_flight_path
+- conditional_exceedance_hours_at_10_and_20_percent_lfl
+- tip_inclination_scan_tornado_and_monte_carlo
+- independent_review_log
+- house_style_figures_and_results_json_fragment
+- cfd_handoff_of_worst_conditions
+- assumptions_limitations_and_human_review_checklist
+human_review_required: true
+version: 0.1.0
