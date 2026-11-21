@@ -1,7 +1,7 @@
 ---
 name: tie-in-screening-agent
 description: Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks.
-version: 0.1.0
+version: 0.1.1
 required_skills:
 - neqsim-fluid-quality-check
 - neqsim-hydrate-screening
@@ -10,6 +10,8 @@ required_skills:
 - neqsim-ageing-life-extension-screening
 coordinated_agents:
 - subsea-infrastructure-capacity-agent
+- fluid-commingling-agent
+- surrogate-study-agent
 ---
 
 # Purpose
@@ -62,9 +64,11 @@ Typical outputs include:
 1a. Use `ageing-life-extension-screening` to establish the technical life basis of the host (design life, economic cut-off, programme validity, cessation year, life-limiting populations such as risers, pipelines, moorings, obsolescence) and the usable host tail from the tie-in start year. List the limiter checks (riser life, pipeline design-life expiry, compression headroom) that must pass before a tie-in is assumed, and flag missing items as data gaps. Report the lifetime action (replace, refurbish, life-extend, monitor) for every host or reused item that expires inside the tie-in horizon.
 1b. Ask `subsea-infrastructure-capacity-agent` which existing slots, tees, hubs and spare or reusable lines (including gas-lift, injection and MEG lines) could take the tie-in, with status, remaining life and verification level, and compare with a new-build tie-back before assuming one.
 2. Use `fluid-quality-check` to review composition quality and missing data.
+2a. When the tie-in fluid will mix with host or existing production upstream of the first separator, hand both compositions to `fluid-commingling-agent` for the NeqSim blend sweep (asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed separator-gas H2S/CO2) and carry its worst blend ratios into the risk list.
 3. Use `hydrate-screening` to flag preliminary hydrate risk considerations.
 4. Use `separator-modelling` to identify high-level separator screening considerations.
 5. Use `resource-classification-screening` to map the project maturity stage to a public resource classification category.
+5a. When the tie-in rate that the host can take must be stated over uncertain pressures, temperatures or compositions and a NeqSim host model exists, ask `surrogate-study-agent` for the limit boundary, the maximum tie-in rate at the worst corner and the exceedance probability.
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible screening report outline.
 8. Document assumptions, limitations, and human review requirements.

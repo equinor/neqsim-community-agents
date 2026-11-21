@@ -22,6 +22,7 @@ coordinated_agents:
 - firewater-coverage-agent
 - flow-assurance-engineer-agent
 - flow-assurance-study-agent
+- fluid-commingling-agent
 - fluid-characterization-agent
 - frontier-block-bid-agent
 - gas-export-pipeline-agent
@@ -61,6 +62,7 @@ coordinated_agents:
 - subsea-cooldown-agent
 - subsea-equipment-placement-agent
 - subsea-layout-screening-agent
+- surrogate-study-agent
 - surf-layout-design-agent
 - umbilical-design-agent
 - technical-document-intelligence-agent
@@ -71,7 +73,7 @@ coordinated_agents:
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
-version: 0.1.3
+version: 0.1.4
 required_skills: []
 supported_domains:
 - request classification
@@ -149,6 +151,7 @@ already obvious.
 | Reservoir-to-facility rates and arrival conditions | `reservoir-to-facility-screening-agent` |
 | Fluid characterization, PVT, phase behaviour, E300 files | `pvt-agent`, `fluid-characterization-agent`, `e300-fluid-agent` |
 | GOR, Bo, stock-tank oil API or stage gas from one fluid; one shared forward separator P/T fit across fluids | `pvt-agent` (forward-only, no recycle) |
+| Two fluids mixed in a tie-in, well or shared flowline: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed sour gas, worst blend ratio | `fluid-commingling-agent` |
 | Hydrate, wax, scale, cooldown, flow assurance | `flow-assurance-engineer-agent`, `flow-assurance-study-agent`, `hydrate-screening-agent`, `subsea-cooldown-agent`, `produced-water-scale-agent` |
 | Transient multiphase flow, slugging, OLGA | `olga-simulation-agent` |
 | Brazilian offshore infrastructure: fields, FPSOs, wells, gas pipelines, tie-in host ranking | `brazil-offshore-infrastructure-agent` |
@@ -166,6 +169,7 @@ already obvious.
 | Heat exchanger fouling, U-value degradation, cleaning interval, cooler capacity limitation | `heat-exchanger-condition-agent` |
 | Control valve saturated, loop stopped controlling, "the disturbance got worse" | `control-authority-agent` |
 | Capacity bottleneck, debottlenecking, throughput | `debottlenecking-agent`, `production-optimization-agent` |
+| Maximum tie-in or throughput rate before a host limit binds, probability of exceeding a limit, Monte Carlo or envelope map on a slow NeqSim flowsheet | `surrogate-study-agent` (after the model is built, e.g. by `debottlenecking-agent` or `tie-in-screening-agent`) |
 | Raw test-separator data to calibrate producer lift curves or refresh a choke advisory | `vfp-lift-curve-agent` for tables, `production-optimization-agent` for advisory model updates |
 | Dynamic simulation, controllers, transmitters | `dynamic-process-preparation-agent`, `dynamic-instrument-controller-agent` |
 | Relief, blowdown, fire, dispersion, safety functions | `process-safety-agent` |

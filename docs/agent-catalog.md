@@ -59,7 +59,7 @@ After installation the agents appear in GitHub Copilot Chat:
 
 ## 2. Agent catalog
 
-The repository contains **48 agents**. They are grouped below by the engineering
+The repository contains **78 agents**. They are grouped below by the engineering
 question they answer.
 
 ### 2.1 Fluids, PVT and characterization
@@ -101,6 +101,7 @@ question they answer.
 | `hydrate-screening-agent` | Preliminary hydrate risk assessment with recommended follow-up analysis. |
 | `subsea-cooldown-agent` | Flowline and riser cooldown screening — checks no-touch time against hydrate-margin guidelines. |
 | `sand-erosion-agent` | Subsea and topside erosional-velocity and remaining-wall-life screening. |
+| `fluid-commingling-agent` | Runs a NeqSim blend sweep of two commingled fluids and finds the blend ratio where the mixture is worst: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed sour gas and water-water scale. |
 | `produced-water-scale-agent` | Builds produced-water brines from ion analyses, presets, or TDS values and evaluates scale risk indicators. |
 | `olga-simulation-agent` *(coordinator)* | Runs the OLGA transient multiphase simulator end to end — locates the engine, rule-checks the case, executes it in batch, decodes the exit status, and reads trend and profile results. |
 | `pipe-route-screening-agent` *(coordinator)* | Builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin. |
@@ -129,6 +130,7 @@ question they answer.
 | `gas-treatment-agent` | Checks gas water content and dehydration against a sales-gas spec and estimates single-stage compression power. |
 | `teg-dehydration-agent` | Builds and runs a validated NeqSim TEG dehydration plant and reports water dew point, lean-TEG purity, and regeneration still-vent emissions. |
 | `gas-export-pipeline-agent` | Chains line velocity, pressure drop, and export compression power into a gas-export line screen. |
+| `surrogate-study-agent` | Builds a validated active-learning surrogate of a NeqSim flowsheet to find where a capacity or specification limit binds (for example the maximum tie-in rate) and to run Monte Carlo or envelope studies with tens of NeqSim runs. |
 
 ### 2.7 Rotating equipment and drivers
 

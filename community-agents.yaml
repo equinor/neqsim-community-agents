@@ -4,7 +4,7 @@
 # consumed by the main NeqSim ecosystem.
 
 catalog_version: "1.0"
-last_updated: "2026-11-19"
+last_updated: "2026-11-21"
 trust: "community"
 
 agents:
@@ -117,7 +117,7 @@ agents:
       - lifetime-screening
 
   - name: tie-in-screening-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks."
     repo: "equinor/neqsim-community-agents"
     path: "agents/tie-in-screening-agent/AGENT.md"
@@ -132,6 +132,44 @@ agents:
       - tie-in-screening
       - flow-assurance
       - resource-classification
+
+  - name: fluid-commingling-agent
+    version: "0.1.0"
+    description: "Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation, gas breakout, blend hydrate temperature, sour gas and produced-water scale."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/fluid-commingling-agent/AGENT.md"
+    required_skills:
+      - neqsim-fluid-commingling-compatibility
+      - neqsim-produced-water-scale-screening
+      - neqsim-fluid-quality-check
+    context_skills:
+      - neqsim-hydrate-screening
+      - neqsim-wax-margin-check
+      - neqsim-active-learning-surrogate
+    supported_domains:
+      - flow-assurance
+      - tie-in-screening
+      - pvt
+      - production-chemistry
+
+  - name: surrogate-study-agent
+    version: "0.1.0"
+    description: "Turns a slow NeqSim flowsheet into a validated active-learning surrogate so a study can run thousands of cases - Monte Carlo, sensitivity, operating-envelope maps - or find exactly where a capacity or specification limit starts to bind, with tens of NeqSim runs."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/surrogate-study-agent/AGENT.md"
+    required_skills:
+      - neqsim-active-learning-surrogate
+      - neqsim-uncertainty-quantification
+    context_skills:
+      - neqsim-compressor-operating-window-check
+      - neqsim-separator-modelling
+      - neqsim-fluid-commingling-compatibility
+    supported_domains:
+      - process-engineering
+      - uncertainty
+      - capacity
+      - tie-in-screening
+      - optimisation
 
   - name: teg-dehydration-agent
     version: "0.1.0"
@@ -1220,7 +1258,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.3"
+    version: "0.1.4"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"
