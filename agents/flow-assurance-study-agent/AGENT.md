@@ -1,12 +1,17 @@
 ---
 name: flow-assurance-study-agent
 description: Coordinates a reviewable flow-assurance study by freezing the engineering basis, delegating calculations to existing NeqSim and OLGA specialist agents, and enforcing like-for-like validation gates.
-version: 0.1.0
+version: 0.1.1
 agent_type: community-coordinator
 required_skills: []
 context_skills:
 - neqsim-benchmark-reference-data
 - neqsim-uncertainty-quantification
+- neqsim-active-learning-surrogate
+- neqsim-co2-corrosion-profile
+- neqsim-meg-loop
+- neqsim-fluid-commingling-compatibility
+- neqsim-ccs-transport-chain
 - neqsim-final-report-writing-style
 coordinated_agents:
 - technical-document-intelligence-agent
@@ -119,7 +124,14 @@ Typical outputs include:
    burial changes the thermal basis, run cooldown and hydrate margin for the
    protected and the unprotected state and carry the burial schedule into the
    `TwoFluidPipe` sections instead of one burial depth for the whole line. Only
-   invoke checks relevant to the decision.
+   invoke checks relevant to the decision. For threats that need a NeqSim
+   calculation rather than a margin screen, load the matching context skill:
+   `neqsim-co2-corrosion-profile` for internal corrosion, allowance and CRA
+   selection; `neqsim-meg-loop` for MEG rate, regeneration and salt build-up;
+   `neqsim-fluid-commingling-compatibility` when a new fluid is tied into a host
+   (asphaltene, gas breakout, blend hydrate and wax, naphthenates, H2S/CO2); and
+   `neqsim-ccs-transport-chain` for CO2 pipeline-to-injector chains. Treat their
+   results as screening and carry their stated limitations into the findings register.
 8. **Escalate transients.** Delegate terrain slugging, ramp-up liquid surge,
    shutdown/restart, blowdown, well clean-up, or design-critical independent
    comparison to `olga-simulation-agent`. Do not spend an OLGA licence on a question
@@ -136,8 +148,10 @@ Typical outputs include:
     discrepancy to a simulator or correlation.
 11. **Quantify uncertainty where it affects the decision.** Load
     `neqsim-uncertainty-quantification` for uncertain inputs and
-    `neqsim-benchmark-reference-data` for independent reference checks. Keep
-    uncertainty separate from deterministic model disagreement.
+    `neqsim-benchmark-reference-data` for independent reference checks. When each
+    NeqSim run takes seconds and the study needs thousands, use
+    `neqsim-active-learning-surrogate` to run NeqSim only where the surrogate is
+    uncertain. Keep uncertainty separate from deterministic model disagreement.
 12. **Synthesize, do not average.** Preserve each specialist's evidence and limits.
     Report agreed findings, unresolved disagreements, open data gaps, recommended
     actions, and who must approve them. Never manufacture one consensus number by
@@ -159,9 +173,12 @@ This is a pure coordinator and has no direct calculation skill. It delegates to:
 - `piping-integrity-agent` for velocity, pressure-drop, wall, and vibration screens.
 - `sand-erosion-agent` for solids-related erosion screening.
 
-It may load `neqsim-benchmark-reference-data` and
-`neqsim-uncertainty-quantification` as context when validation or uncertainty is
-part of the study, and `neqsim-final-report-writing-style` only at the final
+It may load `neqsim-benchmark-reference-data`,
+`neqsim-uncertainty-quantification` and `neqsim-active-learning-surrogate` as
+context when validation or uncertainty is part of the study,
+`neqsim-co2-corrosion-profile`, `neqsim-meg-loop`,
+`neqsim-fluid-commingling-compatibility` and `neqsim-ccs-transport-chain` when the
+corresponding threat is in scope, and `neqsim-final-report-writing-style` only at the final
 reporting step to select the report writing style.
 
 # Example Usage
