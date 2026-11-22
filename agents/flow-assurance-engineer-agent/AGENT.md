@@ -1,7 +1,7 @@
 ---
 name: flow-assurance-engineer-agent
 description: Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines.
-version: 0.1.1
+version: 0.1.2
 required_skills:
 - neqsim-hydrate-margin-check
 - neqsim-wax-margin-check
@@ -9,6 +9,8 @@ coordinated_agents:
 - olga-simulation-agent
 - flow-assurance-study-agent
 - piping-integrity-agent
+- hydrate-screening-agent
+- ccs-transport-agent
 ---
 
 # Purpose
@@ -55,6 +57,8 @@ Typical outputs include:
 2. Use `hydrate-margin-check` to estimate the hydrate margin and subcooling against the hydrate equilibrium temperature.
 3. Use `wax-margin-check` to estimate the wax margin against the wax appearance temperature.
 3a. Where free water and CO2 are present, flag internal corrosion and hand the line to `piping-integrity-agent`, which runs `neqsim-co2-corrosion-profile` on the same NeqSim pipeline profile.
+3b. Where the hydrate margin is negative and MEG is the inhibitor, hand the stream to `hydrate-screening-agent`, which sizes the MEG loop with `neqsim-meg-loop` (injection rate, regeneration duty, salt build-up).
+3c. For a CO2 (CCS) line, hand the chain to `ccs-transport-agent` (`neqsim-ccs-transport-chain`): single-phase and water margins, dry ice on blowdown and bottom-hole pressure.
 4. Summarize major uncertainties and required studies.
 5. Generate a reproducible flow assurance screening report outline.
 6. Document assumptions, limitations, and human review requirements.

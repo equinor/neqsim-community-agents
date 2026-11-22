@@ -67,12 +67,13 @@ agents:
       - fluid-io
 
   - name: hydrate-screening-agent
-    version: "0.1.0"
-    description: "Performs preliminary hydrate risk assessment and recommends further analysis."
+    version: "0.2.0"
+    description: "Performs preliminary hydrate risk assessment and, where MEG is the inhibitor, sizes the MEG loop with NeqSim (lean MEG rate to a hydrate margin, regeneration duty, salt build-up and reclaimer slipstream)."
     repo: "equinor/neqsim-community-agents"
     path: "agents/hydrate-screening-agent/AGENT.md"
     required_skills:
       - neqsim-hydrate-screening
+      - neqsim-meg-loop
     supported_domains:
       - flow-assurance
       - hydrates
@@ -117,7 +118,7 @@ agents:
       - lifetime-screening
 
   - name: tie-in-screening-agent
-    version: "0.1.2"
+    version: "0.1.3"
     description: "Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks."
     repo: "equinor/neqsim-community-agents"
     path: "agents/tie-in-screening-agent/AGENT.md"
@@ -129,6 +130,7 @@ agents:
       - neqsim-ageing-life-extension-screening
     context_skills:
       - neqsim-co2-corrosion-profile
+      - neqsim-meg-loop
     supported_domains:
       - field-development
       - tie-in-screening
@@ -153,6 +155,27 @@ agents:
       - tie-in-screening
       - pvt
       - production-chemistry
+
+  - name: ccs-transport-agent
+    version: "0.1.0"
+    description: "Screens a CO2 (CCS) transport chain from pipeline inlet to reservoir with NeqSim - single-phase and water margins at every station, impurity specification, depressurisation and dry ice, internal corrosion, and injection-well bottom-hole pressure against reservoir and fracture pressure - and names the binding link."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/ccs-transport-agent/AGENT.md"
+    required_skills:
+      - neqsim-ccs-transport-chain
+    context_skills:
+      - neqsim-co2-corrosion-profile
+      - neqsim-active-learning-surrogate
+    coordinated_agents:
+      - piping-integrity-agent
+      - near-well-injectivity-agent
+      - process-safety-agent
+      - surrogate-study-agent
+    supported_domains:
+      - flow-assurance
+      - ccs
+      - pipeline
+      - injection
 
   - name: surrogate-study-agent
     version: "0.1.0"
@@ -293,7 +316,7 @@ agents:
       - instrumentation
 
   - name: flow-assurance-engineer-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/flow-assurance-engineer-agent/AGENT.md"
@@ -302,10 +325,14 @@ agents:
       - neqsim-wax-margin-check
     context_skills:
       - neqsim-co2-corrosion-profile
+      - neqsim-meg-loop
+      - neqsim-ccs-transport-chain
     coordinated_agents:
       - olga-simulation-agent
       - flow-assurance-study-agent
       - piping-integrity-agent
+      - hydrate-screening-agent
+      - ccs-transport-agent
     supported_domains:
       - flow-assurance
       - operating-limits
@@ -365,7 +392,7 @@ agents:
       - simulator-integration
 
   - name: piping-integrity-agent
-    version: "0.2.0"
+    version: "0.2.1"
     description: "Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, flow-induced vibration and internal CO2 corrosion along a flowline against public guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/piping-integrity-agent/AGENT.md"
@@ -1264,7 +1291,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.5"
+    version: "0.1.6"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"

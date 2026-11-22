@@ -59,7 +59,7 @@ After installation the agents appear in GitHub Copilot Chat:
 
 ## 2. Agent catalog
 
-The repository contains **78 agents**. They are grouped below by the engineering
+The repository contains **79 agents**. They are grouped below by the engineering
 question they answer.
 
 ### 2.1 Fluids, PVT and characterization
@@ -98,10 +98,11 @@ question they answer.
 |-------|--------------|
 | `flow-assurance-engineer-agent` *(coordinator)* | Checks operating points against public hydrate-margin and wax-margin guidelines; the usual entry point for flow-assurance questions. |
 | `flow-assurance-study-agent` *(coordinator)* | Runs a reviewable study: freezes the engineering basis, delegates calculations to the NeqSim and OLGA specialists, and enforces like-for-like validation gates. |
-| `hydrate-screening-agent` | Preliminary hydrate risk assessment with recommended follow-up analysis. |
+| `hydrate-screening-agent` | Preliminary hydrate risk assessment with recommended follow-up analysis; sizes a MEG loop with NeqSim (lean MEG rate to a hydrate margin, regeneration duty, salt build-up and reclaimer slipstream). |
 | `subsea-cooldown-agent` | Flowline and riser cooldown screening — checks no-touch time against hydrate-margin guidelines. |
 | `sand-erosion-agent` | Subsea and topside erosional-velocity and remaining-wall-life screening. |
-| `fluid-commingling-agent` | Runs a NeqSim blend sweep of two commingled fluids and finds the blend ratio where the mixture is worst: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed sour gas and water-water scale. |
+| `fluid-commingling-agent` | Runs a NeqSim blend sweep of two commingled fluids and finds the blend ratio where the mixture is worst: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, blend wax appearance temperature, naphthenate soaps from acidic crude, mixed sour gas and water-water scale. |
+| `ccs-transport-agent` | Screens a CO2 (CCS) chain from pipeline to reservoir with NeqSim: single-phase and water margins at every station, impurity specification, depressurisation and dry ice, bottom-hole pressure against fracture; names the binding link. |
 | `produced-water-scale-agent` | Builds produced-water brines from ion analyses, presets, or TDS values and evaluates scale risk indicators. |
 | `olga-simulation-agent` *(coordinator)* | Runs the OLGA transient multiphase simulator end to end — locates the engine, rule-checks the case, executes it in batch, decodes the exit status, and reads trend and profile results. |
 | `pipe-route-screening-agent` *(coordinator)* | Builds a route elevation profile and checks arrival pressure drop, line velocity, and hydrate margin. |
@@ -151,7 +152,7 @@ question they answer.
 
 | Agent | What it does |
 |-------|--------------|
-| `piping-integrity-agent` | Line velocity, pressure drop, wall thickness, flow-induced vibration, and internal CO2 corrosion along a flowline (NORSOK M-506 Rev. 2, allowance, materials review). |
+| `piping-integrity-agent` | Line velocity, pressure drop, wall thickness, flow-induced vibration, and internal CO2 corrosion along a flowline (NORSOK M-506 Rev. 2 with glycol correction, top-of-line condensation screen, H2S regime and ISO 15156 region, allowance, materials review). |
 | `piping-mechanical-agent` | Hoop and thermal-flexibility margins plus acoustic-induced vibration likelihood. |
 | `noise-assessment-agent` | Assesses gas-valve and restriction noise from measurements or process data, routes detailed prediction to IEC 60534-8-3, and keeps workplace-noise and AIV decisions separate. |
 

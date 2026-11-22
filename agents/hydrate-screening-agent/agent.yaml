@@ -1,8 +1,9 @@
 name: hydrate-screening-agent
 agent_type: community-agent
-description: Performs preliminary hydrate risk assessment and recommends further analysis.
+description: Performs preliminary hydrate risk assessment and, where MEG is the inhibitor, sizes the MEG loop with NeqSim (lean MEG rate to a hydrate margin, regeneration duty, salt build-up and reclaimer slipstream).
 required_skills:
 - neqsim-hydrate-screening
+- neqsim-meg-loop
 supported_domains:
 - flow-assurance
 - hydrates
@@ -13,11 +14,15 @@ inputs:
 - water_assumptions
 - operating_scenario
 - inhibitor_information
+- formation_water_rate_and_tds
+- meg_regeneration_basis
 outputs:
 - hydrate_risk_screening_summary
 - missing_information
 - recommended_follow_up_analysis
+- meg_injection_rate_and_rich_meg
+- meg_regeneration_duty_and_salt_balance
 - assumptions_and_limitations
 - validation_checklist
 human_review_required: true
-version: 0.1.0
+version: 0.2.0

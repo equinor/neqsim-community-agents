@@ -24,9 +24,13 @@ outputs:
 - validation_checklist
 context_skills:
 - neqsim-co2-corrosion-profile
+- neqsim-meg-loop
+- neqsim-ccs-transport-chain
 coordinated_agents:
 - olga-simulation-agent
 - flow-assurance-study-agent
 - piping-integrity-agent
+- hydrate-screening-agent
+- ccs-transport-agent
 human_review_required: true
-version: 0.1.1
+version: 0.1.2
