@@ -1,7 +1,7 @@
 ---
 name: piping-integrity-agent
 description: Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, flow-induced vibration and internal CO2 corrosion along a flowline against public guidelines.
-version: 0.2.0
+version: 0.2.1
 required_skills:
 - neqsim-line-velocity-check
 - neqsim-pressure-drop-screening
@@ -61,7 +61,7 @@ Typical outputs include:
 3. Use `pressure-drop-screening` to estimate the pressure gradient and a ratio against the gradient guideline.
 4. Use `pipe-wall-thickness-screening` to estimate the minimum wall thickness and a margin against the nominal wall.
 5. Use `flow-induced-vibration-screening` to estimate a kinetic-energy likelihood index.
-5a. For lines carrying water with CO2 (or a CO2 transport line), use `co2-corrosion-profile` to run NORSOK M-506 Rev. 2 along the NeqSim pipeline profile: where free water exists, the design rate with the stated inhibitor availability, wall loss over the design life against the corrosion allowance, and the NeqSim materials review. Feed the allowance consumed into the wall-thickness margin from step 4.
+5a. For lines carrying water with CO2 (or a CO2 transport line), use `co2-corrosion-profile` to run NORSOK M-506 Rev. 2 along the NeqSim pipeline profile: where free water exists, the design rate with the stated inhibitor availability, wall loss over the design life against the corrosion allowance, and the NeqSim materials review. Feed the allowance consumed into the wall-thickness margin from step 4. Give the line mass flow so top-of-line corrosion is screened from the condensation rate in uninsulated gas lines; give the MEG weight fraction (and `apply_glycol_correction`) where MEG is injected; and give H2S so the CO2/H2S regime and the ISO 15156 sour-service region are reported. Treat `h2s-regime` and `top-of-line-corrosion` findings as limits of the M-506 rate, not as rates.
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible piping integrity screening report outline.
 8. Document assumptions, limitations, and human review requirements.

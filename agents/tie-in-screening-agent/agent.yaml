@@ -9,11 +9,13 @@ required_skills:
 - neqsim-ageing-life-extension-screening
 context_skills:
 - neqsim-co2-corrosion-profile
+- neqsim-meg-loop
 coordinated_agents:
 - subsea-infrastructure-capacity-agent
 - piping-integrity-agent
 - fluid-commingling-agent
 - surrogate-study-agent
+- hydrate-screening-agent
 supported_domains:
 - field-development
 - tie-in-screening
@@ -39,4 +41,4 @@ outputs:
 - required_follow_up_studies
 - validation_checklist
 human_review_required: true
-version: 0.1.2
+version: 0.1.3

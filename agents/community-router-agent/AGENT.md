@@ -73,7 +73,7 @@ coordinated_agents:
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
-version: 0.1.5
+version: 0.1.6
 required_skills: []
 supported_domains:
 - request classification
@@ -151,7 +151,8 @@ already obvious.
 | Reservoir-to-facility rates and arrival conditions | `reservoir-to-facility-screening-agent` |
 | Fluid characterization, PVT, phase behaviour, E300 files | `pvt-agent`, `fluid-characterization-agent`, `e300-fluid-agent` |
 | GOR, Bo, stock-tank oil API or stage gas from one fluid; one shared forward separator P/T fit across fluids | `pvt-agent` (forward-only, no recycle) |
-| Two fluids mixed in a tie-in, well or shared flowline: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed sour gas, worst blend ratio | `fluid-commingling-agent` |
+| Two fluids mixed in a tie-in, well or shared flowline: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, blend wax appearance temperature, naphthenate soaps from acidic crude and separator water pH, mixed sour gas, worst blend ratio | `fluid-commingling-agent` |
+| MEG injection rate, MEG regeneration duty, salt build-up in a MEG loop, reclaimer slipstream, lean MEG concentration | `hydrate-screening-agent` (runs the MEG loop skill) |
 | Hydrate, wax, scale, cooldown, flow assurance | `flow-assurance-engineer-agent`, `flow-assurance-study-agent`, `hydrate-screening-agent`, `subsea-cooldown-agent`, `produced-water-scale-agent` |
 | Transient multiphase flow, slugging, OLGA | `olga-simulation-agent` |
 | Brazilian offshore infrastructure: fields, FPSOs, wells, gas pipelines, tie-in host ranking | `brazil-offshore-infrastructure-agent` |
@@ -160,7 +161,8 @@ already obvious.
 | Open fishing, environmental, wind/grid and crossing constraints for a route or equipment site | `subsea-equipment-placement-agent` for siting, `surf-layout-design-agent` for a new layout, `seabed-protection-agent` for protection scope, `export-tie-in-concept-agent` for an export connection |
 | Umbilical sizing and drawings: chemical injection lines, hydraulic response, power cable, armour and bend radius | `umbilical-design-agent` |
 | Line sizing, velocity, pressure drop, erosion, vibration | `piping-integrity-agent`, `piping-mechanical-agent`, `sand-erosion-agent` |
-| Internal CO2 corrosion along a flowline, corrosion allowance, carbon steel or CRA, inhibitor availability, water and impurities in a CO2 (CCS) line | `piping-integrity-agent` (runs the CO2 corrosion profile) |
+| Internal CO2 corrosion along a flowline, corrosion allowance, carbon steel or CRA, inhibitor availability, top-of-line corrosion, glycol correction, H2S regime and sour service | `piping-integrity-agent` (runs the CO2 corrosion profile) |
+| CO2 (CCS) transport chain: pipeline single-phase and water margins, CO2 impurity specification, blowdown and dry ice, injection-well bottom-hole pressure vs fracture | `ccs-transport-agent`, with `piping-integrity-agent` for internal corrosion |
 | Gas export pipeline sizing and compression | `gas-export-pipeline-agent` |
 | Separator, scrubber, unit-operation screening | `process-engineer-agent`, `process-screening-agent` |
 | Gas dehydration / TEG | `gas-treatment-agent` (screening), `teg-dehydration-agent` (NeqSim-backed) |

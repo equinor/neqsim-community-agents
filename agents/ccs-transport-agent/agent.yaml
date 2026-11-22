@@ -1,0 +1,34 @@
+name: ccs-transport-agent
+agent_type: community-agent
+description: Screens a CO2 (CCS) transport chain from pipeline inlet to reservoir with NeqSim - single-phase and water margins at every station, impurity specification, depressurisation and dry ice, internal corrosion, and injection-well bottom-hole pressure against reservoir and fracture pressure - and names the binding link.
+required_skills:
+- neqsim-ccs-transport-chain
+context_skills:
+- neqsim-co2-corrosion-profile
+- neqsim-active-learning-surrogate
+coordinated_agents:
+- piping-integrity-agent
+- near-well-injectivity-agent
+- process-safety-agent
+- surrogate-study-agent
+supported_domains:
+- flow-assurance
+- ccs
+- pipeline
+- injection
+inputs:
+- co2_stream_composition_and_water
+- pipeline_geometry_flow_and_inlet_conditions
+- ambient_and_heat_transfer
+- injection_well_and_reservoir_pressures
+- project_limits_margin_water_factor_design_temperature_maop
+outputs:
+- station_table_with_single_phase_and_water_margins
+- binding_link_and_findings
+- impurity_specification_screen
+- depressurisation_temperatures_and_dry_ice
+- bottom_hole_pressure_vs_fracture
+- assumptions_and_limitations
+- validation_checklist
+human_review_required: true
+version: 0.1.0
