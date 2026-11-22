@@ -26,3 +26,12 @@ Use the Fluid Commingling Agent to screen lift gas injected into a heavy oil at
 gas-to-oil molar ratios of 0-40 %. Report where the live-oil refractive index
 drops below onset and at which pressure along the tubing that happens.
 ```
+
+## Blend Onset Pressure from a Measured Host Onset
+
+```text
+Use the Fluid Commingling Agent with a calibrated asphaltene onset. The host
+oil's onset is 150 bara at 80 C; assume asphaltene 1000 g/mol, 1.15 g/cm3.
+Report the onset pressure of each blend with the condensate from 0 to 80 mol %
+and the share at which it reaches the 200 bara commingling pressure.
+```

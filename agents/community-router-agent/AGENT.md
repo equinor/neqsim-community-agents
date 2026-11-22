@@ -73,7 +73,7 @@ coordinated_agents:
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
-version: 0.1.6
+version: 0.1.7
 required_skills: []
 supported_domains:
 - request classification
@@ -151,7 +151,7 @@ already obvious.
 | Reservoir-to-facility rates and arrival conditions | `reservoir-to-facility-screening-agent` |
 | Fluid characterization, PVT, phase behaviour, E300 files | `pvt-agent`, `fluid-characterization-agent`, `e300-fluid-agent` |
 | GOR, Bo, stock-tank oil API or stage gas from one fluid; one shared forward separator P/T fit across fluids | `pvt-agent` (forward-only, no recycle) |
-| Two fluids mixed in a tie-in, well or shared flowline: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, blend wax appearance temperature, naphthenate soaps from acidic crude and separator water pH, mixed sour gas, worst blend ratio | `fluid-commingling-agent` |
+| Two fluids mixed in a tie-in, well or shared flowline: asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, blend wax appearance temperature, naphthenate soaps from acidic crude and separator water pH, mixed sour gas, worst blend ratio, asphaltene onset pressure of each blend from a measured host onset | `fluid-commingling-agent` |
 | MEG injection rate, MEG regeneration duty, salt build-up in a MEG loop, reclaimer slipstream, lean MEG concentration | `hydrate-screening-agent` (runs the MEG loop skill) |
 | Hydrate, wax, scale, cooldown, flow assurance | `flow-assurance-engineer-agent`, `flow-assurance-study-agent`, `hydrate-screening-agent`, `subsea-cooldown-agent`, `produced-water-scale-agent` |
 | Transient multiphase flow, slugging, OLGA | `olga-simulation-agent` |

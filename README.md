@@ -54,7 +54,7 @@ screening workflows keep their required prerequisites:
 | H2S expected in the gas of a prospect or discovery before production, with range and sour-service screen | [Reservoir H2S](agents/reservoir-h2s-agent/AGENT.md) |
 | Mercury expected in the gas of a prospect or discovery, with range and mineral limits | [Reservoir mercury](agents/reservoir-mercury-agent/AGENT.md) |
 | Forward-only separator tests and shared stage P/T fitting | [PVT](agents/pvt-agent/AGENT.md) |
-| Mixture-only incompatibility of two commingled fluids (asphaltene by dilution, gas breakout, blend hydrate) | [Fluid commingling](agents/fluid-commingling-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
+| Mixture-only incompatibility of two commingled fluids (asphaltene by dilution and blend onset pressure from a measured host onset, gas breakout, blend hydrate) | [Fluid commingling](agents/fluid-commingling-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
 | Internal CO2 corrosion along a flowline, corrosion allowance, carbon steel or CRA, top-of-line, glycol and sour regime | [Piping integrity](agents/piping-integrity-agent/AGENT.md) |
 | CO2 (CCS) chain: single-phase and water margins, impurities, dry ice on blowdown, bottom-hole vs fracture pressure | [CCS transport](agents/ccs-transport-agent/AGENT.md) |
 | MEG injection rate, regeneration duty, salt build-up and reclaimer slipstream | [Hydrate screening](agents/hydrate-screening-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
