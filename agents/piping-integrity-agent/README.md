@@ -1,6 +1,6 @@
 # Piping Integrity Agent
 
-The Piping Integrity Agent supports early-stage piping integrity screening by combining line-velocity screening, single-phase pressure-drop screening, wall-thickness screening, and flow-induced vibration screening.
+The Piping Integrity Agent supports early-stage piping integrity screening by combining line-velocity screening, single-phase pressure-drop screening, wall-thickness screening, flow-induced vibration screening, and internal CO2 corrosion along the flowline.
 
 It helps engineers check whether lines appear to run within public design and integrity guidelines (such as erosional-velocity, pressure-gradient, ASME B31.3 wall-thickness, and Energy Institute vibration limits), produce preliminary indicators, identify required studies, generate screening reports, and suggest validated NeqSim and standards workflows. It is intended for transparent concept screening only.
 
@@ -10,6 +10,7 @@ It helps engineers check whether lines appear to run within public design and in
 - Estimate single-phase pressure drop against a pressure-gradient guideline
 - Estimate minimum wall thickness against a nominal schedule wall
 - Estimate a flow-induced vibration likelihood index
+- Run NORSOK M-506 Rev. 2 CO2 corrosion along the NeqSim pipeline profile: free water, design rate with inhibitor availability, wall loss against the corrosion allowance, NORSOK M-001 material recommendation and the NeqSim materials review
 - Flag lines that appear to run outside standard guidelines
 - Identify required follow-up line sizing, hydraulic, mechanical, and vibration studies
 - Generate screening reports
@@ -21,6 +22,7 @@ It helps engineers check whether lines appear to run within public design and in
 - `pressure-drop-screening`
 - `pipe-wall-thickness-screening`
 - `flow-induced-vibration-screening`
+- `co2-corrosion-profile`
 
 ## Directory Contents
 

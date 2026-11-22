@@ -1,12 +1,13 @@
 ---
 name: piping-integrity-agent
-description: Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, and flow-induced vibration against public guidelines.
-version: 0.1.0
+description: Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, flow-induced vibration and internal CO2 corrosion along a flowline against public guidelines.
+version: 0.2.0
 required_skills:
 - neqsim-line-velocity-check
 - neqsim-pressure-drop-screening
 - neqsim-pipe-wall-thickness-screening
 - neqsim-flow-induced-vibration-screening
+- neqsim-co2-corrosion-profile
 ---
 
 # Purpose
@@ -37,6 +38,7 @@ Typical inputs include:
 - Line length, diameter, friction factor, and a pressure-gradient guideline
 - Design pressure, outside diameter, allowable stress, and nominal wall thickness
 - Flow velocity and density for a flow-induced vibration index
+- For internal corrosion: well-stream composition with water, CO2, H2S, produced-water chloride and bicarbonate, flowline geometry and thermal data (or a pressure-temperature profile), design life, corrosion allowance and the inhibitor availability that can be justified
 - Screening objective and decision criteria
 
 # Outputs
@@ -47,6 +49,7 @@ Typical outputs include:
 - Pressure-drop indicators (pressure gradient, guideline ratio) and warning level
 - Wall-thickness indicators (minimum thickness, thickness margin ratio) and warning level
 - Flow-induced vibration likelihood index and warning level
+- Internal CO2 corrosion rate along the line, where free water exists, wall loss over the design life against the corrosion allowance, and a NORSOK M-001 material recommendation
 - Recommended validated NeqSim and standards workflows
 - Required follow-up studies
 - Assumptions, limitations, and human review checklist
@@ -58,6 +61,7 @@ Typical outputs include:
 3. Use `pressure-drop-screening` to estimate the pressure gradient and a ratio against the gradient guideline.
 4. Use `pipe-wall-thickness-screening` to estimate the minimum wall thickness and a margin against the nominal wall.
 5. Use `flow-induced-vibration-screening` to estimate a kinetic-energy likelihood index.
+5a. For lines carrying water with CO2 (or a CO2 transport line), use `co2-corrosion-profile` to run NORSOK M-506 Rev. 2 along the NeqSim pipeline profile: where free water exists, the design rate with the stated inhibitor availability, wall loss over the design life against the corrosion allowance, and the NeqSim materials review. Feed the allowance consumed into the wall-thickness margin from step 4.
 6. Summarize major uncertainties and required studies.
 7. Generate a reproducible piping integrity screening report outline.
 8. Document assumptions, limitations, and human review requirements.
@@ -68,6 +72,7 @@ Typical outputs include:
 - `pressure-drop-screening` mapped to community catalog ID `neqsim-pressure-drop-screening`
 - `pipe-wall-thickness-screening` mapped to community catalog ID `neqsim-pipe-wall-thickness-screening`
 - `flow-induced-vibration-screening` mapped to community catalog ID `neqsim-flow-induced-vibration-screening`
+- `co2-corrosion-profile` mapped to community catalog ID `neqsim-co2-corrosion-profile`
 
 # Example Usage
 
@@ -87,6 +92,7 @@ Use public synthetic data to screen a process line for integrity. Estimate the l
 - The agent does not size lines or validate piping mechanical design.
 - The agent does not perform validated hydraulic, transient, or detailed flow-induced vibration analysis.
 - The agent does not perform HAZOP, LOPA, SIL, or materials qualification.
+- Internal corrosion is screened for sweet CO2 corrosion of carbon steel (NORSOK M-506 Rev. 2); sour, top-of-line, under-deposit and microbial corrosion are not assessed.
 - The agent does not replace piping, process, or project assurance reviews.
 - The agent does not use proprietary design methods or confidential facility data.
 
@@ -97,6 +103,7 @@ Use public synthetic data to screen a process line for integrity. Estimate the l
 - Pressure-drop length, diameter, friction factor, and gradient guideline are stated.
 - Wall-thickness design pressure, outside diameter, allowable stress, and nominal wall are stated.
 - Flow-induced vibration velocity and density assumptions are stated.
+- For internal corrosion: water content, chloride and bicarbonate, inhibitor availability and its source, design life and corrosion allowance are stated, and stations with correlation-range flags are reviewed.
 - Line-velocity, pressure-drop, wall-thickness, and vibration screening limitations are documented.
 - Required follow-up studies are listed.
 - Screening report clearly separates facts, assumptions, and recommendations.
@@ -108,6 +115,7 @@ The screening produced by this agent maps to validated, rigorous NeqSim Java fun
 
 - `neqsim.process.equipment.pipeline.PipeBeggsAndBrills` and `neqsim.process.equipment.pipeline.AdiabaticTwoPhasePipe` — rigorous multiphase hydraulics, line velocity, and pressure drop.
 - `neqsim.process.mechanicaldesign.pipeline.PipelineMechanicalDesign` — wall-thickness and mechanical design checks.
+- `neqsim.process.corrosion.NorsokM506Rev2`, `DensePhaseCO2Corrosion` and `neqsim.process.materials.MaterialsReviewEngine` — internal CO2 corrosion, CO2-line water and impurity risk, and materials review (through the `neqsim-co2-corrosion-profile` skill).
 
 In Python these classes are reachable through the `neqsim` package (for example `from neqsim import jneqsim`).
 

@@ -73,7 +73,7 @@ coordinated_agents:
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
-version: 0.1.4
+version: 0.1.5
 required_skills: []
 supported_domains:
 - request classification
@@ -160,6 +160,7 @@ already obvious.
 | Open fishing, environmental, wind/grid and crossing constraints for a route or equipment site | `subsea-equipment-placement-agent` for siting, `surf-layout-design-agent` for a new layout, `seabed-protection-agent` for protection scope, `export-tie-in-concept-agent` for an export connection |
 | Umbilical sizing and drawings: chemical injection lines, hydraulic response, power cable, armour and bend radius | `umbilical-design-agent` |
 | Line sizing, velocity, pressure drop, erosion, vibration | `piping-integrity-agent`, `piping-mechanical-agent`, `sand-erosion-agent` |
+| Internal CO2 corrosion along a flowline, corrosion allowance, carbon steel or CRA, inhibitor availability, water and impurities in a CO2 (CCS) line | `piping-integrity-agent` (runs the CO2 corrosion profile) |
 | Gas export pipeline sizing and compression | `gas-export-pipeline-agent` |
 | Separator, scrubber, unit-operation screening | `process-engineer-agent`, `process-screening-agent` |
 | Gas dehydration / TEG | `gas-treatment-agent` (screening), `teg-dehydration-agent` (NeqSim-backed) |

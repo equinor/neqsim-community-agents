@@ -1,7 +1,7 @@
 ---
 name: tie-in-screening-agent
 description: Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks.
-version: 0.1.1
+version: 0.1.2
 required_skills:
 - neqsim-fluid-quality-check
 - neqsim-hydrate-screening
@@ -10,6 +10,7 @@ required_skills:
 - neqsim-ageing-life-extension-screening
 coordinated_agents:
 - subsea-infrastructure-capacity-agent
+- piping-integrity-agent
 - fluid-commingling-agent
 - surrogate-study-agent
 ---
@@ -66,6 +67,7 @@ Typical outputs include:
 2. Use `fluid-quality-check` to review composition quality and missing data.
 2a. When the tie-in fluid will mix with host or existing production upstream of the first separator, hand both compositions to `fluid-commingling-agent` for the NeqSim blend sweep (asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed separator-gas H2S/CO2) and carry its worst blend ratios into the risk list.
 3. Use `hydrate-screening` to flag preliminary hydrate risk considerations.
+3a. When the tie-in sends more CO2, water or chloride through existing carbon-steel lines, ask `piping-integrity-agent` to run `neqsim-co2-corrosion-profile` for the mixed stream and compare the corrosion allowance needed with the allowance left.
 4. Use `separator-modelling` to identify high-level separator screening considerations.
 5. Use `resource-classification-screening` to map the project maturity stage to a public resource classification category.
 5a. When the tie-in rate that the host can take must be stated over uncertain pressures, temperatures or compositions and a NeqSim host model exists, ask `surrogate-study-agent` for the limit boundary, the maximum tie-in rate at the worst corner and the exceedance probability.

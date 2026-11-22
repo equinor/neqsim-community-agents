@@ -151,7 +151,7 @@ question they answer.
 
 | Agent | What it does |
 |-------|--------------|
-| `piping-integrity-agent` | Line velocity, pressure drop, wall thickness, and flow-induced vibration screening. |
+| `piping-integrity-agent` | Line velocity, pressure drop, wall thickness, flow-induced vibration, and internal CO2 corrosion along a flowline (NORSOK M-506 Rev. 2, allowance, materials review). |
 | `piping-mechanical-agent` | Hoop and thermal-flexibility margins plus acoustic-induced vibration likelihood. |
 | `noise-assessment-agent` | Assesses gas-valve and restriction noise from measurements or process data, routes detailed prediction to IEC 60534-8-3, and keeps workplace-noise and AIV decisions separate. |
 
@@ -262,7 +262,7 @@ flow-assurance-study-agent
     ├── flow-assurance-engineer-agent           hydrate and wax margins
     ├── olga-simulation-agent                   transient multiphase behaviour
     ├── subsea-cooldown-agent                   no-touch time
-    ├── piping-integrity-agent                  velocity, dP, wall thickness, FIV
+    ├── piping-integrity-agent                  velocity, dP, wall thickness, FIV, CO2 corrosion
     └── sand-erosion-agent                      erosional velocity, wall life
 ```
 

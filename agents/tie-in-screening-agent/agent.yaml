@@ -7,8 +7,11 @@ required_skills:
 - neqsim-separator-modelling
 - neqsim-resource-classification-screening
 - neqsim-ageing-life-extension-screening
+context_skills:
+- neqsim-co2-corrosion-profile
 coordinated_agents:
 - subsea-infrastructure-capacity-agent
+- piping-integrity-agent
 - fluid-commingling-agent
 - surrogate-study-agent
 supported_domains:
@@ -36,4 +39,4 @@ outputs:
 - required_follow_up_studies
 - validation_checklist
 human_review_required: true
-version: 0.1.1
+version: 0.1.2
