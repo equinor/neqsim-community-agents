@@ -1,0 +1,39 @@
+name: surrogate-study-agent
+agent_type: community-agent
+description: Turns a slow NeqSim flowsheet into a validated active-learning surrogate so a study can run thousands of cases - Monte Carlo, sensitivity, operating-envelope maps - or find exactly where a capacity or specification limit starts to bind, with tens of NeqSim runs.
+required_skills:
+- neqsim-active-learning-surrogate
+- neqsim-uncertainty-quantification
+context_skills:
+- neqsim-compressor-operating-window-check
+- neqsim-separator-modelling
+- neqsim-fluid-commingling-compatibility
+coordinated_agents:
+- debottlenecking-agent
+- tie-in-screening-agent
+- production-optimization-agent
+- fluid-commingling-agent
+supported_domains:
+- process-engineering
+- uncertainty
+- capacity
+- tie-in-screening
+- optimisation
+inputs:
+- neqsim_model_callable
+- input_names_and_ranges
+- outputs_to_learn
+- limit_output_and_threshold
+- input_distributions_for_monte_carlo
+- evaluation_budget
+outputs:
+- validated_surrogate
+- learning_curve_and_neqsim_run_count
+- limit_boundary_and_max_feasible_rate
+- exceedance_probability
+- p10_p50_p90_and_sensitivity
+- validation_against_fresh_neqsim_runs
+- assumptions_and_limitations
+- validation_checklist
+human_review_required: true
+version: 0.1.0

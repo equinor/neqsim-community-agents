@@ -1,7 +1,7 @@
 name: community-router-agent
 agent_type: community-coordinator
 description: Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself.
-version: 0.1.3
+version: 0.1.4
 required_skills: []
 coordinated_agents:
 - artificial-lift-agent
@@ -25,6 +25,7 @@ coordinated_agents:
 - firewater-coverage-agent
 - flow-assurance-engineer-agent
 - flow-assurance-study-agent
+- fluid-commingling-agent
 - fluid-characterization-agent
 - frontier-block-bid-agent
 - gas-export-pipeline-agent
@@ -64,6 +65,7 @@ coordinated_agents:
 - subsea-cooldown-agent
 - subsea-equipment-placement-agent
 - subsea-layout-screening-agent
+- surrogate-study-agent
 - surf-layout-design-agent
 - umbilical-design-agent
 - technical-document-intelligence-agent

@@ -54,6 +54,8 @@ screening workflows keep their required prerequisites:
 | H2S expected in the gas of a prospect or discovery before production, with range and sour-service screen | [Reservoir H2S](agents/reservoir-h2s-agent/AGENT.md) |
 | Mercury expected in the gas of a prospect or discovery, with range and mineral limits | [Reservoir mercury](agents/reservoir-mercury-agent/AGENT.md) |
 | Forward-only separator tests and shared stage P/T fitting | [PVT](agents/pvt-agent/AGENT.md) |
+| Mixture-only incompatibility of two commingled fluids (asphaltene by dilution, gas breakout, blend hydrate) | [Fluid commingling](agents/fluid-commingling-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
+| Where a host limit binds and the maximum tie-in rate, from tens of NeqSim runs | [Surrogate study](agents/surrogate-study-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
 | Raw well-test calibration, held-out acceptance and consistent volume bases | [VFP lift curves](agents/vfp-lift-curve-agent/AGENT.md), [production optimization](agents/production-optimization-agent/AGENT.md) |
 
 The [reservoir simulator workflow](agents/reservoir-simulator-agent/AGENT.md)
@@ -157,13 +159,15 @@ Each catalog entry maps to a harness `Agent` (name, description, `allowed_skills
 
 ## Initial Example Agents
 
-> 📖 **Looking for the full picture?** [docs/agent-catalog.md](docs/agent-catalog.md) describes **all 48 agents** grouped by discipline and the multi-agent workflows that chain them together — read it as documentation, no need to open individual agent files.
+> 📖 **Looking for the full picture?** [docs/agent-catalog.md](docs/agent-catalog.md) describes **all 78 agents** grouped by discipline and the multi-agent workflows that chain them together — read it as documentation, no need to open individual agent files.
 
 | Agent | Purpose | Required skills |
 | --- | --- | --- |
 | [PVT Agent](agents/pvt-agent/README.md) | Fluid characterization, composition checks, phase behavior evaluation, and thermodynamic analysis | `neqsim-fluid-quality-check` |
 | [Hydrate Screening Agent](agents/hydrate-screening-agent/README.md) | Preliminary hydrate risk assessment | `neqsim-hydrate-screening` |
 | [Tie-In Screening Agent](agents/tie-in-screening-agent/README.md) | Early-stage screening of tie-in opportunities | `neqsim-fluid-quality-check`, `neqsim-hydrate-screening`, `neqsim-separator-modelling` |
+| [Fluid Commingling Agent](agents/fluid-commingling-agent/README.md) | NeqSim blend sweep of two commingled fluids: worst blend ratio for asphaltene, gas breakout, hydrate and sour gas | `neqsim-fluid-commingling-compatibility`, `neqsim-produced-water-scale-screening`, `neqsim-fluid-quality-check` |
+| [Surrogate Study Agent](agents/surrogate-study-agent/README.md) | Active-learning surrogate of a NeqSim flowsheet: limit boundary, maximum tie-in rate, Monte Carlo with tens of NeqSim runs | `neqsim-active-learning-surrogate`, `neqsim-uncertainty-quantification` |
 | [Process Screening Agent](agents/process-screening-agent/README.md) | High-level process engineering screening studies | `neqsim-separator-modelling` |
 | [Process Safety Agent](agents/process-safety-agent/README.md) | Early-stage fire-case relief load and depressurization screening | `neqsim-relief-load-screening`, `neqsim-depressurization-screening` |
 | [Flare-Helideck Dispersion Agent](agents/flare-helideck-dispersion-agent/README.md) | Draft coordinator: unignited flare gas to a helideck and flight paths, conditional exceedance, review, figures and CFD hand-off | `neqsim-flare-helideck-dispersion`, `neqsim-weather-data`, `neqsim-psv-orifice-screening` |
