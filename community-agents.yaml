@@ -138,8 +138,8 @@ agents:
       - resource-classification
 
   - name: fluid-commingling-agent
-    version: "0.1.0"
-    description: "Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation, gas breakout, blend hydrate temperature, sour gas and produced-water scale."
+    version: "0.2.0"
+    description: "Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation (with the onset pressure of each blend when a host onset was measured), gas breakout, blend hydrate and wax temperature, naphthenates, sour gas and produced-water scale."
     repo: "equinor/neqsim-community-agents"
     path: "agents/fluid-commingling-agent/AGENT.md"
     required_skills:
@@ -1291,7 +1291,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.6"
+    version: "0.1.7"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"

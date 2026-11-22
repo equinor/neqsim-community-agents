@@ -1,6 +1,6 @@
 name: fluid-commingling-agent
 agent_type: community-agent
-description: Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation, gas breakout, blend hydrate temperature, sour gas and produced-water scale.
+description: Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation (with the onset pressure of each blend when a host onset was measured), gas breakout, blend hydrate and wax temperature, naphthenates, sour gas and produced-water scale.
 required_skills:
 - neqsim-fluid-commingling-compatibility
 - neqsim-produced-water-scale-screening
@@ -23,6 +23,7 @@ inputs:
 - fluid_a_composition_and_characterisation
 - fluid_b_composition_and_characterisation
 - asphaltenic_fluid_and_onset_ri_or_sara
+- measured_asphaltene_onset_pressure_of_the_asphaltenic_fluid
 - commingling_pressure_temperature
 - blend_ratio_range_or_molar_rates
 - separator_conditions
@@ -32,6 +33,7 @@ inputs:
 outputs:
 - worst_blend_ratio_per_check
 - asphaltene_stability_by_blend
+- asphaltene_onset_pressure_by_blend
 - gas_breakout_on_mixing
 - blend_hydrate_temperature
 - separator_gas_h2s_co2
@@ -40,4 +42,4 @@ outputs:
 - assumptions_and_limitations
 - validation_checklist
 human_review_required: true
-version: 0.1.0
+version: 0.2.0

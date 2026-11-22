@@ -1,7 +1,7 @@
 ---
 name: fluid-commingling-agent
-description: Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation, gas breakout, blend hydrate temperature, sour gas and produced-water scale.
-version: 0.1.0
+description: Screens whether two fluids that will be commingled (tie-in into a host, two zones in one well, shared flowline) behave worse together than apart, running a NeqSim blend sweep for asphaltene destabilisation (with the onset pressure of each blend when a host onset was measured), gas breakout, blend hydrate and wax temperature, naphthenates, sour gas and produced-water scale.
+version: 0.2.0
 required_skills:
 - neqsim-fluid-commingling-compatibility
 - neqsim-produced-water-scale-screening
@@ -41,6 +41,9 @@ Use this agent when an engineer needs to:
   basis) with C7+ pseudo-components: molar mass in kg/mol, density in g/cm3
 - Which fluid carries the asphaltenes, and its onset refractive index from a
   titration, or SARA weight fractions as a fallback
+- A measured asphaltene onset pressure of that fluid (HPM or light-scattering
+  depressurisation test, with temperature; optional lower onset), and its
+  asphaltene content, molar mass and density if known
 - Commingling pressure (bara) and temperature (deg C)
 - Blend ratios as mole fractions, or molar rates of both streams
 - First-stage separator pressure and temperature (optional)
@@ -53,6 +56,8 @@ Use this agent when an engineer needs to:
 - Blend sweep table and worst blend ratio per check
 - Asphaltene stability class per blend, with the pressure of the
   refractive-index minimum
+- With a measured onset: the asphaltene onset pressure of every blend from a
+  calibrated solid model, and whether it reaches the commingling pressure
 - Gas breakout on mixing, blend hydrate temperature, separator-gas H2S/CO2
 - Water-mixing scale saturation indices and worst mixing ratio
 - Recommended laboratory tests and NeqSim follow-up
@@ -70,6 +75,13 @@ Use this agent when an engineer needs to:
 3. Mark the asphaltenic fluid. Use a measured onset RI if one exists; otherwise
    pass SARA and state that the onset is a correlation estimate; with neither,
    report only the relative refractive-index drop.
+3a. If the asphaltenic fluid has a measured onset pressure, add an
+   `Asphaltene` pseudo-component (amount, kg/mol, g/cm3, Tc, Pc, acentric
+   factor; state the defaults 1.0 kg/mol, 1.15 g/cm3, 1015 K, 15.7 bar, 1.5 if
+   the user has none) and pass `CalibratedAsphalteneModel(fluid,
+   MeasuredOnset(T, P))` as `asphaltene_model`. Report the onset of each blend
+   next to the commingling pressure. Never tune interaction parameters to hit
+   the onset instead: that route predicts the wrong blend trend.
 4. Run `neqsim-fluid-commingling-compatibility` with
    `NeqSimBlendEvaluator()` at the commingling, separator and hydrate
    conditions, with the user's limits.
@@ -82,8 +94,9 @@ Use this agent when an engineer needs to:
 7. If the operating ratio, pressure and temperature are themselves uncertain
    and each sweep is too slow to repeat, hand the evaluator to
    `surrogate-study-agent` to learn the compatibility boundary.
-8. Report the worst blend per check, what was assumed (free water, SARA onset),
-   and the human review required.
+8. Report the worst blend per check, what was assumed (free water, SARA onset,
+   asphaltene properties and calibration temperature), and the human review
+   required.
 
 # Python Runtime
 
@@ -122,7 +135,12 @@ mixture need more hydrate inhibitor than either fluid alone?
 - The de Boer class is a reservoir-depletion correlation and can disagree with
   the dilution result; the agent reports both and explains the difference.
 - Hydrate results for dry blends assume free water and are flagged.
-- Wax, emulsions and naphthenates are not assessed.
+- Wax is the appearance temperature only; naphthenates are a threshold screen;
+  emulsions are not assessed.
+- The calibrated asphaltene onset needs a measured onset of the asphaltenic
+  fluid; asphaltene properties are assumptions unless measured, and without
+  a second-temperature onset the onset is extrapolated from the test
+  temperature.
 - The agent does not replace laboratory compatibility testing, a flow
   assurance study or engineering judgement.
 
@@ -136,6 +154,9 @@ mixture need more hydrate inhibitor than either fluid alone?
 - The refractive-index minimum lies near the bubble point for single-phase
   blends.
 - Free-water and other evaluation notes are reported.
+- With a calibrated onset model: the host's own onset reproduces the measured
+  value, and the calibration temperature is stated next to the commingling
+  temperature.
 - Every `high` finding has a named confirming test or study.
 - Qualified human review is completed before design or operating decisions.
 
@@ -147,7 +168,8 @@ mixture need more hydrate inhibitor than either fluid alone?
   `#bubblePointPressureFlash(boolean)`, `#hydrateFormationTemperature()`.
 - `neqsim.pvtsimulation.flowassurance.DeBoerAsphalteneScreening` and
   `RefractiveIndexAsphalteneScreening`; for design-grade asphaltene work
-  `ThermodynamicOperations#asphalteneOnsetPressure()` and
+  `AsphalteneSolidModel` (calibrated solid model, NeqSim after 3.29.0; the
+  skill runs the same equations in Python on older versions) and
   `AsphalteneStabilityAnalyzer` on a characterised fluid.
 - Reached from Python with `from neqsim import jneqsim`.
 
@@ -157,5 +179,7 @@ mixture need more hydrate inhibitor than either fluid alone?
 - NeqSim Community Skills: https://github.com/equinor/neqsim-community-skills
 - Buckley et al. (1998), Asphaltene precipitation and solvent properties of
   crude oils, Petroleum Science and Technology 16(3-4).
+- Nghiem, L.X., Coombe, D.A. (1997), Modeling asphaltene precipitation during
+  primary depletion, SPE Journal 2(2).
 - de Boer et al. (1995), Screening of crude oils for asphalt precipitation,
   SPE Production & Facilities 10(1).
