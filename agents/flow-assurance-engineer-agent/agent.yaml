@@ -22,8 +22,11 @@ outputs:
 - recommended_neqsim_workflows
 - required_follow_up_studies
 - validation_checklist
+context_skills:
+- neqsim-co2-corrosion-profile
 coordinated_agents:
 - olga-simulation-agent
 - flow-assurance-study-agent
+- piping-integrity-agent
 human_review_required: true
-version: 0.1.0
+version: 0.1.1

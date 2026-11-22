@@ -117,7 +117,7 @@ agents:
       - lifetime-screening
 
   - name: tie-in-screening-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks."
     repo: "equinor/neqsim-community-agents"
     path: "agents/tie-in-screening-agent/AGENT.md"
@@ -127,6 +127,8 @@ agents:
       - neqsim-separator-modelling
       - neqsim-resource-classification-screening
       - neqsim-ageing-life-extension-screening
+    context_skills:
+      - neqsim-co2-corrosion-profile
     supported_domains:
       - field-development
       - tie-in-screening
@@ -291,16 +293,19 @@ agents:
       - instrumentation
 
   - name: flow-assurance-engineer-agent
-    version: "0.1.0"
+    version: "0.1.1"
     description: "Provides early-stage flow assurance screening that checks operating points against public hydrate-margin and wax-margin guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/flow-assurance-engineer-agent/AGENT.md"
     required_skills:
       - neqsim-hydrate-margin-check
       - neqsim-wax-margin-check
+    context_skills:
+      - neqsim-co2-corrosion-profile
     coordinated_agents:
       - olga-simulation-agent
       - flow-assurance-study-agent
+      - piping-integrity-agent
     supported_domains:
       - flow-assurance
       - operating-limits
@@ -360,8 +365,8 @@ agents:
       - simulator-integration
 
   - name: piping-integrity-agent
-    version: "0.1.0"
-    description: "Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, and flow-induced vibration against public guidelines."
+    version: "0.2.0"
+    description: "Provides early-stage piping integrity screening that checks line velocity, pressure drop, wall thickness, flow-induced vibration and internal CO2 corrosion along a flowline against public guidelines."
     repo: "equinor/neqsim-community-agents"
     path: "agents/piping-integrity-agent/AGENT.md"
     required_skills:
@@ -369,6 +374,7 @@ agents:
       - neqsim-pressure-drop-screening
       - neqsim-pipe-wall-thickness-screening
       - neqsim-flow-induced-vibration-screening
+      - neqsim-co2-corrosion-profile
     supported_domains:
       - process-engineering
       - piping-integrity
@@ -1258,7 +1264,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.4"
+    version: "0.1.5"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"

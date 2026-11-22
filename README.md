@@ -55,6 +55,7 @@ screening workflows keep their required prerequisites:
 | Mercury expected in the gas of a prospect or discovery, with range and mineral limits | [Reservoir mercury](agents/reservoir-mercury-agent/AGENT.md) |
 | Forward-only separator tests and shared stage P/T fitting | [PVT](agents/pvt-agent/AGENT.md) |
 | Mixture-only incompatibility of two commingled fluids (asphaltene by dilution, gas breakout, blend hydrate) | [Fluid commingling](agents/fluid-commingling-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
+| Internal CO2 corrosion along a flowline, corrosion allowance, carbon steel or CRA | [Piping integrity](agents/piping-integrity-agent/AGENT.md) |
 | Where a host limit binds and the maximum tie-in rate, from tens of NeqSim runs | [Surrogate study](agents/surrogate-study-agent/AGENT.md), [tie-in screening](agents/tie-in-screening-agent/AGENT.md) |
 | Raw well-test calibration, held-out acceptance and consistent volume bases | [VFP lift curves](agents/vfp-lift-curve-agent/AGENT.md), [production optimization](agents/production-optimization-agent/AGENT.md) |
 
