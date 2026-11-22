@@ -20,6 +20,7 @@ context_skills:
 - neqsim-professional-reporting
 - neqsim-crs-geodetic-checks
 - neqsim-open-marine-constraints
+- neqsim-asset-scene
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent
@@ -176,7 +177,10 @@ Typical outputs include:
 10. **Cost it.** Pass the quantity take-off, including trenching and rock
     tonnes, to `capex-opex-screening` or `asset-economics-agent`.
 11. **Hand over.** Emit the GeoJSON, the map and the line schedule, and map the
-    drill centres and wells onto a NeqSim production-network model.
+    drill centres and wells onto a NeqSim production-network model. For a 3D
+    view of the layout (existing and proposed structures, routed lines, risers
+    and well paths) pass the nodes, lines and well surveys to
+    `asset-scene` (`from_subsea_nodes`, `from_well_trajectory`, `render_all`).
 12. **Document** assumptions, limitations, source attribution and the human
     review requirement.
 
@@ -198,6 +202,9 @@ Loaded as context when the task calls for them:
 - `neqsim-crs-geodetic-checks`: check the CRS of every map, bathymetry and licence-block layer before the host is placed or a line is routed. Name the datum operation, run `datum_sensitivity` when a source does not state its datum, and say whether route lengths are grid or geodesic.
 - `neqsim-open-marine-constraints`: open marine exposure and restrictions for
   layout alternatives; retain survey, geotechnical and permitting gaps.
+- `asset-scene` mapped to community catalog ID `neqsim-asset-scene`: 3D
+  illustration (GLB, offline viewer, report PNG) of existing and proposed
+  structures, lines and well paths with provenance captions.
 
 # Example Usage
 

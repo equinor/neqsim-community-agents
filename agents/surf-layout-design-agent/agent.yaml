@@ -18,6 +18,7 @@ context_skills:
 - neqsim-professional-reporting
 - neqsim-crs-geodetic-checks
 - neqsim-open-marine-constraints
+- neqsim-asset-scene
 coordinated_agents:
 - reservoir-simulator-agent
 - subsea-layout-screening-agent

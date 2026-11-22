@@ -493,6 +493,7 @@ agents:
       - neqsim-professional-reporting
       - neqsim-crs-geodetic-checks
       - neqsim-open-marine-constraints
+      - neqsim-asset-scene
     supported_domains:
       - field-development
       - subsea-layout
