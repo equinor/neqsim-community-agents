@@ -79,9 +79,11 @@ Use this agent when an engineer needs to:
 6. Validate with `validate()` on 8-20 fresh NeqSim runs. Require full
    side-of-limit agreement for boundary studies and about 95 % 2-sigma
    coverage for global surrogates; otherwise lower the tolerance and continue.
-7. Use the surrogate: exceedance probability, maximum feasible rate along a
-   line through the worst corner, or `surrogate.as_model(output)` in an
-   `UncertaintyStudy` for P10/P50/P90 and sensitivity.
+7. Use the surrogate: `exceedance_probability` over sampled operating cases,
+   `max_feasible(parameter, fixed)` for the maximum rate at the worst corner
+   (best estimate and mean + 2 sigma conservative value), or
+   `surrogate.as_model(output)` in an `UncertaintyStudy` for P10/P50/P90 and
+   sensitivity.
 8. Confirm the decision point (for example the maximum allowable rate) with a
    direct NeqSim run and report both values.
 9. Document ranges, mode, budget, validation, assumptions and the human

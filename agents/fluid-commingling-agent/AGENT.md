@@ -62,8 +62,11 @@ Use this agent when an engineer needs to:
 
 1. Run `neqsim-fluid-quality-check` on both compositions. Stop and report if
    either fails (normalisation, missing C7+ characterisation, units).
-2. Convert stream rates to molar rates if given in Sm3/d, and pick the blend
-   grid; always include the expected operating ratio.
+2. Put the operating point on the blend axis: convert mass rates with
+   `mole_fraction_from_mass_rates`, taking molar masses from
+   `NeqSimBlendEvaluator().molar_mass_kg_mol(fluid)`. Tell the user the
+   resulting mole fraction, since a light fluid takes a large mole fraction
+   for a small mass rate. Always include the operating ratio in the grid.
 3. Mark the asphaltenic fluid. Use a measured onset RI if one exists; otherwise
    pass SARA and state that the onset is a correlation estimate; with neither,
    report only the relative refractive-index drop.

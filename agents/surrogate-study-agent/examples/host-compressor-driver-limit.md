@@ -29,7 +29,8 @@ in NeqSim Community Skills.
   about 2.8 h.
 - Compressor power P10/P50/P90 about 4,000 / 5,050 / 6,300 kW; probability of
   exceeding 6,500 kW about 7 %.
-- Maximum tie-in rate at 40 bara / 60 C: 28.3 t/h. A direct NeqSim run at
-  28.3 t/h gives 6,499 kW.
+- Maximum tie-in rate at 40 bara / 60 C: 28.2 t/h best estimate, 28.05 t/h
+  conservative (mean + 2 sigma), from `surrogate.max_feasible`. A direct NeqSim
+  run at 28.2 t/h gives 6,492 kW.
 - Validation: 100 % side-of-limit agreement, maximum power error about 35 kW.
 - Human review required before the rate limit is used.

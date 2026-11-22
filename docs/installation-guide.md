@@ -232,6 +232,10 @@ If the `neqsim` command is not found, prefix each of the last three commands wit
   - `@flow-assurance-engineer-agent` — hydrate and wax margin screening
   - `@process-safety-agent` — relief and depressurization screening
   - `@asset-economics-agent` — concept-level cost and value screening
+  - `@fluid-commingling-agent` — compatibility of two commingled fluids (asphaltene,
+    gas breakout, blend hydrate, sour gas) and the worst blend ratio
+  - `@surrogate-study-agent` — maximum tie-in rate before a host limit binds, and
+    Monte Carlo on slow NeqSim flowsheets, from tens of NeqSim runs
 3. Describe your task in plain language. The agent selects the right skills,
    runs NeqSim calculations, and produces a draft for your review.
 

@@ -12,7 +12,9 @@ in NeqSim Community Skills.
 - Commingling at 200 bara and 80 C; separator 40 bara and 60 C; hydrate check
   at 120 bara; minimum operating temperature 25 C.
 - Limits: separator-gas H2S 400 ppm, CO2 3 mol %.
-- Blend grid: 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7 and 1.0 mole fraction condensate.
+- Planned rates: 150 t/h host oil and 25 t/h condensate.
+- Blend grid: 0, 0.1, 0.2, 0.3, 0.4, the operating ratio, 0.7 and 1.0 mole
+  fraction condensate.
 
 ## Expected Agent Actions
 
@@ -22,6 +24,9 @@ in NeqSim Community Skills.
 
 ## Expected Output (NeqSim 3.29.0)
 
+- The planned 25 t/h of condensate is x_B = 0.49 of the blend on a molar
+  basis (molar masses 0.169 and 0.029 kg/mol): the operating point sits deep in
+  the unstable range, although it is only 14 % of the mass.
 - **High**: live-oil refractive index falls below the onset (1.445) from 20 mol %
   condensate; the host oil alone is very stable (minimum RI 1.475 at its
   88 bara bubble point). Confirm with an onset titration or HPM test on the
