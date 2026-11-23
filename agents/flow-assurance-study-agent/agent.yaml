@@ -1,6 +1,6 @@
 name: flow-assurance-study-agent
 description: Coordinates a reviewable flow-assurance study by freezing the engineering basis, delegating calculations to existing NeqSim and OLGA specialist agents, and enforcing like-for-like validation gates.
-version: 0.1.1
+version: 0.1.2
 agent_type: community-coordinator
 required_skills: []
 context_skills:

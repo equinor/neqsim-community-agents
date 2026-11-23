@@ -1,7 +1,7 @@
 ---
 name: export-tie-in-concept-agent
 description: "Screens a new export or tie-in line between two facilities end to end: ranked landing points on neighbouring hosts, seabed profile, pressure drop, thermal decay, wall thickness and size, and conceptual P&ID sketches of both connection ends with open options, before a validated NeqSim pipeline study."
-version: 0.1.1
+version: 0.1.2
 required_skills:
 - neqsim-tie-in-pipeline-concept
 - neqsim-tie-in-pid-sketch
@@ -63,7 +63,9 @@ data gaps, open options, and a recommendation for the NeqSim pipeline study that
    split truncated sections and re-read. Carry dates, units, legends and
    provenance into the ranking. Open map evidence is neither survey clearance
    nor permitting approval; missing layers remain open gaps.
-5. `neqsim-tie-in-pid-sketch`: sketch both ends, run `validate()`, and list the options as questions.
+5. `neqsim-tie-in-pid-sketch`: sketch both ends, run `validate()`, and list the options as questions. For a subsea tie-back (trees on a manifold, water injection, umbilical and chemical supply) draw full sheets with `PidSheet` instead: state the isolating valves in series with `isolation_count`, give every option or open decision the `decision` status, write the layout spec and run `neqsim pfd-check` on it, then view the picture.
+5a. Overpressure: compare the shut-in tubing head pressure (static gas-filled and liquid-filled column at the highest reservoir pressure, hot and cooled) with the line design pressure and with the rating of the host slot, seal and flanges. A host rating below the static pressure at the riser top is a finding to confirm with the host owner, not a number to adjust.
+5b. Run `considerations_register()` and state every item as `ADDRESSED`, `SCREENED` or `OPEN` with its evidence. An item nobody answered is `OPEN`, not "not needed"; the open list, with owners and actions, is part of the hand-off.
 6. Produce a map (coast, hosts, existing lines, new line), the profile figure and the sketches. Check every figure
    by eye before it goes into a report.
 7. State what is not assessed: free span, stability, buckling, surge, wax, pigging, installation, host capacity

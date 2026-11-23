@@ -67,7 +67,7 @@ agents:
       - fluid-io
 
   - name: hydrate-screening-agent
-    version: "0.2.0"
+    version: "0.2.1"
     description: "Performs preliminary hydrate risk assessment and, where MEG is the inhibitor, sizes the MEG loop with NeqSim (lean MEG rate to a hydrate margin, regeneration duty, salt build-up and reclaimer slipstream)."
     repo: "equinor/neqsim-community-agents"
     path: "agents/hydrate-screening-agent/AGENT.md"
@@ -80,7 +80,7 @@ agents:
       - screening
 
   - name: export-tie-in-concept-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Screens a new export or tie-in line between two facilities end to end: ranked landing points on neighbouring hosts, seabed profile, pressure drop, thermal decay, wall thickness and size, and conceptual P&ID sketches of both connection ends with open options, before a validated NeqSim pipeline study."
     repo: "equinor/neqsim-community-agents"
     path: "agents/export-tie-in-concept-agent/AGENT.md"
@@ -118,7 +118,7 @@ agents:
       - lifetime-screening
 
   - name: tie-in-screening-agent
-    version: "0.1.3"
+    version: "0.1.5"
     description: "Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks."
     repo: "equinor/neqsim-community-agents"
     path: "agents/tie-in-screening-agent/AGENT.md"
@@ -339,7 +339,7 @@ agents:
       - standards-compliance
 
   - name: flow-assurance-study-agent
-    version: "0.1.1"
+    version: "0.1.2"
     description: "Coordinates a reviewable flow-assurance study by freezing the engineering basis, delegating calculations to existing NeqSim and OLGA specialist agents, and enforcing like-for-like validation gates."
     repo: "equinor/neqsim-community-agents"
     path: "agents/flow-assurance-study-agent/AGENT.md"

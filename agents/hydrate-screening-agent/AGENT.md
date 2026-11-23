@@ -1,7 +1,7 @@
 ---
 name: hydrate-screening-agent
 description: Performs preliminary hydrate risk assessment and, where MEG is the inhibitor, sizes the MEG loop with NeqSim (lean MEG rate to a hydrate margin, regeneration duty, salt build-up and reclaimer slipstream).
-version: 0.2.0
+version: 0.2.1
 required_skills:
 - neqsim-hydrate-screening
 - neqsim-meg-loop
@@ -58,6 +58,7 @@ Typical outputs include:
 2. Use `hydrate-screening` for preliminary hydrate risk triage.
 3. Identify missing fluid, water, inhibitor, and transient condition data.
 4. Explain uncertainty and screening assumptions.
+4-gate. Gate before selecting MEG: check the host for (1) an MEG regeneration plant, (2) an existing continuous MEG injection with spare capacity (storage, pumps, MEG line or umbilical service line) and (3) batch shut-in injection capability (tank, pump, supply route, disposal of used MEG). If (1) and (2) are not confirmed, record a data gap and treat continuous MEG as not available; compare depressurisation, flush with dead oil/diesel, insulation and cooldown (no-touch) time, minimum flowing rate and batch MEG/methanol/LDHI at shut-in instead. If MEG is selected, evaluate the host topside capacity (utilisation of the existing regeneration, storage and pumps) or the installation required (regeneration package, storage, pumps, duty, power, deck space, weight, tie-in points, cost class) and report it as a host modification.
 4a. When MEG is (or may be) the inhibitor and a well-stream composition is
    available, run `neqsim-meg-loop` (`assess_meg_loop`) at the coldest,
    highest-pressure point (shut-in or settle-out). Report the injection rate,
