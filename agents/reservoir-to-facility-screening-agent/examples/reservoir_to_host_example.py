@@ -27,14 +27,14 @@ sys.path.insert(
     0,
     str(
         Path(__file__).resolve().parents[4]
-        / "neqsim-community-skills/skills/field-development/reservoir-depletion-screening/src"
+        / "neqsim-community-skills/skills/field-development/neqsim-reservoir-depletion-screening/src"
     ),
 )
 sys.path.insert(
     0,
     str(
         Path(__file__).resolve().parents[4]
-        / "neqsim-community-skills/skills/subsea/production-network-routing/src"
+        / "neqsim-community-skills/skills/subsea/neqsim-production-network-routing/src"
     ),
 )
 
