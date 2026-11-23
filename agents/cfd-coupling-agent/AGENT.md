@@ -4,7 +4,7 @@ description: "Runs single-phase and multiphase CFD from governed engineering inp
 coordinated_agents:
 - flow-assurance-engineer-agent
 - fem-coupling-agent
-version: 0.4.0
+version: 0.5.0
 required_skills:
 - neqsim-cfd-coupling
 ---
@@ -134,6 +134,39 @@ inventing it.
     table or patch each value came from. Carry every gate finding into the
     receiving report's assumptions register.
 
+# Explosion and Gas Dispersion Workflow (module or deck)
+
+Use when the question is a gas cloud or a vapour-cloud explosion in a congested,
+partly confined module. The skill generates ESI OpenFOAM `PDRFoam` cases (SCOPE
+laminar speed, sub-grid Xi flame-wrinkling transport, porosity/drag obstacle
+model) and an optional dispersion variant. Fail closed first.
+
+1. `assess_explosion_readiness`: geometry, congestion, source, ignition
+   location, vents/confinement and gas detection must all be present. Stop and
+   list the missing inputs otherwise; never invent an envelope silently - an
+   assumed envelope is allowed only as 3 labelled congestion/confinement/vent
+   variants and every result is then `screening`.
+2. Build the obstacle set from P&IDs, line list and arrangement drawings
+   (`Domain.for_module` aligns module walls and decks to whole cells; a sub-grid
+   slab leaks gas).
+3. Source term from a NeqSim flash: ambient-equilibrium vapour, Birch pseudo-source
+   (`LeakSource`), enthalpy-consistent fuel source, ramped start. Report the
+   liquid/aerosol fraction that is not tracked.
+4. Dispersion first: cloud volume at LFL/UFL and the equivalent stoichiometric
+   cloud (`equivalent_stoich_cloud`), as a function of time (ignition-time
+   dependence), wind speed and jet direction.
+5. Explosion: `PdrCaseSpec` + `write_case` + `explosion_commands`. Run the
+   verification cases (`verification.verify_closed_vessel` against an independent
+   AICC value) before quoting any module result. Run at least 3 grid levels and
+   report `gci`. The scheme matters: use a bounded convection scheme for b.
+6. Report pressure-time histories, peak and impulse at monitor points,
+   compare with the design explosion load (DEL) and the multi-energy class
+   estimate, and state that a handful of scenarios is not a probabilistic
+   exceedance (NORSOK Z-013 Annex F needs the full matrix).
+7. If the verification or validation (a published congested-rig benchmark) is not
+   met, report `verified, not validated`, do not use the peaks as a design basis,
+   and hand over the FLACS-style input package with the missing inputs.
+
 # Traps To Check Every Time
 
 | Trap | Check |
@@ -152,6 +185,10 @@ inventing it.
 | Volume of fluid used on a dilute droplet mist | The interface is far below cell size. The screening says `lagrangian` for a reason |
 | One flash applied along the whole geometry | Phase split, density and interfacial tension change with pressure and temperature |
 | A VOF result read before the interface develops | The first residence times are start-up transient, not the flow pattern |
+| Explosion peak quoted from a model never run on a published congested benchmark | A closed-vessel check verifies thermodynamics only; module peaks stay `screening` until validated |
+| A mass source in an absolute-enthalpy solver without its enthalpy | The fuel is heated by its heat of formation; carry `m_dot * h_f(T_amb)` in the energy equation |
+| Negative convection scheme for the regress variable b | An unbounded scheme drives b<0 and a runaway flame; use a bounded scheme and report the scheme sensitivity |
+| Infinite rigid wall at a barrier in the domain | No diffraction and no venting, so far-field/LQ pressure cannot be read from the domain; use a calibrated multi-energy decay |
 | A forced-convection film coefficient carried into a stagnant or dead-leg region | Without through-flow the inside coefficient falls to natural-convection values, so the same wall heat flux gives a far larger film temperature rise. That needs a buoyant conjugate solver, which this agent does not generate |
 
 # Composition
@@ -166,8 +203,11 @@ inventing it.
 
 # Limitations
 
-Steady single-phase RANS and transient two-phase volume of fluid are what this
-agent generates. Lagrangian parcel clouds and Euler-Euler dispersed models are
+Steady single-phase RANS, transient two-phase volume of fluid and PDRFoam
+gas-explosion/dispersion cases are what this agent generates (no FLACS/KFX
+installation is assumed; a FLACS-style input package can be handed over; PDRFoam
+has no gravity or buoyancy and its congested-module peaks are screening until
+validated). Lagrangian parcel clouds and Euler-Euler dispersed models are
 recommended with a reason but not built. Phase change, interfacial mass transfer
 and conjugate heat transfer are outside scope. Transient compressible
 aeroacoustics, duct-acoustic propagation, structural modal analysis, and two-way

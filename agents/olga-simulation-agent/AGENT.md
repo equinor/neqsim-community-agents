@@ -1,7 +1,7 @@
 ---
 name: olga-simulation-agent
 description: Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch with the right flags, decodes the exit status, reads the trend and profile results, and hands the transient boundary conditions to the validated NeqSim workflow.
-version: 0.2.0
+version: 0.3.0
 agent_type: community-coordinator
 required_skills:
 - neqsim-olga-multiphase-simulator
@@ -148,6 +148,13 @@ This agent then remains the bounded OLGA execution and post-processing specialis
    and boundary refinement, never a fixed `NSEGMENT` per leg. Record the mesh
    `summary()` and demonstrate grid independence by halving the target section
    length.
+7a. **Generate a tie-back case from a route profile.** For a subsea flowline, riser and topside inlet use
+   `olga_multiphase_simulator.casegen` (`load_route_profile` -> `build_mesh` -> `FlowlineCaseSpec` -> `render_genkey`) instead of
+   hand-writing the genkey: it meshes the seabed profile and the riser with a bounded neighbour ratio, turns a screening U-value into
+   physical wall layers (`equivalent_insulation_thickness`), writes the source phase fractions on the right bases, the ESDV closure,
+   the blowdown `LEAK`, the hydrate check, restart chaining and a pig, and keeps the pressure-node back-flow gas. Read the keyword
+   rules in the skill (`SHUTIN` needs `TIME`, never wrap comments, no `CHECKVALVE` on an external leak, take the liquid outflow at the
+   topside inlet) before editing the generated text.
 8. **Prepare variants.** For a sweep, write each variant next to the original so
    relative `.tab` references still resolve, and rule-check every variant.
 9. **Run.** Execute in batch with an explicit output directory, thread count and
@@ -178,6 +185,11 @@ This agent then remains the bounded OLGA execution and post-processing specialis
     about the physics. Compare more than one rate and check the exponent `n` in
     `ΔP ~ rate^n` (it must exceed 2 on a real gas line), because a model can
     reproduce one operating point with the wrong sensitivity.
+13a. **Tabulate the conservatism of an earlier screening study.** When OLGA is run to verify a NeqSim screening study, put every pair
+    into `olga_multiphase_simulator.compare.ComparisonRow` (`higher_is_worse=False` for times to a limit and temperature margins) and
+    publish the ratio table with the verdicts `NEQSIM CONSERVATIVE`, `NEQSIM NON-CONSERVATIVE`, `CONSISTENT`. State per row whether
+    the NeqSim value is a bound or a calibrated model, and never call the screening study conservative as a whole: report the
+    rows where it is not. Use `slug_statistics` (surge volume over one continuous period, not a clipped peak) for slugging.
 14. **Audit before concluding.** Do not attribute a headline disagreement to
     "correlation limitations" or to a bug until the intermediate terms have been
     compared. Reimplement the steady-state correlation from the published

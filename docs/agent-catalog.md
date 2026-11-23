@@ -162,6 +162,7 @@ question they answer.
 |-------|--------------|
 | `process-safety-agent` | Fire-case relief loads, emergency depressurization, vacuum collapse, flare radiation, PSV orifice, and safety-function coverage screening. |
 | `flare-helideck-dispersion-agent` | Draft coordinator for screening unignited flare-tip gas reaching a helideck and its flight paths: frozen basis, wind statistics, release rates, conditional exceedance of 10 and 20 % LFL, independent review, figures with `results.json`, and a CFD hand-off. |
+| `process-safety-study-agent` | Vendor-neutral coordinator for a full process safety study of a tie-in, modification or new facility: evidence gates and document register, HAZID, consequence, relief and flare, OLGA and CFD verification, SIL, QRA, HAZOP preparation, barriers and ESD cause and effect. |
 
 ### 2.11 Utilities
 

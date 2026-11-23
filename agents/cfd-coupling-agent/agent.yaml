@@ -16,6 +16,8 @@ supported_domains:
 - mesh-quality
 - aeroacoustics-readiness
 - tonal-noise
+- gas-explosion
+- gas-dispersion
 inputs:
 - pid_component_class_and_tag
 - stid_or_tag_register_dimensions
@@ -26,6 +28,7 @@ inputs:
 - existing_cfd_report_and_methodology
 - synchronized_narrow_band_spectra_for_tonal_cases
 - acoustic_and_structural_boundaries_for_coupled_cases
+- module_geometry_congestion_vents_and_gas_detection_for_explosion_cases
 outputs:
 - traceable_design_basis
 - neqsim_derived_boundary_conditions
@@ -36,5 +39,7 @@ outputs:
 - aeroacoustic_readiness_verdict
 - local_enhancement_factors
 - assumptions_and_traceability
+- explosion_readiness_verdict
+- gas_cloud_metrics_and_overpressure_time_histories_with_grid_convergence
 human_review_required: true
-version: 0.4.0
+version: 0.5.0
