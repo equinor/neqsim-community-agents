@@ -16,6 +16,7 @@ coordinated_agents:
 - fluid-commingling-agent
 - surrogate-study-agent
 - hydrate-screening-agent
+- export-tie-in-concept-agent
 supported_domains:
 - field-development
 - tie-in-screening
@@ -41,4 +42,4 @@ outputs:
 - required_follow_up_studies
 - validation_checklist
 human_review_required: true
-version: 0.1.3
+version: 0.1.5

@@ -1,7 +1,7 @@
 ---
 name: tie-in-screening-agent
 description: Provides early-stage screening of tie-in opportunities with fluid, flow assurance, and process checks.
-version: 0.1.3
+version: 0.1.5
 required_skills:
 - neqsim-fluid-quality-check
 - neqsim-hydrate-screening
@@ -14,6 +14,7 @@ coordinated_agents:
 - fluid-commingling-agent
 - surrogate-study-agent
 - hydrate-screening-agent
+- export-tie-in-concept-agent
 ---
 
 # Purpose
@@ -66,6 +67,7 @@ Typical outputs include:
 1a. Use `ageing-life-extension-screening` to establish the technical life basis of the host (design life, economic cut-off, programme validity, cessation year, life-limiting populations such as risers, pipelines, moorings, obsolescence) and the usable host tail from the tie-in start year. List the limiter checks (riser life, pipeline design-life expiry, compression headroom) that must pass before a tie-in is assumed, and flag missing items as data gaps. Report the lifetime action (replace, refurbish, life-extend, monitor) for every host or reused item that expires inside the tie-in horizon.
 1b. Ask `subsea-infrastructure-capacity-agent` which existing slots, tees, hubs and spare or reusable lines (including gas-lift, injection and MEG lines) could take the tie-in, with status, remaining life and verification level, and compare with a new-build tie-back before assuming one.
 2. Use `fluid-quality-check` to review composition quality and missing data.
+2-gate. Gate before selecting MEG: check the host for (1) an MEG regeneration plant, (2) an existing continuous MEG injection with spare capacity (storage, pumps, MEG line or umbilical service line) and (3) batch shut-in injection capability (tank, pump, supply route, disposal of used MEG). If (1) and (2) are not confirmed, record a data gap and treat continuous MEG as not available; compare depressurisation, flush with dead oil/diesel, insulation and cooldown (no-touch) time, minimum flowing rate and batch MEG/methanol/LDHI at shut-in instead. If MEG is selected, evaluate the host topside capacity (utilisation of the existing regeneration, storage and pumps) or the installation required (regeneration package, storage, pumps, duty, power, deck space, weight, tie-in points, cost class) and report it as a host modification.
 2a. When the tie-in fluid will mix with host or existing production upstream of the first separator, hand both compositions to `fluid-commingling-agent` for the NeqSim blend sweep (asphaltene destabilisation by dilution, gas breakout on mixing, blend hydrate temperature, mixed separator-gas H2S/CO2) and carry its worst blend ratios into the risk list.
 3. Use `hydrate-screening` to flag preliminary hydrate risk considerations.
 3a. When the tie-in sends more CO2, water or chloride through existing carbon-steel lines, ask `piping-integrity-agent` to run `neqsim-co2-corrosion-profile` for the mixed stream and compare the corrosion allowance needed with the allowance left.
@@ -74,6 +76,7 @@ Typical outputs include:
 5. Use `resource-classification-screening` to map the project maturity stage to a public resource classification category.
 5a. When the tie-in rate that the host can take must be stated over uncertain pressures, temperatures or compositions and a NeqSim host model exists, ask `surrogate-study-agent` for the limit boundary, the maximum tie-in rate at the worst corner and the exceedance probability.
 6. Summarize major uncertainties and required studies.
+6a. For a subsea tie-back, hand the concept to `export-tie-in-concept-agent`, whose workflow draws the conceptual P&ID sheets (`neqsim-tie-in-pid-sketch`, `PidSheet`), compares the shut-in tubing head pressure with the line design pressure and the host slot rating, and runs the tie-in considerations register. Carry the `OPEN` items, with owners and actions, into the required studies; an unanswered item is a gap, not "not needed".
 7. Generate a reproducible screening report outline.
 8. Document assumptions, limitations, and human review requirements.
 

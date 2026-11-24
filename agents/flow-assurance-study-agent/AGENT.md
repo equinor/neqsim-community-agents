@@ -1,7 +1,7 @@
 ---
 name: flow-assurance-study-agent
 description: Coordinates a reviewable flow-assurance study by freezing the engineering basis, delegating calculations to existing NeqSim and OLGA specialist agents, and enforcing like-for-like validation gates.
-version: 0.1.1
+version: 0.1.2
 agent_type: community-coordinator
 required_skills: []
 context_skills:
@@ -90,6 +90,7 @@ Typical outputs include:
    `technical-document-intelligence-agent`. Record source, date/revision, extracted
    value, unit, confidence, and unresolved conflict. Do not silently choose between
    conflicting sources.
+3a. **Hydrate strategy gate.** Gate before selecting MEG: check the host for (1) an MEG regeneration plant, (2) an existing continuous MEG injection with spare capacity (storage, pumps, MEG line or umbilical service line) and (3) batch shut-in injection capability (tank, pump, supply route, disposal of used MEG). If (1) and (2) are not confirmed, record a data gap and treat continuous MEG as not available; compare depressurisation, flush with dead oil/diesel, insulation and cooldown (no-touch) time, minimum flowing rate and batch MEG/methanol/LDHI at shut-in instead. If MEG is selected, evaluate the host topside capacity (utilisation of the existing regeneration, storage and pumps) or the installation required (regeneration package, storage, pumps, duty, power, deck space, weight, tie-in points, cost class) and report it as a host modification.
 3. **Freeze the basis.** Ask `pvt-agent` to quality-check the fluid and document the
    EOS/PVT range. Ask `pipe-route-screening-agent` to normalize route, elevation,
    diameter, roughness, wall, insulation, ambient, and boundary-condition data.
