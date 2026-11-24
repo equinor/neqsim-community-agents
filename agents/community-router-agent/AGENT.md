@@ -44,6 +44,7 @@ coordinated_agents:
 - piping-mechanical-agent
 - process-engineer-agent
 - process-safety-agent
+- process-safety-study-agent
 - process-screening-agent
 - produced-water-scale-agent
 - production-optimization-agent
@@ -73,7 +74,7 @@ coordinated_agents:
 - utilities-screening-agent
 - vfp-lift-curve-agent
 - well-trajectory-anticollision-agent
-version: 0.1.7
+version: 0.1.8
 required_skills: []
 supported_domains:
 - request classification
@@ -176,6 +177,7 @@ already obvious.
 | Raw test-separator data to calibrate producer lift curves or refresh a choke advisory | `vfp-lift-curve-agent` for tables, `production-optimization-agent` for advisory model updates |
 | Dynamic simulation, controllers, transmitters | `dynamic-process-preparation-agent`, `dynamic-instrument-controller-agent` |
 | Relief, blowdown, fire, dispersion, safety functions | `process-safety-agent` |
+| A full process safety study (tie-in, modification, new facility): evidence gates, HAZID/HAZOP preparation, SIL, relief and flare, OLGA and CFD verification, QRA | `process-safety-study-agent` |
 | Deluge coverage, fire water, nozzle count, fire monitors, active vs passive fire protection | `firewater-coverage-agent` |
 | Valve or line noise | `noise-assessment-agent` |
 | Local flow detail, CFD | `cfd-coupling-agent` |

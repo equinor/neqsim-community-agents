@@ -20,6 +20,7 @@ inputs:
 - fluid_and_pvt_table_settings_grid_produced_water_salinity_water_model
 - engineering_question_and_acceptance_criteria
 - case_parameter_overrides_for_sweeps
+- route_profile_json_kp_and_seabed_depth_for_generated_cases
 - olga_version_thread_count_and_timeout
 - installation_override_environment
 outputs:
@@ -32,6 +33,8 @@ outputs:
 - trend_series_with_declared_units
 - spatial_profiles_at_output_times
 - parameter_sweep_table
+- neqsim_vs_olga_ratio_table_with_conservatism_verdicts
+- generated_genkey_case_package_with_pvt_hydrate_and_run_records
 - neqsim_boundary_condition_handoff
 - assumptions_limitations_and_review_checklist
 agent_type: community-coordinator
@@ -42,4 +45,4 @@ coordinated_agents:
 - subsea-cooldown-agent
 - pvt-agent
 human_review_required: true
-version: 0.2.0
+version: 0.3.0

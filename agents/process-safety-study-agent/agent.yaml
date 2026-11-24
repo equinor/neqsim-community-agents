@@ -1,0 +1,72 @@
+name: process-safety-study-agent
+description: Coordinates a full process safety study of a tie-in, modification or new facility in a vendor-neutral way - scope and evidence gates, document register, HAZID, consequence, relief and flare, transient and OLGA verification, SIL, explosion CFD, QRA, HAZOP preparation, barriers and ESD cause and effect - and keeps every result at its evidence status.
+version: 0.1.0
+agent_type: community-coordinator
+required_skills:
+- neqsim-process-safety-study
+context_skills:
+- neqsim-task-workflow
+- neqsim-jurisdiction-regulatory-basis
+- neqsim-task-grill
+- neqsim-tie-in-pid-sketch
+- neqsim-document-intelligence-extraction
+- neqsim-technical-document-reading
+- neqsim-pid-quality-review
+- neqsim-pfd-layout-review
+- neqsim-standard-requirement-extraction
+- neqsim-standards-lookup
+- neqsim-hazid-fmea-eta-fta
+- neqsim-process-safety
+- neqsim-consequence-analysis
+- neqsim-release-source-terms
+- neqsim-jet-fire-radiation-screening
+- neqsim-gas-dispersion-distance-screening
+- neqsim-h2s-safety-impact
+- neqsim-relief-flare-network
+- neqsim-depressurization-mdmt
+- neqsim-trapped-liquid-fire-rupture
+- neqsim-relief-load-screening
+- neqsim-depressurization-screening
+- neqsim-psv-orifice-screening
+- neqsim-flare-radiation-screening
+- neqsim-olga-multiphase-simulator
+- neqsim-multiphase-flow-slug-screening
+- neqsim-water-hammer
+- neqsim-safety-function-coverage-screening
+- neqsim-cfd-coupling
+- neqsim-hazop-node-pack
+- neqsim-firewater-deluge-design
+- neqsim-final-report-writing-style
+- neqsim-standard-engineering-english
+- neqsim-professional-reporting
+coordinated_agents:
+- process-safety-agent
+- cfd-coupling-agent
+- olga-simulation-agent
+- flare-helideck-dispersion-agent
+- firewater-coverage-agent
+- flow-assurance-study-agent
+- technical-document-intelligence-agent
+- subsea-layout-screening-agent
+supported_domains:
+- process-safety
+- study-coordination
+- evidence-gates
+- hazid-hazop-preparation
+- sil-lopa-verification
+- relief-blowdown-flare
+- transient-verification
+- explosion-and-dispersion-cfd
+- quantitative-risk-assessment
+- barrier-and-esd-cause-and-effect
+inputs:
+- study-scope-host-phase-and-jurisdiction
+- source-pids-line-list-and-process-basis-with-revisions
+- governing-documents-and-their-read-status
+- earlier-study-results-and-assumptions
+outputs:
+- step-plan-with-skill-and-agent-per-step
+- document-register-and-evidence-gate-result
+- gate-results-profile-hand-calculation-conservatism-tag-anchoring-reconciliation
+- data-gaps-assumptions-and-human-review-list
+human_review_required: true

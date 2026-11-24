@@ -262,6 +262,70 @@ agents:
       - flare-radiation-screening
       - safety-function-screening
 
+  - name: process-safety-study-agent
+    version: "0.1.0"
+    description: "Coordinates a full process safety study of a tie-in, modification or new facility in a vendor-neutral way - scope and evidence gates, document register, HAZID, consequence, relief and flare, transient and OLGA verification, SIL, explosion CFD, QRA, HAZOP preparation, barriers and ESD cause and effect - and keeps every result at its evidence status."
+    repo: "equinor/neqsim-community-agents"
+    path: "agents/process-safety-study-agent/AGENT.md"
+    agent_type: community-coordinator
+    required_skills:
+      - neqsim-process-safety-study
+    context_skills:
+      - neqsim-task-workflow
+      - neqsim-jurisdiction-regulatory-basis
+      - neqsim-task-grill
+      - neqsim-tie-in-pid-sketch
+      - neqsim-document-intelligence-extraction
+      - neqsim-technical-document-reading
+      - neqsim-pid-quality-review
+      - neqsim-pfd-layout-review
+      - neqsim-standard-requirement-extraction
+      - neqsim-standards-lookup
+      - neqsim-hazid-fmea-eta-fta
+      - neqsim-process-safety
+      - neqsim-consequence-analysis
+      - neqsim-release-source-terms
+      - neqsim-jet-fire-radiation-screening
+      - neqsim-gas-dispersion-distance-screening
+      - neqsim-h2s-safety-impact
+      - neqsim-relief-flare-network
+      - neqsim-depressurization-mdmt
+      - neqsim-trapped-liquid-fire-rupture
+      - neqsim-relief-load-screening
+      - neqsim-depressurization-screening
+      - neqsim-psv-orifice-screening
+      - neqsim-flare-radiation-screening
+      - neqsim-olga-multiphase-simulator
+      - neqsim-multiphase-flow-slug-screening
+      - neqsim-water-hammer
+      - neqsim-safety-function-coverage-screening
+      - neqsim-cfd-coupling
+      - neqsim-hazop-node-pack
+      - neqsim-firewater-deluge-design
+      - neqsim-final-report-writing-style
+      - neqsim-standard-engineering-english
+      - neqsim-professional-reporting
+    coordinated_agents:
+      - process-safety-agent
+      - cfd-coupling-agent
+      - olga-simulation-agent
+      - flare-helideck-dispersion-agent
+      - firewater-coverage-agent
+      - flow-assurance-study-agent
+      - technical-document-intelligence-agent
+      - subsea-layout-screening-agent
+    supported_domains:
+      - process-safety
+      - study-coordination
+      - evidence-gates
+      - hazid-hazop-preparation
+      - sil-lopa-verification
+      - relief-blowdown-flare
+      - transient-verification
+      - explosion-and-dispersion-cfd
+      - quantitative-risk-assessment
+      - barrier-and-esd-cause-and-effect
+
   - name: process-engineer-agent
     version: "0.1.0"
     description: "Provides early-stage process engineering screening that checks unit operations against public line-velocity and compressor operating-window guidelines."
@@ -371,7 +435,7 @@ agents:
       - model-validation
 
   - name: olga-simulation-agent
-    version: "0.2.0"
+    version: "0.3.0"
     description: "Runs the OLGA transient multiphase flow simulator end to end — locates the installed engine, rule-checks the case, executes it in batch with the right flags, decodes the exit status, reads the trend and profile results, and hands the transient boundary conditions to the validated NeqSim workflow."
     repo: "equinor/neqsim-community-agents"
     path: "agents/olga-simulation-agent/AGENT.md"
@@ -1297,7 +1361,7 @@ agents:
       - screening
 
   - name: community-router-agent
-    version: "0.1.7"
+    version: "0.1.8"
     description: "Front door for the public NeqSim community agent catalog. Classifies a plain-language engineering request and routes it to the right community agent, or composes a short multi-agent pipeline when the task spans disciplines. Does no engineering itself."
     repo: "equinor/neqsim-community-agents"
     path: "agents/community-router-agent/AGENT.md"
@@ -1323,7 +1387,7 @@ agents:
       - resource-accounting
 
   - name: cfd-coupling-agent
-    version: "0.4.0"
+    version: "0.5.0"
     description: "Runs single-phase and multiphase CFD from governed engineering inputs, qualifies existing CFD, and assesses aeroacoustic readiness. Tonal-noise cases fail closed unless source topology, internal geometry, synchronized spectra, event conditions, acoustic terminations, and required structural boundaries exist; steady RANS is never used as tonal-source diagnosis."
     repo: "equinor/neqsim-community-agents"
     path: "agents/cfd-coupling-agent/AGENT.md"
@@ -1339,6 +1403,8 @@ agents:
       - mesh-quality
       - aeroacoustics-readiness
       - tonal-noise
+      - gas-explosion
+      - gas-dispersion
 
   - name: fem-coupling-agent
     version: "0.2.0"
