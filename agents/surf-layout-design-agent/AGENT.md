@@ -181,6 +181,14 @@ Typical outputs include:
     view of the layout (existing and proposed structures, routed lines, risers
     and well paths) pass the nodes, lines and well surveys to
     `asset-scene` (`from_subsea_nodes`, `from_well_trajectory`, `render_all`).
+    Draw trees, PLET/PLEM, manifold, jumpers, flowline field joints, riser base
+    and umbilical with `asset_scene.subsea`, and keep the source register rule:
+    every drawn element is SOURCED (document number, revision, page), DERIVED or
+    ASSUMED, and the figure labels ASSUMED items `antatt/skjematisk`
+    (`asset_scene.register.check_register`). Take slot and template positions,
+    headings and line lengths from the design basis and the installer's design
+    basis, and record the exact blocker for any map layer or drawing that could
+    not be read.
 12. **Document** assumptions, limitations, source attribution and the human
     review requirement.
 
@@ -204,7 +212,8 @@ Loaded as context when the task calls for them:
   layout alternatives; retain survey, geotechnical and permitting gaps.
 - `asset-scene` mapped to community catalog ID `neqsim-asset-scene`: 3D
   illustration (GLB, offline viewer, report PNG) of existing and proposed
-  structures, lines and well paths with provenance captions.
+  structures, lines and well paths with provenance captions. Includes the subsea equipment builders
+  (`asset_scene.subsea`) and the source register (`asset_scene.register`).
 
 # Example Usage
 
