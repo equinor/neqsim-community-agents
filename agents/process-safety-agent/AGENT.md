@@ -76,9 +76,10 @@ Typical outputs include:
 5. Use `flare-radiation-screening` to estimate radiant heat flux at a distance against allowable limits.
 6. Use `psv-orifice-screening` to estimate a required PSV orifice area and map an API orifice letter.
 7. Use `safety-function-coverage-screening` to check whether the component has the typically required protective functions.
-8. Summarize major uncertainties and required studies.
-9. Generate a reproducible process safety screening report outline.
-10. Document assumptions, limitations, and human review requirements.
+8. When the screened scenario is a new or higher-pressure source on a separator or header that already has producers, list the comparison with the existing wells and inputs (riser or inlet pressure, shut-in pressure, rates, choke dP, relief basis, ratio new to historical) and the blocked-outlet check against current inflow as required follow-up; do not present a blocked-outlet margin at design inflow as the answer.
+9. Summarize major uncertainties and required studies.
+10. Generate a reproducible process safety screening report outline.
+11. Document assumptions, limitations, and human review requirements.
 
 # Required Skills
 

@@ -82,7 +82,7 @@ Company document systems, criteria and data sources are handled by an enterprise
 3. **Document register (S02).** Build the register with read status per clause; run `evidence_gate`; allow a compliance statement only through `claim_gate`.
 4. **Hazard identification (S03).** Use `neqsim-hazid-fmea-eta-fta` and `process-safety-agent`; link every scenario to a node and a calculation.
 5. **Consequence (S04).** `process-safety-agent` and `flare-helideck-dispersion-agent` with `neqsim-consequence-analysis`, `neqsim-release-source-terms`, `neqsim-h2s-safety-impact`; check every release rate with `hand_calc_gate`.
-6. **Relief, blowdown, flare (S05).** `process-safety-agent` and `firewater-coverage-agent`; require host flare and knock-out drum data read from documents and a dynamic header check.
+6. **Relief, blowdown, flare (S05).** `process-safety-agent` and `firewater-coverage-agent`; require host flare and knock-out drum data read from documents and a dynamic header check. For a new source on a separator or header that already has producers, also require the comparison with the existing wells and inputs (riser or inlet pressure, shut-in pressure, rates, choke dP, what the relief basis was sized for, ratio new to historical, effect on the failed-open or choke-collapse load) and a blocked-outlet check against current inflow with an explicit "governs / does not govern" (lower production today reduces blocked outlet but not failed-open or choke collapse).
 7. **Transients (S06).** `olga-simulation-agent` and `flow-assurance-study-agent`; classify every screening-versus-transient row with `conservatism_gate` and carry the non-conservative rows to the report.
 8. **SIL, LOPA, SRS (S07).** `process-safety-agent` with `neqsim-process-safety`: verify both the SIL band and the hazard-rate criterion; failure data without a certificate stays a gap.
 9. **Explosion and dispersion CFD (S08).** `cfd-coupling-agent`: verification, mesh study and an explicit validation status; no design load from a screening peak.
@@ -129,6 +129,7 @@ A qualified process safety engineer reviews the register, the gate results and e
 - Register has a read status per document; every compliance statement passes `claim_gate`.
 - Every release, relief and wave-speed number has a hand calculation or an independent model.
 - Transient comparisons classified per row; non-conservative rows reported.
+- New source on an existing separator or header: compared with the existing wells and inputs, and blocked outlet checked against current inflow with a stated verdict.
 - Drawing items tag-anchored; new tags listed as proposals.
 - Carried values reconciled; data gaps have owners; human review list attached.
 
